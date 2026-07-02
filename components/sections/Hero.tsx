@@ -1,33 +1,54 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { BadgeCheck, Clock, Smartphone } from "lucide-react";
 import ContentCard from "@/components/ui/ContentCard";
-import Eyebrow from "@/components/ui/Eyebrow";
 
 const heroCards = [
   {
     label: "Reel restaurant",
     gradient: "linear-gradient(160deg, #E8C495 0%, #C98A3C 55%, #8A3B33 100%)",
+    rotate: -7,
     floatDelay: 0,
-    className: "",
+    showBadge: false,
+    className: "z-10 w-[34%] max-w-[220px] sm:w-[26%]",
   },
   {
     label: "Logement insolite",
     gradient: "linear-gradient(200deg, #C98A3C 0%, #8A3B33 60%, #241D17 100%)",
+    rotate: 0,
     floatDelay: 1.6,
-    className: "mt-10",
+    showBadge: true,
+    className: "z-20 -mx-[4%] w-[38%] max-w-[250px] sm:w-[29%]",
   },
   {
     label: "Hôtel & spa",
     gradient: "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 50%, #6B3F2E 100%)",
+    rotate: 7,
     floatDelay: 3.1,
-    className: "hidden sm:block",
+    showBadge: false,
+    className: "z-10 w-[34%] max-w-[220px] sm:w-[26%]",
+  },
+];
+
+const floatingChips = [
+  {
+    icon: BadgeCheck,
+    label: "Prêt à publier",
+    className: "left-[2%] top-[12%] sm:left-[8%]",
+    delay: 1.4,
   },
   {
-    label: "Lieu d'activité",
-    gradient: "linear-gradient(190deg, #E3B87F 0%, #A65E38 55%, #241D17 100%)",
-    floatDelay: 4.4,
-    className: "mt-12 hidden lg:block",
+    icon: Clock,
+    label: "Livré sous 7 jours",
+    className: "right-[1%] top-[30%] sm:right-[6%]",
+    delay: 1.7,
+  },
+  {
+    icon: Smartphone,
+    label: "9:16 + 4:5",
+    className: "bottom-[18%] left-[1%] sm:left-[5%]",
+    delay: 2,
   },
 ];
 
@@ -48,11 +69,11 @@ export default function Hero() {
         };
 
   return (
-    <section className="hero relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40">
+    <section className="hero relative overflow-hidden pt-32 md:pt-40">
       {/* Halo golden-hour en lente dérive */}
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/3 h-[720px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70"
+        className="pointer-events-none absolute left-1/2 top-1/4 h-[720px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70"
         style={{
           background:
             "radial-gradient(circle, rgba(201,138,60,.28) 0%, rgba(201,138,60,.08) 45%, transparent 70%)",
@@ -67,16 +88,25 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-container px-5 md:px-7">
         <div className="mx-auto max-w-3xl text-center">
+          {/* Badge pill avec pastilles empilées — sans faux chiffres */}
           <motion.div {...cascade(0)} className="flex justify-center">
-            <Eyebrow>Contenu clé en main · Occitanie</Eyebrow>
+            <p className="flex items-center gap-2.5 rounded-full border border-line bg-cream/80 py-1.5 pl-2 pr-4 text-xs font-semibold text-muted shadow-soft backdrop-blur-sm">
+              <span className="flex -space-x-1.5" aria-hidden="true">
+                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#E8C495,#C98A3C)]" />
+                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#C98A3C,#8A3B33)]" />
+                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#8A3B33,#241D17)]" />
+              </span>
+              Contenu clé en main · Occitanie
+            </p>
           </motion.div>
 
-          <h1 className="mt-6 font-display text-[clamp(38px,6vw,76px)] font-normal leading-[1.04] tracking-[-0.01em]">
+          <h1 className="mt-7 font-display text-[clamp(38px,6vw,76px)] font-normal leading-[1.04] tracking-[-0.01em]">
             <motion.span {...cascade(1)} className="block">
-              Du contenu <em className="italic text-oxblood">prêt à publier</em>
+              On filme votre lieu.
             </motion.span>
             <motion.span {...cascade(2)} className="block">
-              pour les lieux qu&apos;on a envie de visiter.
+              Vous n&apos;avez{" "}
+              <em className="italic text-oxblood">plus qu&apos;à publier</em>.
             </motion.span>
           </h1>
 
@@ -85,7 +115,7 @@ export default function Hero() {
             className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted"
           >
             Reels, photos et vidéos pensés pour vos réseaux. On vient, on filme,
-            on monte — vous n&apos;avez plus qu&apos;à publier.
+            on monte — du contenu prêt à poster, sans abonnement.
           </motion.p>
 
           <motion.div
@@ -105,38 +135,90 @@ export default function Hero() {
               Voir des réalisations
             </a>
           </motion.div>
-
-          <motion.p {...cascade(5)} className="mt-8 text-sm text-muted">
-            Pour les restaurants, hôtels, logements insolites et lieux
-            d&apos;activité qui veulent de belles images sans s&apos;engager.
-          </motion.p>
         </div>
 
-        {/* Bande de cartes verticales 9:16 — la signature de la page */}
-        <div className="mt-16 grid grid-cols-2 gap-5 sm:grid-cols-3 md:mt-20 md:gap-7 lg:grid-cols-4">
-          {heroCards.map((card, index) => (
-            <motion.div
-              key={card.label}
-              className={card.className}
-              initial={reduceMotion ? undefined : { opacity: 0, y: 32 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={
-                reduceMotion
-                  ? undefined
-                  : {
-                      duration: 0.9,
-                      delay: 0.7 + index * 0.15,
-                      ease: [0.22, 1, 0.36, 1],
-                    }
-              }
-            >
-              <ContentCard
-                label={card.label}
-                gradient={card.gradient}
-                floatDelay={card.floatDelay}
-              />
-            </motion.div>
-          ))}
+        {/* Scène façon Nevra : arc sombre derrière les cartes qui se chevauchent */}
+        <div className="relative mt-14 md:mt-20">
+          {/* Arc espresso */}
+          <motion.div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 mx-auto h-[78%] max-w-[920px] rounded-t-[999px] bg-espresso"
+            initial={reduceMotion ? undefined : { opacity: 0, y: 40 }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            transition={
+              reduceMotion
+                ? undefined
+                : { duration: 1, delay: 0.55, ease: [0.22, 1, 0.36, 1] }
+            }
+          >
+            {/* Lueur honey dans l'arc */}
+            <div
+              className="absolute inset-0 rounded-t-[999px]"
+              style={{
+                background:
+                  "radial-gradient(ellipse 70% 55% at 50% 100%, rgba(201,138,60,.35) 0%, transparent 65%)",
+              }}
+            />
+          </motion.div>
+
+          {/* Cartes 9:16 inclinées et chevauchées */}
+          <div className="relative flex items-end justify-center px-2 pb-10 pt-6 sm:pb-14">
+            {heroCards.map((card, index) => (
+              <motion.div
+                key={card.label}
+                className={card.className}
+                style={{ rotate: card.rotate }}
+                initial={reduceMotion ? undefined : { opacity: 0, y: 46 }}
+                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        duration: 0.9,
+                        delay: 0.75 + index * 0.15,
+                        ease: [0.22, 1, 0.36, 1],
+                      }
+                }
+              >
+                <ContentCard
+                  label={card.label}
+                  gradient={card.gradient}
+                  floatDelay={card.floatDelay}
+                  showBadge={card.showBadge}
+                  className="border-4 border-cream sm:border-8"
+                />
+              </motion.div>
+            ))}
+
+            {/* Chips flottants — bénéfices réels, pas de faux compteurs */}
+            {floatingChips.map((chip) => (
+              <motion.p
+                key={chip.label}
+                className={`absolute z-30 hidden items-center gap-2 rounded-full bg-cream px-4 py-2 text-xs font-semibold text-espresso shadow-card sm:flex ${chip.className}`}
+                initial={reduceMotion ? undefined : { opacity: 0, scale: 0.8 }}
+                animate={
+                  reduceMotion ? undefined : { opacity: 1, scale: 1, y: [0, -8, 0] }
+                }
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        opacity: { duration: 0.5, delay: chip.delay },
+                        scale: { duration: 0.5, delay: chip.delay },
+                        y: {
+                          duration: 6,
+                          delay: chip.delay,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        },
+                      }
+                }
+              >
+                <chip.icon className="h-4 w-4 text-honey" aria-hidden="true" />
+                {chip.label}
+              </motion.p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

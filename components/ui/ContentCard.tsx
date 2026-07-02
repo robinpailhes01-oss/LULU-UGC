@@ -8,6 +8,7 @@ export type ContentCardProps = {
   gradient: string;
   /** Seconds of offset so cards float out of sync. */
   floatDelay?: number;
+  showBadge?: boolean;
   className?: string;
 };
 
@@ -19,6 +20,7 @@ export default function ContentCard({
   label,
   gradient,
   floatDelay = 0,
+  showBadge = true,
   className = "",
 }: ContentCardProps) {
   const reduceMotion = useReducedMotion();
@@ -40,9 +42,11 @@ export default function ContentCard({
       }
       whileHover={reduceMotion ? undefined : { scale: 1.02, y: -6 }}
     >
-      <span className="absolute left-3 top-3 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-espresso">
-        Prêt à publier
-      </span>
+      {showBadge && (
+        <span className="absolute left-3 top-3 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-espresso">
+          Prêt à publier
+        </span>
+      )}
 
       <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream/85 text-espresso transition-transform duration-300 group-hover:scale-110">
         <Play className="ml-0.5 h-5 w-5 fill-current" aria-hidden="true" />
