@@ -1,5 +1,6 @@
 import Header from "@/components/sections/Header";
 import Hero from "@/components/sections/Hero";
+import Marquee from "@/components/sections/Marquee";
 import PourquoiImage from "@/components/sections/PourquoiImage";
 import Prestations from "@/components/sections/Prestations";
 import Realisations from "@/components/sections/Realisations";
@@ -16,6 +17,7 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <Marquee />
         <PourquoiImage />
         <Prestations />
         <Realisations />

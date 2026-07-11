@@ -44,7 +44,7 @@ export const realisations: Realisation[] = [
   },
   {
     titre: "Una Mas — cocktail bar, Carnon",
-    categorie: "Vidéos UGC",
+    categorie: "Reels montés",
     ratio: "9:16",
     src: "/realisations/una-mas-carnon.jpg",
     href: "https://www.instagram.com/reel/DYwjsCSM7wb/?igsh=MTUzbXluNXBxMDdmYQ==",
@@ -53,10 +53,24 @@ export const realisations: Realisation[] = [
   },
   {
     titre: "Harmonie Yacht — location de yacht",
-    categorie: "Shooting photo",
+    categorie: "Reels montés",
     ratio: "9:16",
     src: "/realisations/harmonie-yacht.jpg",
     href: "https://www.instagram.com/reel/DZ5ER2RsFEt/?igsh=MWNwMWtybWVrNTJ5eQ==",
+    gradient:
+      "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
+  },
+  {
+    titre: "Bientôt : exemple UGC ici",
+    categorie: "Vidéos UGC",
+    ratio: "9:16",
+    gradient:
+      "linear-gradient(200deg, #E8C495 0%, #C98A3C 50%, #6B3F2E 100%)",
+  },
+  {
+    titre: "Bientôt : votre lieu ici",
+    categorie: "Shooting photo",
+    ratio: "9:16",
     gradient:
       "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
   },

@@ -43,7 +43,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted transition-colors hover:text-espresso"
+              className="relative text-sm font-medium text-muted transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-espresso after:transition-transform after:duration-300 hover:text-espresso hover:after:origin-left hover:after:scale-x-100"
             >
               {link.label}
             </a>

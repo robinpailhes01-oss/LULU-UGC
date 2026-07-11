@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
@@ -35,6 +36,7 @@ const questions = [
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const reduceMotion = useReducedMotion();
 
   return (
     <section id="faq" className="faq bg-cream py-20 md:py-28">
@@ -71,15 +73,35 @@ export default function Faq() {
                         />
                       </button>
                     </h3>
-                    <div
-                      id={`faq-panel-${index}`}
-                      role="region"
-                      aria-labelledby={`faq-trigger-${index}`}
-                      hidden={!isOpen}
-                      className="pb-5 leading-relaxed text-muted"
-                    >
-                      {item.reponse}
-                    </div>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          id={`faq-panel-${index}`}
+                          role="region"
+                          aria-labelledby={`faq-trigger-${index}`}
+                          className="overflow-hidden"
+                          initial={
+                            reduceMotion ? undefined : { height: 0, opacity: 0 }
+                          }
+                          animate={
+                            reduceMotion
+                              ? undefined
+                              : { height: "auto", opacity: 1 }
+                          }
+                          exit={
+                            reduceMotion ? undefined : { height: 0, opacity: 0 }
+                          }
+                          transition={{
+                            duration: 0.4,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                        >
+                          <p className="pb-5 leading-relaxed text-muted">
+                            {item.reponse}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </li>
                 );
               })}

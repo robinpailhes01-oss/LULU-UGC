@@ -34,11 +34,6 @@ export default function ContentCard({
   return (
     <motion.figure
       className={`group relative aspect-[9/16] overflow-hidden rounded-[20px] shadow-card ${className}`}
-      style={{
-        background: src
-          ? `url('${src}') center / cover no-repeat, ${gradient}`
-          : gradient,
-      }}
       animate={reduceMotion ? undefined : { y: [0, -14, 0] }}
       transition={
         reduceMotion
@@ -52,6 +47,17 @@ export default function ContentCard({
       }
       whileHover={reduceMotion ? undefined : { scale: 1.02, y: -6 }}
     >
+      {/* Média en calque séparé : zoom lent au survol, sans déborder du cadre */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
+        style={{
+          background: src
+            ? `url('${src}') center / cover no-repeat, ${gradient}`
+            : gradient,
+        }}
+      />
+
       {showBadge && (
         <span className="absolute left-3 top-3 z-10 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-espresso">
           Prêt à publier

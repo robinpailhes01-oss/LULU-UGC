@@ -14,8 +14,7 @@ export default function Realisations() {
           </h2>
           <p className="mt-4 max-w-xl leading-relaxed text-muted">
             Trois formats, un même objectif : refléter l&apos;expérience de
-            votre lieu. Premier projet : le Gîte de l&apos;Abric, dans les
-            Cévennes — cliquez pour voir le reel.
+            votre lieu. Cliquez sur un projet pour voir le reel.
           </p>
         </Reveal>
 
@@ -39,6 +38,7 @@ export default function Realisations() {
                         gradient={realisation.gradient}
                         src={realisation.src}
                         href={realisation.href}
+                        showBadge={Boolean(realisation.src)}
                         floatDelay={index * 1.8}
                         className="max-w-[300px]"
                       />

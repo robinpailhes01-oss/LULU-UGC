@@ -1,6 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { BadgeCheck, Clock, Smartphone } from "lucide-react";
 import ContentCard from "@/components/ui/ContentCard";
 
@@ -58,12 +64,26 @@ const floatingChips = [
 export default function Hero() {
   const reduceMotion = useReducedMotion();
 
+  // Parallaxe à la souris : chaque carte dérive à sa propre profondeur.
+  const pointerX = useMotionValue(0);
+  const smoothX = useSpring(pointerX, { stiffness: 60, damping: 20 });
+  const cardParallax = [
+    useTransform(smoothX, [-0.5, 0.5], [14, -14]),
+    useTransform(smoothX, [-0.5, 0.5], [24, -24]),
+    useTransform(smoothX, [-0.5, 0.5], [36, -36]),
+  ];
+
+  const handlePointerMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
+  };
+
   const cascade = (index: number) =>
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 18 },
-          animate: { opacity: 1, y: 0 },
+          initial: { opacity: 0, y: 18, filter: "blur(10px)" },
+          animate: { opacity: 1, y: 0, filter: "blur(0px)" },
           transition: {
             duration: 0.85,
             delay: 0.12 * index,
@@ -166,12 +186,19 @@ export default function Hero() {
           </motion.div>
 
           {/* Cartes 9:16 inclinées et chevauchées */}
-          <div className="relative flex items-end justify-center px-2 pb-10 pt-6 sm:pb-14">
+          <div
+            className="relative flex items-end justify-center px-2 pb-10 pt-6 sm:pb-14"
+            onMouseMove={reduceMotion ? undefined : handlePointerMove}
+            onMouseLeave={reduceMotion ? undefined : () => pointerX.set(0)}
+          >
             {heroCards.map((card, index) => (
               <motion.div
                 key={card.label}
                 className={card.className}
-                style={{ rotate: card.rotate }}
+                style={{
+                  rotate: card.rotate,
+                  x: reduceMotion ? undefined : cardParallax[index],
+                }}
                 initial={reduceMotion ? undefined : { opacity: 0, y: 46 }}
                 animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                 transition={
