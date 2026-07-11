@@ -16,23 +16,24 @@ export default function APropos() {
                   "url('/portrait.jpg') center / cover no-repeat, linear-gradient(170deg, #E8C495 0%, #C98A3C 55%, #7A5230 100%)",
               }}
               role="img"
-              aria-label="Portrait de la créatrice du studio Divine"
+              aria-label="Portrait de Ludivine, créatrice du studio Divine"
             />
           </Reveal>
 
           <Reveal delay={0.15}>
             <Eyebrow>Qui est derrière Divine</Eyebrow>
             <h2 className="mt-4 font-display text-[clamp(28px,4vw,44px)] leading-tight">
-              Enchantée, c&apos;est moi qui viens{" "}
-              <em className="italic text-chestnut">vivre votre lieu</em>.
+              Moi c&apos;est <em className="italic text-chestnut">Ludivine</em>.
             </h2>
             <div className="mt-5 flex flex-col gap-4 leading-relaxed text-muted">
               <p>
-                Je crée du contenu pour les lieux de tourisme en Occitanie :
-                hôtels, restaurants, logements insolites, expériences. Ce qui me
-                plaît, c&apos;est capter ce qu&apos;on ressent chez vous — la
-                lumière d&apos;une terrasse en fin de journée, le premier regard
-                en entrant dans une chambre — et le retranscrire en images.
+                Passionnée par la création de contenu et la découverte de
+                nouveaux lieux et d&apos;expériences, je crée du contenu pour le
+                tourisme en Occitanie : hôtels, restaurants, logements
+                insolites. Ce qui me plaît, c&apos;est capter ce qu&apos;on
+                ressent chez vous — la lumière d&apos;une terrasse en fin de
+                journée, le premier regard en entrant dans une chambre — et le
+                retranscrire en images.
               </p>
               <p>
                 Je viens sur place, je vis l&apos;expérience comme vos futurs
