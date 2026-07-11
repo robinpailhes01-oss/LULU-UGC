@@ -5,9 +5,9 @@ import Reveal from "@/components/ui/Reveal";
 const prestations = [
   {
     icon: Clapperboard,
-    titre: "Des reels qui s'arrêtent sous le pouce",
+    titre: "Des reels qui inspirent et donnent envie de venir",
     texte:
-      "Des vidéos verticales courtes, tournées sur place et montées avec soin. Le genre d'images qui donne envie de pousser la porte.",
+      "Des vidéos verticales courtes, tournées sur place et montées avec soin. Le genre d'images qui inspire et donne envie de réserver.",
   },
   {
     icon: UserRound,

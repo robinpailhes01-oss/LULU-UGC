@@ -5,15 +5,15 @@ import Reveal from "@/components/ui/Reveal";
 const points = [
   {
     icon: Eye,
-    titre: "On vous visite d'abord en ligne",
+    titre: "Vos clients vous découvrent avant de venir",
     texte:
       "Avant de réserver une chambre, une table ou une activité, on regarde vos photos et vos vidéos. C'est là que la décision se joue.",
   },
   {
     icon: Sparkles,
-    titre: "Votre image doit être à la hauteur du réel",
+    titre: "Votre image doit refléter votre expérience",
     texte:
-      "Un lieu magnifique avec des visuels ternes perd des réservations. Votre contenu doit refléter exactement ce qu'on ressent sur place.",
+      "Votre communication doit refléter votre lieu, pour que vos futurs clients aient déjà envie d'y être avant même d'arriver.",
   },
   {
     icon: HeartHandshake,

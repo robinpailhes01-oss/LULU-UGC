@@ -6,19 +6,19 @@ const etapes = [
     numero: "1",
     titre: "On échange",
     texte:
-      "Un appel ou quelques messages pour parler de votre lieu et de ce que vous voulez montrer.",
+      "Un appel ou quelques messages pour parler de l'expérience que vous proposez et de ce que vous voulez mettre en avant.",
   },
   {
     numero: "2",
-    titre: "On vient tourner",
+    titre: "Le tournage",
     texte:
-      "Une demi-journée à une journée sur place, au moment où votre lieu est le plus beau.",
+      "On vient sur place vivre l'expérience, pour créer tout le contenu dont vous aurez besoin.",
   },
   {
     numero: "3",
     titre: "Vous recevez tout sous 7 jours",
     texte:
-      "Reels montés, photos retouchées, bons formats, idées de légendes. Prêt à publier.",
+      "Reels montés, photos retouchées, bons formats, idées de légendes. Prêt à poster.",
   },
 ];
 
