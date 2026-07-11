@@ -6,6 +6,8 @@ export type Realisation = {
   ratio: "9:16" | "4:5";
   /** Chemin du média une fois disponible ; dégradé chaud en attendant. */
   src?: string;
+  /** Lien externe (reel Instagram…) : la carte devient cliquable. */
+  href?: string;
   gradient: string;
 };
 
@@ -32,9 +34,11 @@ export const categories: {
 
 export const realisations: Realisation[] = [
   {
-    titre: "Logement insolite — Port de Carnon",
+    titre: "Gîte de l'Abric — Cévennes",
     categorie: "Reels montés",
     ratio: "9:16",
+    src: "/realisations/gite-abric-cevennes.jpg",
+    href: "https://www.instagram.com/reel/DMVPrINId35/?igsh=ZDNnb20zYzJwY3Ax",
     gradient:
       "linear-gradient(160deg, #C98A3C 0%, #7A5230 55%, #241D17 100%)",
   },

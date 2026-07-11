@@ -6,6 +6,10 @@ import { Play } from "lucide-react";
 export type ContentCardProps = {
   label: string;
   gradient: string;
+  /** Vrai média (chemin sous public/) ; le dégradé reste en fallback. */
+  src?: string;
+  /** Lien externe (reel Instagram…) : toute la carte devient cliquable. */
+  href?: string;
   /** Seconds of offset so cards float out of sync. */
   floatDelay?: number;
   showBadge?: boolean;
@@ -19,6 +23,8 @@ export type ContentCardProps = {
 export default function ContentCard({
   label,
   gradient,
+  src,
+  href,
   floatDelay = 0,
   showBadge = true,
   className = "",
@@ -28,7 +34,11 @@ export default function ContentCard({
   return (
     <motion.figure
       className={`group relative aspect-[9/16] overflow-hidden rounded-[20px] shadow-card ${className}`}
-      style={{ background: gradient }}
+      style={{
+        background: src
+          ? `url('${src}') center / cover no-repeat, ${gradient}`
+          : gradient,
+      }}
       animate={reduceMotion ? undefined : { y: [0, -14, 0] }}
       transition={
         reduceMotion
@@ -43,7 +53,7 @@ export default function ContentCard({
       whileHover={reduceMotion ? undefined : { scale: 1.02, y: -6 }}
     >
       {showBadge && (
-        <span className="absolute left-3 top-3 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-espresso">
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-cream/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-espresso">
           Prêt à publier
         </span>
       )}
@@ -59,6 +69,16 @@ export default function ContentCard({
       <figcaption className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-cream">
         {label}
       </figcaption>
+
+      {href && (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 z-20 rounded-[20px]"
+          aria-label={`Voir sur Instagram : ${label}`}
+        />
+      )}
     </motion.figure>
   );
 }
