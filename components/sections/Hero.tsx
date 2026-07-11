@@ -6,8 +6,9 @@ import ContentCard from "@/components/ui/ContentCard";
 
 const heroCards = [
   {
-    label: "Restaurant",
+    label: "Bar & restaurant",
     gradient: "linear-gradient(160deg, #E8C495 0%, #C98A3C 55%, #7A5230 100%)",
+    src: "/realisations/una-mas-carnon.jpg",
     rotate: -7,
     floatDelay: 0,
     showBadge: false,
@@ -16,14 +17,16 @@ const heroCards = [
   {
     label: "Logement insolite",
     gradient: "linear-gradient(200deg, #C98A3C 0%, #7A5230 60%, #241D17 100%)",
+    src: "/realisations/gite-abric-cevennes.jpg",
     rotate: 0,
     floatDelay: 1.6,
     showBadge: true,
     className: "z-20 -mx-[4%] w-[38%] max-w-[250px] sm:w-[29%]",
   },
   {
-    label: "Hôtel & expérience",
+    label: "Expérience en mer",
     gradient: "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 50%, #6B3F2E 100%)",
+    src: "/realisations/harmonie-yacht.jpg",
     rotate: 7,
     floatDelay: 3.1,
     showBadge: false,
@@ -184,6 +187,7 @@ export default function Hero() {
                 <ContentCard
                   label={card.label}
                   gradient={card.gradient}
+                  src={card.src}
                   floatDelay={card.floatDelay}
                   showBadge={card.showBadge}
                   className="border-4 border-cream sm:border-8"

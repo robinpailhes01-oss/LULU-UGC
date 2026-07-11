@@ -52,9 +52,11 @@ export const realisations: Realisation[] = [
       "linear-gradient(200deg, #E8C495 0%, #C98A3C 50%, #6B3F2E 100%)",
   },
   {
-    titre: "Bientôt : votre lieu ici",
+    titre: "Harmonie Yacht — location de yacht",
     categorie: "Shooting photo",
     ratio: "9:16",
+    src: "/realisations/harmonie-yacht.jpg",
+    href: "https://www.instagram.com/reel/DYwjsCSM7wb/?igsh=MTUzbXluNXBxMDdmYQ==",
     gradient:
       "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
   },
