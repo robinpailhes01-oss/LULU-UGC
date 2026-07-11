@@ -72,7 +72,7 @@ export default function Contact() {
           <Reveal>
             <Eyebrow>Réservation</Eyebrow>
             <h2 className="mt-4 font-display text-[clamp(28px,4vw,44px)] leading-tight">
-              Envie de voir ce que ça donnerait <em className="italic text-oxblood">chez vous</em> ?
+              Envie de voir ce que ça donnerait <em className="italic text-chestnut">chez vous</em> ?
             </h2>
             <p className="mt-4 leading-relaxed text-muted">
               Écrivez-nous quelques mots sur votre lieu. On revient vers vous
@@ -141,7 +141,7 @@ export default function Contact() {
               </div>
 
               {status === "error" && errorMessage && (
-                <p role="alert" className="text-sm font-medium text-oxblood">
+                <p role="alert" className="text-sm font-medium text-chestnut">
                   {errorMessage}
                 </p>
               )}

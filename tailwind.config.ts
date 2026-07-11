@@ -12,7 +12,7 @@ const config: Config = {
         limestone: "#F2EBE0",
         cream: "#FBF7F0",
         espresso: "#241D17",
-        oxblood: "#8A3B33",
+        chestnut: "#8B5E34",
         honey: "#C98A3C",
         muted: "#6B5E50",
       },

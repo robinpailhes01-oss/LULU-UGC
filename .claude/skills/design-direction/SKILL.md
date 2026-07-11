@@ -21,7 +21,7 @@ Définir en variables CSS / config Tailwind. Ne pas introduire d'autres couleurs
 --limestone : #F2EBE0   /* fond principal, base chaude sable */
 --cream     : #FBF7F0   /* surfaces surélevées, cartes claires */
 --espresso  : #241D17   /* texte principal + boutons sombres (near-black chaud) */
---oxblood   : #8A3B33   /* accent : mots en italique, points, détails */
+--chestnut  : #8B5E34   /* accent : mots en italique, points, détails (marron — pas de bordeaux) */
 --honey     : #C98A3C   /* lumière golden-hour, halos, micro-détails */
 --muted     : #6B5E50   /* texte secondaire */
 --line      : rgba(36,29,23,.12)  /* filets, séparateurs */
@@ -30,12 +30,12 @@ Définir en variables CSS / config Tailwind. Ne pas introduire d'autres couleurs
 Règles :
 - Fond limestone par défaut ; sections alternées possibles en cream pour rythmer.
 - Boutons primaires : fond espresso, texte cream. Un seul style de CTA primaire.
-- L'accent oxblood est **rare** : un mot d'un titre, un point, une puce. Pas de gros aplats.
+- L'accent chestnut est **rare** : un mot d'un titre, un point, une puce. Pas de gros aplats.
 - Le honey ne sert qu'à la lumière (halos radiaux, lueur derrière le contenu).
 
 ## Typographie
 - **Display — Fraunces** (variable). Titres, gros chiffres, accents éditoriaux.
-  Poids 300–500, optical size haute pour les grands titres. Italique pour l'accent oxblood.
+  Poids 300–500, optical size haute pour les grands titres. Italique pour l'accent chestnut.
   *N.B. : volontairement différent du Cormorant utilisé sur les autres marques de Robin —
   cette marque a sa propre voix.*
 - **Texte / UI — Manrope** (300–600). Sous-titres, paragraphes, boutons, labels.
@@ -59,7 +59,7 @@ Elles flottent doucement dans une lumière golden-hour. C'est l'élément qu'on 
   jamais de stock photo générique. Remplacer par les vrais reels/photos dès dispo.
 - **Boutons** : pill (`border-radius:100px`). Primaire espresso/cream. Secondaire « fantôme »
   (texte espresso + soulignement fin). Hover : translateY(-2px) + ombre douce.
-- **Eyebrow** : petit point oxblood + label uppercase tracké.
+- **Eyebrow** : petit point chestnut + label uppercase tracké.
 - **Preuve sociale** : pastilles d'avatars empilées + une phrase courte. Pas de faux chiffres.
 - **Halo lumineux** : dégradé radial honey très diffus, fixe ou en lente dérive.
 
@@ -90,5 +90,5 @@ La retenue est ce qui fait « premium ». Trop d'animation = effet IA génériqu
 ## Pièges à éviter
 - Spécificité CSS qui s'annule entre `.section` et `.cta` (paddings/margins). Nommer les
   classes par section.
-- Multiplier les accents colorés : un seul accent (oxblood), une seule lumière (honey).
+- Multiplier les accents colorés : un seul accent (chestnut), une seule lumière (honey).
 - « Décorer » avec des numéros 01/02/03 si le contenu n'est pas une vraie séquence.

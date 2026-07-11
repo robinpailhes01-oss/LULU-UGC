@@ -24,12 +24,12 @@ const etapes = [
 
 export default function CommentCaMarche() {
   return (
-    <section id="comment" className="comment bg-cream py-20 md:py-28">
+    <section id="comment" className="comment py-20 md:py-28">
       <div className="mx-auto max-w-container px-5 md:px-7">
         <Reveal>
           <Eyebrow>Comment ça marche</Eyebrow>
           <h2 className="mt-4 max-w-2xl font-display text-[clamp(28px,4vw,44px)] leading-tight">
-            Trois temps, <em className="italic text-oxblood">zéro</em> charge mentale.
+            Trois temps, <em className="italic text-chestnut">zéro</em> charge mentale.
           </h2>
         </Reveal>
 

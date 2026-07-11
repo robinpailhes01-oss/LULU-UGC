@@ -1,32 +1,55 @@
+export type CategorieRealisation = "Reels montés" | "Vidéos UGC" | "Shooting photo";
+
 export type Realisation = {
   titre: string;
-  type: string;
+  categorie: CategorieRealisation;
   ratio: "9:16" | "4:5";
   /** Chemin du média une fois disponible ; dégradé chaud en attendant. */
   src?: string;
   gradient: string;
 };
 
+export const categories: {
+  nom: CategorieRealisation;
+  description: string;
+}[] = [
+  {
+    nom: "Reels montés",
+    description:
+      "Des vidéos verticales courtes, rythmées, qui racontent votre lieu en quelques secondes.",
+  },
+  {
+    nom: "Vidéos UGC",
+    description:
+      "Je vis l'expérience face caméra, comme une cliente. Le format le plus authentique pour créer la confiance.",
+  },
+  {
+    nom: "Shooting photo",
+    description:
+      "Des photos retouchées qui capturent la lumière et les matières de votre lieu.",
+  },
+];
+
 export const realisations: Realisation[] = [
   {
     titre: "Logement insolite — Port de Carnon",
-    type: "Reel + photos",
+    categorie: "Reels montés",
     ratio: "9:16",
     gradient:
-      "linear-gradient(160deg, #C98A3C 0%, #8A3B33 55%, #241D17 100%)",
+      "linear-gradient(160deg, #C98A3C 0%, #7A5230 55%, #241D17 100%)",
   },
   {
     titre: "Bientôt : votre lieu ici",
-    type: "Reel restaurant",
+    categorie: "Vidéos UGC",
     ratio: "9:16",
     gradient:
       "linear-gradient(200deg, #E8C495 0%, #C98A3C 50%, #6B3F2E 100%)",
   },
   {
     titre: "Bientôt : votre lieu ici",
-    type: "Photos hôtel",
+    categorie: "Shooting photo",
     ratio: "9:16",
     gradient:
-      "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #8A3B33 100%)",
+      "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
   },
 ];

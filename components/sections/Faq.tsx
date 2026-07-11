@@ -7,6 +7,11 @@ import Reveal from "@/components/ui/Reveal";
 
 const questions = [
   {
+    question: "C'est quoi, une vidéo UGC ?",
+    reponse:
+      "Une vidéo où je vis votre expérience face caméra, comme une cliente : j'arrive, je découvre, je teste. C'est le format le plus authentique — vos futurs visiteurs se projettent à travers quelqu'un de vrai, pas une publicité.",
+  },
+  {
     question: "C'est un abonnement ?",
     reponse:
       "Non. Une prestation, une fois. Vous repartez avec vos fichiers et vous en faites ce que vous voulez.",
@@ -38,7 +43,7 @@ export default function Faq() {
           <Reveal>
             <Eyebrow>Questions fréquentes</Eyebrow>
             <h2 className="mt-4 font-display text-[clamp(28px,4vw,44px)] leading-tight">
-              Les questions qu&apos;on nous pose <em className="italic text-oxblood">vraiment</em>.
+              Les questions qu&apos;on nous pose <em className="italic text-chestnut">vraiment</em>.
             </h2>
           </Reveal>
 

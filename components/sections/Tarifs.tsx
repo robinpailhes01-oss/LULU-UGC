@@ -1,103 +1,130 @@
-import { Check } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 
-const packs = [
+const packComplet = {
+  nom: "Pack Immersion",
+  prix: "690 €",
+  pour: "Le contenu complet pour montrer l'expérience de votre lieu et nourrir votre communication pendant des semaines.",
+  inclus: [
+    "Journée de tournage sur place",
+    "Shooting photo complet (30 photos retouchées)",
+    "Reels verticaux montés",
+    "1 vidéo UGC : je vis votre expérience face caméra",
+    "Déclinaisons stories / posts, formats 9:16 + 4:5",
+    "1 idée de légende par contenu",
+    "Livraison sous 7 jours, prêt à poster",
+  ],
+};
+
+const options = [
   {
-    nom: "Essentiel",
-    prix: "390 €",
-    pour: "Pour les restaurants, cafés et lieux d'activité.",
-    inclus: [
-      "Demi-journée de tournage sur place",
-      "3 reels verticaux montés (15–25 s)",
-      "15 photos retouchées",
-      "Livrés en 9:16 + 4:5, prêts à publier",
-      "Livraison sous 7 jours",
-    ],
-    highlight: false,
+    nom: "1 vidéo UGC complète",
+    detail:
+      "Je découvre et vis votre expérience face caméra, montage inclus. Idéal pour tester le format.",
   },
   {
-    nom: "Signature",
-    prix: "690 €",
-    pour: "Pour les logements insolites, hôtels et lieux à forte valeur.",
-    inclus: [
-      "Journée complète de tournage",
-      "5 reels + 1 format long de présentation",
-      "30 photos retouchées",
-      "Déclinaisons stories / posts",
-      "1 idée de légende par contenu",
-      "Livraison sous 7 jours",
-    ],
-    highlight: true,
+    nom: "Shooting photo / vidéo",
+    detail:
+      "Une demi-journée sur place : photos retouchées et séquences vidéo, sans le volet UGC.",
+  },
+  {
+    nom: "Collaboration Instagram",
+    detail:
+      "Votre lieu mis en avant sur mon compte : je partage mon expérience avec ma communauté.",
   },
 ];
 
 export default function Tarifs() {
   return (
-    <section id="tarifs" className="tarifs py-20 md:py-28">
+    <section id="tarifs" className="tarifs bg-cream py-20 md:py-28">
       <div className="mx-auto max-w-container px-5 md:px-7">
         <Reveal>
           <Eyebrow>Tarifs</Eyebrow>
           <h2 className="mt-4 max-w-2xl font-display text-[clamp(28px,4vw,44px)] leading-tight">
-            Une prestation, <em className="italic text-oxblood">une fois</em>. Vous
+            Une prestation, <em className="italic text-chestnut">une fois</em>. Vous
             gardez vos fichiers.
           </h2>
           <p className="mt-4 max-w-xl leading-relaxed text-muted">
-            Pas d&apos;abonnement, pas de « sur devis ». Le palier dépend de la
-            valeur que le contenu apporte à votre lieu, pas du nombre de fichiers.
+            Pas d&apos;abonnement. Le pack Immersion couvre tout ; les options à
+            la carte se composent selon votre lieu et vos besoins.
           </p>
         </Reveal>
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-8 md:mt-16 md:grid-cols-2">
-          {packs.map((pack, index) => (
-            <Reveal key={pack.nom} delay={index * 0.12}>
-              <article
-                className={`flex h-full flex-col rounded-[20px] p-8 md:p-9 ${
-                  pack.highlight
-                    ? "bg-espresso text-cream shadow-card"
-                    : "border border-line bg-cream"
-                }`}
+          {/* Pack principal */}
+          <Reveal>
+            <article className="flex h-full flex-col rounded-[20px] bg-espresso p-8 text-cream shadow-card md:p-9">
+              <p className="self-start rounded-full bg-honey/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-honey">
+                Le plus complet
+              </p>
+              <h3 className="mt-4 font-display text-2xl">{packComplet.nom}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-cream/70">
+                {packComplet.pour}
+              </p>
+              <p className="mt-6 font-display text-5xl font-light">
+                {packComplet.prix}
+              </p>
+
+              <ul className="mt-7 flex flex-col gap-3">
+                {packComplet.inclus.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm leading-relaxed">
+                    <Check
+                      className="mt-0.5 h-4 w-4 shrink-0 text-honey"
+                      strokeWidth={2.4}
+                      aria-hidden="true"
+                    />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href="#contact"
+                className="mt-8 rounded-full bg-cream px-6 py-3 text-center text-sm font-semibold text-espresso transition-transform hover:-translate-y-0.5"
               >
-                <h3 className="font-display text-2xl">{pack.nom}</h3>
-                <p
-                  className={`mt-2 text-sm leading-relaxed ${
-                    pack.highlight ? "text-cream/70" : "text-muted"
-                  }`}
-                >
-                  {pack.pour}
-                </p>
-                <p className="mt-6 font-display text-5xl font-light">
-                  {pack.prix}
-                </p>
+                Réserver un shooting
+              </a>
+            </article>
+          </Reveal>
 
-                <ul className="mt-7 flex flex-col gap-3">
-                  {pack.inclus.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm leading-relaxed">
-                      <Check
-                        className={`mt-0.5 h-4 w-4 shrink-0 ${
-                          pack.highlight ? "text-honey" : "text-oxblood"
-                        }`}
-                        strokeWidth={2.4}
-                        aria-hidden="true"
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+          {/* Menu à la carte */}
+          <Reveal delay={0.12}>
+            <article className="flex h-full flex-col rounded-[20px] border border-line bg-limestone p-8 md:p-9">
+              <h3 className="font-display text-2xl">À la carte</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                Un seul format vous suffit ? Chaque option se réserve seule.
+              </p>
 
-                <a
-                  href="#contact"
-                  className={`mt-8 rounded-full px-6 py-3 text-center text-sm font-semibold transition-transform hover:-translate-y-0.5 ${
-                    pack.highlight
-                      ? "bg-cream text-espresso"
-                      : "bg-espresso text-cream shadow-soft"
-                  }`}
-                >
-                  Réserver un shooting
-                </a>
-              </article>
-            </Reveal>
-          ))}
+              <ul className="mt-7 flex flex-1 flex-col divide-y divide-[rgba(36,29,23,.12)]">
+                {options.map((option) => (
+                  <li key={option.nom} className="flex items-start gap-4 py-5">
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-honey/15">
+                      <Plus className="h-4 w-4 text-chestnut" strokeWidth={2.4} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h4 className="font-semibold">{option.nom}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">
+                        {option.detail}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                Le tarif dépend du format et de votre lieu — on en parle
+                simplement par message.
+              </p>
+
+              <a
+                href="#contact"
+                className="mt-6 rounded-full bg-espresso px-6 py-3 text-center text-sm font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
+              >
+                Réserver un shooting
+              </a>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>

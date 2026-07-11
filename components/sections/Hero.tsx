@@ -6,8 +6,8 @@ import ContentCard from "@/components/ui/ContentCard";
 
 const heroCards = [
   {
-    label: "Reel restaurant",
-    gradient: "linear-gradient(160deg, #E8C495 0%, #C98A3C 55%, #8A3B33 100%)",
+    label: "Restaurant",
+    gradient: "linear-gradient(160deg, #E8C495 0%, #C98A3C 55%, #7A5230 100%)",
     rotate: -7,
     floatDelay: 0,
     showBadge: false,
@@ -15,14 +15,14 @@ const heroCards = [
   },
   {
     label: "Logement insolite",
-    gradient: "linear-gradient(200deg, #C98A3C 0%, #8A3B33 60%, #241D17 100%)",
+    gradient: "linear-gradient(200deg, #C98A3C 0%, #7A5230 60%, #241D17 100%)",
     rotate: 0,
     floatDelay: 1.6,
     showBadge: true,
     className: "z-20 -mx-[4%] w-[38%] max-w-[250px] sm:w-[29%]",
   },
   {
-    label: "Hôtel & spa",
+    label: "Hôtel & expérience",
     gradient: "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 50%, #6B3F2E 100%)",
     rotate: 7,
     floatDelay: 3.1,
@@ -93,20 +93,20 @@ export default function Hero() {
             <p className="flex items-center gap-2.5 rounded-full border border-line bg-cream/80 py-1.5 pl-2 pr-4 text-xs font-semibold text-muted shadow-soft backdrop-blur-sm">
               <span className="flex -space-x-1.5" aria-hidden="true">
                 <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#E8C495,#C98A3C)]" />
-                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#C98A3C,#8A3B33)]" />
-                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#8A3B33,#241D17)]" />
+                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#C98A3C,#7A5230)]" />
+                <span className="h-5 w-5 rounded-full border-2 border-cream bg-[linear-gradient(140deg,#7A5230,#241D17)]" />
               </span>
-              Contenu clé en main · Occitanie
+              Contenu clé en main · Tourisme · Occitanie
             </p>
           </motion.div>
 
           <h1 className="mt-7 font-display text-[clamp(38px,6vw,76px)] font-normal leading-[1.04] tracking-[-0.01em]">
             <motion.span {...cascade(1)} className="block">
-              On filme votre lieu.
+              On crée votre contenu.
             </motion.span>
             <motion.span {...cascade(2)} className="block">
               Vous n&apos;avez{" "}
-              <em className="italic text-oxblood">plus qu&apos;à publier</em>.
+              <em className="italic text-chestnut">plus qu&apos;à poster</em>.
             </motion.span>
           </h1>
 
@@ -114,8 +114,9 @@ export default function Hero() {
             {...cascade(3)}
             className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted"
           >
-            Reels, photos et vidéos pensés pour vos réseaux. On vient, on filme,
-            on monte — du contenu prêt à poster, sans abonnement.
+            Hôtels, restaurants, logements insolites, lieux d&apos;expérience :
+            reels, vidéos UGC et photos pensés pour vos réseaux. On vient, on
+            filme, on monte — prêt à poster, sans abonnement.
           </motion.p>
 
           <motion.div
@@ -130,7 +131,7 @@ export default function Hero() {
             </a>
             <a
               href="#realisations"
-              className="text-sm font-semibold text-espresso underline decoration-line decoration-1 underline-offset-8 transition-colors hover:decoration-oxblood"
+              className="text-sm font-semibold text-espresso underline decoration-line decoration-1 underline-offset-8 transition-colors hover:decoration-chestnut"
             >
               Voir des réalisations
             </a>

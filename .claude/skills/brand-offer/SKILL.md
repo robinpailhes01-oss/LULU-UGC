@@ -15,14 +15,15 @@ description: >
 > demande validation sur le **nom** et le **contenu exact des packs**.
 
 ## Ce qu'on vend
-Du **contenu prêt à publier** pour des lieux d'accueil et de vie :
-restaurants, hôtels, **logements insolites**, lieux d'activité, adresses à expérience.
-Photos + vidéos verticales (reels) tournées sur place, montées, livrées **clé en main** :
-le client n'a plus qu'à publier.
+Du **contenu prêt à poster** pour le **milieu du tourisme uniquement** :
+hôtels, restaurants, **logements insolites**, lieux d'expérience et d'activité.
+Trois formats : photos retouchées, reels montés, et **vidéos UGC** (la créatrice vit
+l'expérience face caméra, comme une cliente). Tourné sur place, monté, livré
+**clé en main** : le client n'a plus qu'à poster.
 
 ## Client cible (ICP)
-- Gérant(e) d'un lieu physique en Occitanie : resto, hôtel, gîte/logement insolite,
-  activité de loisir, lieu de vie.
+- Gérant(e) d'un lieu de tourisme en Occitanie : hôtel, restaurant,
+  gîte/logement insolite, expérience ou activité touristique.
 - A un Instagram/TikTok qu'il/elle **n'a pas le temps ou pas l'œil** d'alimenter.
 - N'a pas envie de s'engager dans un contrat de community management mensuel.
 - Décision rapide, sensible au concret (« je vois ce que je reçois, je paie une fois »).
@@ -41,26 +42,25 @@ Toujours vendre le **résultat** (du contenu beau, prêt à poster, qui donne en
 jamais le **process** ou les outils. Ne jamais se présenter comme « agence de community
 management » : ça active la peur de l'engagement et du jargon. On est un **studio de contenu**.
 
-## L'offre (proposition par défaut — à valider)
+## L'offre (structure validée par Robin — prix à confirmer)
 
-### Essentiel — [390 €]
-- Demi-journée de tournage sur place
-- **3 reels verticaux montés** (15–25 s)
-- **15 photos** retouchées
-- Livrés en 9:16 + 4:5, prêts à publier
-- Livraison sous **7 jours**
-
-### Signature — [690 €] *(logements insolites, hôtels, lieux à forte valeur)*
-- Journée complète
-- **5 reels + 1 format long** (présentation du lieu)
-- **30 photos** retouchées
-- Déclinaisons stories / posts
+### Pack Immersion — [690 €] *(le pack principal, mis en avant)*
+Le contenu complet pour montrer l'expérience du lieu :
+- Journée de tournage sur place
+- **Shooting photo complet** (30 photos retouchées)
+- **Reels verticaux montés**
+- **1 vidéo UGC** (la créatrice vit l'expérience face caméra)
+- Déclinaisons stories / posts, formats 9:16 + 4:5
 - **1 idée de légende par contenu**
 - Livraison sous **7 jours**
 
-> Pourquoi deux paliers : un logement insolite ou un hôtel tire un bénéfice direct
-> (réservations) bien supérieur à un resto de quartier. Même prestation de fond,
-> valeur perçue différente.
+### À la carte *(menu d'options, chaque option se réserve seule)*
+- **1 vidéo UGC complète** (découverte + expérience face caméra, montage inclus)
+- **Shooting photo / vidéo** (demi-journée, sans le volet UGC)
+- **Collaboration Instagram** (le lieu mis en avant sur le compte de la créatrice)
+
+> Tarifs des options à la carte : à définir avec Robin — affichés « on en parle »
+> en attendant.
 
 ### Upsell discret (ne pas mettre en avant sur la landing)
 - **Recharge** — un mini-shoot récurrent pour réalimenter le feed.

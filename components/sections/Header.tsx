@@ -7,6 +7,7 @@ const navLinks = [
   { href: "#prestations", label: "Prestations" },
   { href: "#realisations", label: "Réalisations" },
   { href: "#tarifs", label: "Tarifs" },
+  { href: "#a-propos", label: "À propos" },
 ];
 
 export default function Header() {
@@ -34,7 +35,7 @@ export default function Header() {
           className="font-display text-xl tracking-tight text-espresso"
           aria-label="Divine — retour en haut de page"
         >
-          Divine<span className="text-oxblood">.</span>
+          Divine<span className="text-chestnut">.</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Navigation principale">
