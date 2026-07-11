@@ -60,18 +60,4 @@ export const realisations: Realisation[] = [
     gradient:
       "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
   },
-  {
-    titre: "Bientôt : exemple UGC ici",
-    categorie: "Vidéos UGC",
-    ratio: "9:16",
-    gradient:
-      "linear-gradient(200deg, #E8C495 0%, #C98A3C 50%, #6B3F2E 100%)",
-  },
-  {
-    titre: "Bientôt : votre lieu ici",
-    categorie: "Shooting photo",
-    ratio: "9:16",
-    gradient:
-      "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
-  },
 ];

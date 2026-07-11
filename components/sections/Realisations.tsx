@@ -31,18 +31,24 @@ export default function Realisations() {
                     {categorie.description}
                   </p>
                   <div className="mt-5 flex flex-col gap-6">
-                    {items.map((realisation, itemIndex) => (
-                      <ContentCard
-                        key={`${categorie.nom}-${itemIndex}`}
-                        label={realisation.titre}
-                        gradient={realisation.gradient}
-                        src={realisation.src}
-                        href={realisation.href}
-                        showBadge={Boolean(realisation.src)}
-                        floatDelay={index * 1.8}
-                        className="max-w-[300px]"
-                      />
-                    ))}
+                    {items.length > 0 ? (
+                      items.map((realisation, itemIndex) => (
+                        <ContentCard
+                          key={`${categorie.nom}-${itemIndex}`}
+                          label={realisation.titre}
+                          gradient={realisation.gradient}
+                          src={realisation.src}
+                          href={realisation.href}
+                          showBadge={Boolean(realisation.src)}
+                          floatDelay={index * 1.8}
+                          className="max-w-[300px]"
+                        />
+                      ))
+                    ) : (
+                      <p className="text-sm italic text-muted">
+                        Exemples à venir.
+                      </p>
+                    )}
                   </div>
                 </article>
               </Reveal>
