@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import ContentCard from "@/components/ui/ContentCard";
 import {
   categories,
-  realisations,
+  projets,
   type CategorieRealisation,
 } from "@/lib/realisations";
 
@@ -17,9 +17,8 @@ export default function PortfolioGrid() {
   const [filtre, setFiltre] = useState<Filtre>("Tous");
   const reduceMotion = useReducedMotion();
 
-  const items = realisations.filter(
-    (realisation) =>
-      filtre === "Tous" || realisation.categories.includes(filtre)
+  const visibles = projets.filter(
+    (projet) => filtre === "Tous" || projet.formats.includes(filtre)
   );
 
   return (
@@ -46,31 +45,48 @@ export default function PortfolioGrid() {
         ))}
       </div>
 
-      {items.length > 0 ? (
-        <motion.div layout={!reduceMotion} className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-7 lg:grid-cols-4">
+      {visibles.length > 0 ? (
+        <div className="mt-4">
           <AnimatePresence mode="popLayout" initial={false}>
-            {items.map((realisation, index) => (
-              <motion.div
-                key={realisation.titre}
+            {visibles.map((projet) => (
+              <motion.section
+                key={projet.lieu}
                 layout={!reduceMotion}
-                initial={reduceMotion ? undefined : { opacity: 0, scale: 0.94 }}
-                animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-                exit={reduceMotion ? undefined : { opacity: 0, scale: 0.94 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                initial={reduceMotion ? undefined : { opacity: 0, y: 20 }}
+                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                exit={reduceMotion ? undefined : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="border-b border-line py-10 last:border-b-0"
+                aria-label={projet.lieu}
               >
-                <ContentCard
-                  label={realisation.titre}
-                  gradient={realisation.gradient}
-                  src={realisation.src}
-                  href={realisation.href}
-                  showBadge={false}
-                  showPlay={!realisation.categories.every((c) => c === "Shooting photo")}
-                  floatDelay={index * 1.4}
-                />
-              </motion.div>
+                <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
+                  <h2 className="font-display text-2xl md:text-3xl">
+                    {projet.lieu}
+                  </h2>
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                    {projet.formats.join(" · ")}
+                  </p>
+                </div>
+
+                <div className="mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
+                  {projet.medias.map((media, index) => (
+                    <ContentCard
+                      key={`${projet.lieu}-${index}`}
+                      label={projet.lieu}
+                      gradient={media.gradient}
+                      src={media.src}
+                      href={media.href}
+                      showBadge={false}
+                      showPlay={Boolean(media.video)}
+                      showLabel={false}
+                      floatDelay={index * 1.2}
+                    />
+                  ))}
+                </div>
+              </motion.section>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       ) : (
         <p className="mt-10 italic text-muted">
           Rien dans cette catégorie pour l&apos;instant — ça arrive bientôt.

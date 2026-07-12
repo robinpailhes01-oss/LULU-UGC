@@ -1,7 +1,7 @@
 import ContentCard from "@/components/ui/ContentCard";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
-import { categories, realisations } from "@/lib/realisations";
+import { projets } from "@/lib/realisations";
 
 export default function Realisations() {
   return (
@@ -13,8 +13,9 @@ export default function Realisations() {
             On montre peu, mais on montre <em className="italic text-chestnut">bien</em>.
           </h2>
           <p className="mt-4 max-w-xl leading-relaxed text-muted">
-            Trois formats, un même objectif : refléter l&apos;expérience de
-            votre lieu. Cliquez sur un projet pour voir le reel.
+            Chaque lieu est un projet : reels, vidéos UGC ou shooting photo
+            selon l&apos;expérience. Cliquez sur un projet pour le voir sur
+            Instagram.
           </p>
           <a
             href="/portfolio"
@@ -24,43 +25,24 @@ export default function Realisations() {
           </a>
         </Reveal>
 
-        <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-8">
-          {categories.map((categorie, index) => {
-            // L'accueil montre une sélection ; tout est sur /portfolio.
-            const items = realisations
-              .filter((realisation) =>
-                realisation.categories.includes(categorie.nom)
-              )
-              .slice(0, 2);
+        {/* Une carte par lieu — le portfolio complet est sur /portfolio */}
+        <div className="mt-12 grid grid-cols-2 gap-5 md:mt-16 md:grid-cols-3 md:gap-7">
+          {projets.slice(0, 6).map((projet, index) => {
+            const cover = projet.medias[0];
             return (
-              <Reveal key={categorie.nom} delay={index * 0.12}>
-                <article>
-                  <h3 className="font-display text-2xl">{categorie.nom}</h3>
-                  <p className="mt-2 min-h-0 text-sm leading-relaxed text-muted md:min-h-[84px]">
-                    {categorie.description}
-                  </p>
-                  <div className="mt-5 flex flex-col gap-6">
-                    {items.length > 0 ? (
-                      items.map((realisation, itemIndex) => (
-                        <ContentCard
-                          key={`${categorie.nom}-${itemIndex}`}
-                          label={realisation.titre}
-                          gradient={realisation.gradient}
-                          src={realisation.src}
-                          href={realisation.href}
-                          showBadge={Boolean(realisation.src)}
-                          showPlay={!realisation.categories.every((c) => c === "Shooting photo")}
-                          floatDelay={index * 1.8}
-                          className="max-w-[300px]"
-                        />
-                      ))
-                    ) : (
-                      <p className="text-sm italic text-muted">
-                        Exemples à venir.
-                      </p>
-                    )}
-                  </div>
-                </article>
+              <Reveal key={projet.lieu} delay={(index % 3) * 0.12}>
+                <ContentCard
+                  label={projet.lieu}
+                  gradient={cover.gradient}
+                  src={cover.src}
+                  href={cover.href}
+                  showBadge={false}
+                  showPlay={Boolean(cover.video)}
+                  floatDelay={index * 1.4}
+                />
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                  {projet.formats.join(" · ")}
+                </p>
               </Reveal>
             );
           })}

@@ -54,7 +54,8 @@ l'activité) pour créer un contenu fidèle à ce que découvriront les clients.
 Ce que comprend l'offre :
 - **Une galerie de photos professionnelles** (établissement, espaces, produits, équipe, détails)
 - **Des vidéos verticales prêtes à publier** (Reels, TikTok, Facebook, site)
-- **1 vidéo UGC** (naturelle, immersive, comme une cliente — réseaux + publicités)
+- **1 vidéo UGC** (naturelle, immersive, comme une cliente — diffusion
+  **organique** sur les réseaux, PAS en publicité/ads)
 - **Hooks & légendes** (idées de textes et d'accroches)
 - **Contenu optimisé** (fichiers haute qualité, prêts à publier)
 

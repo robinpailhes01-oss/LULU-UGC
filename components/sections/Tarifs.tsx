@@ -26,7 +26,7 @@ const inclus = [
     icon: UserRound,
     titre: "1 vidéo UGC",
     texte:
-      "Une vidéo naturelle et immersive racontant l'expérience comme si j'étais votre cliente. Idéale pour créer de la confiance, sur vos réseaux sociaux ou dans vos publicités.",
+      "Une vidéo naturelle et immersive racontant l'expérience comme si j'étais votre cliente. Idéale pour créer de la confiance sur vos réseaux sociaux — en organique, pas en publicité.",
   },
   {
     icon: PenLine,
@@ -46,7 +46,7 @@ const options = [
   {
     nom: "1 vidéo UGC complète",
     detail:
-      "Je découvre et vis votre expérience face caméra, montage inclus. Idéal pour tester le format.",
+      "Je découvre et vis votre expérience face caméra, montage inclus. En organique, sur vos réseaux — idéal pour tester le format.",
   },
   {
     nom: "Shooting photo / vidéo",

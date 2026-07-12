@@ -15,6 +15,8 @@ export type ContentCardProps = {
   showBadge?: boolean;
   /** Masquer le bouton play pour les contenus photo. */
   showPlay?: boolean;
+  /** Masquer le libellé (quand le nom du lieu est déjà affiché à côté). */
+  showLabel?: boolean;
   className?: string;
 };
 
@@ -30,6 +32,7 @@ export default function ContentCard({
   floatDelay = 0,
   showBadge = true,
   showPlay = true,
+  showLabel = true,
   className = "",
 }: ContentCardProps) {
   const reduceMotion = useReducedMotion();
@@ -73,13 +76,17 @@ export default function ContentCard({
         </span>
       )}
 
-      <div
-        className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-espresso/70 to-transparent"
-        aria-hidden="true"
-      />
-      <figcaption className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-cream">
-        {label}
-      </figcaption>
+      {showLabel && (
+        <>
+          <div
+            className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-espresso/70 to-transparent"
+            aria-hidden="true"
+          />
+          <figcaption className="absolute bottom-3 left-3 right-3 text-sm font-semibold text-cream">
+            {label}
+          </figcaption>
+        </>
+      )}
 
       {href && (
         <a
