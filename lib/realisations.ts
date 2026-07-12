@@ -67,6 +67,15 @@ export const realisations: Realisation[] = [
       "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
   },
   {
+    titre: "Vidéo UGC — expérience hôtel",
+    categories: ["Vidéos UGC"],
+    ratio: "9:16",
+    src: "/realisations/ugc-hotel.jpg",
+    href: "https://www.instagram.com/reel/DZIU42MMlFD/?igsh=MXd1N3V0bHJ6eDJ3Zw==",
+    gradient:
+      "linear-gradient(180deg, #F0D9B8 0%, #C98A3C 50%, #7A5230 100%)",
+  },
+  {
     titre: "Next Yacht — shooting en mer",
     categories: ["Shooting photo"],
     ratio: "9:16",
