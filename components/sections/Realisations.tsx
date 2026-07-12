@@ -26,9 +26,12 @@ export default function Realisations() {
 
         <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-8">
           {categories.map((categorie, index) => {
-            const items = realisations.filter((realisation) =>
-              realisation.categories.includes(categorie.nom)
-            );
+            // L'accueil montre une sélection ; tout est sur /portfolio.
+            const items = realisations
+              .filter((realisation) =>
+                realisation.categories.includes(categorie.nom)
+              )
+              .slice(0, 2);
             return (
               <Reveal key={categorie.nom} delay={index * 0.12}>
                 <article>
