@@ -42,18 +42,35 @@ Toujours vendre le **résultat** (du contenu beau, prêt à poster, qui donne en
 jamais le **process** ou les outils. Ne jamais se présenter comme « agence de community
 management » : ça active la peur de l'engagement et du jargon. On est un **studio de contenu**.
 
-## L'offre (validée)
+## L'offre (validée — copy de Ludivine)
 
-### Pack Content & UGC — 390 € *(le pack principal, mis en avant)*
-« Le format complet pour montrer et faire vivre votre expérience à travers
-votre communication. »
-- Shooting photo / vidéo sur place
-- **30 photos minimum livrées + tous les rushs vidéo**
-- **2 reels montés**, prêts à publier
-- **1 vidéo UGC** (Ludivine vit l'expérience face caméra)
-- **Idées de hooks et de contenus pour 1 mois minimum**
-- Livraison sous **7 jours**
-- En supplément : reels montés ou photos en plus, selon les besoins
+### L'Expérience Content & UGC — 390 € (tarif de lancement)
+Accroche : « Je vis votre expérience pour donner envie à vos futurs clients
+de la vivre à leur tour. »
+Positionnement : contrairement à un simple shooting photo, Ludivine vit
+réellement l'expérience (déguster les plats, séjourner, participer à
+l'activité) pour créer un contenu fidèle à ce que découvriront les clients.
+
+Ce que comprend l'offre :
+- **Une galerie de photos professionnelles** (établissement, espaces, produits, équipe, détails)
+- **Des vidéos verticales prêtes à publier** (Reels, TikTok, Facebook, site)
+- **1 vidéo UGC** (naturelle, immersive, comme une cliente — réseaux + publicités)
+- **Hooks & légendes** (idées de textes et d'accroches)
+- **Contenu optimisé** (fichiers haute qualité, prêts à publier)
+
+Objectif : une banque de contenus premium utilisable plusieurs semaines.
+« Le but n'est pas seulement de créer de belles images. Le but est de créer
+l'envie de vivre votre expérience. »
+
+Comment ça se passe (par type d'établissement, pas d'étapes numérotées) :
+- **Restaurant** : découverte + dégustation sur place
+- **Hôtel / Airbnb / logement insolite** : séjour complet (arrivée, ambiance,
+  détails, services, réveil, petit-déjeuner)
+- **Activité touristique** : participation réelle pour capturer les émotions
+
+Mention obligatoire en bas de l'offre : « Les frais liés à l'expérience
+(repas, nuitée ou activité) sont à prévoir par l'établissement, ou peuvent
+faire l'objet d'un échange en collaboration selon le projet. »
 
 ### À la carte *(menu d'options, chaque option se réserve seule)*
 - **1 vidéo UGC complète** (découverte + expérience face caméra, montage inclus)
