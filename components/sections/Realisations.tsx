@@ -16,12 +16,18 @@ export default function Realisations() {
             Trois formats, un même objectif : refléter l&apos;expérience de
             votre lieu. Cliquez sur un projet pour voir le reel.
           </p>
+          <a
+            href="/portfolio"
+            className="mt-5 inline-block text-sm font-semibold text-espresso underline decoration-line decoration-1 underline-offset-8 transition-colors hover:decoration-chestnut"
+          >
+            Voir tout le portfolio
+          </a>
         </Reveal>
 
         <div className="mt-12 grid gap-10 md:mt-16 md:grid-cols-3 md:gap-8">
           {categories.map((categorie, index) => {
-            const items = realisations.filter(
-              (realisation) => realisation.categorie === categorie.nom
+            const items = realisations.filter((realisation) =>
+              realisation.categories.includes(categorie.nom)
             );
             return (
               <Reveal key={categorie.nom} delay={index * 0.12}>
@@ -40,6 +46,7 @@ export default function Realisations() {
                           src={realisation.src}
                           href={realisation.href}
                           showBadge={Boolean(realisation.src)}
+                          showPlay={!realisation.categories.every((c) => c === "Shooting photo")}
                           floatDelay={index * 1.8}
                           className="max-w-[300px]"
                         />

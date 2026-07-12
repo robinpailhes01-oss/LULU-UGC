@@ -2,7 +2,8 @@ export type CategorieRealisation = "Reels montés" | "Vidéos UGC" | "Shooting p
 
 export type Realisation = {
   titre: string;
-  categorie: CategorieRealisation;
+  /** Un même contenu peut appartenir à plusieurs catégories. */
+  categories: CategorieRealisation[];
   ratio: "9:16" | "4:5";
   /** Chemin du média une fois disponible ; dégradé chaud en attendant. */
   src?: string;
@@ -32,10 +33,15 @@ export const categories: {
   },
 ];
 
+/**
+ * Pour ajouter un projet : déposer la photo dans public/realisations/,
+ * puis ajouter une entrée ici. La page d'accueil et /portfolio se mettent
+ * à jour automatiquement.
+ */
 export const realisations: Realisation[] = [
   {
     titre: "Gîte de l'Abric — Cévennes",
-    categorie: "Reels montés",
+    categories: ["Reels montés", "Vidéos UGC"],
     ratio: "9:16",
     src: "/realisations/gite-abric-cevennes.jpg",
     href: "https://www.instagram.com/reel/DMVPrINId35/?igsh=ZDNnb20zYzJwY3Ax",
@@ -44,7 +50,7 @@ export const realisations: Realisation[] = [
   },
   {
     titre: "Una Mas — cocktail bar, Carnon",
-    categorie: "Reels montés",
+    categories: ["Reels montés", "Vidéos UGC"],
     ratio: "9:16",
     src: "/realisations/una-mas-carnon.jpg",
     href: "https://www.instagram.com/reel/DYwjsCSM7wb/?igsh=MTUzbXluNXBxMDdmYQ==",
@@ -53,11 +59,20 @@ export const realisations: Realisation[] = [
   },
   {
     titre: "Harmonie Yacht — location de yacht",
-    categorie: "Reels montés",
+    categories: ["Reels montés"],
     ratio: "9:16",
     src: "/realisations/harmonie-yacht.jpg",
     href: "https://www.instagram.com/reel/DZ5ER2RsFEt/?igsh=MWNwMWtybWVrNTJ5eQ==",
     gradient:
       "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 45%, #7A5230 100%)",
+  },
+  {
+    titre: "Next Yacht — shooting en mer",
+    categories: ["Shooting photo"],
+    ratio: "9:16",
+    src: "/realisations/next-yacht.jpg",
+    href: "https://www.instagram.com/p/DOTjasHiLwc/?igsh=Z2R0NTZqYWY4OHA1",
+    gradient:
+      "linear-gradient(170deg, #E8C495 0%, #C98A3C 55%, #241D17 100%)",
   },
 ];

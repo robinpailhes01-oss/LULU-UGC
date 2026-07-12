@@ -13,6 +13,8 @@ export type ContentCardProps = {
   /** Seconds of offset so cards float out of sync. */
   floatDelay?: number;
   showBadge?: boolean;
+  /** Masquer le bouton play pour les contenus photo. */
+  showPlay?: boolean;
   className?: string;
 };
 
@@ -27,6 +29,7 @@ export default function ContentCard({
   href,
   floatDelay = 0,
   showBadge = true,
+  showPlay = true,
   className = "",
 }: ContentCardProps) {
   const reduceMotion = useReducedMotion();
@@ -64,9 +67,11 @@ export default function ContentCard({
         </span>
       )}
 
-      <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream/85 text-espresso transition-transform duration-300 group-hover:scale-110">
-        <Play className="ml-0.5 h-5 w-5 fill-current" aria-hidden="true" />
-      </span>
+      {showPlay && (
+        <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream/85 text-espresso transition-transform duration-300 group-hover:scale-110">
+          <Play className="ml-0.5 h-5 w-5 fill-current" aria-hidden="true" />
+        </span>
+      )}
 
       <div
         className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-espresso/70 to-transparent"

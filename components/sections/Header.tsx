@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#prestations", label: "Prestations" },
-  { href: "#realisations", label: "Réalisations" },
-  { href: "#tarifs", label: "Tarifs" },
-  { href: "#a-propos", label: "À propos" },
+  { href: "/#prestations", label: "Prestations" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/#tarifs", label: "Tarifs" },
+  { href: "/#a-propos", label: "À propos" },
 ];
 
 export default function Header() {
@@ -49,7 +49,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="rounded-full bg-espresso px-5 py-2.5 text-sm font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
           >
             Réserver un shooting
@@ -86,7 +86,7 @@ export default function Header() {
             ))}
             <li>
               <a
-                href="#contact"
+                href="/#contact"
                 className="mt-1 inline-block rounded-full bg-espresso px-5 py-2.5 text-sm font-semibold text-cream"
                 onClick={() => setMenuOpen(false)}
               >
