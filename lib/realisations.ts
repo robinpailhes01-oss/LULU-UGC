@@ -142,4 +142,44 @@ export const realisations: Realisation[] = [
     gradient:
       "linear-gradient(170deg, #F0D9B8 0%, #C98A3C 55%, #7A5230 100%)",
   },
+  {
+    titre: "Hôtel & spa — au balcon",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-balcon.jpg",
+    gradient:
+      "linear-gradient(160deg, #E8C495 0%, #C98A3C 50%, #6B3F2E 100%)",
+  },
+  {
+    titre: "Hôtel & spa — couple en terrasse",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-couple-terrasse.jpg",
+    gradient:
+      "linear-gradient(180deg, #F0D9B8 0%, #C98A3C 55%, #241D17 100%)",
+  },
+  {
+    titre: "Hôtel & spa — piscine extérieure",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-piscine-ext.jpg",
+    gradient:
+      "linear-gradient(200deg, #E8C495 0%, #C98A3C 45%, #7A5230 100%)",
+  },
+  {
+    titre: "Hôtel & spa — balcon fleuri",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-balcon-fleuri.jpg",
+    gradient:
+      "linear-gradient(150deg, #F0D9B8 0%, #C98A3C 50%, #6B3F2E 100%)",
+  },
+  {
+    titre: "Hôtel & spa — moment à deux",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-moment-a-deux.jpg",
+    gradient:
+      "linear-gradient(170deg, #E8C495 0%, #C98A3C 55%, #241D17 100%)",
+  },
 ];
