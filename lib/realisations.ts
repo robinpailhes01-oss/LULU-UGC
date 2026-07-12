@@ -102,4 +102,44 @@ export const realisations: Realisation[] = [
     gradient:
       "linear-gradient(170deg, #E8C495 0%, #C98A3C 55%, #241D17 100%)",
   },
+  {
+    titre: "Hôtel & spa — piscine intérieure",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-piscine.jpg",
+    gradient:
+      "linear-gradient(160deg, #F0D9B8 0%, #C98A3C 50%, #7A5230 100%)",
+  },
+  {
+    titre: "Hôtel & spa — matin en terrasse",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-terrasse.jpg",
+    gradient:
+      "linear-gradient(180deg, #E8C495 0%, #C98A3C 55%, #241D17 100%)",
+  },
+  {
+    titre: "Hôtel & spa — vue sur les jardins",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-jardins-vue.jpg",
+    gradient:
+      "linear-gradient(200deg, #F0D9B8 0%, #C98A3C 45%, #6B3F2E 100%)",
+  },
+  {
+    titre: "Hôtel & spa — les jardins",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-jardins.jpg",
+    gradient:
+      "linear-gradient(150deg, #E8C495 0%, #C98A3C 50%, #7A5230 100%)",
+  },
+  {
+    titre: "Hôtel & spa — détails de la chambre",
+    categories: ["Shooting photo"],
+    ratio: "4:5",
+    src: "/realisations/shooting-hotel-chambre.jpg",
+    gradient:
+      "linear-gradient(170deg, #F0D9B8 0%, #C98A3C 55%, #7A5230 100%)",
+  },
 ];
