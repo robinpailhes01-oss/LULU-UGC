@@ -92,7 +92,7 @@ Carnon** (à intégrer comme premier cas dès qu'il est prêt). Tant que le port
 mince, montrer peu mais bien ; ne jamais inventer de logos clients ou de chiffres.
 
 ## Identité
-- **Nom :** Divine
+- **Nom :** June
 - **Créatrice :** Ludivine — passionnée par la création de contenu et la
   découverte de nouveaux lieux et d'expériences. La page parle d'elle à la
   première personne (« je »).

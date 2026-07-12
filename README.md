@@ -1,6 +1,6 @@
-# Divine — landing page
+# June — landing page
 
-Page de vente du studio de contenu **Divine** : reels, photos et vidéos « prêt à publier »
+Page de vente du studio de contenu **June** : reels, photos et vidéos « prêt à publier »
 pour les restaurants, hôtels, logements insolites et lieux d'activité en Occitanie.
 
 ## Stack

@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-container flex-col items-start gap-6 px-5 md:flex-row md:items-center md:justify-between md:px-7">
         <div>
           <p className="font-display text-xl text-espresso">
-            Divine<span className="text-chestnut">.</span>
+            June<span className="text-chestnut">.</span>
           </p>
           <p className="mt-2 text-sm text-muted">
             Studio de contenu tourisme — Occitanie, Montpellier &amp; littoral.
@@ -24,7 +24,7 @@ export default function Footer() {
             Instagram
           </a>
           <p className="text-sm text-muted">
-            © {new Date().getFullYear()} Divine
+            © {new Date().getFullYear()} June
           </p>
         </div>
       </div>

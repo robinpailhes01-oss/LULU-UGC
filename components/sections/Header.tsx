@@ -33,9 +33,9 @@ export default function Header() {
         <a
           href="#"
           className="font-display text-xl tracking-tight text-espresso"
-          aria-label="Divine — retour en haut de page"
+          aria-label="June — retour en haut de page"
         >
-          Divine<span className="text-chestnut">.</span>
+          June<span className="text-chestnut">.</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Navigation principale">

@@ -6,9 +6,9 @@ import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Portfolio — Divine",
+  title: "Portfolio — June",
   description:
-    "Reels montés, vidéos UGC et shootings photo réalisés par Divine pour des lieux de tourisme en Occitanie : hôtels, restaurants, logements insolites, expériences.",
+    "Reels montés, vidéos UGC et shootings photo réalisés par June pour des lieux de tourisme en Occitanie : hôtels, restaurants, logements insolites, expériences.",
 };
 
 export default function PortfolioPage() {

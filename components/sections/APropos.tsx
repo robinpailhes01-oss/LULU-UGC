@@ -16,12 +16,12 @@ export default function APropos() {
                   "url('/portrait.jpg') center / cover no-repeat, linear-gradient(170deg, #E8C495 0%, #C98A3C 55%, #7A5230 100%)",
               }}
               role="img"
-              aria-label="Portrait de Ludivine, créatrice du studio Divine"
+              aria-label="Portrait de Ludivine, créatrice du studio June"
             />
           </Reveal>
 
           <Reveal delay={0.15}>
-            <Eyebrow>Qui est derrière Divine</Eyebrow>
+            <Eyebrow>Qui est derrière June</Eyebrow>
             <h2 className="mt-4 font-display text-[clamp(28px,4vw,44px)] leading-tight">
               Moi c&apos;est <em className="italic text-chestnut">Ludivine</em>.
             </h2>

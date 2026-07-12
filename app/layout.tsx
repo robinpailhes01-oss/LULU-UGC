@@ -16,11 +16,11 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Divine — On crée votre contenu, vous n'avez plus qu'à poster",
+  title: "June — On crée votre contenu, vous n'avez plus qu'à poster",
   description:
     "Reels, vidéos UGC et photos clé en main pour les lieux de tourisme en Occitanie : hôtels, restaurants, logements insolites, expériences. On vient, on filme, on monte — vous n'avez plus qu'à poster.",
   openGraph: {
-    title: "Divine — Studio de contenu tourisme",
+    title: "June — Studio de contenu tourisme",
     description:
       "Du contenu prêt à poster pour les lieux de tourisme : reels, vidéos UGC et photos qui reflètent l'expérience de votre lieu. Sans abonnement, en Occitanie.",
     locale: "fr_FR",
