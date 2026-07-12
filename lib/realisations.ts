@@ -76,6 +76,15 @@ export const realisations: Realisation[] = [
       "linear-gradient(180deg, #F0D9B8 0%, #C98A3C 50%, #7A5230 100%)",
   },
   {
+    titre: "Vidéo UGC — sortie en mer",
+    categories: ["Vidéos UGC"],
+    ratio: "9:16",
+    src: "/realisations/ugc-bateau.jpg",
+    href: "https://www.instagram.com/reel/DasaBUgIF_3/?igsh=eHQ0cGM1MTN3bzR5",
+    gradient:
+      "linear-gradient(190deg, #E8C495 0%, #C98A3C 50%, #6B3F2E 100%)",
+  },
+  {
     titre: "Harmonie Yacht — shooting photo",
     categories: ["Shooting photo"],
     ratio: "9:16",
