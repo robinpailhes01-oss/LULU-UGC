@@ -76,6 +76,15 @@ export const realisations: Realisation[] = [
       "linear-gradient(180deg, #F0D9B8 0%, #C98A3C 50%, #7A5230 100%)",
   },
   {
+    titre: "Harmonie Yacht — shooting photo",
+    categories: ["Shooting photo"],
+    ratio: "9:16",
+    src: "/realisations/harmonie-yacht-shooting.jpg",
+    href: "https://www.instagram.com/p/DasUCeeiM1E/?igsh=NXppc2lyZ3NmcHB0",
+    gradient:
+      "linear-gradient(165deg, #E8C495 0%, #C98A3C 55%, #241D17 100%)",
+  },
+  {
     titre: "Next Yacht — shooting en mer",
     categories: ["Shooting photo"],
     ratio: "9:16",
