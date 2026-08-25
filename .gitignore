@@ -32,3 +32,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# scrollcraft : planches et captures de vérification (lourdes, régénérables)
+scrollcraft/builds/*/lab/

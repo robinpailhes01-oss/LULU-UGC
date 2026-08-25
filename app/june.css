@@ -1,0 +1,571 @@
+/* ============================================================================
+   june.css — thème et mise en page de la landing scrollcraft.
+   Grammaire : galerie / catalogue. Signature : le soleil de la page (--day).
+   Les tokens scrollcraft sont surchargés ici ; l'engine n'est jamais modifié.
+   ========================================================================== */
+
+:root {
+  --sc-canvas: #f4f0e8;
+  --sc-surface: #fbf7f0;
+  --sc-ink: #241d17;
+  --sc-ink-soft: #6b5e50;
+  --sc-accent: #8b5e34;
+  --sc-accent-ink: #fbf7f0;
+
+  --sc-font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --sc-font-text: var(--font-manrope), system-ui, sans-serif;
+  --sc-font-mono: var(--font-manrope), system-ui, sans-serif;
+
+  --sc-shadow-color: 28 32% 10%;
+
+  /* Le soleil de la page : 0 = matin, 1 = soir. Piloté par JuneEngine. */
+  --day: 0;
+}
+
+/* ------------------------------------------------------------- le soleil -- */
+/* Deux couches de halo : une pâle du matin qui s'éteint, une ambrée du soir
+   qui s'allume et descend vers l'horizon pendant la descente de la page. */
+.june-sun {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.june-sun::before,
+.june-sun::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.june-sun::before {
+  background: radial-gradient(
+    58vmax 58vmax at calc(22% + var(--day) * 46%) calc(6% + var(--day) * 66%),
+    rgba(255, 246, 219, 0.9),
+    transparent 62%
+  );
+  opacity: calc(0.5 * (1 - var(--day)));
+}
+.june-sun::after {
+  background: radial-gradient(
+    52vmax 52vmax at calc(22% + var(--day) * 46%) calc(6% + var(--day) * 66%),
+    rgba(233, 166, 90, 0.75),
+    transparent 60%
+  );
+  opacity: calc(0.55 * var(--day));
+}
+
+/* Le voile chaud : regrade tout d'un coup, photos comprises. */
+.june-veil {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  mix-blend-mode: multiply;
+  background: linear-gradient(180deg, #ffedc9, #f0c88c);
+  opacity: calc(var(--day) * 0.12);
+}
+
+/* --------------------------------------------------------------- l'index -- */
+.june-index {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 60;
+  transition: opacity 320ms var(--sc-ease-out);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sc-5);
+  padding: var(--sc-4) var(--sc-gutter);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--sc-canvas) 88%, transparent),
+    color-mix(in oklab, var(--sc-canvas) 40%, transparent) 70%,
+    transparent
+  );
+}
+.june-index__mark {
+  font-family: var(--sc-font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.45rem;
+  line-height: 1;
+  text-decoration: none;
+}
+.june-index__list {
+  display: flex;
+  gap: var(--sc-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.june-index__list a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sc-ink-soft);
+  text-decoration: none;
+}
+.june-index__list a:hover { color: var(--sc-ink); }
+.june-index__list a.is-cta { color: var(--sc-accent); }
+@media (max-width: 860px) {
+  .june-index__list li { display: none; }
+  .june-index__list li:last-child { display: block; }
+}
+/* La nuit tombe : le chrome s'éteint avec le jour. Classe posée par JuneEngine. */
+.is-dusk .june-index {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------- étiquette de musée ----- */
+.j-label {
+  margin: 0;
+  font-family: var(--sc-font-text);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: var(--sc-ink-soft);
+}
+.j-label strong {
+  display: block;
+  color: var(--sc-ink);
+  font-weight: 700;
+}
+.j-label a {
+  color: inherit;
+  text-decoration-color: color-mix(in oklab, var(--sc-ink-soft) 55%, transparent);
+}
+.j-label a:hover { color: var(--sc-ink); }
+
+/* ------------------------------------------------------- acte 1 : entrée -- */
+.j-hero__media,
+.j-hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.j-hero__media { margin: 0; overflow: clip; }
+.j-hero__media img { object-fit: cover; }
+@media (prefers-reduced-motion: no-preference) {
+  .j-hero__media img {
+    transform: scale(calc(1.08 - var(--sc-p, 0) * 0.08));
+    transform-origin: 50% 42%;
+  }
+}
+.j-hero .sc-copy { max-width: min(44rem, 82vw); }
+.j-walltext {
+  margin-top: var(--sc-5);
+  font-size: var(--sc-t-2xl);
+  font-weight: 340;
+}
+.j-hero__note {
+  margin: var(--sc-4) 0 0;
+  max-width: 42ch;
+  color: var(--sc-ink-soft);
+  text-wrap: pretty;
+}
+
+/* Le lavis clair sous la copie : la version June du scrim, en papier. */
+.j-hero .sc-scrim--lead {
+  background: linear-gradient(
+    to top right,
+    color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 78%, transparent) 34%,
+    color-mix(in oklab, var(--sc-canvas) 34%, transparent) 56%,
+    transparent 74%
+  );
+}
+@media (max-width: 860px) {
+  .j-hero .sc-scrim--lead {
+    background: linear-gradient(
+      to top,
+      color-mix(in oklab, var(--sc-canvas) 98%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 90%, transparent) 30%,
+      color-mix(in oklab, var(--sc-canvas) 52%, transparent) 56%,
+      transparent 74%
+    );
+  }
+}
+
+/* -------------------------------------------------- acte 2 : la salle ----- */
+.j-room {
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+.j-rail {
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-inline: var(--sc-gutter);
+}
+.j-rail__intro { flex: 0 0 auto; width: min(24rem, 74vw); }
+.j-rail__intro p { margin-top: var(--sc-4); }
+.j-rail__outro {
+  flex: 0 0 auto;
+  width: min(17rem, 60vw);
+  padding-inline-end: var(--sc-gutter);
+}
+.j-rail__outro p { margin: 0 0 var(--sc-3); font-family: var(--sc-font-display); font-size: var(--sc-t-lg); }
+.j-object { flex: 0 0 auto; margin: 0; }
+.j-object__media {
+  height: min(56vh, 30rem);
+  overflow: clip;
+  border-radius: var(--sc-r-md);
+  box-shadow: var(--sc-e2);
+  background: var(--sc-surface);
+}
+.j-object__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+.j-object--p34 .j-object__media { aspect-ratio: 3 / 4; }
+.j-object--p910 .j-object__media { aspect-ratio: 9 / 10; }
+.j-object--sq .j-object__media { aspect-ratio: 1 / 1; }
+.j-object--sq .j-object__media img { object-position: 50% 42%; }
+.j-object--wide .j-object__media { aspect-ratio: 4 / 3; }
+.j-object--wide .j-object__media img { object-position: 50% 38%; }
+.j-object--reel .j-object__media { aspect-ratio: 10 / 16; }
+.j-object figcaption { margin-top: var(--sc-3); }
+
+/* Arrivée en escalier des objets, pilotée par --sc-p. Le premier est exempt. */
+@media (prefers-reduced-motion: no-preference) {
+  .j-rail > * {
+    opacity: clamp(0.55, (var(--sc-p, 1) - var(--i, 0) * 0.075) * 7, 1);
+    transform: translateY(
+      clamp(0px, (var(--i, 0) * 0.075 - var(--sc-p, 1)) * 30vh, 22px)
+    );
+  }
+  .j-rail > :first-child { opacity: 1; transform: none; }
+}
+@media (max-width: 860px) {
+  .j-object__media { height: min(52vh, 24rem); }
+}
+
+/* --------------------------------------------- acte 3 : la journée (pic) -- */
+.j-day { background: transparent; }
+.j-day__open {
+  position: absolute;
+  left: var(--sc-gutter);
+  top: clamp(4.5rem, 12vh, 8rem);
+  z-index: var(--sc-z-copy);
+}
+.j-day__table {
+  position: absolute;
+  inset: 0;
+}
+.j-print {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  margin: 0;
+  --o: clamp(0, (var(--sc-p, 0) - var(--in)) * 10, 1);
+  opacity: var(--o);
+  transform: translateY(calc((1 - var(--o)) * 5vh)) rotate(var(--r))
+    scale(calc(0.97 + var(--o) * 0.03));
+  border-radius: var(--sc-r-sm);
+  overflow: clip;
+  box-shadow: var(--sc-e3);
+  background: var(--sc-surface);
+}
+.j-print img { width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .j-print { transform: rotate(var(--r)); }
+}
+
+.j-day__aside {
+  position: absolute;
+  right: var(--sc-gutter);
+  top: clamp(4.5rem, 12vh, 8rem);
+  width: min(15rem, 34vw);
+  z-index: var(--sc-z-copy);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-4);
+  text-align: right;
+}
+/* Lavis papier sous la clôture du pic. Élément frère du texte, jamais enfant,
+   pour que la passe de vérification le mesure. */
+.j-day__wash {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 52%;
+  height: 56%;
+  pointer-events: none;
+  z-index: calc(var(--sc-z-copy) - 1);
+  background: radial-gradient(
+    130% 130% at 92% 82%,
+    color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
+    color-mix(in oklab, var(--sc-canvas) 62%, transparent) 52%,
+    transparent 76%
+  );
+  opacity: clamp(0, (var(--sc-p, 0) - 0.68) * 7, 1);
+}
+.j-day__close {
+  position: absolute;
+  right: var(--sc-gutter);
+  bottom: clamp(3rem, 10vh, 7rem);
+  width: min(21rem, 86vw);
+  z-index: var(--sc-z-copy);
+  text-align: right;
+}
+.j-day__close .sc-lede { margin-left: auto; }
+.j-day__close .j-label { margin-top: var(--sc-4); }
+
+/* Positions des tirages, deux rangées lâches qui se chevauchent. */
+.j-print:nth-of-type(1) { --in: 0.07; --x: 4%;  --y: 9%;  --w: 15%; --r: -2.1deg; }
+.j-print:nth-of-type(2) { --in: 0.16; --x: 21%; --y: 5%;  --w: 13%; --r: 1.7deg; }
+.j-print:nth-of-type(3) { --in: 0.25; --x: 36%; --y: 11%; --w: 14%; --r: -1.2deg; }
+.j-print:nth-of-type(4) { --in: 0.34; --x: 52%; --y: 6%;  --w: 16%; --r: 2.1deg; }
+.j-print:nth-of-type(5) { --in: 0.45; --x: 12%; --y: 49%; --w: 14%; --r: 1.9deg; }
+.j-print:nth-of-type(6) { --in: 0.54; --x: 29%; --y: 45%; --w: 15%; --r: -1.7deg; }
+.j-print:nth-of-type(7) { --in: 0.63; --x: 44%; --y: 51%; --w: 14%; --r: 1.3deg; }
+.j-print:nth-of-type(8) { --in: 0.72; --x: 58%; --y: 46%; --w: 14%; --r: -2.2deg; }
+
+@media (max-width: 860px) {
+  .j-print:nth-of-type(2),
+  .j-print:nth-of-type(6),
+  .j-print:nth-of-type(7) { display: none; }
+  .j-print:nth-of-type(1) { --x: 6%;  --y: 12%; --w: 40%; }
+  .j-print:nth-of-type(3) { --x: 52%; --y: 8%;  --w: 38%; }
+  .j-print:nth-of-type(4) { --x: 10%; --y: 38%; --w: 42%; }
+  .j-print:nth-of-type(5) { --x: 56%; --y: 34%; --w: 38%; }
+  .j-print:nth-of-type(8) { --x: 31%; --y: 52%; --w: 36%; }
+  .j-day__wash {
+    width: 100%;
+    height: 46%;
+    background: linear-gradient(
+      to top,
+      color-mix(in oklab, var(--sc-canvas) 97%, transparent) 0%,
+      color-mix(in oklab, var(--sc-canvas) 86%, transparent) 46%,
+      color-mix(in oklab, var(--sc-canvas) 44%, transparent) 74%,
+      transparent 92%
+    );
+  }
+  .j-day__aside { display: none; }
+  .j-day__close {
+    right: var(--sc-gutter);
+    left: var(--sc-gutter);
+    width: auto;
+    bottom: clamp(1.5rem, 5vh, 3rem);
+    text-align: left;
+  }
+  .j-day__close .sc-lede { margin-left: 0; }
+}
+
+/* ---------------------------------------------------- acte 4 : Ludivine --- */
+.j-lud__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+.j-lud__media {
+  margin: 0;
+  border-radius: var(--sc-r-md);
+  overflow: clip;
+  box-shadow: var(--sc-e2);
+}
+.j-lud__media img { width: 100%; height: auto; }
+.j-lud__text > * + * { margin-top: var(--sc-5); }
+.j-lud__text .j-label { margin-top: var(--sc-6); }
+@media (max-width: 860px) {
+  .j-lud__grid { grid-template-columns: 1fr; }
+  .j-lud__media { max-width: 26rem; }
+}
+
+/* ----------------------------------------------------- acte 5 : l'offre --- */
+.j-offer { position: relative; z-index: 2; }
+.j-plate {
+  background: var(--sc-surface);
+  border-radius: var(--sc-r-lg);
+  box-shadow: var(--sc-e2), var(--sc-edge);
+  padding: clamp(2rem, 5vw, 4.5rem);
+}
+.j-plate > * + * { margin-top: var(--sc-5); }
+.j-plate h2 { max-width: 18ch; }
+.j-price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sc-4);
+  flex-wrap: wrap;
+  margin-top: var(--sc-6);
+}
+.j-price__num {
+  font-family: var(--sc-font-display);
+  font-weight: 300;
+  font-size: var(--sc-t-3xl);
+  line-height: 1;
+  letter-spacing: var(--sc-track-tight);
+}
+.j-price__note { color: var(--sc-ink-soft); max-width: 30ch; }
+.j-rows {
+  list-style: none;
+  margin: var(--sc-6) 0 0;
+  padding: 0;
+}
+.j-rows li {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: var(--sc-4);
+  padding-block: var(--sc-4);
+  border-top: 1px solid var(--sc-hairline);
+}
+.j-rows li:last-child { border-bottom: 1px solid var(--sc-hairline); }
+.j-rows h3 {
+  margin: 0;
+  font-family: var(--sc-font-text);
+  font-size: var(--sc-t-base);
+  font-weight: 700;
+}
+.j-rows p { margin: 0; color: var(--sc-ink-soft); text-wrap: pretty; }
+@media (max-width: 700px) {
+  .j-rows li { grid-template-columns: 1fr; gap: var(--sc-2); }
+}
+.j-how {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sc-5);
+  margin-top: var(--sc-6);
+}
+.j-how h3 {
+  margin: 0 0 var(--sc-2);
+  font-family: var(--sc-font-display);
+  font-size: var(--sc-t-lg);
+  font-weight: 420;
+}
+.j-how p { margin: 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); }
+@media (max-width: 700px) {
+  .j-how { grid-template-columns: 1fr; }
+}
+.j-carte { margin-top: var(--sc-6); }
+.j-carte ul { list-style: none; margin: var(--sc-3) 0 0; padding: 0; }
+.j-carte li { padding-block: var(--sc-2); color: var(--sc-ink-soft); }
+.j-carte li strong { color: var(--sc-ink); font-weight: 700; }
+.j-fine {
+  margin-top: var(--sc-6);
+  font-size: var(--sc-t-xs);
+  color: var(--sc-ink-soft);
+  max-width: 60ch;
+}
+.j-cta {
+  display: inline-block;
+  margin-top: var(--sc-5);
+  padding: 0.95rem 1.9rem;
+  border-radius: var(--sc-r-pill);
+  background: var(--sc-ink);
+  color: var(--sc-canvas);
+  font-weight: 600;
+  font-size: var(--sc-t-sm);
+  text-decoration: none;
+  box-shadow: var(--sc-e1);
+  transition: transform var(--sc-d-fast) var(--sc-ease-out),
+    box-shadow var(--sc-d-fast) var(--sc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .j-cta:hover { transform: translateY(-2px); box-shadow: var(--sc-e2); }
+}
+.j-cta:active { transform: translateY(1px); }
+
+/* --------------------------------------------------- acte 6 : le soir ----- */
+.j-dusk {
+  background: #241d17;
+  --sc-ink: #f6efe3;
+  --sc-ink-soft: #c2b5a4;
+  --sc-accent: #c98a3c;
+  --sc-accent-ink: #241d17;
+  --sc-hairline: rgba(246, 239, 227, 0.16);
+  color: var(--sc-ink);
+}
+.j-dusk__stage {
+  background: linear-gradient(180deg, #2b231b 0%, #241d17 46%, #1d1712 100%);
+  display: flex;
+}
+.j-dusk__inner {
+  width: 100%;
+  max-width: 68rem;
+  /* Centrage sûr : centré quand ça tient, calé en haut quand ça déborde,
+     sans couper le haut comme le ferait align-items: center. */
+  margin-block: auto;
+  margin-inline: auto;
+  padding-inline: var(--sc-gutter);
+  padding-block: var(--sc-6);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+.j-dusk__intro > * + * { margin-top: var(--sc-5); }
+.j-dusk__intro h2 { max-width: 16ch; }
+.j-dusk__meta {
+  margin-top: var(--sc-7);
+  padding-top: var(--sc-5);
+  border-top: 1px solid var(--sc-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sc-2);
+  font-size: var(--sc-t-sm);
+  color: var(--sc-ink-soft);
+}
+.j-dusk__meta a { color: var(--sc-ink); }
+.j-form { display: flex; flex-direction: column; gap: var(--sc-4); }
+.j-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sc-4);
+}
+.j-field { display: flex; flex-direction: column; gap: var(--sc-2); }
+.j-field label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sc-ink-soft);
+}
+.j-field input,
+.j-field textarea {
+  border: 1px solid var(--sc-hairline);
+  border-radius: var(--sc-r-sm);
+  background: rgba(246, 239, 227, 0.05);
+  padding: 0.8rem 0.95rem;
+  color: var(--sc-ink);
+}
+.j-field input::placeholder,
+.j-field textarea::placeholder { color: rgba(194, 181, 164, 0.55); }
+.j-form button {
+  align-self: flex-start;
+  margin-top: var(--sc-2);
+  padding: 0.95rem 1.9rem;
+  border: 0;
+  border-radius: var(--sc-r-pill);
+  background: var(--sc-accent);
+  color: var(--sc-accent-ink);
+  font-weight: 700;
+  font-size: var(--sc-t-sm);
+  cursor: pointer;
+  transition: transform var(--sc-d-fast) var(--sc-ease-out);
+}
+.j-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+@media (hover: hover) and (pointer: fine) {
+  .j-form button:hover { transform: translateY(-2px); }
+}
+.j-form button:active { transform: translateY(1px); }
+.j-form__status { margin: 0; font-size: var(--sc-t-sm); }
+.j-form__status--error { color: #e8a257; }
+@media (max-width: 860px) {
+  .j-dusk__inner { grid-template-columns: 1fr; gap: var(--sc-6); }
+  .j-form__row { grid-template-columns: 1fr; }
+  .j-dusk__stage { overflow-y: auto; }
+  .j-dusk__inner { padding-block: var(--sc-7); }
+}
+
+/* La section après un acte pinné démarre plus près (voir devices.md §8). */
+.j-lud.sc-section { padding-block-start: clamp(2.5rem, 5vw, 5rem); }
