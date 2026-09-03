@@ -35,3 +35,8 @@ next-env.d.ts
 
 # scrollcraft : planches et captures de vérification (lourdes, régénérables)
 scrollcraft/builds/*/lab/
+
+# previews : captures et assets dérivés (régénérables)
+previews/_build/shots/
+previews/_build/*.jpg
+previews/_build/fonts.css
