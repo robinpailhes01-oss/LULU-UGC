@@ -6,7 +6,7 @@ for (const [name, vp] of [['desk', { width: 1440, height: 900 }], ['mob', { widt
   const out = new URL('./shots/' + name + '/', import.meta.url).pathname; mkdirSync(out, { recursive: true });
   const p = await b.newPage({ viewport: vp, deviceScaleFactor: 1 });
   await p.goto(file, { waitUntil: 'networkidle' });
-  await p.evaluate(() => document.fonts.ready);
+  await p.evaluate(() => document.fonts.ready); await p.addStyleTag({ content: 'html{scroll-behavior:auto!important}' });
   await p.waitForTimeout(600);
   const H = await p.evaluate(() => document.documentElement.scrollHeight);
   // positions : top, puis le séjour à 6 points, puis chaque section

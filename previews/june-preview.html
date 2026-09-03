@@ -97,7 +97,13 @@ p{margin:0;text-wrap:pretty}
 section{position:relative}
 
 /* ============ nav ============ */
-.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1rem var(--gutter);pointer-events:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:1rem var(--gutter);pointer-events:none;transition:transform 320ms var(--ease),background 320ms,box-shadow 320ms}
+.nav::before{content:"";position:absolute;inset:0;background:color-mix(in srgb,var(--nav-bg,var(--surface)) 84%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;transition:opacity 320ms;pointer-events:none}
+.nav.is-scrolled::before{opacity:1}
+.nav.is-scrolled{box-shadow:0 1px 0 var(--nav-line,rgba(34,26,20,.08))}
+.nav.is-hidden{transform:translateY(-110%)}
+.nav>*{position:relative}
+.nav .btn .long{display:inline}.nav .btn .short{display:none}
 .nav>*{pointer-events:auto}
 .mark{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:1.6rem;line-height:1;text-decoration:none;color:var(--nav-ink,var(--text));transition:color 300ms}
 .nav .btn{padding:.7rem 1.2rem;font-size:.9rem;background:var(--nav-btn,var(--text));color:var(--nav-btn-ink,var(--surface-alt));transition:background 300ms,color 300ms}
@@ -156,7 +162,7 @@ section{position:relative}
 .deliver .h2{max-width:15ch}
 .phones{display:flex;justify-content:center;align-items:flex-end;gap:clamp(.5rem,2vw,1.5rem);padding:var(--s4) 0}
 .phone{width:clamp(8rem,18vw,14rem);aspect-ratio:9/17;border-radius:1.4rem;overflow:clip;background:var(--night);box-shadow:var(--shadow);position:relative;transform:rotate(var(--rot,0deg)) translateY(var(--ty,0));transition:transform 600ms var(--ease),opacity 600ms var(--ease)}
-.phone img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.phone img{width:100%;height:124%;object-fit:cover;object-position:50% 0}
 .phone__tag{position:absolute;left:.7rem;right:.7rem;bottom:.7rem;background:rgba(23,17,13,.72);color:var(--night-text);font-size:.72rem;padding:.4rem .6rem;border-radius:.6rem;backdrop-filter:blur(6px)}
 .phone:nth-child(1){--rot:-5deg;--ty:1.2rem}.phone:nth-child(3){--rot:5deg;--ty:1.2rem}
 .rows{list-style:none;margin:var(--s4) 0 0;padding:0}
@@ -229,6 +235,7 @@ section{position:relative}
 .form__note{font-size:.85rem;color:var(--night-muted)}
 .foot{margin-top:var(--s7);padding-top:var(--s4);border-top:1px solid rgba(242,231,214,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;font-size:.9rem;color:var(--night-muted)}
 .foot a{color:var(--night-text);text-decoration:none}
+.foot .mark{color:var(--night-text)}
 .foot a:hover{text-decoration:underline}
 
 /* ============ reveals ============ */
@@ -244,19 +251,26 @@ section{position:relative}
   .fiche{max-width:none}
   .fiche .h1{font-size:clamp(2.1rem,7.6vw,2.9rem)}
   .pain .grid,.deliver .grid,.who .grid,.offer .grid,.faq .grid,.book .grid{grid-template-columns:1fr}
-  .stay{--stay-len:420vh}
-  .stay__stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:var(--s2);align-items:start;padding-top:4.5rem;padding-bottom:1rem}
+  .stay{--stay-len:400vh}
+  .stay__stage{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:.6rem;align-items:start;padding-top:4.6rem;padding-bottom:max(.9rem,env(safe-area-inset-bottom))}
   .stay__head{padding-top:0}
-  .stay__head .h2{margin-bottom:var(--s2);max-width:none;font-size:clamp(1.6rem,6vw,2.2rem)}
-  .rail{display:flex;gap:.9rem;font-size:.85rem;overflow:hidden}
+  .stay__head .h2{margin-bottom:.5rem;max-width:none;font-size:clamp(1.35rem,5.4vw,1.8rem);line-height:1.08}
+  .rail{display:flex;gap:.85rem;font-size:.82rem;overflow:hidden}
   .rail li{grid-template-columns:auto;gap:.1rem;white-space:nowrap}
   .rail li span:last-child{display:none}
-  .deck{height:auto;align-self:stretch;min-height:0}
-  .card{grid-template-columns:1fr;grid-template-rows:minmax(0,46%) minmax(0,54%);width:100%;height:100%}
-  .card__body{padding:1.1rem 1.2rem 1.2rem}
-  .card .h3{font-size:1.25rem;margin:.2rem 0 .5rem}
-  .card__muted{font-size:.9rem}
-  .card__cap{font-size:.82rem;padding-top:.7rem}
+  .deck{height:auto;align-self:stretch;min-height:0;overflow:clip;padding-top:.9rem;border-radius:var(--r) var(--r) 0 0}
+  .card{grid-template-columns:1fr;grid-template-rows:minmax(0,48%) minmax(0,52%);width:100%;height:100%;inset:.9rem 0 0 0;margin:0}
+  .card__body{padding:.9rem 1rem 1rem;gap:.8rem}
+  .card__top{font-size:.85rem}
+  .card__top .time{font-size:.95rem}
+  .card .h3{font-size:1.15rem;margin:.15rem 0 .35rem;line-height:1.1}
+  .card__muted{font-size:.88rem;line-height:1.45}
+  .card__cap{font-size:.78rem;padding-top:.6rem;line-height:1.4}
+  .nav .btn .long{display:none}.nav .btn .short{display:inline}
+  :root{--s8:5rem;--s7:4rem}
+  .phones{padding:var(--s2) 0 var(--s3)}
+  .deliver .grid{gap:var(--s4)}
+  .hero__card{padding-bottom:var(--s5)}
   .places{grid-auto-rows:16rem}
   .place--xl,.place--md,.place--sm{grid-column:span 12}
   .price{position:static}
@@ -281,7 +295,7 @@ section{position:relative}
 
 <header class="nav">
   <a class="mark" href="#top" aria-label="June, accueil">june</a>
-  <a class="btn" href="#reserver">Réserver un shooting</a>
+  <a class="btn" href="#reserver"><span class="long">Réserver un shooting</span><span class="short">Réserver</span></a>
 </header>
 
 <main id="top">
@@ -562,19 +576,25 @@ section{position:relative}
     return { css: mix(stops[stops.length-1][1],stops[stops.length-1][1],0), lum: 1 };
   };
 
-  var ticking = false, vh = innerHeight, isMobile = innerWidth < 900;
+  var ticking = false, vh = innerHeight, isMobile = innerWidth < 900, lastY = scrollY;
   addEventListener('resize', function(){ vh = innerHeight; isMobile = innerWidth < 900; onScroll(); }, { passive:true });
 
   function frame(){
     ticking = false;
     var y = scrollY;
+    nav.classList.toggle('is-scrolled', y > vh * 0.6);
+    if (isMobile) { nav.classList.toggle('is-hidden', y > lastY + 4 && y > vh * 0.8); if (y < lastY - 4) nav.classList.remove('is-hidden'); }
+    else nav.classList.remove('is-hidden');
+    lastY = y;
     if (heroImg) { var hp = Math.min(y / vh, 1); heroImg.style.transform = 'translate3d(0,' + (hp * (isMobile ? 6 : 12)).toFixed(2) + '%,0)'; }
 
     var r = stay.getBoundingClientRect();
     var travel = Math.max(r.height - vh, 1);
     var p = Math.min(Math.max(-r.top / travel, 0), 1);
     var live = r.bottom > -vh && r.top < vh * 2;
-    if (!live) return;
+    var bookTop = document.getElementById('reserver').getBoundingClientRect().top;
+    if (bookTop <= 0) { document.documentElement.style.setProperty('--nav-bg', '#17110D'); document.documentElement.style.setProperty('--nav-ink', 'var(--night-text)'); document.documentElement.style.setProperty('--nav-btn', 'var(--honey)'); document.documentElement.style.setProperty('--nav-btn-ink', 'var(--night)'); document.documentElement.style.setProperty('--nav-line', 'rgba(242,231,214,.12)'); }
+    if (!live) { if (bookTop > 0) { ['--nav-bg','--nav-ink','--nav-btn','--nav-btn-ink','--nav-line'].forEach(function(k){ document.documentElement.style.setProperty(k, ''); }); } return; }
 
     var s = surfaceAt(p);
     stay.style.setProperty('--surface', s.css);
@@ -586,6 +606,8 @@ section{position:relative}
     document.documentElement.style.setProperty('--nav-ink', (onStage && dark) ? 'var(--night-text)' : '');
     document.documentElement.style.setProperty('--nav-btn', (onStage && dark) ? 'var(--honey)' : '');
     document.documentElement.style.setProperty('--nav-btn-ink', (onStage && dark) ? 'var(--night)' : '');
+    document.documentElement.style.setProperty('--nav-bg', (onStage && dark) ? s.css : '');
+    document.documentElement.style.setProperty('--nav-line', (onStage && dark) ? 'rgba(242,231,214,.12)' : '');
 
     /* cartes empilées : chaque carte entre sur sa fenêtre, les précédentes reculent */
     var active = 0;
