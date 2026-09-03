@@ -76,25 +76,26 @@ export default function Home() {
         <section
           className="v-pain"
           data-sc-act="pin"
-          data-sc-span="2.8"
+          data-sc-span="3.2"
+          data-sc-span-mobile="4.6"
           aria-label="Ce que vous vivez"
         >
           <div data-sc-stage className="v-pain__stage">
             <div className="v-pain__inner">
-              <p className="v-pain__line" data-sc-cue="0.02 0.34 0.22 0.3">
+              <p className="v-pain__line" data-sc-cue="0 0.3 0.12 0.2">
                 Vous savez que votre lieu mérite d&apos;être vu.
               </p>
-              <p className="v-pain__line" data-sc-cue="0.28 0.58 0.22 0.3">
+              <p className="v-pain__line" data-sc-cue="0.26 0.54 0.15 0.2">
                 Mais entre gérer, accueillir, répondre…{" "}
                 <br />
                 publier passe toujours après.
               </p>
-              <p className="v-pain__line" data-sc-cue="0.52 0.8 0.22 0.3">
+              <p className="v-pain__line" data-sc-cue="0.5 0.78 0.15 0.2">
                 Et ce que vous postez ne ressemble pas{" "}
                 <br />
                 à ce que vos clients vivent vraiment.
               </p>
-              <p className="v-pain__turn" data-sc-cue="0.76 0.995 0.2 0.1" data-sc-kinetic="lines">
+              <p className="v-pain__turn" data-sc-cue="0.74 0.995 0.15 0.08" data-sc-kinetic="lines">
                 C&apos;est là que June intervient.
               </p>
             </div>

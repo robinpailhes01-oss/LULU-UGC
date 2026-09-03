@@ -18,6 +18,13 @@ export default function JuneEngine() {
     let stopSun: (() => void) | undefined;
 
     const start = () => {
+      // Sur téléphone, les actes épinglés qui le demandent prennent plus de scroll :
+      // le pouce va vite, il faut des paliers pour lire.
+      if (window.innerWidth < 900) {
+        document.querySelectorAll<HTMLElement>("[data-sc-span-mobile]").forEach((el) => {
+          el.setAttribute("data-sc-span", el.dataset.scSpanMobile ?? "");
+        });
+      }
       window.ScrollCraft?.mount(document);
       stopSun = startGoldenHour();
     };
