@@ -1,3 +1,4 @@
+import type React from "react";
 import JuneEngine from "@/components/june/JuneEngine";
 import JuneContact from "@/components/june/JuneContact";
 
@@ -42,27 +43,26 @@ export default function Home() {
       <main id="haut">
         {/* 01 — Hero */}
         <section className="v-hero" aria-label="June, studio de contenu et UGC">
-          <div className="v-hero__copy" data-sc-in data-sc-stagger="90">
-            <p className="j-label">Studio de contenu &amp; UGC</p>
+          <div className="v-hero__copy">
+            <p className="j-label v-in" style={{ "--d": "0ms" } as React.CSSProperties}>Studio de contenu &amp; UGC</p>
             <h1 className="v-hero__title">
-              Votre expérience mérite d&apos;être vue.
-              <br />
-              <em>Et surtout, d&apos;être vécue.</em>
+              <span className="v-line"><span className="v-line__i" style={{ "--d": "120ms" } as React.CSSProperties}>Votre expérience</span></span>
+              <span className="v-line"><span className="v-line__i" style={{ "--d": "220ms" } as React.CSSProperties}>mérite d&apos;être vue.</span></span>
+              <span className="v-line"><em className="v-line__i" style={{ "--d": "360ms" } as React.CSSProperties}>Et surtout, d&apos;être vécue.</em></span>
             </h1>
-            <p className="v-hero__lede">
+            <p className="v-hero__lede v-in" style={{ "--d": "520ms" } as React.CSSProperties}>
               June imagine &amp; crée la com qui donne envie de vous découvrir.
             </p>
-            <p className="v-hero__text">
-              Des contenus pensés pour raconter votre univers, faire vivre votre
-              expérience et donner envie d&apos;aller plus loin.
-            </p>
-            <p className="v-hero__formats">UGC • Réels • Photos</p>
-            <p className="v-hero__place">📍 Alpe d&apos;Huez • Saison 26/27 🏔️</p>
-            <a className="j-cta" href="#offres">
-              Découvrir les offres →
-            </a>
+            <p className="v-hero__formats v-in" style={{ "--d": "640ms" } as React.CSSProperties}>UGC • Réels • Photos</p>
+            <p className="v-hero__place v-in" style={{ "--d": "700ms" } as React.CSSProperties}>📍 Alpe d&apos;Huez • Saison 26/27 🏔️</p>
+            <div className="v-hero__actions v-in" style={{ "--d": "800ms" } as React.CSSProperties}>
+              <a className="j-cta" href="#offres">
+                Découvrir les offres →
+              </a>
+              <a className="v-hero__link" href="/portfolio">Voir des réalisations</a>
+            </div>
           </div>
-          <figure className="v-hero__media">
+          <figure className="v-hero__media v-in" style={{ "--d": "200ms" } as React.CSSProperties}>
             <img
               src="/realisations/shooting-hotel-balcon-fleuri.jpg"
               alt="Ludivine au balcon d'un hôtel, face à la piscine et aux jardins"
@@ -70,6 +70,35 @@ export default function Home() {
               height={1616}
             />
           </figure>
+        </section>
+
+        {/* 01b — Les points de douleur, sous le scroll */}
+        <section
+          className="v-pain"
+          data-sc-act="pin"
+          data-sc-span="2.8"
+          aria-label="Ce que vous vivez"
+        >
+          <div data-sc-stage className="v-pain__stage">
+            <div className="v-pain__inner">
+              <p className="v-pain__line" data-sc-cue="0.02 0.34 0.22 0.3">
+                Vous savez que votre lieu mérite d&apos;être vu.
+              </p>
+              <p className="v-pain__line" data-sc-cue="0.28 0.58 0.22 0.3">
+                Mais entre gérer, accueillir, répondre…{" "}
+                <br />
+                publier passe toujours après.
+              </p>
+              <p className="v-pain__line" data-sc-cue="0.52 0.8 0.22 0.3">
+                Et ce que vous postez ne ressemble pas{" "}
+                <br />
+                à ce que vos clients vivent vraiment.
+              </p>
+              <p className="v-pain__turn" data-sc-cue="0.76 0.995 0.2 0.1" data-sc-kinetic="lines">
+                C&apos;est là que June intervient.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* 02 — Positionnement */}
@@ -80,22 +109,23 @@ export default function Home() {
               <h2 className="v-h2">
                 Créer l&apos;envie avant même d&apos;être découvert en vrai.
               </h2>
-            </div>
-            <div className="v-pos__text">
-              <p>
+              <p className="v-pos__note">
                 Avant de choisir une adresse, réserver une expérience ou
                 découvrir une marque, il y a souvent une première rencontre :
                 son contenu.
               </p>
-              <p>C&apos;est là que June intervient.</p>
-              <p>
-                Faire ressentir une ambiance. Montrer ce qui vous différencie.
-                Mettre un produit en situation. Raconter une expérience comme
-                elle se vit vraiment.
-              </p>
+            </div>
+            <div>
+              <ul className="v-verbs" data-sc-in data-sc-stagger="140">
+                <li><b>Faire ressentir</b> une ambiance.</li>
+                <li><b>Montrer</b> ce qui vous différencie.</li>
+                <li><b>Mettre</b> un produit en situation.</li>
+                <li><b>Raconter</b> une expérience comme elle se vit vraiment.</li>
+              </ul>
               <p className="v-pos__punch">
-                Pas simplement créer pour poster. Créer pour donner envie de vous
-                découvrir.
+                Pas simplement créer pour poster.{" "}
+                <br />
+                Créer pour donner envie de vous découvrir.
               </p>
             </div>
           </div>

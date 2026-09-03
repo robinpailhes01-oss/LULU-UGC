@@ -160,3 +160,44 @@
 .nav-on-dark .june-index{background:linear-gradient(180deg,rgba(29,23,18,.86),rgba(29,23,18,.32) 60%,transparent)}
 .nav-on-dark .june-index__mark,.nav-on-dark .june-index__list a{color:#f6efe3}
 .nav-on-dark .june-index__list a.is-cta{color:#c98a3c}
+
+/* ================================================= hero animé + douleurs === */
+.v-in{opacity:0;transform:translateY(14px);animation:v-rise 900ms var(--sc-ease-out) var(--d,0ms) both}
+.v-line{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.v-line__i{display:block;transform:translateY(110%);animation:v-lift 1000ms var(--sc-ease-out) var(--d,0ms) both}
+.v-hero__title{margin-bottom:1.2rem}
+.v-hero__title .v-line__i{font-style:normal}
+.v-hero__title em.v-line__i{font-style:italic;color:var(--sc-accent);font-weight:400}
+.v-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;margin-top:1.6rem}
+.v-hero__link{font-weight:600;font-size:.95rem;text-underline-offset:.25em;text-decoration-thickness:1px}
+.v-hero__media img{transform:translate3d(0,calc(var(--day,0) * 34vh),0) scale(1.06);transform-origin:50% 20%;will-change:transform}
+@keyframes v-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes v-lift{from{transform:translateY(110%)}to{transform:none}}
+
+.v-pain{background:transparent}
+.v-pain__stage{display:grid;place-items:center;padding:0 var(--sc-gutter);background:color-mix(in oklab,var(--sc-canvas),#241d17 calc(var(--sc-p,0) * 10%))}
+.v-pain__inner{position:relative;width:min(48rem,100%);min-height:min(40vh,22rem);display:grid;place-items:center;text-align:center}
+.v-pain__line,.v-pain__turn{position:absolute;inset-inline:0;margin:0;font-family:var(--sc-font-display);text-wrap:balance;line-height:1.12;letter-spacing:-.015em}
+.v-pain__line{font-size:clamp(1.6rem,1.1rem + 2.6vw,3.2rem);font-weight:380;font-variation-settings:"opsz" 96;color:var(--sc-ink)}
+.v-pain__turn{font-size:clamp(2rem,1.3rem + 3.4vw,4.2rem);font-weight:360;font-style:italic;color:var(--sc-accent);font-variation-settings:"opsz" 144}
+
+.v-pos__note{margin-top:1.2rem;color:var(--sc-ink-soft);max-width:36ch}
+.v-verbs{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;font-family:var(--sc-font-display);font-size:clamp(1.35rem,1.1rem + 1.1vw,2rem);line-height:1.2;font-variation-settings:"opsz" 40;font-weight:380}
+.v-verbs b{font-weight:500;color:var(--sc-accent)}
+.v-verbs li{padding-left:1.4rem;position:relative}
+.v-verbs li::before{content:"";position:absolute;left:0;top:.72em;width:.6rem;height:1px;background:var(--sc-accent)}
+.v-pos .v-pos__punch{margin-top:2rem}
+
+@media (max-width:900px){
+  .v-hero__media img{transform:translate3d(0,calc(var(--day,0) * 14vh),0) scale(1.04)}
+  .v-pain__inner{min-height:min(46vh,20rem)}
+  .v-pain__line br,.v-pain__turn br{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .v-in,.v-line__i{animation:none;opacity:1;transform:none}
+  .v-hero__media img{transform:none}
+  .v-pain{height:auto !important}
+  .v-pain__stage{position:static;height:auto;padding-block:4rem}
+  .v-pain__inner{min-height:0;display:grid;gap:1.2rem}
+  .v-pain__line,.v-pain__turn{position:static;opacity:1 !important;transform:none !important}
+}
