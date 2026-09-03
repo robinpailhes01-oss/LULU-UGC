@@ -61,6 +61,12 @@ function startGoldenHour() {
     const day = Math.min(Math.max(window.scrollY / max, 0), 1);
     doc.style.setProperty("--day", day.toFixed(4));
     document.body.classList.toggle("is-dusk", day > 0.86);
+    let onDark = false;
+    document.querySelectorAll<HTMLElement>("[data-dark]").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top <= 40 && r.bottom >= 40) onDark = true;
+    });
+    document.body.classList.toggle("nav-on-dark", onDark);
 
     let a = STOPS[0];
     let b = STOPS[STOPS.length - 1];
@@ -92,6 +98,6 @@ function startGoldenHour() {
     cancelAnimationFrame(raf);
     doc.style.removeProperty("--day");
     doc.style.removeProperty("--sc-canvas");
-    document.body.classList.remove("is-dusk");
+    document.body.classList.remove("is-dusk", "nav-on-dark");
   };
 }

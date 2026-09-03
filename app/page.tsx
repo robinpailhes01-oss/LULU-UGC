@@ -1,12 +1,9 @@
-import type { CSSProperties } from "react";
 import JuneEngine from "@/components/june/JuneEngine";
 import JuneContact from "@/components/june/JuneContact";
 
-/* La landing est une galerie : le travail d'abord, des étiquettes de fait,
-   l'offre ensuite, la demande à la fin. L'engine scrollcraft lit les
-   attributs data-sc-* ; le soleil de la page est piloté par JuneEngine. */
-
-const i = (n: number) => ({ "--i": n }) as CSSProperties;
+/* Accueil V1 saison 26/27. Structure et copywriting du brief June Content
+   Studio, direction artistique conservée (palette, Fraunces / Manrope, photos,
+   le soleil de la page). JuneEngine pilote la lumière et les révélations. */
 
 export default function Home() {
   return (
@@ -19,23 +16,23 @@ export default function Home() {
         <a className="june-index__mark" href="#haut">
           june
         </a>
-        <nav aria-label="Index">
+        <nav aria-label="Navigation">
           <ul className="june-index__list">
             <li>
-              <a href="#collection">La collection</a>
+              <a href="#formats">Formats</a>
             </li>
             <li>
-              <a href="#journee">La journée</a>
+              <a href="#offres">Offres</a>
             </li>
             <li>
-              <a href="#ludivine">Ludivine</a>
+              <a href="#alpe">Alpe d&apos;Huez</a>
             </li>
             <li>
-              <a href="#offre">L&apos;offre</a>
+              <a href="/portfolio">Réalisations</a>
             </li>
             <li>
-              <a className="is-cta" href="#reserver">
-                Réserver
+              <a className="is-cta" href="#contact">
+                Parler de mon projet
               </a>
             </li>
           </ul>
@@ -43,476 +40,482 @@ export default function Home() {
       </header>
 
       <main id="haut">
-        {/* Acte 1 : l'entrée. L'objet un est déjà là, déjà étiqueté. */}
-        <section data-sc-act="pin" data-sc-span="1.65" data-sc-dwell="0.25" className="j-hero" aria-label="Entrée de la collection">
-          <div data-sc-stage>
-            <figure className="j-hero__media">
-              <img
-                src="/realisations/shooting-hotel-piscine.jpg"
-                alt="Piscine intérieure d'un hôtel et spa en Provence, arches blanches et lumière chaude de fin de matinée"
-                width={1200}
-                height={1464}
-              />
-            </figure>
-            <div className="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
-            <div className="sc-copy sc-copy--lead" data-sc-cue="0 1 0 0.3">
-              <p className="j-label">
-                <strong>Hôtel &amp; spa, Provence</strong>
-                <span>Shooting photo. Piscine intérieure, fin de matinée.</span>
+        {/* 01 — Hero */}
+        <section className="v-hero" aria-label="June, studio de contenu et UGC">
+          <div className="v-hero__copy" data-sc-in data-sc-stagger="90">
+            <p className="j-label">Studio de contenu &amp; UGC</p>
+            <h1 className="v-hero__title">
+              Votre expérience mérite d&apos;être vue.
+              <br />
+              <em>Et surtout, d&apos;être vécue.</em>
+            </h1>
+            <p className="v-hero__lede">
+              June imagine &amp; crée la com qui donne envie de vous découvrir.
+            </p>
+            <p className="v-hero__text">
+              Des contenus pensés pour raconter votre univers, faire vivre votre
+              expérience et donner envie d&apos;aller plus loin.
+            </p>
+            <p className="v-hero__formats">UGC • Réels • Photos</p>
+            <p className="v-hero__place">📍 Alpe d&apos;Huez • Saison 26/27 🏔️</p>
+            <a className="j-cta" href="#offres">
+              Découvrir les offres →
+            </a>
+          </div>
+          <figure className="v-hero__media">
+            <img
+              src="/realisations/shooting-hotel-balcon-fleuri.jpg"
+              alt="Ludivine au balcon d'un hôtel, face à la piscine et aux jardins"
+              width={1080}
+              height={1616}
+            />
+          </figure>
+        </section>
+
+        {/* 02 — Positionnement */}
+        <section className="v-pos" aria-label="Positionnement">
+          <div className="v-wrap v-pos__grid" data-sc-in data-sc-stagger="90">
+            <div>
+              <p className="j-label">Plus que du joli contenu</p>
+              <h2 className="v-h2">
+                Créer l&apos;envie avant même d&apos;être découvert en vrai.
+              </h2>
+            </div>
+            <div className="v-pos__text">
+              <p>
+                Avant de choisir une adresse, réserver une expérience ou
+                découvrir une marque, il y a souvent une première rencontre :
+                son contenu.
               </p>
-              <h1 className="j-walltext sc-display">
-                Studio de contenu pour les lieux de tourisme.
-              </h1>
-              <p className="j-hero__note">
-                June photographie et filme des hôtels, restaurants, logements
-                insolites et expériences en Occitanie. Tout est livré prêt à
-                publier. La collection commence ici.
+              <p>C&apos;est là que June intervient.</p>
+              <p>
+                Faire ressentir une ambiance. Montrer ce qui vous différencie.
+                Mettre un produit en situation. Raconter une expérience comme
+                elle se vit vraiment.
+              </p>
+              <p className="v-pos__punch">
+                Pas simplement créer pour poster. Créer pour donner envie de vous
+                découvrir.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Acte 2 : la salle. La collection défile latéralement. */}
-        <section
-          id="collection"
-          data-sc-act="pan"
-          data-sc-span="2.7"
-          aria-label="La collection"
-        >
-          <div data-sc-stage className="j-room">
-            <div className="j-rail" data-sc-pan="0.06">
-              <div className="j-rail__intro" style={i(0)}>
-                <h2 className="sc-display sc-display--md">La collection</h2>
-                <p className="sc-body">
-                  Six lieux, trois formats : reels montés, vidéos UGC, shooting
-                  photo. Chaque projet est visible sur Instagram.
-                </p>
-              </div>
-
-              <figure className="j-object j-object--p910" style={i(1)}>
-                <div className="j-object__media">
-                  <img
-                    src="/realisations/harmonie-yacht-shooting.jpg"
-                    alt="Quatre amis au soleil couchant sur le pont d'un yacht, verres à la main"
-                    width={1179}
-                    height={1456}
-                  />
-                </div>
-                <figcaption className="j-label">
-                  <strong>Harmonie Yacht, Carnon</strong>
-                  <span>
-                    Location de yacht. Shooting photo, reels.{" "}
-                    <a
-                      href="https://www.instagram.com/p/DasUCeeiM1E/?igsh=NXppc2lyZ3NmcHB0"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Voir sur Instagram
-                    </a>
-                  </span>
-                </figcaption>
-              </figure>
-
-              <figure className="j-object j-object--wide" style={i(2)}>
-                <div className="j-object__media">
-                  <img
-                    src="/realisations/next-yacht.jpg"
-                    alt="Yacht à l'ancre en pleine mer, deux personnes assises sur la plateforme de baignade"
-                    width={1179}
-                    height={1499}
-                  />
-                </div>
-                <figcaption className="j-label">
-                  <strong>Next Yacht, en mer</strong>
-                  <span>
-                    Shooting photo.{" "}
-                    <a
-                      href="https://www.instagram.com/p/DOTjasHiLwc/?igsh=Z2R0NTZqYWY4OHA1"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Voir sur Instagram
-                    </a>
-                  </span>
-                </figcaption>
-              </figure>
-
-              <figure className="j-object j-object--reel" style={i(3)}>
-                <div className="j-object__media">
-                  <img
-                    src="/realisations/una-mas-carnon.jpg"
-                    alt="Verres levés en terrasse au cocktail bar Una Mas à Carnon"
-                    width={385}
-                    height={679}
-                  />
-                </div>
-                <figcaption className="j-label">
-                  <strong>Una Mas, Carnon</strong>
-                  <span>
-                    Cocktail bar. Reel publié.{" "}
-                    <a
-                      href="https://www.instagram.com/reel/DYwjsCSM7wb/?igsh=MTUzbXluNXBxMDdmYQ=="
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Voir le reel
-                    </a>
-                  </span>
-                </figcaption>
-              </figure>
-
-              <figure className="j-object j-object--sq" style={i(4)}>
-                <div className="j-object__media">
-                  <img
-                    src="/realisations/beltra-therapy.jpg"
-                    alt="Séance de thérapie manuelle au cabinet Beltra Physical Therapy"
-                    width={1179}
-                    height={1465}
-                  />
-                </div>
-                <figcaption className="j-label">
-                  <strong>Beltra Physical Therapy</strong>
-                  <span>
-                    Thérapie manuelle. Shooting photo.{" "}
-                    <a
-                      href="https://www.instagram.com/p/DSKXshciI5F/?img_index=1&igsh=NnV2cnc3ejduaGZp"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Voir sur Instagram
-                    </a>
-                  </span>
-                </figcaption>
-              </figure>
-
-              <figure className="j-object j-object--reel" style={i(5)}>
-                <div className="j-object__media">
+        {/* 03 — Les formats */}
+        <section className="v-formats" id="formats" aria-label="Les formats">
+          <div className="v-wrap">
+            <div className="v-formats__head" data-sc-in data-sc-stagger="90">
+              <h2 className="v-h2">Un besoin, plusieurs façons de le raconter.</h2>
+              <p className="v-lede">
+                Pas besoin de choisir entre du contenu esthétique et du contenu
+                plus incarné. Chaque format a son rôle.
+              </p>
+            </div>
+            <div className="v-formats__grid" data-sc-in data-sc-stagger="110">
+              <article className="v-format">
+                <figure className="v-format__media v-format__media--reel">
                   <img
                     src="/realisations/gite-abric-cevennes.jpg"
-                    alt="Couverture du reel du Gîte de l'Abric dans les Cévennes, table dressée sous la treille"
+                    alt="Couverture d'un reel publié pour le Gîte de l'Abric"
                     width={393}
                     height={700}
+                    loading="lazy"
                   />
-                </div>
-                <figcaption className="j-label">
-                  <strong>Gîte de l&apos;Abric, Cévennes</strong>
-                  <span>
-                    Logement insolite. Reel publié.{" "}
-                    <a
-                      href="https://www.instagram.com/reel/DMVPrINId35/?igsh=ZDNnb20zYzJwY3Ax"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Voir le reel
-                    </a>
-                  </span>
-                </figcaption>
-              </figure>
-
-              <div className="j-rail__outro" style={i(6)}>
-                <p>Chaque lieu est un projet.</p>
-                <a href="/portfolio" className="j-label">
-                  Voir des réalisations
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Acte 3, le pic : une prestation entière se déroule, du matin au soir. */}
-        <section
-          id="journee"
-          data-sc-act="pin"
-          data-sc-span="4.2"
-          className="j-day"
-          aria-label="Une journée de prestation"
-        >
-          <div data-sc-stage>
-            <p className="j-day__open j-label" data-sc-cue="0 0.16 0 0.5">
-              Une seule prestation. Un séjour, du matin au soir.
-            </p>
-
-            <div className="j-day__table">
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-jardins.jpg"
-                  alt="Arrivée à l'hôtel : bastide ocre, cyprès et jardins sous le ciel du matin"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-chambre.jpg"
-                  alt="Salle de bain de la chambre, peignoir et serviettes brodées"
-                  width={1200}
-                  height={1600}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-balcon.jpg"
-                  alt="Ludivine au balcon de la chambre, face à la piscine et aux jardins"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-piscine-ext.jpg"
-                  alt="Piscine extérieure de l'hôtel, transats et parasols dans l'après-midi"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-terrasse.jpg"
-                  alt="Lecture sur la terrasse de la chambre, vue à travers la porte-fenêtre"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-jardins-vue.jpg"
-                  alt="Vue du balcon sur la piscine et les jardins de l'hôtel"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-couple-terrasse.jpg"
-                  alt="Le couple attablé sur la terrasse en fin de journée"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-              <figure className="j-print">
-                <img
-                  src="/realisations/shooting-hotel-moment-a-deux.jpg"
-                  alt="Moment à deux au balcon, dans la dernière lumière du soir"
-                  width={1080}
-                  height={1616}
-                />
-              </figure>
-            </div>
-
-            <div className="j-day__aside">
-              <p className="j-label" data-sc-cue="0.05 0.34 0.2 0.3">
-                Le matin. L&apos;arrivée, la chambre.
-              </p>
-              <p className="j-label" data-sc-cue="0.36 0.64 0.2 0.3">
-                L&apos;après-midi. La piscine, un livre.
-              </p>
-              <p className="j-label" data-sc-cue="0.66 0.87 0.2 0.3">
-                Le soir. La lumière tombe, ils restent.
-              </p>
-            </div>
-
-            <div className="j-day__wash" aria-hidden="true"></div>
-            <div className="j-day__close" data-sc-cue="0.74 0.995 0.18 0.12">
-              <p className="sc-lede">Imaginez la même journée, chez vous.</p>
-              <p className="j-label">
-                <strong>Hôtel &amp; spa, Provence</strong>
-                <span>
-                  Séjour complet : arrivée, chambre, piscine, terrasse, soir.
-                  Livré prêt à publier.
-                </span>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Acte 4 : Ludivine. La page ralentit, quelqu'un parle. */}
-        <section
-          id="ludivine"
-          data-sc-act="flow"
-          className="sc-section j-lud"
-          aria-label="Ludivine"
-        >
-          <div className="sc-wrap j-lud__grid">
-            <figure
-              className="j-lud__media"
-              data-sc-reveal="up"
-              data-sc-reveal-at="0.14 0.42"
-            >
-              <img
-                src="/portrait.jpg"
-                alt="Ludivine, créatrice de June, assise dans la lumière du soir"
-                width={1122}
-                height={1402}
-              />
-            </figure>
-            <div className="j-lud__text">
-              <h2 className="sc-display sc-display--md">
-                Je vis votre expérience.
-              </h2>
-              <p className="sc-lede">
-                Contrairement à un simple shooting, je prends le temps de vivre
-                réellement votre lieu : déguster vos plats, dormir dans vos
-                chambres, participer à votre activité.
-              </p>
-              <p className="sc-body">
-                Chaque établissement a une identité, une ambiance, une histoire.
-                Mon rôle est de les capturer dans un contenu fidèle à ce que
-                découvriront vos futurs clients. Le but n&apos;est pas seulement
-                de faire de belles images : c&apos;est de créer l&apos;envie de
-                venir les vivre.
-              </p>
-              <p className="j-label">
-                <strong>Ludivine</strong>
-                <span>Créatrice de June. Occitanie, Montpellier et littoral.</span>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Acte 5 : l'offre, en plaque d'exposition. */}
-        <section
-          id="offre"
-          data-sc-act="flow"
-          className="sc-section j-offer"
-          aria-label="L'offre"
-        >
-          <div className="sc-wrap">
-            <div className="j-plate" data-sc-in data-sc-stagger="70">
-              <p className="j-label">L&apos;offre. Tarif de lancement.</p>
-              <h2 className="sc-display sc-display--lg">
-                L&apos;Expérience Content &amp; UGC
-              </h2>
-              <p className="sc-lede">
-                Je vis votre expérience pour donner envie à vos futurs clients
-                de la vivre à leur tour.
-              </p>
-              <p className="j-price">
-                <span className="j-price__num">390&nbsp;€</span>
-                <span className="j-price__note">
-                  une fois. Pas d&apos;abonnement : vous repartez avec vos
-                  fichiers.
-                </span>
-              </p>
-
-              <ul className="j-rows">
-                <li>
-                  <h3>Une galerie de photos professionnelles</h3>
-                  <p>
-                    Votre établissement, vos espaces, vos produits, votre équipe
-                    et les détails qui font votre différence.
-                  </p>
-                </li>
-                <li>
-                  <h3>Des vidéos verticales prêtes à publier</h3>
-                  <p>Pensées pour Instagram Reels, TikTok, Facebook et votre site.</p>
-                </li>
-                <li>
-                  <h3>1 vidéo UGC</h3>
-                  <p>
-                    Naturelle et immersive, comme si j&apos;étais votre cliente.
-                    Diffusée en organique sur vos réseaux, pas en publicité.
-                  </p>
-                </li>
-                <li>
-                  <h3>Hooks &amp; légendes</h3>
-                  <p>Des idées de textes et d&apos;accroches pour vos publications.</p>
-                </li>
-                <li>
-                  <h3>Contenu optimisé</h3>
-                  <p>Fichiers haute qualité, prêts à publier, à garder.</p>
-                </li>
-              </ul>
-
-              <div className="j-how">
-                <div>
-                  <h3>Restaurant</h3>
-                  <p>Découverte et dégustation sur place.</p>
-                </div>
-                <div>
-                  <h3>Hôtel, gîte, logement insolite</h3>
-                  <p>
-                    Séjour complet : arrivée, ambiance, détails, services,
-                    réveil, petit-déjeuner.
-                  </p>
-                </div>
-                <div>
-                  <h3>Activité touristique</h3>
-                  <p>Participation réelle pour capturer les émotions.</p>
-                </div>
-              </div>
-
-              <div className="j-carte">
-                <p className="j-label">
-                  À la carte. Chaque option se réserve seule, on en parle
-                  simplement.
+                </figure>
+                <h3 className="v-format__name">
+                  Réels <span>Faire ressentir</span>
+                </h3>
+                <p>
+                  Des vidéos immersives et esthétiques qui racontent votre
+                  univers : l&apos;ambiance, les détails, le lieu, le produit ou
+                  l&apos;expérience.
                 </p>
-                <ul>
+              </article>
+              <article className="v-format">
+                <figure className="v-format__media v-format__media--reel">
+                  <img
+                    src="/realisations/ugc-hotel.jpg"
+                    alt="Vidéo UGC tournée dans la chambre d'un hôtel, au réveil"
+                    width={393}
+                    height={687}
+                    loading="lazy"
+                  />
+                </figure>
+                <h3 className="v-format__name">
+                  UGC <span>Faire vivre</span>
+                </h3>
+                <p>
+                  Un contenu plus humain et incarné, construit autour d&apos;un
+                  angle et d&apos;un message : expérience, recommandation,
+                  démonstration, storytelling, face caméra ou voix off.
+                </p>
+              </article>
+              <article className="v-format">
+                <figure className="v-format__media">
+                  <img
+                    src="/realisations/shooting-hotel-piscine.jpg"
+                    alt="Piscine intérieure d'un hôtel et spa, arches et lumière chaude"
+                    width={1200}
+                    height={1464}
+                    loading="lazy"
+                  />
+                </figure>
+                <h3 className="v-format__name">
+                  Photos <span>Construire votre image</span>
+                </h3>
+                <p>
+                  Des images naturelles et travaillées pour alimenter vos
+                  réseaux, votre site et vos différents supports.
+                </p>
+              </article>
+            </div>
+            <p className="v-formats__more">
+              <a href="/portfolio">Voir des réalisations</a>
+            </p>
+          </div>
+        </section>
+
+        {/* 04 — Les offres */}
+        <section className="v-offers" id="offres" aria-label="Les offres">
+          <div className="v-wrap">
+            <div className="v-offers__head" data-sc-in data-sc-stagger="90">
+              <h2 className="v-h2">À chaque besoin, sa façon de créer.</h2>
+              <p className="v-lede">
+                Un besoin ponctuel, une campagne UGC ou quelqu&apos;un à vos côtés
+                toute la saison : les offres June s&apos;adaptent à la façon dont
+                vous avez besoin de communiquer.
+              </p>
+            </div>
+
+            <div className="v-offers__grid" data-sc-in data-sc-stagger="120">
+              <article className="v-offer" id="content-shoot">
+                <p className="j-label">01 — Content Shoot</p>
+                <h3 className="v-offer__title">
+                  Pour refaire le plein de contenu sans déléguer vos réseaux.
+                </h3>
+                <p className="v-offer__text">
+                  Avant chaque shooting, on échange sur votre actualité, vos
+                  besoins et ce que vous souhaitez mettre en avant. June imagine
+                  ensuite une session adaptée à votre univers.
+                </p>
+                <p className="v-offer__price">
+                  <span className="from">À partir de</span> 490&nbsp;<span className="eur">€</span> <small>HT</small>
+                </p>
+                <ul className="v-offer__list">
+                  <li>25 à 35 photos retouchées</li>
+                  <li>3 Réels montés</li>
+                  <li>15 à 20 séquences verticales</li>
+                  <li>Concepts &amp; préparation du shooting</li>
+                  <li>Galerie organisée prête à utiliser</li>
+                </ul>
+                <p className="v-offer__note">Chaque shooting est pensé selon vos besoins.</p>
+                <a className="j-cta" href="#contact" data-offre="Content Shoot">
+                  Imaginer mon shooting →
+                </a>
+              </article>
+
+              <article className="v-offer" id="ugc">
+                <p className="j-label">02 — UGC</p>
+                <h3 className="v-offer__title">
+                  Faire découvrir votre expérience ou votre produit autrement.
+                </h3>
+                <p className="v-offer__text">
+                  Des vidéos incarnées qui parlent directement à votre client,
+                  pensées de l&apos;idée au montage.
+                </p>
+                <p className="v-offer__steps">Concept • Hook • Script • Tournage • Montage</p>
+                <ul className="v-offer__prices">
                   <li>
-                    <strong>1 vidéo UGC complète.</strong> Découverte et
-                    expérience face caméra, montage inclus.
+                    <span>1 UGC</span>
+                    <b>220&nbsp;<span className="eur">€</span> <small>HT</small></b>
                   </li>
                   <li>
-                    <strong>Shooting photo / vidéo.</strong> Une demi-journée
-                    sur place, sans le volet UGC.
+                    <span>3 UGC</span>
+                    <b>590&nbsp;<span className="eur">€</span> <small>HT</small></b>
                   </li>
                   <li>
-                    <strong>Collab Instagram.</strong> Publication en
-                    collaboration : nos deux audiences se cumulent.
+                    <span>5 UGC</span>
+                    <b>950&nbsp;<span className="eur">€</span> <small>HT</small></b>
                   </li>
                 </ul>
-              </div>
+                <p className="v-offer__note">
+                  Utilisation organique incluse. Les droits publicitaires sont
+                  disponibles en supplément.
+                </p>
+                <a className="j-cta" href="#contact" data-offre="UGC">
+                  Créer mon contenu UGC →
+                </a>
+              </article>
 
-              <p className="j-fine">
-                Les frais liés à l&apos;expérience (repas, nuitée ou activité)
-                sont à prévoir par l&apos;établissement, ou peuvent faire
-                l&apos;objet d&apos;un échange en collaboration selon le projet.
+              <article className="v-offer v-offer--partner" id="june-partner">
+                <p className="j-label">03 — June Partner</p>
+                <h3 className="v-offer__title">
+                  Votre partenaire contenu, sans gestion de vos réseaux.
+                </h3>
+                <p className="v-offer__text">
+                  Vous connaissez votre établissement et ce que vous voulez faire
+                  vivre à vos clients. Mais réfléchir à quoi montrer, quoi créer
+                  et trouver le temps de le produire chaque mois, c&apos;est autre
+                  chose.
+                </p>
+                <p className="v-offer__text">
+                  Avec June Partner, on ne repart pas de zéro à chaque shooting.
+                  On échange sur votre actualité, vos offres et vos temps forts.
+                  June imagine les contenus à créer puis vient les produire.
+                </p>
+                <p className="v-offer__text">
+                  Vous gardez la main sur vos réseaux. June vous donne tout ce
+                  qu&apos;il faut pour les faire vivre.
+                </p>
+                <p className="v-offer__price">
+                  890&nbsp;<span className="eur">€</span> <small>HT / mois</small>
+                </p>
+                <p className="v-offer__sub">Chaque mois :</p>
+                <ul className="v-offer__list">
+                  <li>1 point communication mensuel</li>
+                  <li>1 plan de contenu adapté au mois</li>
+                  <li>1 session de création jusqu&apos;à 3h</li>
+                  <li>25 à 30 photos retouchées</li>
+                  <li>3 Réels montés</li>
+                  <li>1 vidéo UGC</li>
+                  <li>Séquences vidéo complémentaires</li>
+                  <li>Hooks &amp; idées d&apos;utilisation</li>
+                  <li>Support pour les besoins communication</li>
+                </ul>
+                <a className="j-cta j-cta--honey" href="#contact" data-offre="June Partner">
+                  Devenir June Partner →
+                </a>
+                <p className="v-offer__note">
+                  Sans gestion de vos réseaux • accompagnement flexible selon vos
+                  besoins.
+                </p>
+              </article>
+            </div>
+
+            <details className="v-supp">
+              <summary>Suppléments et droits d&apos;utilisation</summary>
+              <table>
+                <tbody>
+                  <tr><td>Réel supplémentaire</td><td>+120 €</td></tr>
+                  <tr><td>UGC supplémentaire</td><td>+220 €</td></tr>
+                  <tr><td>10 photos supplémentaires</td><td>+90 €</td></tr>
+                  <tr><td>Shooting supplémentaire 1h30</td><td>+250 €</td></tr>
+                  <tr><td>Couverture événement</td><td>À partir de 290 €</td></tr>
+                  <tr><td>Hook UGC supplémentaire</td><td>+40 €</td></tr>
+                  <tr><td>CTA UGC supplémentaire</td><td>+30 €</td></tr>
+                  <tr><td>Version alternative de montage UGC</td><td>+60 €</td></tr>
+                  <tr><td>Rushs bruts UGC</td><td>+30 % du prix de la vidéo</td></tr>
+                  <tr><td>Format supplémentaire 16:9 / 1:1</td><td>+30 €</td></tr>
+                  <tr><td>Livraison express 48h</td><td>+25 %</td></tr>
+                  <tr><td>Droits Ads 30 jours</td><td>+30 %</td></tr>
+                  <tr><td>Droits Ads 3 mois</td><td>+60 %</td></tr>
+                  <tr><td>Droits Ads 6 mois</td><td>+100 %</td></tr>
+                  <tr><td>Droits Ads 12 mois</td><td>+150 %</td></tr>
+                  <tr><td>Exclusivité secteur / whitelisting</td><td>Sur devis</td></tr>
+                  <tr><td>Déplacement hors Alpe d&apos;Huez</td><td>Sur devis</td></tr>
+                </tbody>
+              </table>
+              <p>Tarifs HT. Ces suppléments servent de base aux devis.</p>
+            </details>
+          </div>
+        </section>
+
+        {/* 05 — Alpe d'Huez */}
+        <section className="v-alpe" id="alpe" data-dark aria-label="Alpe d'Huez, saison 26/27">
+          <div className="v-wrap v-alpe__grid" data-sc-in data-sc-stagger="90">
+            <div>
+              <p className="j-label">Cet hiver, June prend de l&apos;altitude. 🏔️</p>
+              <h2 className="v-h2">Saison 26/27 • Alpe d&apos;Huez</h2>
+            </div>
+            <div className="v-alpe__text">
+              <p>
+                June s&apos;installe à l&apos;Alpe d&apos;Huez pour accompagner celles
+                et ceux qui font vivre la station.
               </p>
-
-              <a className="j-cta" href="#reserver">
-                Réserver un shooting
+              <p>
+                Hôtels, restaurants, chalets, activités, wellness, commerces,
+                expériences…
+              </p>
+              <p>
+                Mais la montagne devient aussi un terrain de création pour les
+                marques qui souhaitent produire du contenu UGC, lifestyle ou
+                winter directement à l&apos;Alpe d&apos;Huez.
+              </p>
+              <p className="v-alpe__ask">
+                Un lieu à faire découvrir ?
+                <br />
+                Une expérience à raconter ?
+                <br />
+                Un produit à emmener en montagne ?
+              </p>
+              <p>Parlons-en.</p>
+              <a className="j-cta j-cta--honey" href="#contact" data-offre="Alpe d'Huez">
+                Créer à l&apos;Alpe →
               </a>
             </div>
           </div>
         </section>
 
-        {/* Acte 6 : le soir. La page arrive au crépuscule et s'arrête. */}
-        <section
-          id="reserver"
-          data-sc-act="pin"
-          data-sc-span="1.35"
-          className="j-dusk"
-          aria-label="Réservation"
-        >
-          <div data-sc-stage className="j-dusk__stage">
-            <div className="j-dusk__inner" data-sc-cue="0 1 0 0">
-              <div className="j-dusk__intro">
-                <p className="j-label">
-                  Réservation. Réponse rapide, sans engagement.
+        {/* 06 — Comment ça se passe */}
+        <section className="v-how" aria-label="Comment ça se passe">
+          <div className="v-wrap">
+            <h2 className="v-h2" data-sc-in>
+              De l&apos;idée au contenu.
+            </h2>
+            <ol className="v-steps" data-sc-in data-sc-stagger="110">
+              <li>
+                <span className="v-steps__num">01</span>
+                <h3>On échange</h3>
+                <p>
+                  Votre univers, vos besoins, votre actualité et ce que vous
+                  souhaitez mettre en avant.
                 </p>
-                <h2 className="sc-display sc-display--md">
-                  Envie de voir ce que ça donnerait chez vous ?
-                </h2>
-                <p className="sc-body">
-                  Écrivez-nous quelques mots sur votre lieu. On revient vers
-                  vous rapidement pour en parler.
+              </li>
+              <li>
+                <span className="v-steps__num">02</span>
+                <h3>J&apos;imagine</h3>
+                <p>
+                  Concepts, angles, formats et direction du shooting : chaque
+                  création part d&apos;une intention.
                 </p>
-                <div className="j-dusk__meta">
-                  <span>June. Studio de contenu, Occitanie.</span>
-                  <a href="mailto:harmonieyacht@gmail.com">
-                    harmonieyacht@gmail.com
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Instagram
-                  </a>
-                  <a href="/portfolio">Voir des réalisations</a>
-                </div>
-              </div>
-              <JuneContact />
+              </li>
+              <li>
+                <span className="v-steps__num">03</span>
+                <h3>On crée</h3>
+                <p>
+                  Sur place pour les lieux &amp; expériences, ou à partir de vos
+                  produits pour les projets de marques.
+                </p>
+              </li>
+              <li>
+                <span className="v-steps__num">04</span>
+                <h3>Vous utilisez</h3>
+                <p>
+                  Vous récupérez vos contenus prêts à prendre vie sur vos
+                  réseaux et supports.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        {/* 07 — À propos */}
+        <section className="v-about" id="a-propos" aria-label="Derrière June">
+          <div className="v-wrap v-about__grid" data-sc-in data-sc-stagger="90">
+            <figure className="v-about__media">
+              <img
+                src="/portrait.jpg"
+                alt="Ludivine, créatrice de June, dans la lumière du soir"
+                width={1122}
+                height={1402}
+                loading="lazy"
+              />
+            </figure>
+            <div className="v-about__text">
+              <p className="j-label">Derrière June</p>
+              <h2 className="v-h2">Moi c&apos;est Ludivine 👋</h2>
+              <p>
+                J&apos;ai créé June avec une idée assez simple : une belle
+                expérience mérite une communication qui donne réellement envie
+                de la découvrir.
+              </p>
+              <p>
+                J&apos;aime comprendre ce qui fait l&apos;identité d&apos;un lieu ou
+                d&apos;une marque, trouver comment le raconter et le transformer
+                en contenu.
+              </p>
+              <p>C&apos;est pour ça que June ne s&apos;arrête pas au shooting.</p>
+              <p>Il y a l&apos;idée, l&apos;angle, l&apos;image, le message… puis la création.</p>
+              <p className="v-about__motto">De l&apos;idée au contenu.</p>
+              <p>
+                Cet hiver, je pose June à l&apos;Alpe d&apos;Huez pour la saison
+                26/27, tout en continuant à créer pour des marques partout en
+                France.
+              </p>
             </div>
+          </div>
+        </section>
+
+        {/* 08 — FAQ */}
+        <section className="v-faq" aria-label="Questions fréquentes">
+          <div className="v-wrap v-faq__grid">
+            <h2 className="v-h2">Questions fréquentes</h2>
+            <div>
+              <details>
+                <summary>Est-ce que June gère mes réseaux sociaux ?</summary>
+                <p>
+                  Non. June imagine et crée votre contenu, mais vous gardez la
+                  main sur vos réseaux. L&apos;objectif est de vous donner la
+                  matière et les idées nécessaires pour communiquer plus
+                  facilement.
+                </p>
+              </details>
+              <details>
+                <summary>Quelle est la différence entre un Réel et une vidéo UGC ?</summary>
+                <p>
+                  Le Réel met principalement en scène votre univers, votre lieu
+                  ou votre produit. L&apos;UGC est davantage incarné et construit
+                  autour d&apos;un message, d&apos;un hook et d&apos;un angle
+                  précis pour parler directement à votre audience.
+                </p>
+              </details>
+              <details>
+                <summary>Travaillez-vous uniquement à l&apos;Alpe d&apos;Huez ?</summary>
+                <p>
+                  Non. June sera basé à l&apos;Alpe d&apos;Huez pendant la saison
+                  26/27, mais les projets UGC avec les marques peuvent être
+                  réalisés partout en France, notamment à distance avec envoi de
+                  produits.
+                </p>
+              </details>
+              <details>
+                <summary>Puis-je utiliser mes UGC en publicité ?</summary>
+                <p>
+                  Oui. Les tarifs affichés comprennent l&apos;utilisation
+                  organique. Les droits d&apos;utilisation publicitaire sont
+                  disponibles en supplément selon la durée et le projet.
+                </p>
+              </details>
+              <details>
+                <summary>Les offres sont-elles personnalisables ?</summary>
+                <p>
+                  Oui. Les offres donnent un cadre, mais chaque projet commence
+                  par un échange pour adapter la création à vos besoins.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        {/* 09 — CTA final + 10 — Footer */}
+        <section className="j-dusk v-final" id="contact" data-dark aria-label="Parler de mon projet">
+          <div className="v-wrap v-final__grid">
+            <div className="v-final__intro">
+              <h2 className="v-h2">On crée quelque chose ensemble ?</h2>
+              <p className="v-lede">
+                Un lieu, une expérience ou une marque à faire découvrir ?
+              </p>
+              <p>Racontez-moi votre projet et voyons ce qu&apos;on peut imaginer.</p>
+              <footer className="v-foot">
+                <p>
+                  <strong>JUNE</strong> — Studio de contenu &amp; UGC
+                  <br />
+                  Alpe d&apos;Huez • France
+                  <br />
+                  Saison 26/27
+                </p>
+                <p>
+                  <a href="https://instagram.com" target="_blank" rel="noreferrer">
+                    Instagram
+                  </a>{" "}
+                  •{" "}
+                  <a href="mailto:harmonieyacht@gmail.com">Email</a>
+                  {" "}•{" "}
+                  <a href="/portfolio">Réalisations</a>
+                </p>
+              </footer>
+            </div>
+            <JuneContact />
           </div>
         </section>
       </main>

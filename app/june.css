@@ -79,8 +79,8 @@
   padding: var(--sc-4) var(--sc-gutter);
   background: linear-gradient(
     180deg,
-    color-mix(in oklab, var(--sc-canvas) 88%, transparent),
-    color-mix(in oklab, var(--sc-canvas) 40%, transparent) 70%,
+    color-mix(in oklab, var(--sc-canvas) 72%, transparent),
+    color-mix(in oklab, var(--sc-canvas) 28%, transparent) 60%,
     transparent
   );
 }
@@ -569,3 +569,7 @@
 
 /* La section après un acte pinné démarre plus près (voir devices.md §8). */
 .j-lud.sc-section { padding-block-start: clamp(2.5rem, 5vw, 5rem); }
+
+/* Sélecteur du formulaire (V1) */
+.j-field select{border:1px solid var(--sc-hairline);border-radius:var(--sc-r-sm);background:rgba(246,239,227,.05);padding:.8rem .95rem;color:var(--sc-ink);font:inherit;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23c2b5a4' stroke-width='1.5'/></svg>");background-repeat:no-repeat;background-position:right .95rem center}
+.j-field select option{color:#241d17}

@@ -7,7 +7,7 @@ description: >
   copy par section et le vocabulaire des CTA. S'appuie sur brand-offer pour l'offre exacte.
 ---
 
-# Copywriting — Studio [NOM]
+# Copywriting — June Content Studio (V1 saison 26/27)
 
 ## Voix
 Chaleureuse, humaine, sûre de son goût. On parle comme une personne qui aime les beaux
@@ -24,49 +24,29 @@ Français naturel, à la 2e personne (« vous »), phrases courtes, verbes concr
 - Pas de point d'exclamation en rafale. Pas d'emoji dans les titres.
 
 ## Le message central
-Tout tourne autour de **clé en main → vous n'avez plus qu'à publier**, et du **one-shot**
-(pas d'engagement, contrairement à un CM). C'est l'angle qui rassure et qui vend.
+« June imagine & crée la com qui donne envie de vous découvrir. » Pour les lieux,
+expériences & marques. UGC • Réels • Photos. Sans gestion des réseaux (on donne la
+matière et les idées, le client garde la main). Ancrage Alpe d'Huez saison 26/27,
+projets partout en France. De l'idée au contenu.
 
-## Formules de titres (H1)
-Structure qui marche : *[nature du contenu] + [bénéfice tangible / lieu]*, avec un mot en
-italique accentué (voir design-direction).
-- « Du contenu *prêt à publier* pour les lieux qu'on a envie de visiter. »
-- « Vos plus belles images, *prêtes à poster*. »
-- « On filme votre lieu. Vous n'avez *plus qu'à publier*. »
-Choisir-en un, garder les autres pour A/B plus tard.
+## Titres validés (brief V1)
+- Hero : « Votre expérience mérite d'être vue. Et surtout, d'être vécue. »
+- Positionnement : « Créer l'envie avant même d'être découvert en vrai. »
+- Formats : « Un besoin, plusieurs façons de le raconter. »
+- Offres : « À chaque besoin, sa façon de créer. »
+- Alpe d'Huez : « Cet hiver, June prend de l'altitude. »
+- Process : « De l'idée au contenu. »
+- CTA final : « On crée quelque chose ensemble ? »
 
-## Copy par section (landing)
-
-**Eyebrow** : `Contenu clé en main · Occitanie`
-
-**Sous-titre hero** (1 phrase) :
-« Reels, photos et vidéos pensés pour vos réseaux. On vient, on filme, on monte —
-vous n'avez plus qu'à publier. »
-
-**Prestations** : décrire par le résultat, pas par la technique.
-« Des reels qui s'arrêtent sous le pouce. Des photos qui donnent faim / envie de réserver.
-Tout livré au bon format, prêt à publier. »
-
-**Comment ça marche** (3 temps — vraie séquence, donc numérotation OK) :
-1. On échange sur votre lieu et ce que vous voulez montrer.
-2. On vient tourner sur place (une demi-journée à une journée).
-3. Vous recevez tout sous 7 jours, prêt à publier.
-
-**Tarifs** : afficher clairement (voir brand-offer). Cadrer la différence des paliers par
-la valeur du lieu, pas par « plus de fichiers ». Pas de « sur devis ».
-
-**FAQ** (traiter les vraies objections, sans défensive) :
-- « C'est un abonnement ? » → Non. Une prestation, une fois. Vous gardez vos fichiers.
-- « Vous gérez mes comptes ? » → Non, vous gardez la main. On vous livre la matière prête.
-- « Et si je veux du contenu régulièrement ? » → On peut en reparler après une première fois.
-- « Vous vous déplacez où ? » → [zone]. Au-delà, on en discute.
-
-**CTA final** : une invitation, pas une sommation.
-« Envie de voir ce que ça donnerait chez vous ? Écrivez-moi. »
+## Copy par section
+Le copy de référence de chaque section est dans  (offres, formats,
+Alpe d'Huez, FAQ). Le reprendre tel quel, ne pas le paraphraser.
 
 ## Vocabulaire des CTA (cohérent partout)
-- Action principale : **« Réserver un shooting »** (et le bouton qui confirme dit « Demande envoyée »).
-- Secondaire : **« Voir des réalisations »**.
+- Hero : « Découvrir les offres → ». Content Shoot : « Imaginer mon shooting → ».
+  UGC : « Créer mon contenu UGC → ». June Partner : « Devenir June Partner → ».
+  Alpe d'Huez : « Créer à l'Alpe → ». Final : « Parler de mon projet → ».
+- Secondaire : « Voir des réalisations ».
 - Ne pas mélanger « Réserver », « Contacter », « Démarrer » au hasard : un libellé = une action.
 
 ## Micro-copy

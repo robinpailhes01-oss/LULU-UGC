@@ -3,6 +3,7 @@ import { Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import "./scrollcraft.css";
 import "./june.css";
+import "./june-v1.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -18,13 +19,13 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "June — On crée votre contenu, vous n'avez plus qu'à poster",
+  title: "June, studio de contenu & UGC. Alpe d'Huez, saison 26/27",
   description:
-    "Reels, vidéos UGC et photos clé en main pour les lieux de tourisme en Occitanie : hôtels, restaurants, logements insolites, expériences. On vient, on filme, on monte — vous n'avez plus qu'à poster.",
+    "June imagine et crée la com qui donne envie de vous découvrir. UGC, Réels et Photos pour les lieux, expériences et marques. Basé à l'Alpe d'Huez pour la saison 26/27, projets partout en France.",
   openGraph: {
-    title: "June — Studio de contenu tourisme",
+    title: "June, studio de contenu & UGC",
     description:
-      "Du contenu prêt à poster pour les lieux de tourisme : reels, vidéos UGC et photos qui reflètent l'expérience de votre lieu. Sans abonnement, en Occitanie.",
+      "UGC, Réels et Photos pour les lieux, expériences et marques. Alpe d'Huez, saison 26/27.",
     locale: "fr_FR",
     type: "website",
   },

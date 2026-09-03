@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
@@ -10,6 +10,18 @@ const CONTACT_EMAIL = "harmonieyacht@gmail.com";
 export default function JuneContact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const offreRef = useRef<HTMLSelectElement>(null);
+
+  // Les boutons d'offre (data-offre) présélectionnent le sujet du formulaire.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest<HTMLElement>("[data-offre]");
+      if (!a || !offreRef.current) return;
+      offreRef.current.value = a.dataset.offre ?? "";
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,6 +33,8 @@ export default function JuneContact() {
       email: String(formData.get("email") ?? "").trim(),
       message: String(formData.get("message") ?? "").trim(),
     };
+    const offre = String(formData.get("offre") ?? "").trim();
+    if (offre) payload.message = `[${offre}] ${payload.message}`.trim();
 
     if (!payload.email) {
       setStatus("error");
@@ -45,7 +59,7 @@ export default function JuneContact() {
 
       if (data.fallback === "mailto") {
         const subject = encodeURIComponent(
-          `Demande de shooting : ${payload.lieu || payload.nom}`
+          `Projet June : ${payload.lieu || payload.nom}`
         );
         const body = encodeURIComponent(
           `Nom : ${payload.nom}\nLieu : ${payload.lieu}\nEmail : ${payload.email}\n\n${payload.message}`
@@ -78,15 +92,26 @@ export default function JuneContact() {
           />
         </div>
         <div className="j-field">
-          <label htmlFor="lieu">Nom du lieu</label>
+          <label htmlFor="lieu">Lieu, expérience ou marque</label>
           <input
             id="lieu"
             name="lieu"
             type="text"
             autoComplete="organization"
-            placeholder="La Table du Port"
+            placeholder="Le Chalet des Cimes"
           />
         </div>
+      </div>
+
+      <div className="j-field">
+        <label htmlFor="offre">Ce qui vous intéresse</label>
+        <select id="offre" name="offre" ref={offreRef} defaultValue="">
+          <option value="">Je ne sais pas encore</option>
+          <option value="Content Shoot">Content Shoot</option>
+          <option value="UGC">UGC</option>
+          <option value="June Partner">June Partner</option>
+          <option value="Alpe d'Huez">Un projet à l'Alpe d'Huez</option>
+        </select>
       </div>
 
       <div className="j-field">
@@ -107,7 +132,7 @@ export default function JuneContact() {
           id="message"
           name="message"
           rows={4}
-          placeholder="Parlez-nous de votre lieu et de ce que vous aimeriez montrer."
+          placeholder="Racontez-moi votre projet : le lieu, l'expérience ou la marque, et ce que vous aimeriez faire découvrir."
         />
       </div>
 
@@ -127,7 +152,7 @@ export default function JuneContact() {
           ? "Envoi en cours…"
           : status === "success"
             ? "Demande envoyée"
-            : "Réserver un shooting"}
+            : "Parler de mon projet →"}
       </button>
     </form>
   );

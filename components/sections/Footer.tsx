@@ -9,7 +9,7 @@ export default function Footer() {
             June<span className="text-chestnut">.</span>
           </p>
           <p className="mt-2 text-sm text-muted">
-            Studio de contenu tourisme — Occitanie, Montpellier &amp; littoral.
+            Studio de contenu &amp; UGC. Alpe d'Huez • France. Saison 26/27.
           </p>
         </div>
 
