@@ -50,8 +50,8 @@ June **ne gère pas les réseaux sociaux** des clients (pas de community managem
 Pour refaire le plein de contenu sans déléguer ses réseaux. Échange avant le
 shooting (actualité, besoins, mise en avant), puis session imaginée par June.
 - 25 à 35 photos retouchées
-- 3 Réels montés
-- 15 à 20 séquences verticales
+- 3 à 4 Réels montés
+- Envoi des rushs
 - Concepts & préparation du shooting
 - Galerie organisée prête à utiliser
 CTA : « Imaginer mon shooting → »
@@ -72,9 +72,9 @@ Partenaire contenu, sans gestion des réseaux. Chaque mois :
 - 1 plan de contenu adapté au mois
 - 1 session de création jusqu'à 3h
 - 25 à 30 photos retouchées
-- 3 Réels montés
+- 3 à 4 Réels montés
 - 1 vidéo UGC
-- Séquences vidéo complémentaires
+- Envoi des rushs
 - Hooks & idées d'utilisation
 - Support pour les besoins communication
 Accompagnement flexible selon les besoins. CTA : « Devenir June Partner → »

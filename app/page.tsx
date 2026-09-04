@@ -234,8 +234,8 @@ export default function Home() {
                 </p>
                 <ul className="v-offer__list">
                   <li>25 à 35 photos retouchées</li>
-                  <li>3 Réels montés</li>
-                  <li>15 à 20 séquences verticales</li>
+                  <li>3 à 4 Réels montés</li>
+                  <li>Envoi des rushs</li>
                   <li>Concepts &amp; préparation du shooting</li>
                   <li>Galerie organisée prête à utiliser</li>
                 </ul>
@@ -307,9 +307,9 @@ export default function Home() {
                   <li>1 plan de contenu adapté au mois</li>
                   <li>1 session de création jusqu&apos;à 3h</li>
                   <li>25 à 30 photos retouchées</li>
-                  <li>3 Réels montés</li>
+                  <li>3 à 4 Réels montés</li>
                   <li>1 vidéo UGC</li>
-                  <li>Séquences vidéo complémentaires</li>
+                  <li>Envoi des rushs</li>
                   <li>Hooks &amp; idées d&apos;utilisation</li>
                   <li>Support pour les besoins communication</li>
                 </ul>

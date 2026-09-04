@@ -1,97 +1,82 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import ContentCard from "@/components/ui/ContentCard";
 import {
   categories,
   projets,
   type CategorieRealisation,
+  type Media,
 } from "@/lib/realisations";
 
-type Filtre = "Tous" | CategorieRealisation;
+type Entree = { media: Media; lieu: string; index: number };
 
-const filtres: Filtre[] = ["Tous", ...categories.map((c) => c.nom)];
+/* Un média vidéo relève des formats vidéo de son projet (Réels, UGC) ; une
+   photo relève du shooting photo. Un même reel peut apparaître sous Réels et
+   sous UGC quand le projet couvre les deux. */
+function mediasPour(format: CategorieRealisation): Entree[] {
+  const out: Entree[] = [];
+  projets.forEach((projet) => {
+    if (!projet.formats.includes(format)) return;
+    projet.medias.forEach((media, index) => {
+      const estVideo = Boolean(media.video);
+      const formatVideo = format !== "Shooting photo";
+      if (estVideo === formatVideo) out.push({ media, lieu: projet.lieu, index });
+    });
+  });
+  return out;
+}
 
 export default function PortfolioGrid() {
-  const [filtre, setFiltre] = useState<Filtre>("Tous");
-  const reduceMotion = useReducedMotion();
-
-  const visibles = projets.filter(
-    (projet) => filtre === "Tous" || projet.formats.includes(filtre)
-  );
+  const sections = categories.map((c) => ({ ...c, entrees: mediasPour(c.nom) }));
 
   return (
     <div>
-      <div
-        className="flex flex-wrap gap-3"
-        role="group"
-        aria-label="Filtrer le portfolio par format"
-      >
-        {filtres.map((f) => (
-          <button
-            key={f}
-            type="button"
-            onClick={() => setFiltre(f)}
-            aria-pressed={filtre === f}
-            className={`rounded-full px-5 py-2.5 text-sm font-semibold transition-all ${
-              filtre === f
-                ? "bg-espresso text-cream shadow-soft"
-                : "border border-line bg-cream text-muted hover:text-espresso"
-            }`}
+      <nav aria-label="Aller à un format" className="flex flex-wrap gap-3">
+        {sections.map((s) => (
+          <a
+            key={s.nom}
+            href={`#${s.ancre}`}
+            className="rounded-full border border-line bg-cream px-5 py-2.5 text-sm font-semibold text-espresso transition-colors hover:bg-espresso hover:text-cream"
           >
-            {f}
-          </button>
+            {s.titre}
+          </a>
         ))}
-      </div>
+      </nav>
 
-      {visibles.length > 0 ? (
-        <div className="mt-4">
-          <AnimatePresence mode="popLayout" initial={false}>
-            {visibles.map((projet) => (
-              <motion.section
-                key={projet.lieu}
-                layout={!reduceMotion}
-                initial={reduceMotion ? undefined : { opacity: 0, y: 20 }}
-                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                exit={reduceMotion ? undefined : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="border-b border-line py-10 last:border-b-0"
-                aria-label={projet.lieu}
-              >
-                <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
-                  <h2 className="font-display text-2xl md:text-3xl">
-                    {projet.lieu}
-                  </h2>
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                    {projet.formats.join(" · ")}
-                  </p>
-                </div>
+      {sections.map((s) => (
+        <section
+          key={s.nom}
+          id={s.ancre}
+          className="scroll-mt-28 border-b border-line py-12 last:border-b-0 md:py-16"
+          aria-label={s.titre}
+        >
+          <div className="max-w-2xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-chestnut">
+              {s.accroche}
+            </p>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl">{s.titre}</h2>
+            <p className="mt-3 leading-relaxed text-muted">{s.description}</p>
+          </div>
 
-                <div className="mt-6 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
-                  {projet.medias.map((media, index) => (
-                    <ContentCard
-                      key={`${projet.lieu}-${index}`}
-                      label={projet.lieu}
-                      gradient={media.gradient}
-                      src={media.src}
-                      href={media.href}
-                      showBadge={false}
-                      showPlay={Boolean(media.video)}
-                      showLabel={false}
-                      floatDelay={index * 1.2}
-                    />
-                  ))}
-                </div>
-              </motion.section>
-            ))}
-          </AnimatePresence>
-        </div>
-      ) : (
-        <p className="mt-10 italic text-muted">
-          Rien dans cette catégorie pour l&apos;instant — ça arrive bientôt.
-        </p>
-      )}
+          {s.entrees.length > 0 ? (
+            <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 md:gap-6 lg:grid-cols-4">
+              {s.entrees.map(({ media, lieu, index }) => (
+                <ContentCard
+                  key={`${lieu}-${index}`}
+                  label={lieu}
+                  gradient={media.gradient}
+                  src={media.src}
+                  href={media.href}
+                  position={media.position}
+                  showBadge={false}
+                  showPlay={Boolean(media.video)}
+                  floatDelay={index * 1.2}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="mt-8 italic text-muted">Exemples à venir.</p>
+          )}
+        </section>
+      ))}
     </div>
   );
 }

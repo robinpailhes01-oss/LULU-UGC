@@ -10,6 +10,8 @@ export type ContentCardProps = {
   src?: string;
   /** Lien externe (reel Instagram…) : toute la carte devient cliquable. */
   href?: string;
+  /** Point d'ancrage du cadrage (background-position), ex. "70% 50%". */
+  position?: string;
   /** Seconds of offset so cards float out of sync. */
   floatDelay?: number;
   showBadge?: boolean;
@@ -29,6 +31,7 @@ export default function ContentCard({
   gradient,
   src,
   href,
+  position = "center",
   floatDelay = 0,
   showBadge = true,
   showPlay = true,
@@ -59,7 +62,7 @@ export default function ContentCard({
         className="absolute inset-0 transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
         style={{
           background: src
-            ? `url('${src}') center / cover no-repeat, ${gradient}`
+            ? `url('${src}') ${position} / cover no-repeat, ${gradient}`
             : gradient,
         }}
       />

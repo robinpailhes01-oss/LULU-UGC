@@ -3,6 +3,8 @@ export type CategorieRealisation = "Reels montés" | "Vidéos UGC" | "Shooting p
 export type Media = {
   /** Chemin du média sous public/ ; dégradé chaud en fallback. */
   src?: string;
+  /** Point d'ancrage du cadrage dans la carte 9:16 (background-position). */
+  position?: string;
   /** Lien externe (reel ou post Instagram) : la carte devient cliquable. */
   href?: string;
   /** true si le média renvoie vers une vidéo (affiche le bouton play). */
@@ -18,22 +20,34 @@ export type Projet = {
 
 export const categories: {
   nom: CategorieRealisation;
+  titre: string;
+  ancre: string;
+  accroche: string;
   description: string;
 }[] = [
   {
-    nom: "Reels montés",
+    nom: "Vidéos UGC",
+    titre: "UGC",
+    ancre: "ugc",
+    accroche: "Faire vivre",
     description:
-      "Des vidéos verticales courtes, rythmées, qui racontent votre lieu en quelques secondes.",
+      "Un contenu plus humain et incarné, construit autour d'un angle et d'un message : expérience, recommandation, démonstration, storytelling, face caméra ou voix off.",
   },
   {
-    nom: "Vidéos UGC",
+    nom: "Reels montés",
+    titre: "Réels",
+    ancre: "reels",
+    accroche: "Faire ressentir",
     description:
-      "Je vis l'expérience face caméra, comme une cliente. Le format le plus authentique pour créer la confiance.",
+      "Des vidéos immersives et esthétiques qui racontent votre univers : l'ambiance, les détails, le lieu, le produit ou l'expérience.",
   },
   {
     nom: "Shooting photo",
+    titre: "Photos",
+    ancre: "photos",
+    accroche: "Construire votre image",
     description:
-      "Des photos retouchées qui capturent la lumière et les matières de votre lieu.",
+      "Des images naturelles et travaillées pour alimenter vos réseaux, votre site et vos différents supports.",
   },
 ];
 

@@ -20,12 +20,12 @@ export default function PortfolioPage() {
           <Reveal>
             <Eyebrow>Portfolio</Eyebrow>
             <h1 className="mt-4 max-w-2xl font-display text-[clamp(34px,5vw,60px)] leading-tight">
-              Des lieux qu&apos;on a eu la chance de{" "}
+              Des lieux, des expériences et des marques qu&apos;on a eu la chance de{" "}
               <em className="italic text-chestnut">raconter</em>.
             </h1>
             <p className="mt-4 max-w-xl leading-relaxed text-muted">
-              Reels, vidéos UGC et shootings photo — mis à jour au fil des
-              tournages. Cliquez sur un projet pour le voir sur Instagram.
+              UGC, Réels et Photos, classés par format et mis à jour au fil des
+              tournages. Cliquez sur un contenu pour le voir sur Instagram.
             </p>
           </Reveal>
 
@@ -35,13 +35,13 @@ export default function PortfolioPage() {
 
           <Reveal delay={0.1} className="mt-16 text-center md:mt-20">
             <p className="font-display text-2xl">
-              Envie d&apos;y voir votre lieu ?
+              On crée quelque chose ensemble ?
             </p>
             <a
               href="/#contact"
               className="mt-6 inline-block rounded-full bg-espresso px-7 py-3.5 text-sm font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
             >
-              Réserver un shooting
+              Parler de mon projet →
             </a>
           </Reveal>
         </div>
