@@ -42,3 +42,6 @@ previews/_build/*.jpg
 previews/_build/fonts.css
 previews/_build/v1/
 previews/_build/v2/
+previews/_build/figma/*.png
+previews/_build/figma/*.jpg
+previews/_build/figma/look/
