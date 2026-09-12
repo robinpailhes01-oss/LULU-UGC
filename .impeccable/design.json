@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-12T00:00:00Z",
+  "title": "Design System: June Content Studio",
+  "source": {
+    "artifact": "previews/june-impeccable.html",
+    "template": "previews/_build/impeccable/template.html",
+    "fonts": "previews/_build/impeccable/fonts.css",
+    "surfaceBrief": ".impeccable/surfaces/previews-june-impeccable-html.md",
+    "form": "Le mur de preuves",
+    "seed": "edc8e105"
+  },
+  "extensions": {
+    "colorMeta": {
+      "sand": { "role": "neutral", "displayName": "Sand / Limestone", "canonical": "#F4F0E8", "tonalRamp": ["#221d15", "#3f372b", "#5f5545", "#82766a", "#a79a8b", "#c9bfae", "#e6dfd2", "#F4F0E8"] },
+      "cream": { "role": "neutral", "displayName": "Cream", "canonical": "#FBF7F0", "tonalRamp": ["#241f17", "#43392d", "#645848", "#877a68", "#ac9f8c", "#cfc3b0", "#ede5d6", "#FBF7F0"] },
+      "ink": { "role": "neutral", "displayName": "Ink / Espresso", "canonical": "#241D17", "tonalRamp": ["#241D17", "#3b3229", "#554a3f", "#716459", "#8f8175", "#ada094", "#cbbfb4", "#ebe2d8"] },
+      "night": { "role": "neutral", "displayName": "Night", "canonical": "#17110D", "tonalRamp": ["#17110D", "#2e2620", "#473d35", "#62574d", "#7f7368", "#9e9185", "#bfb2a6", "#e0d5c9"] },
+      "night-ink": { "role": "neutral", "displayName": "Night Ink", "canonical": "#F2E7D6", "tonalRamp": ["#231d14", "#403729", "#5f5541", "#81765f", "#a4987f", "#c6b9a0", "#e2d6c2", "#F2E7D6"] },
+      "night-muted": { "role": "neutral", "displayName": "Night Muted", "canonical": "#BFAE98", "tonalRamp": ["#221c15", "#3f3629", "#5d523f", "#7c6f57", "#9c8d72", "#BFAE98", "#dccfbe", "#f1eae0"] },
+      "chestnut": { "role": "primary", "displayName": "Chestnut", "canonical": "#8B5E34", "tonalRamp": ["#2a1a0b", "#472c14", "#65401f", "#8B5E34", "#a97a4f", "#c4996f", "#dcb997", "#f1dcc4"] },
+      "honey": { "role": "primary", "displayName": "Honey", "canonical": "#D89B4E", "tonalRamp": ["#2f1f0b", "#513513", "#754e1c", "#9a6928", "#bf8437", "#D89B4E", "#e8bc84", "#f6dfc0"] },
+      "muted": { "role": "neutral", "displayName": "Muted", "canonical": "#6B5E50", "tonalRamp": ["#1f1a15", "#37302a", "#504740", "#6B5E50", "#877a6b", "#a69889", "#c6baac", "#e6ded4"] },
+      "line": { "role": "neutral", "displayName": "Line (ink 12 %)", "canonical": "rgba(36,29,23,.12)", "tonalRamp": ["rgba(36,29,23,.6)", "rgba(36,29,23,.45)", "rgba(36,29,23,.35)", "rgba(36,29,23,.28)", "rgba(36,29,23,.2)", "rgba(36,29,23,.14)", "rgba(36,29,23,.12)", "rgba(36,29,23,.06)"] },
+      "line-strong": { "role": "neutral", "displayName": "Line strong (ink 28 %)", "canonical": "rgba(36,29,23,.28)", "tonalRamp": ["rgba(36,29,23,.6)", "rgba(36,29,23,.45)", "rgba(36,29,23,.35)", "rgba(36,29,23,.28)", "rgba(36,29,23,.2)", "rgba(36,29,23,.14)", "rgba(36,29,23,.12)", "rgba(36,29,23,.06)"] },
+      "plate-base": { "role": "neutral", "displayName": "Plate base (undeveloped)", "canonical": "#d9c7ad", "tonalRamp": ["#221c14", "#3f3626", "#5e523b", "#7f7052", "#a1906c", "#c1ac8a", "#d9c7ad", "#efe4d3"] },
+      "etiquette-veil": { "role": "neutral", "displayName": "Étiquette veil (night 68 %)", "canonical": "rgba(23,17,13,.68)", "tonalRamp": ["rgba(23,17,13,.92)", "rgba(23,17,13,.8)", "rgba(23,17,13,.68)", "rgba(23,17,13,.55)", "rgba(23,17,13,.4)", "rgba(23,17,13,.28)", "rgba(23,17,13,.16)", "rgba(23,17,13,.06)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Le h1 du mur et la chute des douleurs ; Fraunces 340, opsz 144, SOFT 30, text-wrap balance." },
+      "display-accent": { "displayName": "Display accent", "purpose": "L'italique 380 en chestnut (honey sur night) pour la seconde ligne d'un titre." },
+      "headline": { "displayName": "Headline", "purpose": "Tous les h2 de section, titres V1 verbatim." },
+      "title": { "displayName": "Title", "purpose": "h3 des formats, noms d'offres, titres d'étapes ; small inline chestnut ou sous-titre small muted." },
+      "price": { "displayName": "Price", "purpose": "Prix d'offre en Fraunces 320 tabulaire, € en Manrope 400 à .55em remonté." },
+      "lede": { "displayName": "Lede", "purpose": "Phrase sous le h1 et sous le titre des offres, max 40ch." },
+      "body": { "displayName": "Body", "purpose": "Paragraphes Manrope, bornés 26–56ch selon le contexte." },
+      "label": { "displayName": "Label", "purpose": "Étiquettes de plaques, labels de champs, notes de prix ; casse normale, jamais de capitales." },
+      "button": { "displayName": "Button", "purpose": "Libellés de CTA pilule, flèche → dans le texte verbatim." },
+      "mark": { "displayName": "Mark", "purpose": "Le mot-marque « June » en Fraunces italique, nav 1.7rem et pied 1.4rem." }
+    },
+    "fonts": [
+      { "family": "Fraunces", "style": "normal", "weight": "300 600", "axes": "opsz, SOFT (variable)", "display": "swap", "hosting": "self-hosted, inlined" },
+      { "family": "Fraunces", "style": "italic", "weight": "300 600", "axes": "opsz, SOFT (variable)", "display": "swap", "hosting": "self-hosted, inlined" },
+      { "family": "Manrope", "style": "normal", "weight": "400, 500, 600, 700", "display": "swap", "hosting": "self-hosted, inlined" }
+    ],
+    "shadows": [
+      { "name": "shadow-plate", "value": "0 3px 8px rgba(36,29,23,.08), 0 28px 60px -22px rgba(36,29,23,.32)", "purpose": "Toutes les plaques d'image (--shadow)." },
+      { "name": "shadow-tag", "value": "0 4px 10px rgba(36,29,23,.07), 0 34px 60px -30px rgba(36,29,23,.35)", "purpose": "Plaque de titre du mur et étiquettes d'offre (--shadow-tag)." },
+      { "name": "shadow-btn-hover", "value": "0 12px 26px -12px rgba(36,29,23,.55)", "purpose": "Bouton espresso au survol, avec translateY(-2px)." },
+      { "name": "shadow-btn-honey-hover", "value": "0 12px 30px -10px rgba(216,155,78,.6)", "purpose": "Bouton honey au survol." },
+      { "name": "ring-ghost", "value": "inset 0 0 0 1px rgba(36,29,23,.28)", "purpose": "Bouton ghost au repos ; inset 0 0 0 1px #241D17 au survol." },
+      { "name": "veil-nav", "value": "background: color-mix(in srgb, var(--canvas) 82%, transparent); backdrop-filter: blur(14px)", "purpose": "Nav dès 24px de scroll ; color-mix(in srgb, #17110D 78%, transparent) sur section sombre." },
+      { "name": "veil-head", "value": "background: color-mix(in srgb, #FBF7F0 94%, transparent); backdrop-filter: blur(8px)", "purpose": "Plaque de titre du mur." },
+      { "name": "veil-etiquette", "value": "background: rgba(23,17,13,.68); backdrop-filter: blur(10px)", "purpose": "Étiquette en bas de plaque." },
+      { "name": "gradient-plate-read", "value": "linear-gradient(180deg, rgba(36,29,23,0) 55%, rgba(36,29,23,.55) 100%)", "purpose": "Dégradé de lisibilité en bas de plaque, opacité = --dev." },
+      { "name": "gradient-plate-veil", "value": "linear-gradient(180deg, #ead8b9 0%, #dcc094 55%, #c9a066 100%)", "purpose": "Voile ambre avant développement, opacité = 1 − --dev." },
+      { "name": "halo-alpe", "value": "radial-gradient(circle, rgba(216,155,78,.28), rgba(216,155,78,0) 62%)", "purpose": "Halo honey 60vw (max 900px) en haut à droite de la plaque Alpe." },
+      { "name": "focus-ring", "value": "outline: 2px solid #8B5E34; outline-offset: 3px; border-radius: 6px", "purpose": "Focus clavier global ; champs de nuit : border-color #D89B4E sans outline." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Easing unique de tout le système (--ease)." },
+      { "name": "duration-link", "value": "250ms", "purpose": "Soulignés, bordure et fond des champs." },
+      { "name": "duration-button", "value": "320ms", "purpose": "transform, box-shadow, background des boutons." },
+      { "name": "duration-chevron", "value": "350ms", "purpose": "Rotation 45° des « + » de details." },
+      { "name": "duration-nav", "value": "500ms", "purpose": "Masquage de la nav (translateY(-110%)) et levée -4px des étiquettes d'offre ; voile nav en 400ms." },
+      { "name": "duration-step", "value": "600ms / 700ms", "purpose": "Opacité/translate des étapes ; déploiement scaleX du filet chestnut." },
+      { "name": "duration-ask", "value": "800ms", "purpose": "Triple question de l'Alpe, délai i × 140ms." },
+      { "name": "duration-reveal", "value": "900ms", "purpose": ".rv : 18px → 0, délai --rd (pas de 110–140ms), IntersectionObserver seuil .12 marge -10%, une seule fois." },
+      { "name": "rise-head", "value": "1100ms, delay 550ms, from translateY(18px) opacity 0", "purpose": "Entrée de la plaque de titre du mur." },
+      { "name": "colin", "value": "1400ms, delay i × 90ms, from translate 0 40px opacity 0", "purpose": "Entrée des colonnes du mur." },
+      { "name": "develop-intro", "value": "start 350ms + i × 130ms, 1100ms, ease-out cubic (1 − (1−t)^3)", "purpose": "Développement séquentiel des plaques visibles du mur, Réels avec compteur d'abord ; le scroll ne reprend --dev qu'après." },
+      { "name": "develop-scroll", "value": "--dev = clamp((.92·vh − top) / (.42·vh), 0, 1)", "purpose": "Émergence continue par position dans l'écran ; jamais rembobinée une fois révélée (sauf plaque encore sous l'écran). Pilote mask radial, sepia/contrast/brightness, voile ambre, étiquette." },
+      { "name": "parallax-column", "value": "transform: translate3d(0, calc(var(--off) + var(--sy) * var(--sp)), 0) ; --sy = −min(scrollY, 1.4·vh)", "purpose": "Chaque colonne dérive à sa vitesse ; --off 14/0/10/2/16/8vh, --sp .16/.32/.08/.28/.20/.24." },
+      { "name": "golden-hour", "value": "stops [0 rgb(244,240,232)] [.3 rgb(242,234,217)] [.6 rgb(242,227,198)] [.85 rgb(238,218,188)] [1 rgb(234,210,175)]", "purpose": "--canvas interpolé linéairement selon scrollY / hauteur défilable, appliqué sur html ; --day expose la progression." },
+      { "name": "pain-paliers", "value": "prog = −top / (height − vh) ; hold .22 ; gap = (1 − hold) / n ; p_i = easeOutCubic(clamp((prog − i·gap) / (hold·.9)))", "purpose": "Chaque ligne de douleur reçoit --p qui règle opacity, translateY(26px→0), scale(.94→1), blur(6px→0) ; la barre 1px se remplit en chestnut avec prog." },
+      { "name": "process-activation", "value": "prog = clamp((.88·vh − top) / (.75·vh)) ; on = floor(prog · n)", "purpose": "Une seule étape .is-on (opacité 1, filet chestnut scaleX 1) ; celles d'avant .is-past (opacité .72, filet line-strong) ; les autres à .28." },
+      { "name": "nav-behaviour", "value": "is-scrolled: y > 24 ; is-hidden: y > 420 && y > lastY + 4 ; on-dark: section data-dark couvrant y = 44px", "purpose": "Voile, masquage à la descente, bascule de palette sur plaque de nuit." },
+      { "name": "hint-bob", "value": "1.8s infinite, translateY(-2px ↔ 3px)", "purpose": "Flèche « Longez le mur », masquée sous 1300px." },
+      { "name": "reduced-motion", "value": "scroll-behavior auto ; --dev 1 ; colonnes et plaque de titre sans animation ni transform ; douleurs en flux statique sans barre ; .rv, questions et étapes visibles ; hint immobile", "purpose": "prefers-reduced-motion : tout le contenu livré immédiatement ; la nav garde voile et masquage." }
+    ],
+    "breakpoints": [
+      { "name": "wide", "value": "1301px+", "note": "Localités des étiquettes et hint visibles." },
+      { "name": "desktop", "value": "1201px–1300px", "note": "Six colonnes ; .loc et .wall__hint masqués." },
+      { "name": "laptop", "value": "901px–1200px", "note": "Cinq colonnes, la sixième masquée." },
+      { "name": "mobile", "value": "≤900px", "note": "Mur en trois colonnes .col--m sur 74svh, plaque de titre en flux à -17svh, grilles en une colonne, formats en carrousel 74vw, étapes 2 colonnes, CTA nav court." },
+      { "name": "narrow", "value": "≤480px", "note": "Étapes en une colonne, prix UGC 1.3rem. Testé jusqu'à 360px." }
+    ],
+    "aspectRatios": [
+      { "name": "plate", "value": "9 / 16", "purpose": "Réels et vidéos UGC." },
+      { "name": "plate-photo", "value": "4 / 5", "purpose": "Photos et portrait." }
+    ],
+    "iconography": {
+      "style": "SVG inline via <symbol>, trait 1.6, round caps, currentColor, 1em (étiquette) à 1.1rem (details, hint)",
+      "set": ["i-eye (compteur de vues)", "i-play (Réel / UGC sans compteur)", "i-plus (details, tourne 45°)", "i-down (hint)"]
+    }
+  },
+  "components": [
+    {
+      "name": "Nav",
+      "kind": "nav",
+      "refersTo": "nav-cta",
+      "description": "Barre fixe : mot-marque June en Fraunces italique à gauche, une pilule espresso réduite à droite, rien d'autre. Voile canvas 82 % + blur dès 24px de scroll ; bascule honey/night-ink sur plaque de nuit.",
+      "html": "<header class=\"ds-nav ds-nav--scrolled\"><a class=\"ds-mark\" href=\"#\">June</a><a class=\"ds-nav-btn\" href=\"#\">Parler de mon projet →</a></header>",
+      "css": ".ds-nav{position:relative;display:flex;align-items:center;justify-content:space-between;padding:.9rem clamp(1.25rem,4vw,4.5rem);font-family:Manrope,system-ui,sans-serif}.ds-nav::before{content:\"\";position:absolute;inset:0;background:color-mix(in srgb,#F4F0E8 82%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;transition:opacity .4s}.ds-nav--scrolled::before{opacity:1}.ds-nav>*{position:relative}.ds-mark{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:400;font-size:1.7rem;line-height:1;letter-spacing:-.01em;color:#241D17;text-decoration:none}.ds-nav-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.7rem 1.2rem;border-radius:999px;background:#241D17;color:#FBF7F0;font-weight:600;font-size:.9rem;text-decoration:none;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}.ds-nav-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(36,29,23,.55)}.ds-nav-btn:active{transform:translateY(1px)}.ds-nav-btn:focus-visible,.ds-mark:focus-visible{outline:2px solid #8B5E34;outline-offset:3px;border-radius:6px}"
+    },
+    {
+      "name": "Bouton primaire (espresso)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "L'unique CTA primaire sur limestone : pilule ink/cream, Manrope 600, lève de 2px avec une ombre chaude au survol.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Parler de mon projet →</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.65rem;border-radius:999px;background:#241D17;color:#FBF7F0;font-family:Manrope,system-ui,sans-serif;font-weight:600;font-size:.98rem;text-decoration:none;border:0;cursor:pointer;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1),background .32s}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(36,29,23,.55)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid #8B5E34;outline-offset:3px}"
+    },
+    {
+      "name": "Bouton honey (plaque de nuit)",
+      "kind": "button",
+      "refersTo": "button-honey",
+      "description": "Le CTA des surfaces night : même pilule, fond honey, texte night, halo honey au survol.",
+      "html": "<div class=\"ds-night-bg\"><a class=\"ds-btn-honey\" href=\"#\">Devenir June Partner →</a></div>",
+      "css": ".ds-night-bg{display:inline-block;padding:1.5rem;background:#17110D;border-radius:20px}.ds-btn-honey{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.65rem;border-radius:999px;background:#D89B4E;color:#17110D;font-family:Manrope,system-ui,sans-serif;font-weight:600;font-size:.98rem;text-decoration:none;border:0;cursor:pointer;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}.ds-btn-honey:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(216,155,78,.6)}.ds-btn-honey:active{transform:translateY(1px)}.ds-btn-honey:focus-visible{outline:2px solid #D89B4E;outline-offset:3px}"
+    },
+    {
+      "name": "Bouton ghost + lien",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Le ghost est défini (anneau inset line-strong) mais la page utilise le lien souligné comme action secondaire.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Voir les offres</a> <a class=\"ds-link\" href=\"#\">Voir les offres</a>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.65rem;border-radius:999px;background:transparent;color:#241D17;box-shadow:inset 0 0 0 1px rgba(36,29,23,.28);font-family:Manrope,system-ui,sans-serif;font-weight:600;font-size:.98rem;text-decoration:none;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}.ds-btn-ghost:hover{box-shadow:inset 0 0 0 1px #241D17;transform:translateY(-2px)}.ds-link{font-family:Manrope,system-ui,sans-serif;color:#241D17;text-decoration:underline;text-underline-offset:.24em;text-decoration-thickness:1px;text-decoration-color:rgba(36,29,23,.35);transition:text-decoration-color .25s;margin-left:1.4rem}.ds-link:hover{text-decoration-color:currentColor}.ds-btn-ghost:focus-visible,.ds-link:focus-visible{outline:2px solid #8B5E34;outline-offset:3px;border-radius:6px}"
+    },
+    {
+      "name": "Plaque + étiquette",
+      "kind": "card",
+      "refersTo": "plate",
+      "description": "Plaque 9:16 à coins 18px, ombre chaude, développée par --dev (mask radial + sepia/contrast/brightness + voile ambre), étiquette lieu · compteur avec œil SVG en bas à gauche. Ici figée à --dev:1 ; passer --dev:0 pour voir le voile.",
+      "html": "<figure class=\"ds-plate\" style=\"--dev:1\"><img src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='440' height='708'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23c98a3c'/%3E%3Cstop offset='1' stop-color='%23241d17'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='440' height='708' fill='url(%23g)'/%3E%3C/svg%3E\" alt=\"\"><figcaption class=\"ds-etq\"><b>Gîte de l'Abric<small> · Cévennes</small></b><span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>4 403 vues</span></figcaption></figure>",
+      "css": ".ds-plate{position:relative;width:220px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#d9c7ad;box-shadow:0 3px 8px rgba(36,29,23,.08),0 28px 60px -22px rgba(36,29,23,.32);isolation:isolate;margin:0;--dev:1}.ds-plate img{display:block;width:100%;height:100%;object-fit:cover;-webkit-mask-image:radial-gradient(130% 100% at 50% 100%,#000 calc(var(--dev) * 105%),transparent calc(var(--dev) * 105% + 28%));mask-image:radial-gradient(130% 100% at 50% 100%,#000 calc(var(--dev) * 105%),transparent calc(var(--dev) * 105% + 28%));filter:sepia(calc((1 - var(--dev)) * .75)) contrast(calc(.5 + var(--dev) * .5)) brightness(calc(1.32 - var(--dev) * .32));transition:filter .12s linear}.ds-plate::after{content:\"\";position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,29,23,0) 55%,rgba(36,29,23,.55) 100%);opacity:var(--dev);pointer-events:none}.ds-plate::before{content:\"\";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#ead8b9 0%,#dcc094 55%,#c9a066 100%);opacity:calc(1 - var(--dev));pointer-events:none}.ds-etq{position:absolute;left:.6rem;bottom:.6rem;max-width:calc(100% - 1.2rem);z-index:2;display:flex;flex-direction:column;gap:.1rem;padding:.5rem .7rem;border-radius:12px;background:rgba(23,17,13,.68);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F2E7D6;font-family:Manrope,system-ui,sans-serif;font-size:.78rem;line-height:1.3;opacity:var(--dev);transform:translateY(calc((1 - var(--dev)) * 8px))}.ds-etq b{font-weight:600;font-size:.84rem;letter-spacing:.005em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-etq b small{font-size:1em;font-weight:500;color:rgba(242,231,214,.8)}.ds-etq span{display:inline-flex;align-items:center;gap:.35rem;color:rgba(242,231,214,.86);white-space:nowrap}.ds-etq svg{width:1em;height:1em;flex:none}"
+    },
+    {
+      "name": "Plaque de titre (wall head)",
+      "kind": "card",
+      "refersTo": "wall-head",
+      "description": "La plaque limestone qui chevauche le mur : cream 94 % + blur, coins 24px, ombre tag, h1 Fraunces en deux lignes avec l'italique chestnut, lede, CTA + lien.",
+      "html": "<div class=\"ds-head\"><h1 class=\"ds-h1\">Votre expérience mérite d'être vue.<br><em>Et surtout, d'être vécue.</em></h1><p class=\"ds-lede\">UGC, Réels et Photos pour les lieux, expériences et marques. Des contenus vécus, prêts à publier.</p><div class=\"ds-actions\"><a class=\"ds-btn\" href=\"#\">Parler de mon projet →</a><a class=\"ds-link\" href=\"#\">Voir les offres</a></div></div>",
+      "css": ".ds-head{max-width:40rem;padding:clamp(1.5rem,2.6vw,2.6rem) clamp(1.5rem,2.8vw,2.8rem);background:color-mix(in srgb,#FBF7F0 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:24px;box-shadow:0 4px 10px rgba(36,29,23,.07),0 34px 60px -30px rgba(36,29,23,.35);color:#241D17;font-family:Manrope,system-ui,sans-serif}.ds-h1{margin:0 0 1rem;font-family:Fraunces,Georgia,serif;font-weight:340;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(2.3rem,1.2rem + 3.6vw,4.4rem);line-height:1.02;letter-spacing:-.02em;text-wrap:balance}.ds-h1 em{font-style:italic;font-weight:380;color:#8B5E34}.ds-lede{margin:0 0 1.5rem;font-size:clamp(1.08rem,1rem + .45vw,1.3rem);line-height:1.5;max-width:40ch;text-wrap:pretty}.ds-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem}.ds-btn{display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.65rem;border-radius:999px;background:#241D17;color:#FBF7F0;font-weight:600;font-size:.98rem;text-decoration:none;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(36,29,23,.55)}.ds-link{color:inherit;text-decoration:underline;text-underline-offset:.24em;text-decoration-thickness:1px;text-decoration-color:rgba(36,29,23,.35);transition:text-decoration-color .25s}.ds-link:hover{text-decoration-color:currentColor}.ds-btn:focus-visible,.ds-link:focus-visible{outline:2px solid #8B5E34;outline-offset:3px;border-radius:6px}"
+    },
+    {
+      "name": "Étiquette d'offre suspendue",
+      "kind": "card",
+      "refersTo": "tag",
+      "description": "Carte cream à coins 20px accrochée à un rail 1px par un fil et un anneau ; nom Fraunces + sous-titre, prix Fraunces 320 tabulaire, liste à puces chestnut, CTA espresso. Lève de 4px au survol.",
+      "html": "<div class=\"ds-rail-wrap\"><div class=\"ds-rail\"></div><article class=\"ds-tag\" style=\"--hang:2.2rem\"><h3 class=\"ds-tag-name\">Content Shoot <small>Refaire le plein de contenu sans déléguer vos réseaux.</small></h3><p class=\"ds-price\"><span class=\"from\">à partir de</span> <span>490<span class=\"eur\">€</span></span> <span class=\"ht\">HT</span></p><p class=\"ds-pitch\">On échange sur votre actualité et vos besoins, puis j'imagine la session.</p><ul class=\"ds-tag-list\"><li>25 à 35 photos retouchées</li><li>3 à 4 Réels montés</li><li>Envoi des rushs</li></ul><a class=\"ds-btn\" href=\"#\">Imaginer mon shooting →</a></article></div>",
+      "css": ".ds-rail-wrap{position:relative;padding:0 1rem;font-family:Manrope,system-ui,sans-serif;color:#241D17}.ds-rail{height:1px;background:rgba(36,29,23,.28)}.ds-tag{position:relative;max-width:22rem;margin-top:calc(var(--hang,2.5rem) + 1.6rem);background:#FBF7F0;border-radius:20px;padding:clamp(1.6rem,2.4vw,2.4rem) clamp(1.4rem,2.2vw,2.2rem);box-shadow:0 4px 10px rgba(36,29,23,.07),0 34px 60px -30px rgba(36,29,23,.35);display:flex;flex-direction:column;gap:1.1rem;transition:transform .5s cubic-bezier(.16,1,.3,1)}.ds-tag:hover{transform:translateY(-4px)}.ds-tag::before{content:\"\";position:absolute;left:50%;bottom:100%;width:1px;height:calc(var(--hang,2.5rem) + 1.6rem);background:rgba(36,29,23,.28)}.ds-tag::after{content:\"\";position:absolute;left:50%;top:.85rem;width:12px;height:12px;margin-left:-6px;border-radius:50%;border:1.5px solid rgba(36,29,23,.28);background:#F4F0E8}.ds-tag-name{margin:0;padding-top:1rem;font-family:Fraunces,Georgia,serif;font-weight:400;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(1.45rem,1.15rem + .9vw,2rem);line-height:1.02;letter-spacing:-.02em}.ds-tag-name small{display:block;font-family:Manrope,system-ui,sans-serif;font-size:.82rem;color:#6B5E50;margin-top:.3rem;font-weight:500;letter-spacing:0}.ds-price{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem;font-family:Fraunces,Georgia,serif;font-weight:320;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(2.4rem,2rem + 1.4vw,3.4rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums lining-nums}.ds-price .from{font-family:Manrope,system-ui,sans-serif;font-size:.95rem;font-weight:500;color:#6B5E50;margin-right:.15rem;letter-spacing:0}.ds-price .eur{font-family:Manrope,system-ui,sans-serif;font-weight:400;font-size:.55em;position:relative;top:-.2em}.ds-price .ht{font-family:Manrope,system-ui,sans-serif;font-size:.85rem;font-weight:500;color:#6B5E50;letter-spacing:.02em}.ds-pitch{margin:0;color:#6B5E50;max-width:30ch;line-height:1.6}.ds-tag-list{margin:0;padding:.4rem 0 0;list-style:none;display:flex;flex-direction:column;gap:.45rem;font-size:.95rem;border-top:1px solid rgba(36,29,23,.12)}.ds-tag-list li{display:flex;gap:.6rem;align-items:flex-start;padding-top:.35rem}.ds-tag-list li::before{content:\"\";width:.4rem;height:.4rem;border-radius:50%;background:#8B5E34;flex:none;margin-top:.55rem}.ds-btn{align-self:flex-start;margin-top:.4rem;display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.65rem;border-radius:999px;background:#241D17;color:#FBF7F0;font-weight:600;font-size:.98rem;text-decoration:none;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}.ds-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(36,29,23,.55)}.ds-btn:focus-visible{outline:2px solid #8B5E34;outline-offset:3px}"
+    },
+    {
+      "name": "Étiquette d'offre de nuit (June Partner)",
+      "kind": "card",
+      "refersTo": "tag-night",
+      "description": "Même étiquette en négatif : fond night, texte night-ink, secondaires night-muted, filet night-ink 14 %, puces et CTA honey, anneau night.",
+      "html": "<div class=\"ds-rail-wrap\"><div class=\"ds-rail\"></div><article class=\"ds-tag ds-tag--night\" style=\"--hang:3.4rem\"><h3 class=\"ds-tag-name\">June Partner <small>Votre partenaire contenu, sans gestion de vos réseaux.</small></h3><p class=\"ds-price\"><span>890<span class=\"eur\">€</span></span> <span class=\"ht\">HT / mois</span></p><p class=\"ds-pitch\">Un rythme de création régulier, adapté à votre actualité.</p><ul class=\"ds-tag-list\"><li>1 point communication mensuel</li><li>1 session de création jusqu'à 3h</li><li>3 à 4 Réels montés · 1 vidéo UGC</li></ul><a class=\"ds-btn-honey\" href=\"#\">Devenir June Partner →</a></article></div>",
+      "css": ".ds-rail-wrap{position:relative;padding:0 1rem;font-family:Manrope,system-ui,sans-serif}.ds-rail{height:1px;background:rgba(36,29,23,.28)}.ds-tag{position:relative;max-width:22rem;margin-top:calc(var(--hang,2.5rem) + 1.6rem);border-radius:20px;padding:clamp(1.6rem,2.4vw,2.4rem) clamp(1.4rem,2.2vw,2.2rem);box-shadow:0 4px 10px rgba(36,29,23,.07),0 34px 60px -30px rgba(36,29,23,.35);display:flex;flex-direction:column;gap:1.1rem;transition:transform .5s cubic-bezier(.16,1,.3,1)}.ds-tag:hover{transform:translateY(-4px)}.ds-tag::before{content:\"\";position:absolute;left:50%;bottom:100%;width:1px;height:calc(var(--hang,2.5rem) + 1.6rem);background:rgba(36,29,23,.28)}.ds-tag::after{content:\"\";position:absolute;left:50%;top:.85rem;width:12px;height:12px;margin-left:-6px;border-radius:50%;border:1.5px solid rgba(36,29,23,.28)}.ds-tag--night{background:#17110D;color:#F2E7D6}.ds-tag--night::after{background:#17110D;border-color:rgba(242,231,214,.4)}.ds-tag-name{margin:0;padding-top:1rem;font-family:Fraunces,Georgia,serif;font-weight:400;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(1.45rem,1.15rem + .9vw,2rem);line-height:1.02;letter-spacing:-.02em}.ds-tag-name small{display:block;font-family:Manrope,system-ui,sans-serif;font-size:.82rem;color:#BFAE98;margin-top:.3rem;font-weight:500;letter-spacing:0}.ds-price{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem;font-family:Fraunces,Georgia,serif;font-weight:320;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(2.4rem,2rem + 1.4vw,3.4rem);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums lining-nums}.ds-price .eur{font-family:Manrope,system-ui,sans-serif;font-weight:400;font-size:.55em;position:relative;top:-.2em}.ds-price .ht{font-family:Manrope,system-ui,sans-serif;font-size:.85rem;font-weight:500;color:#BFAE98;letter-spacing:.02em}.ds-pitch{margin:0;color:#BFAE98;max-width:30ch;line-height:1.6}.ds-tag-list{margin:0;padding:.4rem 0 0;list-style:none;display:flex;flex-direction:column;gap:.45rem;font-size:.95rem;border-top:1px solid rgba(242,231,214,.14)}.ds-tag-list li{display:flex;gap:.6rem;align-items:flex-start;padding-top:.35rem}.ds-tag-list li::before{content:\"\";width:.4rem;height:.4rem;border-radius:50%;background:#D89B4E;flex:none;margin-top:.55rem}.ds-btn-honey{align-self:flex-start;margin-top:.4rem;display:inline-flex;align-items:center;gap:.55rem;padding:.95rem 1.65rem;border-radius:999px;background:#D89B4E;color:#17110D;font-weight:600;font-size:.98rem;text-decoration:none;transition:transform .32s cubic-bezier(.16,1,.3,1),box-shadow .32s cubic-bezier(.16,1,.3,1)}.ds-btn-honey:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(216,155,78,.6)}.ds-btn-honey:focus-visible{outline:2px solid #D89B4E;outline-offset:3px}"
+    },
+    {
+      "name": "Champ de formulaire (plaque de nuit)",
+      "kind": "input",
+      "refersTo": "input-night",
+      "description": "Champ sur night : fond night-ink 6 %, bordure 18 %, coins 12px ; label Manrope 600 night-muted ; focus = bordure honey, fond 9 %, sans outline.",
+      "html": "<div class=\"ds-night-bg\"><div class=\"ds-f\"><label for=\"ds-nom\">Votre nom</label><input id=\"ds-nom\" type=\"text\" placeholder=\"Camille Durand\"></div><div class=\"ds-f\"><label for=\"ds-offre\">Ce qui vous intéresse</label><select id=\"ds-offre\"><option>Je ne sais pas encore</option><option>Content Shoot</option><option>UGC</option><option>June Partner</option></select></div></div>",
+      "css": ".ds-night-bg{display:flex;flex-direction:column;gap:1rem;padding:1.5rem;background:#17110D;border-radius:20px;font-family:Manrope,system-ui,sans-serif;max-width:22rem}.ds-f{display:flex;flex-direction:column;gap:.45rem}.ds-f label{font-size:.82rem;font-weight:600;color:#BFAE98;letter-spacing:.01em}.ds-f input,.ds-f select{width:100%;padding:.85rem 1rem;border-radius:12px;border:1px solid rgba(242,231,214,.18);background:rgba(242,231,214,.06);color:#F2E7D6;font:inherit;transition:border-color .25s,background .25s}.ds-f input::placeholder{color:rgba(242,231,214,.45)}.ds-f input:focus,.ds-f select:focus{outline:none;border-color:#D89B4E;background:rgba(242,231,214,.09)}.ds-f select{appearance:none;-webkit-appearance:none;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23D89B4E' stroke-width='1.5'%3E%3Cpath d='M3.5 6l4.5 4.5L12.5 6'/%3E%3C/svg%3E\");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.6rem}.ds-f select option{color:#241D17;background:#FBF7F0}"
+    },
+    {
+      "name": "Étape de process (brick)",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "Étape sous filet : numéro Fraunces 320 chestnut, titre, paragraphe muted 26ch. is-on = vive avec filet chestnut déployé ; is-past = estompée à .72 avec filet line-strong ; repos à .28.",
+      "html": "<ol class=\"ds-steps\"><li class=\"ds-step ds-step--past\"><span class=\"ds-step-n\">01</span><h3>On échange</h3><p>Votre univers, vos besoins, votre actualité.</p></li><li class=\"ds-step ds-step--on\"><span class=\"ds-step-n\">02</span><h3>J'imagine</h3><p>Concepts, angles, formats et direction du shooting.</p></li><li class=\"ds-step\"><span class=\"ds-step-n\">03</span><h3>On crée</h3><p>Sur place pour les lieux, ou à partir de vos produits.</p></li></ol>",
+      "css": ".ds-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,2.4vw,2.4rem);margin:0;padding:0;list-style:none;font-family:Manrope,system-ui,sans-serif;color:#241D17}.ds-step{position:relative;padding-top:1.4rem;border-top:1px solid rgba(36,29,23,.12);opacity:.28;transform:translateY(10px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}.ds-step::before{content:\"\";position:absolute;top:-1px;left:0;height:1px;width:100%;background:#8B5E34;transform-origin:left;transform:scaleX(0);transition:transform .7s cubic-bezier(.16,1,.3,1)}.ds-step--on{opacity:1;transform:none}.ds-step--on::before{transform:scaleX(1)}.ds-step--past{opacity:.72;transform:none}.ds-step--past::before{transform:scaleX(1);background:rgba(36,29,23,.28)}.ds-step-n{display:block;font-family:Fraunces,Georgia,serif;font-weight:320;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:2.6rem;line-height:1;letter-spacing:-.03em;color:#8B5E34;font-variant-numeric:tabular-nums lining-nums}.ds-step h3{margin:.8rem 0 .5rem;font-family:Fraunces,Georgia,serif;font-weight:400;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(1.45rem,1.15rem + .9vw,2rem);line-height:1.02;letter-spacing:-.02em}.ds-step p{margin:0;color:#6B5E50;font-size:.96rem;max-width:26ch;line-height:1.6}"
+    },
+    {
+      "name": "FAQ / details",
+      "kind": "custom",
+      "refersTo": "title",
+      "description": "Accordéon sous filets line : question Fraunces 400, « + » SVG qui tourne de 45° à l'ouverture, réponse muted 56ch.",
+      "html": "<div class=\"ds-faq\"><details open><summary>Est-ce que June gère mes réseaux sociaux ? <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>Non. June imagine et crée votre contenu, mais vous gardez la main sur vos réseaux.</p></details><details><summary>Les offres sont-elles personnalisables ? <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>Oui. Chaque projet commence par un échange.</p></details></div>",
+      "css": ".ds-faq{font-family:Manrope,system-ui,sans-serif;color:#241D17;max-width:36rem}.ds-faq details{border-top:1px solid rgba(36,29,23,.12)}.ds-faq details:last-child{border-bottom:1px solid rgba(36,29,23,.12)}.ds-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;padding:1.15rem 0;font-family:Fraunces,Georgia,serif;font-weight:400;font-variation-settings:\"opsz\" 144,\"SOFT\" 30;font-size:clamp(1.15rem,1rem + .6vw,1.45rem);letter-spacing:-.01em;line-height:1.25}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary svg{width:1.1rem;height:1.1rem;flex:none;transition:transform .35s cubic-bezier(.16,1,.3,1)}.ds-faq details[open] summary svg{transform:rotate(45deg)}.ds-faq summary:focus-visible{outline:2px solid #8B5E34;outline-offset:3px;border-radius:6px}.ds-faq details p{margin:0;padding:0 0 1.3rem;color:#6B5E50;max-width:56ch;line-height:1.6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Le mur de preuves",
+    "overview": "Le système est celui d'un mur de plaques verticales, posées sur un sable chaud, que le visiteur longe. Le fond n'est pas une couleur mais une lumière : le limestone (#F4F0E8) glisse vers l'heure dorée au fil du scroll, puis la page bascule sur deux plaques de nuit (Alpe d'Huez, contact) où le même vocabulaire passe en négatif. Rien n'est décoratif : les images sont les Réels et photos réellement publiés, et les seuls chiffres affichés sont les compteurs lus sur les captures.\n\nLa densité est éditoriale, pas SaaS : un display Fraunces léger (340) à grande taille optique, une italique chestnut pour l'accent, Manrope pour le corps, les prix et les étiquettes. Les ombres sont chaudes, décalées vers le bas et très floues ; les filets sont des voiles d'encre (rgba(36,29,23,.12)) plutôt que des gris. La motion est retenue et pilotée par le scroll : les plaques « se développent » comme un tirage argentique, les colonnes dérivent chacune à sa vitesse, les lignes de douleur montent en taille jamais en couleur, et prefers-reduced-motion livre tout immédiatement.\n\nRefus confirmés par le build : pas de photo hero unique, pas de trois cartes-icônes, pas de tableau de prix, pas de kicker ni d'eyebrow au-dessus des titres, pas de témoignage, logo ou compteur inventé.",
+    "keyCharacteristics": [
+      "Fond vivant : le canvas interpole cinq arrêts rgb du limestone au sable doré selon la progression du scroll.",
+      "Plaques 9:16 (Réels, UGC) et 4:5 (photos) à coins 18 px, chacune portant une étiquette lieu + format ou compteur de vues.",
+      "Un seul CTA primaire pilule espresso/cream ; sur les plaques de nuit, la même pilule devient honey/night.",
+      "Fraunces 300–600 variable (opsz 144, SOFT 30), italique chestnut pour la seconde ligne du titre ; Manrope 400–700 partout ailleurs.",
+      "Profondeur par ombres chaudes très floues et voiles teintés (color-mix, backdrop-filter), jamais par bordure dure."
+    ],
+    "rules": [
+      { "name": "The Golden Hour Rule", "body": "Le canvas n'est jamais fixe : `--canvas` est interpolé au scroll entre rgb(244,240,232), rgb(242,234,217), rgb(242,227,198), rgb(238,218,188) et rgb(234,210,175) (arrêts 0 / .3 / .6 / .85 / 1 de la hauteur défilable). Tout élément qui doit se fondre dans le fond lit `var(--canvas)` (nav, anneau des étiquettes), jamais `--sand` en dur.", "section": "colors" },
+      { "name": "The Two Accents Rule", "body": "Chestnut est l'accent du jour, honey l'accent de nuit ; ils ne se croisent pas. Sur limestone honey n'existe qu'en mélange sous 25 % ; sur night chestnut n'apparaît pas.", "section": "colors" },
+      { "name": "The Ink Veil Rule", "body": "Filets, ombres, voiles et sélections sont des alphas de l'encre (36,29,23) ou de night-ink (242,231,214), jamais un gris neutre.", "section": "colors" },
+      { "name": "The Light Fraunces Rule", "body": "Fraunces ne dépasse jamais 400 et se règle toujours en `opsz 144, SOFT 30` ; l'emphase vient de l'italique et de la couleur, jamais de la graisse.", "section": "typography" },
+      { "name": "The Size-Not-Color Rule", "body": "Une progression de lecture monte en taille (douleurs : 2.2 → 3.2 → 4.4 rem max), jamais en couleur ; la couleur n'arrive qu'à la chute, en italique chestnut.", "section": "typography" },
+      { "name": "The No-Kicker Rule", "body": "Aucun eyebrow, kicker ou étiquette en capitales au-dessus d'un titre ; le qualificatif vit après le titre (small inline) ou sous lui.", "section": "typography" },
+      { "name": "The Warm Shadow Rule", "body": "Toute ombre est de l'encre chaude (36,29,23) ou du honey (216,155,78), en deux couches dont la seconde a un spread négatif ; jamais de noir pur ni d'ombre dure décalée.", "section": "elevation" },
+      { "name": "The Rest-Is-Flat Rule", "body": "Seuls les objets posés sur le mur ont une ombre au repos ; les boutons n'en gagnent une qu'au survol.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do poser toute image dans une plaque 9:16 ou 4:5 à coins 18 px, ombre Plate, avec une étiquette lieu + format ; un compteur de vues uniquement s'il a été lu sur une capture réelle.",
+      "Do lire `var(--canvas)` pour tout voile qui doit se fondre dans le fond doré ; ne jamais figer `#F4F0E8` sur un élément qui traverse la page.",
+      "Do régler Fraunces en 320–400, `opsz 144, SOFT 30`, −0.02 em, avec l'italique chestnut (honey la nuit) pour l'accent.",
+      "Do n'offrir qu'un CTA primaire par bloc : pilule espresso/cream sur limestone, honey/night sur plaque de nuit, secondaire en lien souligné.",
+      "Do dériver filets, ombres et voiles des alphas de (36,29,23) le jour et (242,231,214) la nuit.",
+      "Do piloter la motion par le scroll avec `cubic-bezier(.16,1,.3,1)` et livrer l'état final immédiatement sous `prefers-reduced-motion`."
+    ],
+    "donts": [
+      "Don't placer un kicker, un eyebrow ou une étiquette en capitales au-dessus d'un titre.",
+      "Don't utiliser Fraunces au-delà de 400, ni Manrope pour un titre.",
+      "Don't faire monter une progression en couleur ; la taille monte, la couleur n'arrive qu'à la chute.",
+      "Don't employer honey en aplat sur limestone ni chestnut sur night.",
+      "Don't poser d'ombre noire, dure ou décalée latéralement ; d'ombre au repos sur un bouton.",
+      "Don't inventer un compteur, un témoignage, un logo ou une carte-icône ; le mur est fait de pièces publiées."
+    ]
+  }
+}
