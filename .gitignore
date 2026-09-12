@@ -45,3 +45,6 @@ previews/_build/v2/
 previews/_build/figma/*.png
 previews/_build/figma/*.jpg
 previews/_build/figma/look/
+
+# Réglages locaux Claude Code (hooks impeccable, chemins machine)
+.claude/settings.local.json
