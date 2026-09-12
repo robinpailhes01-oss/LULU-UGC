@@ -1,0 +1,41 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "fraunces",
+        "createdAt": "2026-09-12T07:55:02.003Z",
+        "reason": "user confirmed: Fraunces est la typo de marque pinnée (design-direction), reconfirmée le 2026-09-12"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "previews/_build/impeccable/template.html"
+        ],
+        "createdAt": "2026-09-12T07:55:02.047Z",
+        "reason": "faux positif : les sections .dark contiennent .wrap avec padding-inline var(--gutter) et padding-block clamp"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "previews/_build/impeccable/template.html"
+        ],
+        "createdAt": "2026-09-12T07:55:07.682Z",
+        "reason": "user confirmed: DA pinnée par le client (limestone), reconfirmée le 2026-09-12"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "previews/_build/impeccable/template.html"
+        ],
+        "createdAt": "2026-09-12T07:55:07.692Z",
+        "reason": "titres display Fraunces et lignes de douleur en grande taille : interlignage serré volontaire sur du display, le corps reste à 1.6"
+      }
+    ]
+  }
+}

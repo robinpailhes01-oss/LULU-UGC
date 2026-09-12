@@ -48,3 +48,9 @@ previews/_build/figma/look/
 
 # Réglages locaux Claude Code (hooks impeccable, chemins machine)
 .claude/settings.local.json
+
+# Captures de revue impeccable (régénérées)
+.impeccable/review/
+previews/_build/impeccable/.probe.mjs
+previews/_build/impeccable/*.jpg
+previews/_build/impeccable/fonts.css
