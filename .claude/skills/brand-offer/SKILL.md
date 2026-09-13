@@ -2,111 +2,77 @@
 name: brand-offer
 description: >
   Source de vérité de la marque. À consulter AVANT toute production de contenu,
-  copy, design ou message de prospection : positionnement, cibles, promesse,
-  détail des offres, grille tarifaire, nom et ton de marque. Tout autre skill
-  (design-direction, copywriting, sales-outreach) s'appuie sur ce fichier. En cas de
+  copy, design ou message de prospection : positionnement, cible, promesse,
+  détail de l'offre, prix, nom et ton de marque. Tout autre skill
+  (design-direction, copywriting) s'appuie sur ce fichier. En cas de
   contradiction, ce fichier fait foi.
 ---
 
-# Socle de marque — June Content Studio (V1 saison 26/27)
+# Socle de marque — June Content Studio (V2 « Content Experience », septembre 2026)
 
-Mis à jour d'après le brief « June Content Studio — V1 site saison 26/27 ».
-En cas de doute, le brief et la bio Instagram font foi.
+Sources : brief copywriter (sept. 2026), Offre v2 « Content Experience », Avatar Master.
+Le document « Positionnement & Offre — Ludivine » prime sur ce fichier s'il diffère.
 
 ## Ce qu'on vend
-Un **studio de contenu & UGC** pour les **lieux, expériences & marques**.
-June imagine la communication puis crée les contenus : **UGC, Réels, Photos**.
-June **ne gère pas les réseaux sociaux** des clients (pas de community management).
+**Une seule offre visible : Content Experience — 490 € TTC, tout compris.** Jamais « à partir de ».
+Signature : « Faire ressentir l'expérience avant même de l'avoir vécue. »
+Reels, UGC, photo lifestyle, stories, rushs, direction créative sont des outils, pas des produits.
 
-## Positionnement (à comprendre en moins de 30 secondes)
-- June imagine & crée une com qui donne envie de vous découvrir.
-- Cibles : lieux, expériences & marques (hôtels, restaurants, chalets, activités,
-  wellness, commerces, expériences ; marques pour de l'UGC, lifestyle ou winter).
-- Formats principaux : UGC • Réels • Photos.
-- Pas de community management. Pas d'agence, pas d'équipe : Ludivine travaille
-  seule, June est le nom du studio.
-- Ancrage : **Alpe d'Huez, saison 26/27**, tout en travaillant avec des marques
-  partout en France (projets UGC possibles à distance avec envoi de produits).
+## À qui
+Le **propriétaire fier et débordé** d'un hébergement de charme (villa, maison d'hôtes, gîte
+premium, chalet), 35-60 ans, souvent en couple, qui fait déjà tout lui-même. Ses photos sont
+les siennes, « faites entre deux départs ». Ce qu'on voit en ligne ne ressemble pas à ce qu'on
+vit chez lui. Il ne veut pas de CM, pas poster pour poster, pas se montrer. On lui parle en « vous ».
+Restaurants, spas, activités : par recommandation, pas par prospection.
+Saisonnalité (⚠️ à valider) : Occitanie jusqu'en novembre, Alpe d'Huez l'hiver. La page ne nomme
+aucune région pour l'instant.
 
-### Bio Instagram de référence
-> Ludivine | Studio de contenu & UGC • Alpe d'Huez
-> On imagine & crée une com qui donne envie de vous découvrir ✨
-> Pour les lieux, expériences & marques
-> UGC • RÉELS • PHOTOS
-> 📍 Alpe d'Huez, Saison 26/27 🏔️
+## Promesse
+Générale : « Je fais ressentir votre expérience à ceux qui ne l'ont pas encore vécue. »
+Spécifique : une immersion chez vous, et sous 14 jours une banque de contenus fidèles (reels,
+photos, stories) plus votre annonce dans le bon ordre, prêts à publier, à vous, sans engagement.
+Pitch : « Vous faites vivre l'expérience. Moi, je la raconte pour ceux qui ne l'ont pas encore
+vécue — et vous, vous avez juste à poster. »
+On ne promet jamais un nombre de réservations. On mesure les vues et clics de l'annonce
+avant / après (lecture à 30 et 90 jours).
 
-## Les formats
-- **Réels — faire ressentir** : vidéos immersives et esthétiques qui racontent
-  l'univers (ambiance, détails, lieu, produit, expérience).
-- **UGC — faire vivre** : contenu incarné construit autour d'un angle et d'un
-  message (expérience, recommandation, démonstration, storytelling, face caméra
-  ou voix off).
-- **Photos — construire votre image** : images naturelles et travaillées pour
-  les réseaux, le site et les supports.
+## Le mécanisme — l'immersion (sans nuit exigée)
+01 Comprendre (brief : univers, clientèle, avis, ressenti attendu ; annonce comparée aux voisins ;
+trois moments choisis ; règle « on ne triche pas ») · 02 Vivre (sur place aux moments du séjour :
+arrivée, fin de journée à la lumière, matin ; une journée ou deux demi-journées ; le propriétaire
+n'a jamais à poser, Ludivine peut incarner) · 03 Créer (reels, UGC, vidéo immersive, stories,
+photos lifestyle ; vrai, en mieux) · 04 Exploiter (Content Board : banque organisée, ordre de
+publication, usages).
 
-## Les offres (tarifs HT)
+## Livrables inclus (490 € TTC)
+Brief · immersion · création et montage des contenus convenus · set annonce : 20 photos dans
+l'ordre, couverture désignée, dossiers par canal (Airbnb / Booking / Google / Instagram / site) ·
+Content Board : quoi poster, dans quel ordre, sur 30 jours, avec 10 légendes · licence tous
+canaux sans limite (Ads en option) · lecture des stats à 30 et 90 jours. Livraison sous 14 jours.
+Aucun nombre de reels ou de photos au-delà du set annonce : l'offre ne le fixe pas, ne pas inventer.
 
-### 01 — Content Shoot — à partir de 490 € HT
-Pour refaire le plein de contenu sans déléguer ses réseaux. Échange avant le
-shooting (actualité, besoins, mise en avant), puis session imaginée par June.
-- 25 à 35 photos retouchées
-- 3 à 4 Réels montés
-- Envoi des rushs
-- Concepts & préparation du shooting
-- Galerie organisée prête à utiliser
-CTA : « Imaginer mon shooting → »
+## Options (sur devis)
+UGC dédié avec script · contenus supplémentaires · Content Direction · droits Ads ·
+nouvelle immersion / rythme saisonnier · déplacement hors zone.
 
-### 02 — UGC
-Vidéos incarnées pensées de l'idée au montage : Concept • Hook • Script •
-Tournage • Montage.
-- 1 UGC : 220 € HT
-- 3 UGC : 590 € HT
-- 5 UGC : 950 € HT
-Utilisation organique incluse. **Droits publicitaires en supplément** (jamais
-inclus dans le tarif de base).
-CTA : « Créer mon contenu UGC → »
-
-### 03 — June Partner — 890 € HT / mois
-Partenaire contenu, sans gestion des réseaux. Chaque mois :
-- 1 point communication mensuel
-- 1 plan de contenu adapté au mois
-- 1 session de création jusqu'à 3h
-- 25 à 30 photos retouchées
-- 3 à 4 Réels montés
-- 1 vidéo UGC
-- Envoi des rushs
-- Hooks & idées d'utilisation
-- Support pour les besoins communication
-Accompagnement flexible selon les besoins. CTA : « Devenir June Partner → »
-
-### Suppléments (tarifs conseillés HT, pour devis)
-Réel supplémentaire +120 € · UGC supplémentaire +220 € · 10 photos +90 € ·
-Shooting supplémentaire 1h30 +250 € · Couverture événement à partir de 290 € ·
-Hook UGC +40 € · CTA UGC +30 € · Version alternative de montage UGC +60 € ·
-Rushs bruts UGC +30 % du prix de la vidéo · Format 16:9 / 1:1 +30 € ·
-Livraison express 48h +25 % · Droits Ads 30 jours +30 %, 3 mois +60 %,
-6 mois +100 %, 12 mois +150 % · Exclusivité secteur / whitelisting sur devis ·
-Déplacement hors Alpe d'Huez sur devis.
-
-## Comment ça se passe (vraie séquence, numérotation OK)
-01 On échange · 02 J'imagine · 03 On crée · 04 Vous utilisez.
-
-## Preuve / réalisations
-Conserver les réalisations et visuels actuels qui restent cohérents (hôtel & spa,
-Gîte de l'Abric, Una Mas, Harmonie Yacht, Beltra, Next Yacht). Ne jamais
-inventer de logos clients ni de chiffres.
+## Preuve
+Réalisations réelles (gîte, hôtel & spa, UGC hôtel, yachts, bar) et compteurs de vues lus sur
+les captures Instagram (Gîte de l'Abric 4 403, Una Mas 3 865, Harmonie Yacht 20,3 K), à confirmer.
+Témoignages : section prévue, vide. Aucun avis, logo ou chiffre inventé. Aucune statistique
+Airbnb sur la page.
 
 ## Identité
-- **Nom :** June (June Content Studio). Site : junecontentstudio.fr.
-- **Créatrice :** Ludivine. La page parle d'elle à la première personne.
-- **Ton :** professionnel mais accessible. Pas d'image d'agence corporate, pas
-  de jargon marketing inutile. Voir `copywriting`.
-- **Direction visuelle :** conserver la DA actuelle (voir `design-direction`).
+Nom : June (June Content Studio). Créatrice : Ludivine, « Creative Content Partner ·
+Hospitality · Tourisme · Expériences ». Elle parle à la première personne. Un seul bouton
+partout : « Réserver un appel » (Calendly, à fournir ; en attendant, email pré-rempli).
+Direction visuelle : conserver la DA (voir `design-direction` et DESIGN.md).
 
 ## Garde-fous
-- Ne pas présenter June comme une agence ou une équipe.
-- Ne jamais promettre la gestion des réseaux sociaux.
-- Droits publicitaires jamais inclus dans le tarif UGC de base : organique seul.
-- Plus de mention « tourisme en Occitanie » ni de l'ancienne offre unique
-  « Content & UGC — 390 € ».
-- Pas de promesse de résultats chiffrés, pas de faux avis ni faux compteurs.
+- Mots interdits : abonnement, community management, stratégie de contenu, influenceur,
+  personal branding, pack Instagram, retainer, « à partir de », boostez, réservations garanties,
+  « contenu premium », « stratégie », « visibilité 360 ».
+- Ne jamais désigner Airbnb / Booking comme ennemis. Ne jamais moquer ses photos. Ne jamais
+  culpabiliser l'inaction. Ennemis : la photo catalogue, le prestataire qui vient trois heures,
+  la photo trop belle qui déçoit.
+- Ne jamais promettre un nombre de réservations, un chiffre d'affaires, un taux de conversion.
+- Pas d'agence, pas d'équipe. Pas de gestion des réseaux.

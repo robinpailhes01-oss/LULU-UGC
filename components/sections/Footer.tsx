@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 export default function Footer() {
   return (
@@ -9,20 +10,22 @@ export default function Footer() {
             June<span className="text-chestnut">.</span>
           </p>
           <p className="mt-2 text-sm text-muted">
-            Studio de contenu &amp; UGC. Alpe d'Huez • France. Saison 26/27.
+            Creative Content Partner · Hospitality · Tourisme · Expériences
           </p>
         </div>
 
         <div className="flex items-center gap-6">
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-espresso"
-          >
-            <Instagram className="h-4 w-4" aria-hidden="true" />
-            Instagram
-          </a>
+          {INSTAGRAM_URL && (
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-espresso"
+            >
+              <Instagram className="h-4 w-4" aria-hidden="true" />
+              Instagram
+            </a>
+          )}
           <p className="text-sm text-muted">
             © {new Date().getFullYear()} June
           </p>

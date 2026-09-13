@@ -55,3 +55,4 @@ previews/_build/impeccable/.probe.mjs
 previews/_build/impeccable/*.jpg
 previews/_build/impeccable/fonts.css
 previews/_build/impeccable/artifact.html
+previews/_build/impeccable/.shoot-site.mjs
