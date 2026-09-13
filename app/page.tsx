@@ -138,9 +138,9 @@ export default function Home() {
               Faire ressentir l&apos;expérience <em>avant même de l&apos;avoir vécue.</em>
             </h1>
             <p className="lede">
-              Je viens vivre chez vous ce que vos clients vivent. Quinze jours plus tard, vous avez de quoi le montrer : des reels, des photos, des stories, et votre annonce dans le bon ordre. Vous avez juste à poster.
+              Je viens vivre chez vous ce que vos clients vivent. Quinze jours plus tard, vous avez de quoi le montrer. Vous avez juste à poster.
             </p>
-            <p className="wall__who">Pour les villas, maisons d&apos;hôtes, gîtes et chalets dont le propriétaire fait déjà tout lui-même.</p>
+            <p className="wall__who">Villas, maisons d&apos;hôtes, gîtes, chalets.</p>
             <div className="wall__actions">
               <a className="btn" href={APPEL_URL} {...appel}>
                 {CTA} →
@@ -164,11 +164,11 @@ export default function Home() {
             <div className="mirror__inner">
               <p className="mirror__title">Vous vous reconnaissez ?</p>
               <p className="mirror__l">Vos photos ne rendent pas justice au lieu.</p>
-              <p className="mirror__l">Vous les avez faites vous-même, entre deux départs. Vous savez qu&apos;elles ne sont pas terribles. Vous avez fait de votre mieux.</p>
+              <p className="mirror__l">Vous les avez faites vous-même, entre deux départs.</p>
               <p className="mirror__l">Beaucoup de vues. Pas assez de réservations.</p>
-              <p className="mirror__l">Vous avez baissé le prix, faute de savoir quoi faire d&apos;autre.</p>
-              <p className="mirror__l">Debout à 6 h, couché à minuit, tout de A à Z. Pas une minute pour refaire des photos correctes.</p>
-              <p className="mirror__l">Et aucune envie de vous mettre en scène. Vous voulez juste que votre lieu soit vu comme il est.</p>
+              <p className="mirror__l">Vous avez baissé le prix, faute de mieux.</p>
+              <p className="mirror__l">Debout à 6 h, couché à minuit. Pas une minute pour refaire des photos.</p>
+              <p className="mirror__l">Et aucune envie de vous mettre en scène.</p>
             </div>
             <div className="mirror__bar" aria-hidden="true">
               <i />
@@ -185,7 +185,7 @@ export default function Home() {
               Vous n&apos;avez peut-être pas besoin de poster plus. Vous avez surtout besoin de mieux montrer.
             </p>
             <p className="lede muted rv" style={{ "--rd": "240ms", marginTop: "1rem" } as React.CSSProperties}>
-              Ce n&apos;est pas que vous photographiez mal. C&apos;est que personne ne vous a dit ce qui fait cliquer, et ce qui fait ressentir.
+              Ce n&apos;est pas que vous photographiez mal. Personne ne vous a dit ce qui fait cliquer.
             </p>
           </div>
         </section>
@@ -198,29 +198,29 @@ export default function Home() {
                 Je ne viens pas seulement filmer votre lieu. <em>Je viens comprendre ce que l&apos;on ressent lorsqu&apos;on y est.</em>
               </h2>
               <p className="how__intro muted rv" style={{ "--rd": "120ms" } as React.CSSProperties}>
-                Un photographe vient trois heures et repart avec un catalogue. Une agence n&apos;a jamais mis les pieds chez vous. Moi, je vis ce que votre client vivra. C&apos;est ça, l&apos;immersion.
+                Un photographe vient trois heures et repart avec un catalogue. Moi, je vis ce que votre client vivra.
               </p>
             </div>
             <ol className="steps" id="steps">
               <li className="step">
                 <span className="step__n">01</span>
                 <h3 className="d h3">Comprendre</h3>
-                <p>Avant de venir, on regarde ensemble ce que vos clients disent le plus dans leurs avis, et votre annonce à côté de celles de vos voisins. On choisit trois moments à raconter, pas tout. Et on se met d&apos;accord sur une règle : on ne triche pas.</p>
+                <p>Vos avis, votre annonce à côté de celles des voisins. Trois moments à raconter. Une règle : on ne triche pas.</p>
               </li>
               <li className="step">
                 <span className="step__n">02</span>
                 <h3 className="d h3">Vivre</h3>
-                <p>Je suis chez vous aux moments qui font le séjour : l&apos;arrivée, la fin de journée quand la lumière fait que votre terrasse ressemble à votre terrasse, le matin. Une journée, ou deux demi-journées. Vous n&apos;avez pas à poser : s&apos;il faut quelqu&apos;un dans l&apos;image, c&apos;est moi.</p>
+                <p>Je suis chez vous à l&apos;arrivée, à la lumière du soir, au matin. Une journée. Vous n&apos;avez pas à poser.</p>
               </li>
               <li className="step">
                 <span className="step__n">03</span>
                 <h3 className="d h3">Créer</h3>
-                <p>Reels, photos, stories, vidéo immersive. Vrai, en mieux : perspectives réalistes, couleurs naturelles, rien de masqué. Les photos trop belles préparent un mauvais avis à l&apos;arrivée. Les photos fidèles rassurent les bons clients.</p>
+                <p>Reels, photos, stories. Vrai, en mieux : rien de masqué, rien de trop beau.</p>
               </li>
               <li className="step">
                 <span className="step__n">04</span>
                 <h3 className="d h3">Exploiter</h3>
-                <p>Vous ne recevez pas un dossier de quatre-vingts fichiers qui dort. Vous recevez votre annonce dans le bon ordre, et une banque de contenus organisée : quoi poster, dans quel ordre, avec les légendes. Vous avez juste à poster.</p>
+                <p>Votre annonce dans le bon ordre. Vos contenus rangés, avec les légendes. Vous avez juste à poster.</p>
               </li>
             </ol>
             <p className="how__sig rv">
@@ -250,23 +250,22 @@ export default function Home() {
                   <span className="set__n">{n === "Couverture" ? <b>Couverture</b> : <b>{n}</b>}</span>
                 </figure>
               ))}
-              <p className="set__cap">Votre annonce dans le bon ordre : vingt photos classées, photo de couverture désignée. Ici, les cinq premières d&apos;un hôtel &amp; spa.</p>
+              <p className="set__cap">Votre annonce dans le bon ordre. Ici, les cinq premières photos d&apos;un hôtel &amp; spa.</p>
             </div>
             <div className="get__grid">
               <ul className="get__list rv">
-                <li><span><b>Votre annonce dans le bon ordre.</b><p>Vingt photos classées, photo de couverture désignée, déjà aux bons formats.</p></span></li>
-                <li><span><b>Des reels.</b><p>La visite que vos futurs clients aimeraient faire avant de payer. Vous n&apos;y apparaissez pas.</p></span></li>
-                <li><span><b>Des photos qui ressemblent vraiment à votre lieu.</b><p>Rangées par canal : Airbnb, Booking, Google, Instagram, votre site.</p></span></li>
+                <li><span><b>Votre annonce dans le bon ordre.</b><p>Vingt photos classées, couverture désignée.</p></span></li>
+                <li><span><b>Des reels.</b><p>La visite avant de payer. Sans vous à l&apos;image.</p></span></li>
+                <li><span><b>Des photos fidèles à votre lieu.</b><p>Rangées par canal : Airbnb, Booking, Google, Instagram, votre site.</p></span></li>
                 <li><span><b>Des stories</b><p>prêtes à poster.</p></span></li>
-                <li><span><b>Le Content Board.</b><p>Quoi poster, dans quel ordre, sur 30 jours, avec dix légendes écrites dans le ton du lieu.</p></span></li>
-                <li><span><b>Vos droits.</b><p>Tous canaux, sans limite de durée. Ce sont vos images, pas celles d&apos;une plateforme.</p></span></li>
-                <li><span><b>La lecture à 30 et 90 jours.</b><p>On regarde ensemble ce qui a bougé sur les vues et les clics de votre annonce. Vous saurez.</p></span></li>
+                <li><span><b>Le Content Board.</b><p>Quoi poster, dans quel ordre, avec les légendes.</p></span></li>
+                <li><span><b>Vos droits.</b><p>Tous canaux, sans limite. Ce sont vos images.</p></span></li>
+                <li><span><b>La lecture à 30 et 90 jours.</b><p>Vues et clics de votre annonce. Vous saurez.</p></span></li>
               </ul>
               <aside className="get__side rv" style={{ "--rd": "140ms" } as React.CSSProperties}>
                 <p className="d h3">
                   Rien à monter, rien à écrire. <em>Vous avez juste à poster.</em>
                 </p>
-                <p className="muted">Livré sous 14 jours, rangé par canal, avec l&apos;ordre de publication.</p>
                 <a className="btn" href={APPEL_URL} {...appel}>
                   {CTA} →
                 </a>
@@ -284,22 +283,22 @@ export default function Home() {
                 490<span className="eur">€</span> <span className="ttc">TTC</span>
               </p>
               <p className="price__all">Tout compris.</p>
-              <p className="price__nights">Si votre nuit est à 150 €, c&apos;est le prix de trois nuits. Pour une saison de contenus.</p>
+              <p className="price__nights">Le prix de trois nuits à 150 €. Pour une saison de contenus.</p>
               <a className="btn btn--honey" href={APPEL_URL} {...appel}>
                 {CTA} →
               </a>
             </div>
             <div className="price__copy rv" style={{ "--rd": "160ms" } as React.CSSProperties}>
               <p>
-                <b>Le brief, l&apos;immersion, la création, votre annonce dans le bon ordre, le Content Board, vos droits, la lecture à 30 et 90 jours.</b> Sans engagement, rien à payer chaque mois.
+                <b>Brief, immersion, création, annonce dans le bon ordre, Content Board, droits, lecture à 30 et 90 jours.</b> Rien à payer chaque mois.
               </p>
               <div className="price__no">
                 <h3>Ce que je ne promets pas</h3>
-                <p>Un nombre de réservations. Personne ne peut le promettre honnêtement. Ce que je promets : des images fidèles à ce qu&apos;on vit chez vous, prêtes à publier, à vous.</p>
+                <p>Un nombre de réservations. Ce que je promets : des images fidèles, prêtes à publier, à vous.</p>
               </div>
               <p className="price__opts">
                 <b>Options, sur devis</b>
-                UGC dédié avec script · contenus supplémentaires · Content Direction (plus de légendes, plus loin) · droits publicitaires · nouvelle immersion, au rythme des saisons · déplacement hors zone.
+                UGC avec script · contenus supplémentaires · Content Direction · droits publicitaires · nouvelle immersion · déplacement hors zone.
               </p>
             </div>
           </div>
@@ -335,7 +334,7 @@ export default function Home() {
                 <h2 className="d h2">
                   On en <em>parle ?</em>
                 </h2>
-                <p>Un appel pour regarder votre annonce, vos avis, et voir si l&apos;immersion a du sens chez vous. Sans engagement.</p>
+                <p>On regarde votre annonce ensemble. Sans engagement.</p>
               </div>
               <div className="fin__act rv" style={{ "--rd": "140ms" } as React.CSSProperties}>
                 <a className="btn btn--honey" href={APPEL_URL} {...appel}>
