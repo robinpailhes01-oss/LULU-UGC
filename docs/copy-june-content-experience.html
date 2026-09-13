@@ -1,0 +1,150 @@
+<title>Copy June Content Experience</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..500;1,9..144,300..500&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F4F0E8; --surface:#FBF7F0; --ink:#241D17; --muted:#6B5E50; --accent:#8B5E34; --honey:#C98A3C;
+  --line:rgba(36,29,23,.14); --note-bg:#F7E8D2; --note-ink:#6E4A1E; --code:#EFE6D6;
+  --display:"Fraunces",Georgia,serif; --text:"Manrope",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17110D; --surface:#211913; --ink:#F2E7D6; --muted:#BFAE98; --accent:#D89B4E; --honey:#D89B4E;
+  --line:rgba(242,231,214,.16); --note-bg:#2C2115; --note-ink:#E7C48F; --code:#2A2018;
+}}
+:root[data-theme="dark"]{
+  --bg:#17110D; --surface:#211913; --ink:#F2E7D6; --muted:#BFAE98; --accent:#D89B4E; --honey:#D89B4E;
+  --line:rgba(242,231,214,.16); --note-bg:#2C2115; --note-ink:#E7C48F; --code:#2A2018;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:1.02rem;line-height:1.6;padding-inline:clamp(16px,4vw,40px);padding-block:2.5rem 5rem}
+.doc{max-width:46rem;margin-inline:auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 144;letter-spacing:-.015em;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,1.4rem+2.2vw,3rem)}
+h2{font-size:1.65rem;margin-top:3.2rem;padding-top:1.4rem;border-top:1px solid var(--line)}
+h3{font-size:1.15rem;font-family:var(--text);font-weight:600;margin-top:1.6rem;color:var(--muted)}
+p{margin:.7rem 0}
+.meta{color:var(--muted);font-size:.92rem;margin-top:.6rem}
+.legend{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin-top:1.6rem;font-size:.95rem}
+.copy{font-family:var(--display);font-weight:400;font-variation-settings:"opsz" 60;font-size:1.32rem;line-height:1.3;letter-spacing:-.01em;margin:.5rem 0}
+.copy.big{font-size:clamp(1.6rem,1.2rem+1.4vw,2.2rem);line-height:1.12;font-variation-settings:"opsz" 144;color:var(--ink)}
+.copy em{font-style:italic;color:var(--accent)}
+.btn{display:inline-block;padding:.5rem 1rem;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;font-size:.9rem;margin:.4rem 0}
+ul,ol{padding-left:1.2rem;margin:.6rem 0}
+li{margin:.35rem 0}
+ol.steps{list-style:none;padding:0;display:grid;gap:.9rem;margin-top:1rem}
+ol.steps li{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:baseline;padding:.9rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+ol.steps b{font-family:var(--display);font-weight:400;font-size:1.3rem;color:var(--accent)}
+.src{display:block;background:var(--note-bg);color:var(--note-ink);border-radius:10px;padding:.7rem .9rem;font-size:.88rem;margin:.8rem 0}
+.src::before{content:"Source à reprendre · ";font-weight:700}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.4rem 1rem;font-size:.95rem;margin-top:.8rem}
+.kv dt{color:var(--muted);font-weight:600}
+.kv dd{margin:0}
+.check li::marker{color:var(--accent)}
+.warn{background:var(--note-bg);color:var(--note-ink);border-radius:10px;padding:.8rem 1rem}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.88em;background:var(--code);padding:.1em .35em;border-radius:5px}
+@media (max-width:480px){ol.steps li{grid-template-columns:1fr}}
+</style>
+<main class="doc">
+<h1>Copy de la page June · Content Experience</h1>
+<p class="meta">Version unique · septembre 2026 · d'après le brief copywriter. Une page, dans l'ordre du brief. Voix de Ludivine, vouvoiement, phrases courtes.</p>
+<div class="legend">Les encarts <strong>« Source à reprendre »</strong> signalent un fait à prendre dans un des trois documents cités par le brief (Offre v2 — Content Experience, Avatar Master, Positionnement &amp; Offre — Ludivine). Ces documents n'étaient pas joints : rien n'a été inventé à leur place. Les cinq formulations de Ludivine sont reprises telles quelles.</div>
+
+<h2>0. Navigation</h2>
+<dl class="kv"><dt>Marque</dt><dd>June</dd><dt>Bouton unique</dt><dd><span class="btn">Réserver un appel</span></dd></dl>
+
+<h2>1. Hero</h2>
+<h3>Titre</h3>
+<p class="copy big">Faire ressentir l'expérience avant même de l'avoir vécue.</p>
+<h3>Sous-titre</h3>
+<p class="copy">Je viens vivre votre lieu comme vos hôtes, et j'en repars avec des contenus prêts à publier. Pour les villas, maisons d'hôtes, gîtes et chalets qui ont plus à montrer que ce qu'on voit en ligne.</p>
+<h3>Bouton</h3>
+<p><span class="btn">Réserver un appel</span><br><span class="meta">Sous le bouton : Sans engagement.</span></p>
+
+<h2>2. Le problème, dans ses mots</h2>
+<h3>Titre</h3>
+<p class="copy big">Votre établissement peut être incroyable dans la vraie vie. <em>Mais est-ce que ça se voit vraiment ?</em></p>
+<h3>Lignes, une par une, sans explication</h3>
+<p class="copy">Vous faites l'accueil, le ménage, les réponses, les départs. Et les photos, entre deux.</p>
+<p class="copy">Ce que vos hôtes vivent chez vous ne ressemble pas à ce qu'on voit en ligne.</p>
+<p class="copy">Vous n'avez pas envie de poster pour poster. Encore moins de vous mettre en scène.</p>
+<p class="copy">Vous savez ce que vaut votre lieu. Vous ne savez pas comment le montrer.</p>
+<h3>Chute</h3>
+<p class="copy">Vous n'avez peut-être pas besoin de poster plus. <em>Vous avez surtout besoin de mieux montrer.</em></p>
+<span class="src">Avatar Master §VI (lexique) et Positionnement §2 (les 7 phrases) : remplacer ou compléter ces lignes par les mots exacts du client. Les lignes 🔎 servent au vocabulaire, jamais comme témoignage.</span>
+
+<h2>3. Le mécanisme : l'immersion</h2>
+<h3>Titre</h3>
+<p class="copy big">Je ne viens pas seulement filmer votre lieu. <em>Je viens comprendre ce que l'on ressent lorsqu'on y est.</em></p>
+<h3>Intro</h3>
+<p class="copy">Une immersion chez vous, aux moments qui comptent dans un séjour : l'arrivée, le soir, le matin. Pas trois heures avec un trépied. Et vous n'avez jamais à poser.</p>
+<h3>Les quatre temps</h3>
+<ol class="steps">
+<li><b>Comprendre</b><span>On échange avant. Ce que vos hôtes viennent chercher, ce qu'ils disent en partant, ce que vous aimeriez qu'on voie enfin.</span></li>
+<li><b>Vivre</b><span>Je séjourne chez vous comme un hôte. Je vis l'expérience, je regarde, je capte ce qui se passe vraiment.</span></li>
+<li><b>Créer</b><span>Je monte, je retouche, j'écris. Vrai, en mieux : on ne triche pas sur les images, on choisit les bons moments.</span></li>
+<li><b>Exploiter</b><span>Vous recevez tout, prêt à publier, avec l'ordre dans lequel le poster. Vous avez juste à poster.</span></li>
+</ol>
+<h3>Signature</h3>
+<p class="copy">Vous faites vivre l'expérience. <em>Moi, je la raconte pour ceux qui ne l'ont pas encore vécue.</em></p>
+<span class="src">Offre v2 : durée réelle de l'immersion (une nuit, deux ?) et moments couverts, à caler sur l'offre.</span>
+
+<h2>4. Ce que vous recevez</h2>
+<h3>Titre</h3>
+<p class="copy big">Tout ce qu'il faut pour montrer votre lieu tel qu'il se vit.</p>
+<ul>
+<li>Des reels qui font ressentir le séjour <code>nombre exact : Offre v2</code></li>
+<li>Des photos pour votre annonce, votre site et vos réseaux <code>nombre exact</code></li>
+<li>Des stories prêtes à poster <code>nombre / format</code></li>
+<li>Votre annonce remise dans le bon ordre <code>préciser : ordre des photos ? texte ?</code></li>
+<li>Le Content Board : quoi poster, quand, avec quel texte <code>définition exacte</code></li>
+<li>Vos droits d'utilisation <code>étendue incluse</code></li>
+</ul>
+<p class="copy">Livré sous 14 jours.</p>
+<p class="copy"><em>Vous avez juste à poster.</em></p>
+
+<h2>5. Le prix</h2>
+<p class="copy big">Content Experience — 490 € TTC. Tout compris.</p>
+<p class="copy">Une immersion, tous les contenus, vos droits. Sans engagement.</p>
+<h3>Options</h3>
+<span class="src">Offre v2 : liste des options, une ligne par option, prix TTC. Présentation sobre, sans mise en avant. Jamais « à partir de ».</span>
+<p><span class="btn">Réserver un appel</span></p>
+
+<h2>6. Ludivine</h2>
+<p class="copy big">Ludivine</p>
+<p class="meta">Creative Content Partner · Hospitality · Tourisme · Expériences</p>
+<p class="copy">Je ne viens pas seulement filmer votre lieu. Je viens comprendre ce que l'on ressent lorsqu'on y est.</p>
+<p class="copy">Je travaille seule, sur place, avec vous.</p>
+<p class="copy">Vous faites vivre l'expérience. Moi, je la raconte pour ceux qui ne l'ont pas encore vécue.</p>
+<span class="src">Positionnement §8 : les trois phrases à la première personne de Ludivine remplacent ces trois lignes si elles diffèrent.</span>
+
+<h2>7. Contact</h2>
+<p class="copy big">On en parle ?</p>
+<p class="copy">Un appel pour comprendre votre lieu et voir si l'immersion a du sens chez vous. Sans engagement.</p>
+<p><span class="btn">Réserver un appel</span> <span class="meta">→ lien Calendly à fournir</span></p>
+
+<h2>8. Témoignages</h2>
+<p class="warn">Section prévue, <strong>vide pour l'instant</strong>. Aucun texte, aucun logo, aucun « ils nous font confiance » tant qu'il n'y a pas de témoignage réel. Ne pas afficher de titre vide.</p>
+
+<h2>Pied de page</h2>
+<p>June · Creative Content Partner · Hospitality · Tourisme · Expériences<br><span class="meta">email de contact · Instagram (lien à confirmer) · Mentions légales</span></p>
+
+<h2>Métadonnées</h2>
+<dl class="kv"><dt>Onglet</dt><dd>June · Faire ressentir l'expérience avant même de l'avoir vécue</dd><dt>Description</dt><dd>Content Experience : une immersion chez vous, des reels, photos et stories fidèles à ce que vivent vos hôtes, prêts à publier sous 14 jours. Pour les villas, maisons d'hôtes, gîtes et chalets. 490 € TTC, tout compris.</dd></dl>
+
+<h2>Contrôle du brief</h2>
+<ul class="check">
+<li>Mots interdits : aucun utilisé (abonnement, community management, stratégie de contenu, influenceur, personal branding, pack Instagram, retainer, « à partir de », boostez, réservations garanties).</li>
+<li>Promesses : contenus fidèles à l'expérience, prêts à publier, à eux, sans engagement. Aucun chiffre de réservation, de chiffre d'affaires ou de conversion.</li>
+<li>Les cinq formulations de Ludivine sont reprises telles quelles (hero, problème, mécanisme, signature).</li>
+<li>Un seul bouton, un seul libellé : Réserver un appel.</li>
+</ul>
+
+<h2>À trancher avant mise en ligne</h2>
+<ol>
+<li><strong>Une offre au lieu de trois.</strong> Content Experience 490 € TTC remplace Content Shoot (490 € HT), UGC (220 / 590 / 950 € HT) et June Partner (890 € HT / mois). Le site en ligne et le skill brand-offer disent encore l'inverse.</li>
+<li><strong>HT → TTC.</strong> Le prix affiché passe en TTC tout compris.</li>
+<li><strong>Cible resserrée.</strong> Hébergements de charme au lieu de « lieux, expériences &amp; marques ». Le portfolio garde ce qui reste cohérent (gîte, hôtel &amp; spa) ; yachts et bar deviennent secondaires.</li>
+<li><strong>Formulaire → Calendly.</strong> Un bouton, un lien de prise de rendez-vous, plus de formulaire long.</li>
+<li><strong>Alpe d'Huez.</strong> Sort de la page, prévu plus tard.</li>
+<li><strong>Titre.</strong> « Faire ressentir l'expérience avant même de l'avoir vécue. » remplace « Votre expérience mérite d'être vue. Et surtout, d'être vécue. »</li>
+</ol>
+</main>

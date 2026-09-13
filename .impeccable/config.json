@@ -35,6 +35,60 @@
         ],
         "createdAt": "2026-09-12T07:55:07.692Z",
         "reason": "titres display Fraunces et lignes de douleur en grande taille : interlignage serré volontaire sur du display, le corps reste à 1.6"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "docs/copy-june-content-experience.html"
+        ],
+        "createdAt": "2026-09-13T20:32:36.123Z",
+        "reason": "faux positif : le détecteur croise les jetons du thème sombre (media query / data-theme) avec le fond clair ; chaque thème est cohérent"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "*",
+        "files": [
+          "docs/copy-june-content-experience.html"
+        ],
+        "createdAt": "2026-09-13T20:32:36.134Z",
+        "reason": "document de travail interne (copy à partager), pas une surface du site : DESIGN.md gouverne la preview, pas ce doc"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          "docs/copy-june-content-experience.html"
+        ],
+        "createdAt": "2026-09-13T20:32:36.145Z",
+        "reason": "document de travail interne (copy à partager), pas une surface du site : DESIGN.md gouverne la preview, pas ce doc"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "docs/copy-june-content-experience.html"
+        ],
+        "createdAt": "2026-09-13T20:32:36.154Z",
+        "reason": "document de travail interne (copy à partager), pas une surface du site : DESIGN.md gouverne la preview, pas ce doc"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "*",
+        "files": [
+          "docs/copy-june-content-experience.html"
+        ],
+        "createdAt": "2026-09-13T20:32:36.163Z",
+        "reason": "document de travail interne (copy à partager), pas une surface du site : DESIGN.md gouverne la preview, pas ce doc"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "docs/copy-june-content-experience.html"
+        ],
+        "createdAt": "2026-09-13T20:32:36.174Z",
+        "reason": "document de travail interne (copy à partager), pas une surface du site : DESIGN.md gouverne la preview, pas ce doc"
       }
     ]
   }
