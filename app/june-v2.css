@@ -128,7 +128,7 @@ body.on-dark .nav .btn { background: var(--honey); color: var(--night); }
 .step h3 { margin: 0.8rem 0 0.5rem; }
 .step p { color: var(--muted); font-size: 0.96rem; }
 .how__sig { margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid var(--line); font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(1.5rem, 1rem + 2vw, 2.7rem); line-height: 1.12; letter-spacing: -0.015em; max-width: 30ch; }
-.how__sig em { font-style: italic; color: var(--chestnut); }
+.how__sig em { font-style: italic; font-weight: 380; color: var(--chestnut); }
 
 /* ---------- ce que vous recevez ---------- */
 .get { padding-block: clamp(4rem, 9vw, 8rem); }
@@ -157,7 +157,7 @@ body.on-dark .nav .btn { background: var(--honey); color: var(--night); }
 .price__num { font-family: var(--font-fraunces), Georgia, serif; font-weight: 320; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(3rem, 2rem + 4vw, 6rem); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums lining-nums; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem; }
 .price__num .eur { font-family: var(--font-manrope), system-ui, sans-serif; font-weight: 400; font-size: 0.5em; position: relative; top: -0.25em; }
 .price__num .ttc { font-family: var(--font-manrope), system-ui, sans-serif; font-size: 1rem; font-weight: 600; color: var(--honey); letter-spacing: 0.02em; }
-.price__all { font-family: var(--font-fraunces), Georgia, serif; font-style: italic; font-size: clamp(1.4rem, 1rem + 1.4vw, 2.2rem); color: var(--honey); line-height: 1.1; }
+.price__all { font-family: var(--font-fraunces), Georgia, serif; font-style: italic; font-weight: 380; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(1.4rem, 1rem + 1.4vw, 2.2rem); color: var(--honey); line-height: 1.1; }
 .price__copy { display: flex; flex-direction: column; gap: 1rem; color: var(--night-muted); max-width: 46ch; }
 .price__copy b { color: var(--night-ink); font-weight: 500; }
 .price__nights { font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(1.4rem, 1rem + 1.6vw, 2.4rem); line-height: 1.15; letter-spacing: -0.015em; color: var(--night-ink); max-width: 24ch; }
@@ -174,7 +174,7 @@ body.on-dark .nav .btn { background: var(--honey); color: var(--night); }
 .about__txt { display: flex; flex-direction: column; gap: 1.1rem; max-width: 44ch; }
 .about__role { font-size: 0.9rem; font-weight: 600; color: var(--chestnut); }
 .about__l { font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(1.3rem, 1rem + 1.2vw, 2rem); line-height: 1.2; letter-spacing: -0.012em; }
-.about__l em { font-style: italic; color: var(--chestnut); }
+.about__l em { font-style: italic; font-weight: 380; color: var(--chestnut); }
 
 /* ---------- contact ---------- */
 .fin { padding-block: clamp(5rem, 11vw, 9rem) clamp(2rem, 4vw, 3rem); }
