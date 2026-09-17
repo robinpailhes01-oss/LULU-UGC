@@ -58,39 +58,53 @@ export default function Home() {
             <Media video={VIDEO.hero} poster="/realisations/shooting-hotel-piscine-ext.jpg" alt="Piscine extérieure d'un hôtel & spa au soleil couchant" pos="50% 55%" w={1080} h={1616} eager />
           </div>
           <div className="hero__inner">
-            <div>
-              <p className="k rise" style={{ "--d": "100ms" } as React.CSSProperties}>Content Studio — Hospitality • Tourism • Experiences</p>
-              <h1 className="d hero__title rise" style={{ "--d": "220ms" } as React.CSSProperties}>
-                Des lieux qui font vivre quelque chose. <em>Des contenus qui donnent envie de le vivre.</em>
-              </h1>
-              <p className="hero__lede rise" style={{ "--d": "380ms" } as React.CSSProperties}>June est un studio de création spécialisé dans l&apos;expérience &amp; le storytelling.</p>
-              <p className="hero__lede rise" style={{ "--d": "460ms" } as React.CSSProperties}>Je découvre ce que vos clients vivent réellement chez vous pour le transformer en histoires et en contenus dans lesquels vos futurs clients peuvent se projeter.</p>
-            </div>
-            <div className="hero__side">
-              <p className="hero__fmt rise" style={{ "--d": "560ms" } as React.CSSProperties}>Reels · UGC · Vidéos · Photos</p>
-              <a className="btn rise" href="#content-experience" style={{ "--d": "640ms" } as React.CSSProperties}>
-                Découvrir Content Experience →
-              </a>
-              <p className="hero__place rise" style={{ "--d": "720ms" } as React.CSSProperties}>Montpellier • France • Alpe d&apos;Huez — Hiver 26/27</p>
-            </div>
+            <p className="hero__june rise" style={{ "--d": "80ms" } as React.CSSProperties}>June</p>
+            <p className="hero__studio rise" style={{ "--d": "180ms" } as React.CSSProperties}>Content Studio</p>
+            <p className="k k--c hero__k rise" style={{ "--d": "260ms" } as React.CSSProperties}>Hospitality • Tourism • Experiences</p>
+            <h1 className="d hero__title rise" style={{ "--d": "340ms" } as React.CSSProperties}>
+              Des lieux qui font vivre quelque chose. <em>Des contenus qui donnent envie de le vivre.</em>
+            </h1>
+            <p className="hero__lede rise" style={{ "--d": "440ms" } as React.CSSProperties}>June est un studio de création spécialisé dans l&apos;expérience &amp; le storytelling.</p>
+            <p className="hero__lede rise" style={{ "--d": "500ms" } as React.CSSProperties}>Je découvre ce que vos clients vivent réellement chez vous pour le transformer en histoires et en contenus dans lesquels vos futurs clients peuvent se projeter.</p>
+            <p className="hero__fmt rise" style={{ "--d": "580ms" } as React.CSSProperties}>Reels · UGC · Vidéos · Photos</p>
+            <a className="btn rise" href="#content-experience" style={{ "--d": "660ms" } as React.CSSProperties}>
+              Découvrir Content Experience →
+            </a>
+            <p className="hero__place rise" style={{ "--d": "740ms" } as React.CSSProperties}>Montpellier • France • Alpe d&apos;Huez — Hiver 26/27</p>
           </div>
         </section>
 
         {/* 02 — Le constat */}
         <section className="sec constat" aria-label="Le point de départ">
-          <div className="wrap wrap--n ed">
-            <p className="k rv">Le point de départ</p>
-            <h2 className="d h2 rv" style={rv(80)}>
-              Votre établissement est probablement <em>bien mieux en vrai que sur Instagram.</em>
-            </h2>
-            <p className="rv" style={rv(160)}>Vous avez créé un lieu, une ambiance, une expérience et toutes ces petites attentions que vos clients découvrent une fois sur place.</p>
-            <p className="big rv" style={rv(200)}>Mais derrière un écran ?</p>
-            <p className="rv" style={rv(240)}>Il n&apos;est pas toujours évident de savoir quoi montrer, quelle histoire raconter et comment faire ressentir ce qui rend votre expérience différente.</p>
-            <p className="rv" style={rv(280)}>Alors on finit parfois par montrer une chambre, un plat, un soin, une piscine…</p>
-            <p className="big rv" style={rv(320)}>Sans réellement montrer ce que l&apos;on vit autour.</p>
-            <p className="rv" style={rv(360)}>Et entre votre établissement, vos clients et tout le reste, réfléchir et créer du contenu finit souvent tout en bas de la liste.</p>
-            <p className="turn rv" style={rv(400)}>C&apos;est là que June intervient.</p>
-            <p className="after rv" style={rv(440)}>Un regard extérieur pour identifier ce qui mérite d&apos;être raconté et le transformer en contenu.</p>
+          <div className="wrap constat__grid">
+            <div className="mosaic rv" aria-label="Ce que vos clients vivent sur place">
+              {[
+                ["/realisations/shooting-hotel-terrasse.jpg", "Terrasse d'un hôtel & spa au soleil couchant", "50% 40%"],
+                ["/realisations/shooting-hotel-chambre.jpg", "Chambre baignée de lumière", "50% 40%"],
+                ["/realisations/shooting-hotel-piscine.jpg", "Piscine intérieure", "50% 60%"],
+                ["/realisations/shooting-hotel-couple-terrasse.jpg", "Un couple en terrasse", "50% 40%"],
+                ["/realisations/shooting-hotel-balcon-fleuri.jpg", "Balcon fleuri", "50% 45%"],
+                ["/realisations/shooting-hotel-jardins-vue.jpg", "Jardins avec vue", "50% 40%"],
+              ].map(([src, alt, pos]) => (
+                <figure className="plate" data-dev key={src}>
+                  <img src={src} alt={`Photo : ${alt}`} width={1080} height={1616} loading="lazy" style={{ "--pos": pos } as React.CSSProperties} />
+                </figure>
+              ))}
+            </div>
+            <div className="constat__panel ed">
+              <p className="k rv">Le point de départ</p>
+              <h2 className="d h2 rv" style={rv(80)}>
+                Votre établissement est probablement <em>bien mieux en vrai que sur Instagram.</em>
+              </h2>
+              <p className="rv" style={rv(160)}>Vous avez créé un lieu, une ambiance, une expérience et toutes ces petites attentions que vos clients découvrent une fois sur place.</p>
+              <p className="big rv" style={rv(200)}>Mais derrière un écran ?</p>
+              <p className="rv" style={rv(240)}>Il n&apos;est pas toujours évident de savoir quoi montrer, quelle histoire raconter et comment faire ressentir ce qui rend votre expérience différente.</p>
+              <p className="rv" style={rv(280)}>Alors on finit parfois par montrer une chambre, un plat, un soin, une piscine…</p>
+              <p className="big rv" style={rv(320)}>Sans réellement montrer ce que l&apos;on vit autour.</p>
+              <p className="rv" style={rv(360)}>Et entre votre établissement, vos clients et tout le reste, réfléchir et créer du contenu finit souvent tout en bas de la liste.</p>
+              <p className="turn rv" style={rv(400)}>C&apos;est là que June intervient.</p>
+              <p className="after rv" style={rv(440)}>Un regard extérieur pour identifier ce qui mérite d&apos;être raconté et le transformer en contenu.</p>
+            </div>
           </div>
         </section>
 
