@@ -38,7 +38,8 @@ export default function Home() {
 
       <header className="nav nav--hero" id="nav">
         <a className="mark" href="#top" aria-label="June, retour en haut">
-          June
+          <b>June</b>
+          <small>Content Studio</small>
         </a>
         <nav className="nav__links" aria-label="Navigation">
           <a href="#comment">Comment ça se passe</a>
@@ -47,8 +48,8 @@ export default function Home() {
           <a href="#contact">Contact</a>
         </nav>
         <a className="btn" href="#contact">
-          <span className="l">{CTA} →</span>
-          <span className="s">Mon projet →</span>
+          <span className="l">{CTA}</span>
+          <span className="s">Mon projet</span>
         </a>
       </header>
 
@@ -56,25 +57,67 @@ export default function Home() {
         {/* 01 — Hero : pour qui, ce qu'on obtient, un bouton */}
         <section className="hero" aria-label="June, studio de contenu">
           <div className="media">
-            <Media video={VIDEO.hero} poster="/realisations/shooting-hotel-piscine-ext.jpg" alt="Piscine extérieure d'un hôtel & spa au soleil couchant" pos="50% 55%" w={1080} h={1616} eager />
+            <Media video={VIDEO.hero} poster="/realisations/shooting-hotel-terrasse.jpg" alt="Terrasse d'un hôtel & spa au soleil couchant" pos="70% 45%" w={1080} h={1616} eager />
           </div>
           <div className="hero__inner">
-            <p className="hero__june rise" style={{ "--d": "80ms" } as React.CSSProperties}>June</p>
-            <p className="hero__studio rise" style={{ "--d": "180ms" } as React.CSSProperties}>Studio de contenu pour les lieux qui se vivent</p>
-            <h1 className="d hero__title rise" style={{ "--d": "300ms" } as React.CSSProperties}>
-              Des lieux qui font vivre quelque chose. <em>Des contenus qui donnent envie de le vivre.</em>
-            </h1>
-            <p className="hero__lede rise" style={{ "--d": "420ms" } as React.CSSProperties}>Je viens vivre votre établissement comme vos clients, et je vous rends des vidéos et des photos prêtes à publier, qui racontent ce qu&apos;on ressent chez vous.</p>
-            <p className="hero__fmt rise" style={{ "--d": "520ms" } as React.CSSProperties}>Hôtels · Chalets · Maisons d&apos;hôtes · Spas · Restaurants · Expériences</p>
-            <a className="btn rise" href="#comment" style={{ "--d": "620ms" } as React.CSSProperties}>
-              Voir comment ça se passe →
-            </a>
-            <p className="hero__place rise" style={{ "--d": "720ms" } as React.CSSProperties}>Montpellier • France • Alpe d&apos;Huez, hiver 26/27</p>
+            <div className="hero__copy">
+              <p className="k hero__k rise" style={{ "--d": "80ms" } as React.CSSProperties}>Studio de contenu pour les lieux qui se vivent</p>
+              <h1 className="d hero__title rise" style={{ "--d": "200ms" } as React.CSSProperties}>
+                Des lieux qui font vivre quelque chose. <em>Des contenus qui donnent envie de le vivre.</em>
+              </h1>
+              <p className="hero__lede rise" style={{ "--d": "340ms" } as React.CSSProperties}>Je viens vivre votre établissement comme vos clients, et je vous rends des vidéos et des photos prêtes à publier, qui racontent ce qu&apos;on ressent chez vous.</p>
+              <p className="hero__fmt rise" style={{ "--d": "440ms" } as React.CSSProperties}>Hôtels · Chalets · Maisons d&apos;hôtes · Spas · Restaurants · Expériences</p>
+              <a className="btn rise" href="#comment" style={{ "--d": "540ms" } as React.CSSProperties}>
+                Voir comment ça se passe
+              </a>
+              <p className="hero__place rise" style={{ "--d": "640ms" } as React.CSSProperties}>Montpellier • France • Alpe d&apos;Huez, hiver 26/27</p>
+            </div>
+            <div className="hero__side">
+              <p className="script rise" style={{ "--d": "700ms" } as React.CSSProperties}>More than content</p>
+              <p className="hero__list rise" style={{ "--d": "780ms" } as React.CSSProperties}>
+                <span>Capturer</span>
+                <span>Raconter</span>
+                <span>Sublimer</span>
+                <span>vos expériences</span>
+              </p>
+              <p className="hero__scroll rise" aria-hidden="true" style={{ "--d": "900ms" } as React.CSSProperties}>Scroll</p>
+            </div>
           </div>
         </section>
 
-        {/* 02 — Le constat, dans ses mots */}
-        <section className="sec constat" aria-label="Le point de départ">
+
+        {/* 02 — Pour qui : les univers */}
+        <section className="strip night" id="pour-qui" aria-label="Pour qui">
+          <div className="strip__head">
+            <div>
+              <p className="k rv">Pour qui</p>
+              <h2 className="d h2 rv" style={rv(80)}>Pensé pour les lieux &amp; expériences qui ont quelque chose à faire vivre.</h2>
+            </div>
+            <p className="strip__note rv" style={rv(160)}>Des univers différents, une même approche.</p>
+          </div>
+          <div className="tiles">
+            {[
+              ["01", "Hospitality", "Hôtels • Chalets • Maisons d'hôtes • Lieux insolites", "/realisations/shooting-hotel-chambre.jpg", "50% 45%"],
+              ["02", "Wellness", "Spas • Instituts • Bien-être", "/wall/beltra.jpg", "50% 40%"],
+              ["03", "Tourisme", "Activités • Expériences • Loisirs", "/wall/yacht-reel.jpg", "50% 60%"],
+              ["04", "Food & lifestyle", "Restaurants • Bars • Lieux de vie", "/wall/unamas.jpg", "50% 45%"],
+              ["05", "Retraites", "Yoga • Séjours thématiques • Workshops", "/realisations/shooting-hotel-jardins.jpg", "50% 50%"],
+              ["06", "Expériences éphémères", "Pop-up • Événements intimistes", "/realisations/shooting-hotel-couple-terrasse.jpg", "50% 40%"],
+            ].map(([n, t, sub, img, pos], i) => (
+              <a className="tile rv" style={rv(i * 70)} href="#comment" key={t}>
+                <img src={img} alt={`${t} : ${sub}`} width={1080} height={1404} loading="lazy" style={{ "--pos": pos } as React.CSSProperties} />
+                <span className="tile__cap">
+                  <span className="tile__n">{n}</span>
+                  <b>{t}</b>
+                  <span>{sub}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* 03 — Le constat, dans ses mots */}
+        <section className="sec constat light" aria-label="Le point de départ">
           <div className="wrap constat__grid">
             <div className="mosaic rv" aria-label="Ce que vos clients vivent sur place">
               {[
@@ -106,8 +149,8 @@ export default function Home() {
         </section>
 
         {/* 03 — Comment ça se passe */}
-        <section className="ce" id="comment" aria-label="Comment ça se passe">
-          <div className="wrap">
+        <section className="ce night" id="comment" aria-label="Comment ça se passe">
+          <div className="ce__card light">
             <div className="ce__head">
               <div>
                 <p className="k rv">Comment ça se passe</p>
@@ -160,20 +203,31 @@ export default function Home() {
                 <p>Avec votre tableau de bord : ce que vous avez reçu, et comment l&apos;utiliser sur vos réseaux, votre site et vos annonces. Pas des séquences oubliées dans un dossier.</p>
               </li>
             </ol>
-            <p className="sig rv" style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
-              Vous faites vivre l&apos;expérience. <em>June trouve comment la raconter.</em>
-            </p>
+            <div className="ce__foot">
+              <p className="sig rv">
+                Vous faites vivre l&apos;expérience. <em>June trouve comment la raconter.</em>
+              </p>
+              <div className="rv" style={rv(120)}>
+                <p className="muted" style={{ fontSize: "0.85rem", marginBottom: "0.8rem" }}>À partir de 490 € TTC · devis avant tout engagement</p>
+                <a className="btn btn--fill" href="#prix">
+                  Découvrir l&apos;offre
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* 04 — Ce que vous recevez */}
-        <section className="sec formats" id="recevez" aria-label="Ce que vous recevez">
+        <section className="sec formats night" id="recevez" aria-label="Ce que vous recevez">
           <div className="wrap">
-            <div className="formats__head ed">
-              <p className="k rv">Ce que vous recevez</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Une expérience. <em>Plusieurs façons de la raconter.</em>
-              </h2>
+            <div className="formats__head">
+              <div>
+                <p className="k rv">Ce que vous recevez</p>
+                <h2 className="d h2 rv" style={rv(80)}>
+                  Une expérience. <em>Plusieurs façons de la raconter.</em>
+                </h2>
+              </div>
+              <p className="script rv" style={rv(160)}>Experiences create connections</p>
             </div>
             <div className="fgrid">
               {[
@@ -197,13 +251,15 @@ export default function Home() {
         </section>
 
         {/* 05 — Réalisations */}
-        <section className="work" id="realisations" aria-label="Réalisations">
+        <section className="work light" id="realisations" aria-label="Réalisations">
           <div className="wrap">
             <div className="work__head">
-              <p className="k rv">Réalisations</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Quelques expériences, <em>racontées par June.</em>
-              </h2>
+              <div>
+                <p className="k rv">Réalisations</p>
+                <h2 className="d h2 rv" style={rv(80)}>
+                  Quelques expériences, <em>racontées par June.</em>
+                </h2>
+              </div>
             </div>
             <div className="wk">
               {works.map((wk, i) => {
@@ -237,39 +293,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 06 — Pour qui */}
-        <section className="sec who" id="pour-qui" aria-label="Pour qui">
-          <div className="wrap">
-            <div className="who__head ed">
-              <p className="k rv">Pour qui</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Pour les lieux &amp; expériences <em>que l&apos;on choisit autant pour ce qu&apos;on y vit que pour ce qu&apos;ils proposent.</em>
-              </h2>
-              <p className="rv" style={rv(160)}>June accompagne les lieux, établissements et expériences qui ont quelque chose à faire vivre, ressentir et raconter.</p>
-            </div>
-            <ul className="wgrid">
-              {[
-                ["Hôtels & hébergements", "Boutique-hôtels • Chalets • Locations & lieux insolites"],
-                ["Wellness & bien-être", "Spas • Instituts • Expériences bien-être"],
-                ["Tourisme & activités", "Expériences touristiques • Loisirs • Activités"],
-                ["Food & lieux lifestyle", "Restaurants • Bars • Lieux expérientiels"],
-                ["Retraites & séjours expérientiels", "Yoga • Wellness • Séjours thématiques • Workshops"],
-                ["Expériences éphémères & événements intimistes", "Pop-up • Expériences de marque • Événements en petit comité"],
-              ].map(([t, s], i) => (
-                <li className="rv" style={rv(i * 60)} key={t}>
-                  <b>{t}</b>
-                  <span>{s}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="who__end">
-              <p className="rv">Un lieu permanent ou une expérience qui ne dure que quelques jours : l&apos;approche reste la même. Comprendre ce que vos clients vont vivre, trouver l&apos;histoire à raconter et la transformer en contenu.</p>
-            </div>
-          </div>
-        </section>
-
         {/* 07 — Le prix, vu du client */}
-        <section className="offer" id="prix" aria-label="Le prix">
+        <section className="offer night" id="prix" aria-label="Le prix">
           <div className="wrap offer__grid">
             <div className="offer__side">
               <p className="k rv">Le prix</p>
@@ -280,8 +305,8 @@ export default function Home() {
                 À partir de 490<span className="eur">&nbsp;€</span> TTC
               </p>
               <p className="muted rv" style={rv(200)}>Le prix dépend de votre établissement, de l&apos;expérience à raconter et de la quantité de contenu réellement utile. Vous recevez un devis avant tout engagement.</p>
-              <a className="btn rv" href="#contact" style={rv(260)} data-offre="Content Experience">
-                {CTA} →
+              <a className="btn btn--fill rv" href="#contact" style={rv(260)} data-offre="Content Experience">
+                {CTA}
               </a>
             </div>
             <div>
@@ -316,7 +341,7 @@ export default function Home() {
         </section>
 
         {/* 08 — Ludivine */}
-        <section className="sec about" id="ludivine" aria-label="Derrière June">
+        <section className="sec about light" id="ludivine" aria-label="Derrière June">
           <div className="wrap about__grid">
             <figure className="media about__media rv">
               <Media video={VIDEO.approche} poster="/portrait.jpg" alt="Ludivine, créatrice de June, dans la lumière du soir" pos="50% 20%" w={1122} h={1402} />
@@ -336,7 +361,7 @@ export default function Home() {
         </section>
 
         {/* 09 — Alpe d'Huez */}
-        <section className="alpe" id="alpe" data-dark aria-label="Alpe d'Huez, hiver 26/27">
+        <section className="alpe" id="alpe" aria-label="Alpe d'Huez, hiver 26/27">
           <div className="media">
             <Media video={VIDEO.alpe} poster="/realisations/shooting-hotel-jardins-vue.jpg" alt="Vue depuis les jardins, en attendant les images de l'Alpe d'Huez" pos="50% 40%" w={1080} h={1616} />
           </div>
@@ -359,15 +384,15 @@ export default function Home() {
                 <span>Besoin de renouveler vos contenus ?</span>
               </p>
               <p className="ask turn rv" style={rv(300)}>Faisons vivre votre hiver avant même l&apos;arrivée de vos prochains clients.</p>
-              <a className="btn btn--honey rv" href="#contact" style={rv(380)} data-offre="Alpe d'Huez">
-                {CTA} →
+              <a className="btn rv" href="#contact" style={rv(380)} data-offre="Alpe d'Huez">
+                {CTA}
               </a>
             </div>
           </div>
         </section>
 
         {/* 10 — Contact */}
-        <section className="dark fin" id="contact" data-dark aria-label="Contact">
+        <section className="fin night" id="contact" data-dark aria-label="Contact">
           <div className="wrap">
             <div className="fin__top">
               <p className="k k--c rv">Parlons de votre expérience</p>
@@ -383,9 +408,9 @@ export default function Home() {
             <footer className="foot">
               <p>
                 <a className="mark" href="#top">
-                  June
-                </a>{" "}
-                Studio de contenu pour les lieux qui se vivent · Montpellier • Alpe d&apos;Huez
+                  <b>June</b>
+                  <small>Studio de contenu pour les lieux qui se vivent · Montpellier • Alpe d&apos;Huez</small>
+                </a>
               </p>
               <nav aria-label="Liens">
                 {INSTAGRAM_URL && (
@@ -405,7 +430,7 @@ export default function Home() {
         </section>
 
         {/* Questions */}
-        <section className="faq" aria-label="Questions fréquentes">
+        <section className="faq light" aria-label="Questions fréquentes">
           <div className="wrap faq__grid">
             <div className="faq__head">
               <p className="k rv">Questions fréquentes</p>
@@ -439,8 +464,8 @@ export default function Home() {
                 </details>
               ))}
               <div className="faq__cta">
-                <a className="btn" href="#contact">
-                  {CTA} →
+                <a className="btn btn--fill" href="#contact">
+                  {CTA}
                 </a>
               </div>
             </div>

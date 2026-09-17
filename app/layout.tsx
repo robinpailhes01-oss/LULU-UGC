@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Caveat, Fraunces, Manrope } from "next/font/google";
 import "./globals.css";
 import "./scrollcraft.css";
 import "./june.css";
@@ -11,6 +11,13 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   display: "swap",
   axes: ["opsz", "SOFT"],
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-script",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 const manrope = Manrope({
@@ -38,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${fraunces.variable} ${manrope.variable}`}>
+    <html lang="fr" className={`${fraunces.variable} ${manrope.variable} ${caveat.variable}`}>
       <body className="font-sans">{children}</body>
     </html>
   );
