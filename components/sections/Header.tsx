@@ -3,15 +3,12 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
-import { APPEL_EXTERNE, APPEL_URL, CTA } from "@/lib/site";
-
 const navLinks = [
-  { href: "/#immersion", label: "L'immersion" },
-  { href: "/#livrables", label: "Ce que vous recevez" },
-  { href: "/#prix", label: "Le prix" },
-  { href: "/portfolio", label: "Réalisations" },
+  { href: "/#formats", label: "Formats" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/#offres", label: "Offres" },
+  { href: "/#alpe", label: "Alpe d'Huez" },
 ];
-const appel = APPEL_EXTERNE ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -52,11 +49,10 @@ export default function Header() {
             </a>
           ))}
           <a
-            href={APPEL_URL}
-            {...appel}
+            href="/#contact"
             className="rounded-full bg-espresso px-5 py-2.5 text-sm font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
           >
-            {CTA}
+            Parler de mon projet
           </a>
         </nav>
 
@@ -90,12 +86,11 @@ export default function Header() {
             ))}
             <li>
               <a
-                href={APPEL_URL}
-                {...appel}
+                href="/#contact"
                 className="mt-1 inline-block rounded-full bg-espresso px-5 py-2.5 text-sm font-semibold text-cream"
                 onClick={() => setMenuOpen(false)}
               >
-                {CTA}
+                Parler de mon projet
               </a>
             </li>
           </ul>
