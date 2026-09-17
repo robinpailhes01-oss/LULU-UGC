@@ -2,54 +2,39 @@
 name: copywriting
 description: >
   Voix et ton de la marque pour tous les textes visibles (landing, légendes, micro-copy).
-  À consulter pour rédiger ou réviser n'importe quel texte client-facing. Définit le
-  registre (chaleureux, humain, sans forcing), les formules de titres, les patterns de
-  copy par section et le vocabulaire des CTA. S'appuie sur brand-offer pour l'offre exacte.
+  À consulter pour rédiger ou réviser n'importe quel texte client-facing. Définit le registre
+  (simple, direct, chaleureux, éditorial), les formulations à garder telles quelles et le
+  vocabulaire des boutons. S'appuie sur brand-offer.
 ---
 
-# Copywriting — June Content Studio (V1 saison 26/27)
+# Copywriting — June Content Studio (version site finale)
+
+Le texte de référence du site est le brief `docs/brief-site-final.md`, repris tel quel dans
+`app/page.tsx`. Ne pas le paraphraser.
 
 ## Voix
-Chaleureuse, humaine, sûre de son goût. On parle comme une personne qui aime les beaux
-lieux, pas comme une agence. **Jamais de forcing.** On donne envie, on ne pousse pas.
-Français naturel, à la 2e personne (« vous »), phrases courtes, verbes concrets.
+Ludivine parle à la première personne, au visiteur en « vous ». Simple, direct, chaleureux.
+Phrases courtes, souvent une idée par ligne, qui apparaissent au scroll. On parle d'expérience,
+de ressentir, de vivre, de raconter. Petits titres en capitales tracées (LE POINT DE DÉPART,
+NOT JUST CONTENT., FORMATS, SELECTED WORK, WORK WITH JUNE, BEHIND JUNE, WINTER 26/27,
+YOUR EXPERIENCE, TOLD DIFFERENTLY., FAQ) : ce sont des repères éditoriaux, pas des slogans.
 
-### On dit / On ne dit pas
-- ✅ « On vient, on filme, on monte. Vous n'avez plus qu'à publier. »
-- ❌ « Boostez votre visibilité grâce à notre solution de contenu performante. »
-- ✅ « Du contenu qui donne envie de pousser la porte. »
-- ❌ « Maximisez votre ROI social media. »
-- Bannir : « n'hésitez pas », « solution », « booster », « ROI », « digital », tout jargon
-  de community management, les superlatifs vides (« le meilleur », « incroyable »).
-- Pas de point d'exclamation en rafale. Pas d'emoji dans les titres.
+## Formulations à garder telles quelles
+- « Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. »
+- « Votre établissement est probablement bien mieux en vrai que sur Instagram. »
+- « C'est là que June intervient. »
+- « Avant de créer du contenu, il faut savoir ce que l'on veut raconter. »
+- « Vous faites vivre l'expérience. June trouve comment la raconter. »
+- « Le format vient toujours après l'histoire que l'on souhaite raconter. »
+- « Chaque projet commence par une expérience différente. Et donc, une nouvelle façon de la raconter. »
+- « Cet hiver, June prend de l'altitude. »
+- « Et si on racontait votre expérience avant même qu'elle soit vécue ? »
 
-## Le message central
-« June imagine & crée la com qui donne envie de vous découvrir. » Pour les lieux,
-expériences & marques. UGC • Réels • Photos. Sans gestion des réseaux (on donne la
-matière et les idées, le client garde la main). Ancrage Alpe d'Huez saison 26/27,
-projets partout en France. De l'idée au contenu.
+## Boutons
+Hero : « Découvrir Content Experience → ». Pour qui : « Voir les expériences → ».
+Offre : « Parler de votre projet → ». Alpe : « Créer ensemble à l'Alpe d'Huez → ».
+Menu, CTA final et FAQ : « Parler de mon projet → ».
 
-## Titres validés (brief V1)
-- Hero : « Votre expérience mérite d'être vue. Et surtout, d'être vécue. »
-- Positionnement : « Créer l'envie avant même d'être découvert en vrai. »
-- Formats : « Un besoin, plusieurs façons de le raconter. »
-- Offres : « À chaque besoin, sa façon de créer. »
-- Alpe d'Huez : « Cet hiver, June prend de l'altitude. »
-- Process : « De l'idée au contenu. »
-- CTA final : « On crée quelque chose ensemble ? »
-
-## Copy par section
-Le copy de référence de chaque section est dans  (offres, formats,
-Alpe d'Huez, FAQ). Le reprendre tel quel, ne pas le paraphraser.
-
-## Vocabulaire des CTA (cohérent partout)
-- Hero : « Découvrir les offres → ». Content Shoot : « Imaginer mon shooting → ».
-  UGC : « Créer mon contenu UGC → ». June Partner : « Devenir June Partner → ».
-  Alpe d'Huez : « Créer à l'Alpe → ». Final : « Parler de mon projet → ».
-- Secondaire : « Voir des réalisations ».
-- Ne pas mélanger « Réserver », « Contacter », « Démarrer » au hasard : un libellé = une action.
-
-## Micro-copy
-- Formulaire vide / erreur : direct et utile, jamais d'excuse vague.
-  « Indiquez un email pour qu'on puisse vous répondre. »
-- Confirmation : « Merci, on revient vers vous très vite. » (humain, pas robotique)
+## À éviter
+Jargon marketing, superlatifs, « contenu premium », « stratégie », « visibilité 360 »,
+« booster », « n'hésitez pas », community management, promesse de résultats.

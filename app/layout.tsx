@@ -4,12 +4,13 @@ import "./globals.css";
 import "./scrollcraft.css";
 import "./june.css";
 import "./june-v1.css";
+import "./june-v3.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",
-  axes: ["opsz"],
+  axes: ["opsz", "SOFT"],
 });
 
 const manrope = Manrope({
@@ -19,13 +20,13 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "June, studio de contenu & UGC. Alpe d'Huez, saison 26/27",
+  title: "June Content Studio · Hospitality • Tourism • Experiences",
   description:
-    "June imagine et crée la com qui donne envie de vous découvrir. UGC, Réels et Photos pour les lieux, expériences et marques. Basé à l'Alpe d'Huez pour la saison 26/27, projets partout en France.",
+    "Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. June est un studio de création spécialisé dans l'expérience & le storytelling : Reels, UGC, vidéos et photos. Montpellier • Alpe d'Huez, hiver 26/27.",
   openGraph: {
-    title: "June, studio de contenu & UGC",
+    title: "June Content Studio",
     description:
-      "UGC, Réels et Photos pour les lieux, expériences et marques. Alpe d'Huez, saison 26/27.",
+      "Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. Content Experience : une immersion dans votre univers pour comprendre, raconter & créer.",
     locale: "fr_FR",
     type: "website",
   },

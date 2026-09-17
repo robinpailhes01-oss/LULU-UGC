@@ -1,0 +1,6 @@
+Déposer ici les vidéos (mp4, H.264, sans son ou son coupé) :
+- hero.mp4 : grande vidéo plein écran du hero
+- approche.mp4 : Ludivine en création + séquences de l expérience
+- alpe.mp4 : montagne, Alpe d Huez
+- work/<slug>.mp4 : une vidéo par réalisation (noms dans lib/work.ts)
+Tant qu un fichier manque, l image d attente reste affichée.

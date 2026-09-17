@@ -59,7 +59,7 @@ export default function JuneContact() {
 
       if (data.fallback === "mailto") {
         const subject = encodeURIComponent(
-          `Projet June : ${payload.lieu || payload.nom}`
+          `Content Experience : ${payload.lieu || payload.nom}`
         );
         const body = encodeURIComponent(
           `Nom : ${payload.nom}\nLieu : ${payload.lieu}\nEmail : ${payload.email}\n\n${payload.message}`
@@ -92,7 +92,7 @@ export default function JuneContact() {
           />
         </div>
         <div className="j-field">
-          <label htmlFor="lieu">Lieu, expérience ou marque</label>
+          <label htmlFor="lieu">Votre établissement ou votre expérience</label>
           <input
             id="lieu"
             name="lieu"
@@ -104,13 +104,11 @@ export default function JuneContact() {
       </div>
 
       <div className="j-field">
-        <label htmlFor="offre">Ce qui vous intéresse</label>
+        <label htmlFor="offre">Votre projet</label>
         <select id="offre" name="offre" ref={offreRef} defaultValue="">
-          <option value="">Je ne sais pas encore</option>
-          <option value="Content Shoot">Content Shoot</option>
-          <option value="UGC">UGC</option>
-          <option value="June Partner">June Partner</option>
-          <option value="Alpe d'Huez">Un projet à l'Alpe d'Huez</option>
+          <option value="Content Experience">Une Content Experience</option>
+          <option value="Alpe d'Huez">Un projet à l'Alpe d'Huez, hiver 26/27</option>
+          <option value="Autre">Autre chose, on en parle</option>
         </select>
       </div>
 
@@ -132,7 +130,7 @@ export default function JuneContact() {
           id="message"
           name="message"
           rows={4}
-          placeholder="Racontez-moi votre projet : le lieu, l'expérience ou la marque, et ce que vous aimeriez faire découvrir."
+          placeholder="Parlez-moi de votre établissement, de ce que vous faites vivre à vos clients et de ce que vous aimeriez réussir à mieux montrer."
         />
       </div>
 
