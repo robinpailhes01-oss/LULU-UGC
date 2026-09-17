@@ -20,9 +20,9 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "June Content Studio · Hospitality • Tourism • Experiences",
+  title: "June · Studio de contenu pour les lieux qui se vivent",
   description:
-    "Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. June est un studio de création spécialisé dans l'expérience & le storytelling : Reels, UGC, vidéos et photos. Montpellier • Alpe d'Huez, hiver 26/27.",
+    "Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. Je viens vivre votre établissement comme vos clients, et je vous rends des vidéos et des photos prêtes à publier. Hôtels, chalets, maisons d'hôtes, spas, restaurants, expériences. Montpellier • Alpe d'Huez, hiver 26/27.",
   openGraph: {
     title: "June Content Studio",
     description:

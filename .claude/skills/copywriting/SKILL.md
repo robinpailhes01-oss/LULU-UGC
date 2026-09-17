@@ -30,10 +30,23 @@ YOUR EXPERIENCE, TOLD DIFFERENTLY., FAQ) : ce sont des repères éditoriaux, pas
 - « Cet hiver, June prend de l'altitude. »
 - « Et si on racontait votre expérience avant même qu'elle soit vécue ? »
 
-## Boutons
-Hero : « Découvrir Content Experience → ». Pour qui : « Voir les expériences → ».
-Offre : « Parler de votre projet → ». Alpe : « Créer ensemble à l'Alpe d'Huez → ».
-Menu, CTA final et FAQ : « Parler de mon projet → ».
+## Boutons (décision du 2026-09-17)
+Un seul bouton principal partout : « Parler de mon projet → » (menu, prix, Alpe d'Huez, FAQ).
+Un seul bouton secondaire, dans le hero : « Voir comment ça se passe → ».
+
+## Libellés en français (décision du 2026-09-17)
+Le seul anglicisme conservé est le nom de l'offre, Content Experience. Menu : Comment ça se
+passe · Réalisations · Ludivine · Contact. Petits titres : Le point de départ, Comment ça se
+passe, Ce que vous recevez, Réalisations, Pour qui, Le prix, Derrière June, Hiver 26/27,
+Parlons de votre expérience, Questions fréquentes.
+Mots remplacés : UGC → « vidéos où je vis l'expérience » ; Content Plan → « le plan des
+contenus » ; Content Board → « votre tableau de bord » ; rushs → « séquences brutes » ;
+Reels → « vidéos courtes ».
+Structure : pour qui et ce qu'on obtient dès le hero ; le constat dans les mots du client ;
+comment ça se passe (avec ce que le client doit faire) ; ce que vous recevez ; réalisations ;
+pour qui ; le prix vu du client (vous recevez / ce que ça vous demande / options) ; Ludivine ;
+Alpe d'Huez ; contact ; questions. Aucune quantité de vidéos ou de photos tant que Ludivine
+ne l'a pas confirmée.
 
 ## À éviter
 Jargon marketing, superlatifs, « contenu premium », « stratégie », « visibilité 360 »,

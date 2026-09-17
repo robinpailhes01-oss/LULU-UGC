@@ -10,7 +10,7 @@ export default function Footer() {
             June<span className="text-chestnut">.</span>
           </p>
           <p className="mt-2 text-sm text-muted">
-            Content Studio · Hospitality • Tourism • Experiences. Montpellier • Alpe d'Huez, hiver 26/27.
+            Studio de contenu pour les lieux qui se vivent. Montpellier • Alpe d'Huez, hiver 26/27.
           </p>
         </div>
 

@@ -97,12 +97,12 @@ body.on-dark .nav .btn { background: var(--honey) !important; color: var(--night
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23, 17, 13, 0.46) 0%, rgba(23, 17, 13, 0.42) 45%, rgba(23, 17, 13, 0.72) 100%); pointer-events: none; }
 .hero__inner { position: relative; z-index: 2; height: 100%; max-width: 52rem; margin-inline: auto; padding: 6rem var(--gutter) clamp(2rem, 5vh, 3.5rem); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.9rem; }
 .hero__june { font-family: var(--font-fraunces), Georgia, serif; font-style: italic; font-weight: 340; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(4.5rem, 2rem + 10vw, 9.5rem); line-height: 0.95; letter-spacing: -0.03em; }
-.hero__studio { font-size: clamp(0.8rem, 0.7rem + 0.5vw, 1.05rem); font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase; color: rgba(242, 231, 214, 0.92); margin-top: -0.2rem; }
+.hero__studio { font-size: clamp(0.72rem, 0.66rem + 0.35vw, 0.92rem); font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; max-width: 30ch; color: rgba(242, 231, 214, 0.92); margin-top: -0.2rem; }
 .hero__k { color: rgba(242, 231, 214, 0.7); margin-bottom: 0.8rem; }
 .hero__title { font-size: clamp(1.7rem, 1rem + 2.6vw, 3.1rem); max-width: 22ch; margin-bottom: 0.4rem; }
 .hero__title em { color: var(--honey); }
-.hero__lede { max-width: 52ch; color: rgba(242, 231, 214, 0.9); font-size: clamp(0.98rem, 0.94rem + 0.3vw, 1.12rem); }
-.hero__fmt { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242, 231, 214, 0.8); margin-top: 0.8rem; }
+.hero__lede { max-width: 50ch; margin-top: 0.6rem; color: rgba(242, 231, 214, 0.9); font-size: clamp(0.98rem, 0.94rem + 0.3vw, 1.12rem); }
+.hero__fmt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242, 231, 214, 0.8); margin-top: 0.8rem; max-width: 40ch; line-height: 1.7; }
 .hero .btn { background: var(--cream); color: var(--ink); margin-top: 0.3rem; }
 .hero__place { font-size: 0.82rem; color: rgba(242, 231, 214, 0.72); margin-top: 0.4rem; }
 .hero .rise { opacity: 0; transform: translateY(16px); animation: rise 1s var(--ease) both; animation-delay: var(--d, 0ms); }
@@ -150,6 +150,7 @@ body.on-dark .nav .btn { background: var(--honey) !important; color: var(--night
 .step .big { font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-variation-settings: "opsz" 144, "SOFT" 30; font-size: clamp(1.35rem, 1rem + 1.2vw, 1.9rem); line-height: 1.2; letter-spacing: -0.012em; max-width: 24ch; }
 .step p { color: var(--muted); max-width: 44ch; }
 .step .list { color: var(--ink); display: flex; flex-direction: column; gap: 0.1rem; font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-size: 1.15rem; line-height: 1.35; }
+.step .list span:last-child { font-style: italic; color: var(--chestnut); }
 .step .tags { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--chestnut); margin-top: 0.4rem; }
 
 /* ---------- 05 formats ---------- */
@@ -218,7 +219,7 @@ body.on-dark .nav .btn { background: var(--honey) !important; color: var(--night
 
 /* ---------- 09 behind june ---------- */
 .about__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
-.about .plate { aspect-ratio: 4 / 5; max-width: 28rem; }
+.about .plate, .about__media { aspect-ratio: 4 / 5; max-width: 28rem; border-radius: 18px; box-shadow: var(--shadow); }
 .about .ed p { max-width: 50ch; }
 
 /* ---------- 10 alpe ---------- */
@@ -284,7 +285,7 @@ body.on-dark .nav .btn { background: var(--honey) !important; color: var(--night
   .wgrid { grid-template-columns: 1fr; }
   .wk { columns: 2; }
   .offer__side { position: static; }
-  .about .plate { max-width: 20rem; }
+  .about .plate, .about__media { max-width: 20rem; }
 }
 @media (max-width: 480px) { .wk { columns: 1; } .fmt { flex-basis: 74vw; } }
 @media (prefers-reduced-motion: reduce) {
