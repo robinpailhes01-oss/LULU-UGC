@@ -65,21 +65,14 @@ export default function Home() {
               <h1 className="d hero__title rise" style={{ "--d": "200ms" } as React.CSSProperties}>
                 Des lieux qui font vivre quelque chose. <em>Des contenus qui donnent envie de le vivre.</em>
               </h1>
-              <p className="hero__lede rise" style={{ "--d": "340ms" } as React.CSSProperties}>Je viens vivre votre établissement comme vos clients, et je vous rends des vidéos et des photos prêtes à publier, qui racontent ce qu&apos;on ressent chez vous.</p>
-              <p className="hero__fmt rise" style={{ "--d": "440ms" } as React.CSSProperties}>Hôtels · Chalets · Maisons d&apos;hôtes · Spas · Restaurants · Expériences</p>
-              <a className="btn rise" href="#comment" style={{ "--d": "540ms" } as React.CSSProperties}>
+              <p className="hero__lede rise" style={{ "--d": "340ms" } as React.CSSProperties}>Je vis votre établissement comme vos clients. Vous recevez des vidéos et des photos prêtes à publier.</p>
+              <a className="btn rise" href="#comment" style={{ "--d": "460ms" } as React.CSSProperties}>
                 Voir comment ça se passe
               </a>
-              <p className="hero__place rise" style={{ "--d": "640ms" } as React.CSSProperties}>Montpellier • France • Alpe d&apos;Huez, hiver 26/27</p>
             </div>
             <div className="hero__side">
               <p className="script rise" style={{ "--d": "700ms" } as React.CSSProperties}>More than content</p>
-              <p className="hero__list rise" style={{ "--d": "780ms" } as React.CSSProperties}>
-                <span>Capturer</span>
-                <span>Raconter</span>
-                <span>Sublimer</span>
-                <span>vos expériences</span>
-              </p>
+              <p className="hero__place rise" style={{ "--d": "780ms" } as React.CSSProperties}>Montpellier • Alpe d&apos;Huez, hiver 26/27</p>
               <p className="hero__scroll rise" aria-hidden="true" style={{ "--d": "900ms" } as React.CSSProperties}>Scroll</p>
             </div>
           </div>
@@ -91,9 +84,8 @@ export default function Home() {
           <div className="strip__head">
             <div>
               <p className="k rv">Pour qui</p>
-              <h2 className="d h2 rv" style={rv(80)}>Pensé pour les lieux &amp; expériences qui ont quelque chose à faire vivre.</h2>
+              <h2 className="d h2 rv" style={rv(80)}>Les lieux &amp; expériences qui ont quelque chose à faire vivre.</h2>
             </div>
-            <p className="strip__note rv" style={rv(160)}>Des univers différents, une même approche.</p>
           </div>
           <div className="tiles">
             {[
@@ -138,12 +130,8 @@ export default function Home() {
               <h2 className="d h2 rv" style={rv(80)}>
                 Votre établissement est probablement <em>bien mieux en vrai que sur Instagram.</em>
               </h2>
-              <p className="rv" style={rv(160)}>Vous avez créé un lieu, une ambiance, et toutes ces petites attentions que vos clients découvrent une fois sur place.</p>
-              <p className="big rv" style={rv(200)}>Mais derrière un écran ?</p>
-              <p className="rv" style={rv(240)}>Les photos ont été faites entre deux départs. On montre une chambre, un plat, une piscine… sans ce que l&apos;on vit autour.</p>
-              <p className="rv" style={rv(280)}>Et entre l&apos;accueil, les clients et tout le reste, réfléchir à ce qu&apos;on publie finit tout en bas de la liste.</p>
-              <p className="turn rv" style={rv(340)}>C&apos;est là que June intervient.</p>
-              <p className="after rv" style={rv(400)}>Un regard extérieur pour repérer ce qui mérite d&apos;être raconté, et le transformer en vidéos et en photos qui donnent envie de venir.</p>
+              <p className="rv" style={rv(160)}>Les photos ont été faites entre deux départs. On montre une chambre, un plat, une piscine… sans ce que l&apos;on vit autour.</p>
+              <p className="turn rv" style={rv(240)}>C&apos;est là que June intervient.</p>
             </div>
           </div>
         </section>
@@ -162,45 +150,32 @@ export default function Home() {
               </div>
               <div className="ce__intro">
                 <p className="lede rv" style={rv(100)}>Une immersion chez vous, pour comprendre ce que vos clients vivent, puis le raconter en vidéos et en photos.</p>
-                <p className="rv" style={rv(160)}>Je ne pars pas d&apos;une liste de contenus à produire. Je pars de votre expérience, de vos clients et de ce que vous voulez faire ressentir. Les contenus viennent après.</p>
               </div>
             </div>
             <ol className="steps">
               <li className="step rv">
                 <span className="step__n">01</span>
                 <h3>On échange</h3>
-                <p className="big">Un échange avant de venir, à distance.</p>
-                <p>On parle de votre établissement, de vos clients, de ce que vous aimeriez qu&apos;on ressente en vous découvrant. Vous n&apos;avez rien à préparer : je pose les questions.</p>
+                <p className="big">Un échange avant de venir.</p>
+                <p>Rien à préparer : je pose les questions.</p>
               </li>
               <li className="step rv" style={rv(100)}>
                 <span className="step__n">02</span>
                 <h3>On choisit quoi raconter</h3>
-                <p className="big">Les moments qui font votre expérience.</p>
-                <div className="list">
-                  <span>Une arrivée.</span>
-                  <span>Un réveil.</span>
-                  <span>Un dîner.</span>
-                  <span>Un retour du ski.</span>
-                  <span>Une attention particulière…</span>
-                </div>
-                <p>Vous validez le plan des contenus avant que je vienne. Vous savez ce que je vais créer, et pourquoi.</p>
+                <p className="big">Une arrivée. Un réveil. Un dîner. Une attention particulière…</p>
+                <p>Vous validez le plan avant que je vienne.</p>
               </li>
               <li className="step rv" style={rv(160)}>
                 <span className="step__n">03</span>
                 <h3>Je viens vivre l&apos;expérience</h3>
                 <p className="big">Chez vous, comme votre futur client.</p>
-                <div className="list">
-                  <span>Je découvre votre univers.</span>
-                  <span>J&apos;observe les détails.</span>
-                  <span>Et surtout, je la vis.</span>
-                </div>
-                <p>Une journée sur place, ou une nuit pour un hébergement, afin de raconter l&apos;arrivée, la soirée, le réveil. Vous n&apos;avez pas à poser : quand ça sert l&apos;histoire, c&apos;est moi qui vis l&apos;expérience à la place de vos clients.</p>
+                <p>Une journée, ou une nuit pour un hébergement. Vous n&apos;avez pas à poser.</p>
               </li>
               <li className="step rv" style={rv(220)}>
                 <span className="step__n">04</span>
                 <h3>Vous recevez tout</h3>
-                <p className="big">Vos vidéos et photos, montées, triées, prêtes à publier.</p>
-                <p>Avec votre tableau de bord : ce que vous avez reçu, et comment l&apos;utiliser sur vos réseaux, votre site et vos annonces. Pas des séquences oubliées dans un dossier.</p>
+                <p className="big">Vos vidéos et photos, montées, prêtes à publier.</p>
+                <p>Avec votre tableau de bord : quoi utiliser, et où.</p>
               </li>
             </ol>
             <div className="ce__foot">
@@ -231,11 +206,11 @@ export default function Home() {
             </div>
             <div className="fgrid">
               {[
-                ["Vidéos courtes", "Pour vos réseaux : une ambiance, un moment, une journée ou une expérience complète, en quelques secondes.", "/wall/yacht-reel.jpg", "Vidéo publiée pour Harmonie Yacht", 389, 614, "/video/work/harmonie-yacht.mp4", ""],
-                ["Vidéos où je vis l'expérience", "Je prends la place de vos clients : l'arrivée, le repas, le soin. Vos futurs clients se projettent plus naturellement.", "/wall/ugc-hotel.jpg", "Vidéo vécue dans une chambre d'hôtel", 393, 622, "/video/work/experience-hotel.mp4", ""],
-                ["Vidéos immersives", "Les sensations, les détails et les moments qui font réellement l'expérience.", "/wall/gite.jpg", "Petit-déjeuner sous la treille au Gîte de l'Abric", 393, 633, "/video/work/gite-abric.mp4", "50% 30%"],
-                ["Photos", "Une sélection d'images d'ambiance pour votre site, vos annonces et vos réseaux, sans transformer l'immersion en séance photo classique.", "/realisations/shooting-hotel-chambre.jpg", "Chambre d'hôtel baignée de lumière", 1200, 1600, "", ""],
-                ["Stories & séquences brutes", "Des formats plus spontanés pour alimenter votre communication facilement, quand vous en avez besoin.", "/wall/ugc-bateau.jpg", "Sortie en mer, chapeau de paille et bateau au large", 386, 615, "/video/work/sortie-en-mer.mp4", ""],
+                ["Vidéos courtes", "Une ambiance, un moment, une journée. Pour vos réseaux.", "/wall/yacht-reel.jpg", "Vidéo publiée pour Harmonie Yacht", 389, 614, "/video/work/harmonie-yacht.mp4", ""],
+                ["Vidéos vécues", "Je prends la place de vos clients. Ils se projettent.", "/wall/ugc-hotel.jpg", "Vidéo vécue dans une chambre d'hôtel", 393, 622, "/video/work/experience-hotel.mp4", ""],
+                ["Vidéos immersives", "Les sensations, les détails, les moments.", "/wall/gite.jpg", "Petit-déjeuner sous la treille au Gîte de l'Abric", 393, 633, "/video/work/gite-abric.mp4", "50% 30%"],
+                ["Photos", "Une sélection d'ambiance pour votre site et vos annonces.", "/realisations/shooting-hotel-chambre.jpg", "Chambre d'hôtel baignée de lumière", 1200, 1600, "", ""],
+                ["Stories & séquences brutes", "Pour alimenter votre communication, simplement.", "/wall/ugc-bateau.jpg", "Sortie en mer, chapeau de paille et bateau au large", 386, 615, "/video/work/sortie-en-mer.mp4", ""],
               ].map(([nom, txt, img, alt, w, h, video, pos], i) => (
                 <article className="fmt rv" style={rv(i * 90)} key={nom as string} data-hover-host>
                   <figure className="plate" data-dev>
@@ -287,9 +262,7 @@ export default function Home() {
                 );
               })}
             </div>
-            <p className="work__end rv">
-              Chaque projet commence par une expérience différente. <em>Et donc, une nouvelle façon de la raconter.</em>
-            </p>
+
           </div>
         </section>
 
@@ -304,7 +277,7 @@ export default function Home() {
               <p className="offer__price rv" style={rv(140)}>
                 À partir de 490<span className="eur">&nbsp;€</span> TTC
               </p>
-              <p className="muted rv" style={rv(200)}>Le prix dépend de votre établissement, de l&apos;expérience à raconter et de la quantité de contenu réellement utile. Vous recevez un devis avant tout engagement.</p>
+              <p className="muted rv" style={rv(200)}>Selon votre établissement et la quantité de contenu utile. Devis avant tout engagement.</p>
               <a className="btn btn--fill rv" href="#contact" style={rv(260)} data-offre="Content Experience">
                 {CTA}
               </a>
@@ -313,10 +286,10 @@ export default function Home() {
               <p className="k rv" style={{ marginBottom: "1.2rem" }}>Vous recevez</p>
               <ul className="offer__list">
                 {[
-                  ["Les vidéos et les photos définies ensemble", "Montées, triées, aux bons formats pour vos réseaux, votre site et vos annonces."],
-                  ["Votre tableau de bord", "Ce que vous avez reçu, et comment l'utiliser."],
-                  ["Votre espace client", "Tout au même endroit, en haute définition, quand vous en avez besoin."],
-                  ["Vos droits d'utilisation", "Pour vos réseaux et vos supports. Les campagnes publicitaires s'ajoutent en option."],
+                  ["Les vidéos et les photos définies ensemble", "Montées, aux bons formats."],
+                  ["Votre tableau de bord", "Quoi utiliser, et où."],
+                  ["Votre espace client", "Tout au même endroit, en haute définition."],
+                  ["Vos droits d'utilisation", "Réseaux et supports. Publicité en option."],
                 ].map(([t, s], i) => (
                   <li className="rv" style={rv(i * 40)} key={t}>
                     <span>
@@ -328,13 +301,12 @@ export default function Home() {
               </ul>
               <div className="offer__block rv">
                 <p className="k">Ce que ça vous demande</p>
-                <p>Un échange avant. Une journée sur place, ou une nuit pour un hébergement. Rien à préparer, et vous n&apos;avez pas à poser.</p>
-                <p className="big">Pour un hôtel ou un hébergement, l&apos;immersion se fait autour d&apos;un vrai séjour : l&apos;arrivée, la soirée, la nuit, le réveil, le petit-déjeuner.</p>
-                <p>Parce qu&apos;un séjour ne se raconte pas en deux heures. C&apos;est une partie normale du projet, on la prévoit ensemble.</p>
+                <p className="big">Un échange avant. Une journée sur place, ou une nuit pour un hébergement.</p>
+                <p>Parce qu&apos;un séjour ne se raconte pas en deux heures. Rien à préparer, et vous n&apos;avez pas à poser.</p>
               </div>
               <div className="offer__block rv">
-                <p className="k">Selon votre projet</p>
-                <p className="muted">En option : vidéos supplémentaires, séquences brutes, besoins spécifiques, droits publicitaires. Les déplacements sont précisés à l&apos;avance, dans le devis.</p>
+                <p className="k">En option</p>
+                <p className="muted">Vidéos supplémentaires, séquences brutes, droits publicitaires. Déplacements précisés dans le devis.</p>
               </div>
             </div>
           </div>
@@ -351,11 +323,9 @@ export default function Home() {
               <h2 className="d h2 rv" style={rv(80)}>
                 Derrière June, <em>il y a moi, Ludivine.</em>
               </h2>
-              <p className="rv" style={rv(160)}>Créatrice de contenu, entrepreneuse et saisonnière, j&apos;ai toujours eu ce réflexe de capturer les endroits que je découvre, leurs détails, leurs ambiances et surtout ce que l&apos;on y vit.</p>
-              <p className="rv" style={rv(200)}>Je ne découvre pas un hôtel ou une expérience uniquement avec un regard de créatrice. Je me mets à la place de la personne qui va venir, réserver, dormir, manger ou vivre ce moment.</p>
-              <p className="rv" style={rv(240)}>Mon rôle est de prendre ce regard extérieur pour comprendre ce qui rend votre expérience particulière, et le transformer en contenu.</p>
-              <p className="big rv" style={rv(280)}>Je ne suis pas là pour gérer vos réseaux à votre place.</p>
-              <p className="rv" style={rv(320)}>Je crée la matière et les histoires qui vous permettent de mieux raconter ce que vous faites vivre.</p>
+              <p className="rv" style={rv(160)}>Créatrice de contenu et saisonnière, j&apos;ai toujours capturé les endroits que je découvre, et surtout ce que l&apos;on y vit.</p>
+              <p className="rv" style={rv(200)}>Je me mets à la place de la personne qui va venir, dormir, manger ou vivre ce moment. Puis je le raconte.</p>
+              <p className="big rv" style={rv(240)}>Je ne gère pas vos réseaux. Je crée la matière qui vous permet de mieux raconter ce que vous faites vivre.</p>
             </div>
           </div>
         </section>
@@ -371,19 +341,16 @@ export default function Home() {
               <h2 className="d alpe__title rv" style={rv(80)}>
                 Cet hiver, <em>June prend de l&apos;altitude.</em>
               </h2>
-              <p className="alpe__season rv" style={rv(140)}>Saison hiver 2026/27 — Alpe d&apos;Huez</p>
-              <p className="rv" style={rv(200)}>Cet hiver, je pose mes valises à l&apos;Alpe d&apos;Huez pour la saison. Et pas seulement en tant que créatrice.</p>
-              <p className="rv" style={rv(240)}>Étant moi-même saisonnière, je connais cet univers de l&apos;intérieur : son rythme, ses temps forts, les nouvelles saisons à préparer, et cette nécessité de raconter une destination au-delà de ses paysages.</p>
-              <p className="rv" style={rv(280)}>Pendant toute la saison, je suis disponible directement sur place pour les hôtels, chalets, restaurants, spas, activités et expériences de la station et des alentours.</p>
+              <p className="rv" style={rv(160)}>Je pose mes valises à l&apos;Alpe d&apos;Huez pour la saison. Saisonnière moi-même, je connais cet univers de l&apos;intérieur.</p>
+              <p className="rv" style={rv(200)}>Sur place tout l&apos;hiver, pour les hôtels, chalets, restaurants, spas et expériences de la station.</p>
             </div>
             <div className="ed">
               <p className="ask rv" style={rv(200)}>
                 <span>Nouvelle saison ?</span>
                 <span>Nouvelle carte ?</span>
                 <span>Nouvelle expérience ?</span>
-                <span>Besoin de renouveler vos contenus ?</span>
               </p>
-              <p className="ask turn rv" style={rv(300)}>Faisons vivre votre hiver avant même l&apos;arrivée de vos prochains clients.</p>
+              <p className="ask turn rv" style={rv(300)}>Faisons vivre votre hiver avant l&apos;arrivée de vos clients.</p>
               <a className="btn rv" href="#contact" style={rv(380)} data-offre="Alpe d'Huez">
                 {CTA}
               </a>
@@ -399,7 +366,7 @@ export default function Home() {
               <h2 className="d h2 rv" style={rv(80)}>
                 Et si on racontait votre expérience <em>avant même qu&apos;elle soit vécue ?</em>
               </h2>
-              <p className="rv" style={rv(160)}>Parlez-moi de votre établissement, de ce que vous faites vivre à vos clients et de ce que vous aimeriez réussir à mieux montrer. Je vous réponds rapidement, et on commence par un simple échange.</p>
+              <p className="rv" style={rv(160)}>Parlez-moi de votre établissement. On commence par un simple échange.</p>
               <p className="fin__sign rv" style={rv(200)}>Ludivine — June</p>
             </div>
             <div className="fin__form rv" style={rv(240)}>

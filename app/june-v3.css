@@ -93,9 +93,9 @@ body.v3 { background: var(--night); color: var(--night-ink); font-family: var(--
 .hero__inner { position: absolute; left: var(--gutter); right: var(--gutter); bottom: clamp(2rem, 6vh, 4rem); z-index: 2; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 4rem; align-items: end; }
 .hero__copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1.1rem; }
 .hero__k { color: rgba(242, 231, 214, 0.8); }
-.hero__title { font-size: clamp(2.5rem, 1.3rem + 4.6vw, 5.6rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 13ch; }
+.hero__title { font-size: clamp(2.6rem, 1.3rem + 5vw, 6rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 13ch; }
 .hero__title em { display: block; font-size: 0.66em; margin-top: 0.35em; line-height: 1.1; color: var(--night-ink); }
-.hero__lede { max-width: 50ch; color: rgba(242, 231, 214, 0.9); font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem); }
+.hero__lede { max-width: 34ch; color: rgba(242, 231, 214, 0.9); font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem); }
 .hero__fmt { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(242, 231, 214, 0.82); display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
 .hero__fmt::before { content: ""; width: 1.6rem; height: 1px; background: currentColor; opacity: 0.7; }
 .hero__place { font-size: 0.78rem; color: rgba(242, 231, 214, 0.7); margin-top: 0.3rem; }
@@ -124,7 +124,7 @@ body.v3 { background: var(--night); color: var(--night-ink); font-family: var(--
 .tile__cap span { font-size: 0.68rem; color: var(--night-muted); line-height: 1.4; }
 
 /* ---------- sections ---------- */
-.sec { padding-block: clamp(5rem, 11vw, 9rem); }
+.sec { padding-block: clamp(5rem, 12vw, 10rem); }
 .ed { display: flex; flex-direction: column; gap: 1.1rem; }
 .ed .h2 { margin-bottom: 0.6rem; }
 .ed p { max-width: 54ch; }
@@ -162,7 +162,7 @@ body.v3 { background: var(--night); color: var(--night-ink); font-family: var(--
 .step__n { font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-size: 1.6rem; line-height: 1; letter-spacing: 0.04em; color: var(--muted); }
 .step h3 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; margin-top: 0.2rem; }
 .step .big { font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-variation-settings: "opsz" 144, "SOFT" 10; font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem); line-height: 1.25; }
-.step p { color: var(--muted); font-size: 0.92rem; }
+.step p { color: var(--muted); font-size: 0.9rem; max-width: 26ch; }
 .step .list { color: var(--ink); display: flex; flex-direction: column; gap: 0.05rem; font-family: var(--font-fraunces), Georgia, serif; font-weight: 340; font-size: 1.05rem; line-height: 1.35; }
 .step .list span:last-child { font-style: italic; color: var(--chestnut); }
 .ce__foot { margin-top: clamp(2.5rem, 5vw, 4rem); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem 3rem; flex-wrap: wrap; }
