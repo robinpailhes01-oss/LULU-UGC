@@ -1,6 +1,8 @@
 import type React from "react";
 import JuneV3Engine from "@/components/june/JuneV3Engine";
 import JuneContact from "@/components/june/JuneContact";
+import WorkGallery from "@/components/june/WorkGallery";
+import SiteNav from "@/components/june/SiteNav";
 import { CONTACT_EMAIL, CTA, INSTAGRAM_URL, VIDEO } from "@/lib/site";
 import { works } from "@/lib/work";
 
@@ -36,22 +38,7 @@ export default function Home() {
         </symbol>
       </svg>
 
-      <header className="nav nav--hero" id="nav">
-        <a className="mark" href="#top" aria-label="June, retour en haut">
-          <b>June</b>
-          <small>Content Studio</small>
-        </a>
-        <nav className="nav__links" aria-label="Navigation">
-          <a href="#comment">Comment ça se passe</a>
-          <a href="#realisations">Réalisations</a>
-          <a href="#ludivine">Ludivine</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a className="btn" href="#contact">
-          <span className="l">{CTA}</span>
-          <span className="s">Mon projet</span>
-        </a>
-      </header>
+      <SiteNav />
 
       <main id="top">
         {/* 01 — Hero : pour qui, ce qu'on obtient, un bouton */}
@@ -136,7 +123,26 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 03 — Comment ça se passe */}
+        {/* 03 — Réalisations : le travail de June, tout de suite */}
+        <section className="work light" id="realisations" aria-label="Réalisations">
+          <div className="wrap">
+            <div className="work__head">
+              <div>
+                <p className="k rv">Réalisations</p>
+                <h2 className="d h2 rv" style={rv(80)}>
+                  Quelques expériences, <em>racontées par June.</em>
+                </h2>
+              </div>
+              <p className="work__note rv" style={rv(160)}>Survolez pour lancer la vidéo. Cliquez pour voir le contenu publié.</p>
+            </div>
+            <WorkGallery works={works.filter((w) => w.home)} featured />
+            <div className="work__more rv">
+              <a className="btn" href="/portfolio">Voir toutes les réalisations</a>
+            </div>
+          </div>
+        </section>
+
+        {/* 04 — Comment ça se passe */}
         <section className="ce night" id="comment" aria-label="Comment ça se passe">
           <div className="ce__card light">
             <div className="ce__head">
@@ -222,47 +228,6 @@ export default function Home() {
               ))}
             </div>
             <p className="formats__end rv">Le format vient toujours après l&apos;histoire que l&apos;on souhaite raconter.</p>
-          </div>
-        </section>
-
-        {/* 05 — Réalisations */}
-        <section className="work light" id="realisations" aria-label="Réalisations">
-          <div className="wrap">
-            <div className="work__head">
-              <div>
-                <p className="k rv">Réalisations</p>
-                <h2 className="d h2 rv" style={rv(80)}>
-                  Quelques expériences, <em>racontées par June.</em>
-                </h2>
-              </div>
-            </div>
-            <div className="wk">
-              {works.map((wk, i) => {
-                const inner = (
-                  <>
-                    <figure className={wk.large ? "plate plate--wide" : "plate"} data-dev>
-                      <Media video={wk.video} poster={wk.image} alt={`${wk.nom} : ${wk.univers}, ${wk.type}`} pos={wk.pos} w={wk.w} h={wk.h} auto="hover" />
-                    </figure>
-                    <div className="wk__cap">
-                      <b>{wk.nom}</b>
-                      <span>
-                        {wk.univers} • {wk.type}
-                      </span>
-                    </div>
-                  </>
-                );
-                return wk.href ? (
-                  <a className="wk__it rv" style={rv((i % 3) * 80)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
-                    {inner}
-                  </a>
-                ) : (
-                  <div className="wk__it rv" style={rv((i % 3) * 80)} key={wk.nom} data-hover-host>
-                    {inner}
-                  </div>
-                );
-              })}
-            </div>
-
           </div>
         </section>
 

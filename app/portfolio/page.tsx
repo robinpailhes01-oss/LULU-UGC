@@ -1,52 +1,74 @@
+import type React from "react";
 import type { Metadata } from "next";
-import Header from "@/components/sections/Header";
-import Footer from "@/components/sections/Footer";
-import PortfolioGrid from "@/components/PortfolioGrid";
-import Eyebrow from "@/components/ui/Eyebrow";
-import Reveal from "@/components/ui/Reveal";
+import JuneV3Engine from "@/components/june/JuneV3Engine";
+import SiteNav from "@/components/june/SiteNav";
+import WorkGallery from "@/components/june/WorkGallery";
+import { CONTACT_EMAIL, CTA, INSTAGRAM_URL } from "@/lib/site";
+import { works } from "@/lib/work";
 
 export const metadata: Metadata = {
-  title: "Portfolio — June",
-  description:
-    "Réels, vidéos UGC et shootings photo réalisés par June pour des lieux, des expériences et des marques.",
+  title: "Réalisations · June",
+  description: "Vidéos, vidéos vécues et photos réalisées par June pour des hôtels, des gîtes, des expériences et des lieux qui se vivent.",
 };
 
 export default function PortfolioPage() {
   return (
     <>
-      <Header />
-      <main className="pb-20 pt-32 md:pb-28 md:pt-40">
-        <div className="mx-auto max-w-container px-5 md:px-7">
-          <Reveal>
-            <Eyebrow>Portfolio</Eyebrow>
-            <h1 className="mt-4 max-w-2xl font-display text-[clamp(34px,5vw,60px)] leading-tight">
-              Quelques expériences,{" "}
-              <em className="italic text-chestnut">racontées par June</em>.
+      <JuneV3Engine />
+      <SiteNav home={false} />
+
+      <main id="top">
+        <section className="pf night" data-dark aria-label="Réalisations">
+          <div className="wrap pf__inner">
+            <p className="k rv">Réalisations</p>
+            <h1 className="d h1 rv" style={{ "--rd": "80ms" } as React.CSSProperties}>
+              Le travail de June, <em>tel qu&apos;il a été publié.</em>
             </h1>
-            <p className="mt-4 max-w-xl leading-relaxed text-muted">
-              Reels, UGC, vidéos et photos, classés par format. Cliquez sur un
-              contenu pour le voir sur Instagram.
+            <p className="pf__lede rv" style={{ "--rd": "160ms" } as React.CSSProperties}>
+              Les vidéos se lancent au survol ou au défilement. Cliquez pour voir le contenu sur Instagram.
             </p>
-          </Reveal>
+          </div>
+        </section>
 
-          <Reveal delay={0.15} className="mt-12">
-            <PortfolioGrid />
-          </Reveal>
+        <section className="work light" aria-label="Toutes les réalisations">
+          <div className="wrap">
+            <WorkGallery works={works} all />
+          </div>
+        </section>
 
-          <Reveal delay={0.1} className="mt-16 text-center md:mt-20">
-            <p className="font-display text-2xl">
-              Et si on racontait votre expérience avant même qu&apos;elle soit vécue ?
-            </p>
-            <a
-              href="/#contact"
-              className="mt-6 inline-block rounded-full bg-espresso px-7 py-3.5 text-sm font-semibold text-cream shadow-soft transition-transform hover:-translate-y-0.5"
-            >
-              Parler de mon projet →
+        <section className="night" data-dark aria-label="Contact">
+          <div className="wrap pf__end">
+            <p className="k k--c rv">Parlons de votre expérience</p>
+            <h2 className="d h2 rv" style={{ "--rd": "80ms" } as React.CSSProperties}>
+              Et si on racontait votre expérience <em>avant même qu&apos;elle soit vécue ?</em>
+            </h2>
+            <a className="btn btn--fill rv" style={{ "--rd": "160ms" } as React.CSSProperties} href="/#contact">
+              {CTA}
             </a>
-          </Reveal>
-        </div>
+            <footer className="foot" style={{ width: "100%" }}>
+              <p>
+                <a className="mark" href="/">
+                  <b>June</b>
+                  <small>Studio de contenu pour les lieux qui se vivent · Montpellier • Alpe d&apos;Huez</small>
+                </a>
+              </p>
+              <nav aria-label="Liens">
+                {INSTAGRAM_URL && (
+                  <a className="link" href={INSTAGRAM_URL} rel="noopener noreferrer" target="_blank">
+                    Instagram
+                  </a>
+                )}
+                <a className="link" href="/">
+                  Accueil
+                </a>
+                <a className="link" href={`mailto:${CONTACT_EMAIL}`}>
+                  Email
+                </a>
+              </nav>
+            </footer>
+          </div>
+        </section>
       </main>
-      <Footer />
     </>
   );
 }
