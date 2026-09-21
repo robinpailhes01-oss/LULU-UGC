@@ -64,7 +64,6 @@ const STEPS: Step[] = [
   },
 ];
 
-const SELECTED = ["Harmonie Yacht", "Hôtel & spa", "Gîte de l'Abric", "Beltra Physical Therapy"];
 const CATEGORY: Record<string, string> = { Tourisme: "Tourism", Hébergement: "Hospitality", "Bien-être": "Wellness", "Restaurant & bar": "Food & Lifestyle" };
 
 const INCLUS: Array<[string, string]> = [
@@ -83,7 +82,7 @@ const FAQ: Array<[string, string[]]> = [
 ];
 
 export default function Home() {
-  const selected = SELECTED.map((n) => works.find((w) => w.nom === n)).filter(Boolean) as typeof works;
+  const selected = works.filter((w) => w.home);
   return (
     <>
       <JuneV3Engine />
@@ -141,14 +140,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. L'expertise June */}
-        <section className="approche light" id="approche" aria-label="L'approche June">
+        {/* 3. Mon approche : le regard, puis la méthode */}
+        <section className="approche light" id="approche" aria-label="Mon approche">
           <div className="wrap approche__grid">
             <figure className="approche__media rv" data-px="16">
               <Media video={VIDEO.approche} poster="/wall/ugc-hotel.jpg" alt="Ludivine en immersion dans une chambre d'hôtel" pos="50% 50%" w={393} h={622} />
             </figure>
             <div className="approche__copy">
-              <p className="k rv">02 — L&apos;approche June</p>
+              <p className="k rv">02 — Mon approche</p>
               <h2 className="d h2 rv" style={rv(80)}>
                 Je ne viens pas simplement
                 <br />
@@ -159,43 +158,33 @@ export default function Home() {
                 <p>Je cherche ce qui va lui permettre de se projeter, de s&apos;imaginer ici et d&apos;avoir envie de vivre l&apos;expérience à son tour.</p>
                 <p>Puis je transforme tout cela en histoires et en contenus.</p>
               </div>
-            </div>
-          </div>
-          <div className="wrap">
-            <p className="d signature rv">
-              Vous faites vivre l&apos;expérience.
-              <br />
-              <em>June trouve comment la raconter.</em>
-            </p>
-            <div className="regard rv" style={rv(120)}>
-              <p className="k">Mon regard extérieur</p>
-              <div className="regard__body">
-                <p className="regard__lead">Avant de créer quoi que ce soit, je regarde ce qui existe déjà.</p>
-                <p className="lines">
-                  Ce que votre communication raconte.
-                  <br />
-                  Ce qu&apos;elle ne raconte pas encore.
-                  <br />
-                  Ce que vos clients vivent réellement.
-                  <br />
-                  Et ce qui pourrait permettre à quelqu&apos;un qui ne vous connaît pas encore de comprendre pourquoi venir chez vous.
-                </p>
-                <p>Je vous conseille ensuite sur ce qui mérite d&apos;être montré, raconté ou créé.</p>
+              <div className="regard rv" style={rv(240)}>
+                <p className="k">Mon regard extérieur</p>
+                <div className="regard__body">
+                  <p className="regard__lead">Avant de créer quoi que ce soit, je regarde ce qui existe déjà.</p>
+                  <p className="lines">
+                    Ce que votre communication raconte.
+                    <br />
+                    Ce qu&apos;elle ne raconte pas encore.
+                    <br />
+                    Ce que vos clients vivent réellement.
+                    <br />
+                    Et ce qui pourrait permettre à quelqu&apos;un qui ne vous connaît pas encore de comprendre pourquoi venir chez vous.
+                  </p>
+                  <p>Je vous conseille ensuite sur ce qui mérite d&apos;être montré, raconté ou créé.</p>
+                </div>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* 4. La méthode */}
-        <section className="methode sand" id="methode" aria-label="La Content Experience, la méthode">
-          <div className="wrap">
+          <div className="wrap methode" id="methode">
             <div className="sec__head">
-              <p className="k rv">03 — La Content Experience</p>
-              <h2 className="d h2 rv" style={rv(80)}>
+              <p className="k rv">Comment ça se passe</p>
+              <h3 className="d h2 rv" style={rv(80)}>
                 Votre expérience est le point de départ.
                 <br />
                 <em>Le contenu vient ensuite.</em>
-              </h2>
+              </h3>
             </div>
             <MethodSteps steps={STEPS} />
             <p className="flow rv" aria-label="Comprendre, révéler, vivre, raconter">
@@ -207,20 +196,22 @@ export default function Home() {
               ))}
             </p>
           </div>
-          <div className="wrap respire rv">
-            <p className="respire__no">Une Content Experience ne commence pas par « Combien de Reels voulez-vous ? »</p>
-            <p className="d respire__yes">
-              Elle commence par : « Qu&apos;est-ce que votre client vit réellement chez vous <em>et qu&apos;est-ce que votre communication n&apos;arrive pas encore à montrer ?</em> »
+
+          <div className="wrap">
+            <p className="d signature rv">
+              Vous faites vivre l&apos;expérience.
+              <br />
+              <em>June trouve comment la raconter.</em>
             </p>
           </div>
         </section>
 
-        {/* 5. La preuve */}
-        <section className="work light" id="experiences" aria-label="Selected experiences">
+        {/* 4. Mon travail */}
+        <section className="work sand" id="travail" aria-label="Mon travail">
           <div className="wrap">
             <div className="sec__head sec__head--row">
               <div>
-                <p className="k rv">04 — Selected experiences</p>
+                <p className="k rv">03 — Mon travail</p>
                 <h2 className="d h2 rv" style={rv(80)}>
                   Des expériences
                   <br />
@@ -229,32 +220,41 @@ export default function Home() {
               </div>
               <p className="work__sub rv" style={rv(160)}>Parce que le meilleur moyen de comprendre mon travail reste encore de le voir.</p>
             </div>
-            <div className="proof">
+            <div className="grid">
               {selected.map((wk, i) => {
-                const cat = `${CATEGORY[wk.univers] ?? wk.univers} • Experience`;
+                const cat = `${CATEGORY[wk.univers] ?? wk.univers} • ${wk.type}`;
                 const inner = (
                   <>
-                    <figure className="plate proof__plate" data-dev>
+                    <figure className="plate" data-dev>
                       <img src={wk.image} alt={`${wk.nom} : ${cat}`} width={wk.w} height={wk.h} loading="lazy" style={posOf(wk.pos)} />
                       {wk.video && (
                         <video data-auto="hover" muted loop playsInline preload="none" poster={wk.image} aria-hidden="true" style={posOf(wk.pos)}>
                           <source src={wk.video} type="video/mp4" />
                         </video>
                       )}
+                      {wk.vues && (
+                        <span className="plate__vues">
+                          <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z" />
+                            <circle cx="12" cy="12" r="3" />
+                          </svg>
+                          {wk.vues} vues
+                        </span>
+                      )}
                       {wk.video && <span className="plate__play" aria-hidden="true" />}
                     </figure>
-                    <span className="proof__cap">
+                    <span className="grid__cap">
                       <b>{wk.nom}</b>
                       <span>{cat}</span>
                     </span>
                   </>
                 );
                 return wk.href ? (
-                  <a className="proof__it rv" style={rv((i % 2) * 120)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
+                  <a className="grid__it rv" style={rv((i % 5) * 70)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
                     {inner}
                   </a>
                 ) : (
-                  <div className="proof__it rv" style={rv((i % 2) * 120)} key={wk.nom} data-hover-host>
+                  <div className="grid__it rv" style={rv((i % 5) * 70)} key={wk.nom} data-hover-host>
                     {inner}
                   </div>
                 );
@@ -268,11 +268,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. L'accompagnement */}
-        <section className="offre night" id="content-experience" data-dark aria-label="Work with June">
+        {/* 5. L'accompagnement */}
+        <section className="offre night" id="offre" data-dark aria-label="Work with June">
           <div className="wrap offre__grid">
             <div className="offre__side">
-              <p className="k rv">05 — Work with June</p>
+              <p className="k rv">04 — Work with June</p>
               <h2 className="d offre__title rv" style={rv(80)}>
                 Content{" "}
                 <span className="nowrap">
@@ -311,7 +311,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 7. Ludivine */}
+        {/* 6. Ludivine */}
         <section className="about light" id="apropos" aria-label="Behind June">
           <div className="wrap about__grid">
             <figure className="about__media plate plate--photo rv" data-dev>

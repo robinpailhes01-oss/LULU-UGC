@@ -10,9 +10,9 @@ export const VIDEO = {
   alpe: "/video/alpe.mp4",
 };
 export const NAV = [
-  ["Approche", "#approche"],
-  ["Expériences", "#experiences"],
-  ["Content Experience", "#content-experience"],
+  ["Mon approche", "#approche"],
+  ["Mon travail", "#travail"],
+  ["Offre", "#offre"],
   ["À propos", "#apropos"],
 ] as const;
 export const NAV_MOBILE = [...NAV, ["Contact", "#contact"]] as const;
