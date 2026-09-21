@@ -323,7 +323,7 @@ export default function Home() {
         <section className="about light" id="apropos" aria-label="Behind June">
           <div className="wrap about__grid">
             <figure className="about__media plate plate--photo rv" data-dev>
-              <img src="/portrait.jpg" alt="Ludivine, fondatrice de June" width={1122} height={1402} loading="lazy" style={posOf("50% 30%")} />
+              <img src="/ludivine.jpg" alt="Ludivine, fondatrice de June, caméra en main" width={1111} height={1415} loading="lazy" style={posOf("50% 35%")} />
             </figure>
             <div className="about__copy">
               <p className="k rv">Behind June</p>
@@ -357,7 +357,7 @@ export default function Home() {
 
         {/* Bandeau saisonnier */}
         <section className="alpe" id="alpe" data-dark aria-label="Alpe d'Huez, hiver 26/27">
-          <Media video={VIDEO.alpe} poster="/realisations/shooting-hotel-jardins-vue.jpg" alt="En attendant les images de l'Alpe d'Huez" pos="50% 35%" w={1080} h={1616} px={24} />
+          <Media video={VIDEO.alpe} poster="/alpe.jpg" alt="Un chalet sous la neige face aux montagnes" pos="60% 55%" w={1080} h={1616} px={24} />
           <div className="wrap alpe__inner">
             <div className="alpe__copy">
               <p className="k rv">Winter 26/27</p>

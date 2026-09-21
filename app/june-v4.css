@@ -241,8 +241,8 @@ body.v4.menu-open { overflow: hidden; }
 /* bandeau alpe d'huez */
 .alpe { overflow: hidden; color: var(--night-ink); padding-block: clamp(5rem, 10vw, 8rem); background: var(--night); }
 .alpe .media { position: absolute; inset: 0; }
-.alpe .media img { filter: brightness(0.55) saturate(0.6); }
-.alpe::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(33, 28, 24, 0.82), rgba(33, 28, 24, 0.35)); pointer-events: none; }
+.alpe .media img { filter: brightness(0.8); }
+.alpe::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(33, 28, 24, 0.78) 0%, rgba(33, 28, 24, 0.45) 55%, rgba(33, 28, 24, 0.25) 100%); pointer-events: none; }
 .alpe__inner { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem 4rem; flex-wrap: wrap; }
 .alpe__copy { display: flex; flex-direction: column; gap: 1.2rem; max-width: 40rem; }
 .alpe .k { color: rgba(244, 240, 232, 0.8); }
