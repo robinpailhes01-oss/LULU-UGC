@@ -160,7 +160,7 @@ export default function Home() {
 
           <div className="wrap regard">
             <figure className="regard__media rv" data-px="16">
-              <Media video={VIDEO.approche} poster="/wall/ugc-hotel.jpg" alt="Ludivine en immersion dans une chambre d'hôtel" pos="50% 50%" w={393} h={622} />
+              <Media video={VIDEO.approche} poster="/regard.jpg" alt="Ludivine prend des notes, carnet et téléphone en main, la caméra posée à côté" pos="50% 40%" w={1127} h={1408} />
             </figure>
             <div className="regard__copy">
               <p className="k rv">Mon regard extérieur</p>
