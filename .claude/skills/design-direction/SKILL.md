@@ -92,3 +92,6 @@ La retenue est ce qui fait « premium ». Trop d'animation = effet IA génériqu
   classes par section.
 - Multiplier les accents colorés : un seul accent (chestnut), une seule lumière (honey).
 - « Décorer » avec des numéros 01/02/03 si le contenu n'est pas une vraie séquence.
+
+
+> Mise à jour 2026-09-21 : le brief « version claire » (docs/brief-site-clair.md) fait foi pour la palette, le menu, l'ordre des sections et les textes de l'accueil. En cas de contradiction avec ce qui précède, suivre ce brief.

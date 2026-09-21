@@ -1,18 +1,19 @@
-/** Constantes du site June Content Studio. */
-
+/** Coordonnées et libellés partagés. Un lien vide n'affiche rien. */
 export const CONTACT_EMAIL = "harmonieyacht@gmail.com";
-
-/** Lien Instagram : à confirmer par Ludivine (rien n'est affiché tant qu'il est vide). */
 export const INSTAGRAM_URL = "";
-
+export const TIKTOK_URL = "";
+export const LINKEDIN_URL = "";
 export const CTA = "Parler de mon projet";
-
-/**
- * Emplacements des vidéos. Déposer les fichiers dans public/video/ avec ces
- * noms : tant qu'un fichier manque, l'image d'attente (poster) reste affichée.
- */
 export const VIDEO = {
   hero: "/video/hero.mp4",
   approche: "/video/approche.mp4",
   alpe: "/video/alpe.mp4",
 };
+export const NAV = [
+  ["Accueil", "#top"],
+  ["Approche", "#approche"],
+  ["Expériences", "#experiences"],
+  ["Offre", "#offre"],
+  ["À propos", "#apropos"],
+] as const;
+export const NAV_MOBILE = [...NAV, ["FAQ", "#faq"], ["Contact", "#contact"]] as const;

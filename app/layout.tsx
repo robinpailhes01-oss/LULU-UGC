@@ -4,7 +4,7 @@ import "./globals.css";
 import "./scrollcraft.css";
 import "./june.css";
 import "./june-v1.css";
-import "./june-v3.css";
+import "./june-v4.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -27,13 +27,13 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "June · Studio de contenu pour les lieux qui se vivent",
+  title: "June · Content Experience Studio",
   description:
-    "Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. Je viens vivre votre établissement comme vos clients, et je vous rends des vidéos et des photos prêtes à publier. Hôtels, chalets, maisons d'hôtes, spas, restaurants, expériences. Montpellier • Alpe d'Huez, hiver 26/27.",
+    "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre. J'accompagne les établissements et expériences à révéler ce que leurs clients vivent réellement chez eux, pour le transformer en contenu dans lequel leurs futurs clients peuvent se projeter. Montpellier • France • Alpe d'Huez, hiver 26/27.",
   openGraph: {
     title: "June Content Studio",
     description:
-      "Des lieux qui font vivre quelque chose. Des contenus qui donnent envie de le vivre. Content Experience : une immersion dans votre univers pour comprendre, raconter & créer.",
+      "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre. Content Experience : comprendre, révéler, vivre, raconter.",
     locale: "fr_FR",
     type: "website",
   },

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import JuneV3Engine from "@/components/june/JuneV3Engine";
 import SiteNav from "@/components/june/SiteNav";
 import WorkGallery from "@/components/june/WorkGallery";
-import { CONTACT_EMAIL, CTA, INSTAGRAM_URL } from "@/lib/site";
+import SiteFooter from "@/components/june/SiteFooter";
+import { CTA } from "@/lib/site";
 import { works } from "@/lib/work";
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function PortfolioPage() {
       <SiteNav home={false} />
 
       <main id="top">
-        <section className="pf night" data-dark aria-label="Réalisations">
+        <section className="pf light" aria-label="Réalisations">
           <div className="wrap pf__inner">
             <p className="k rv">Réalisations</p>
             <h1 className="d h1 rv" style={{ "--rd": "80ms" } as React.CSSProperties}>
@@ -36,39 +37,19 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        <section className="night" data-dark aria-label="Contact">
+        <section className="sand" aria-label="Contact">
           <div className="wrap pf__end">
-            <p className="k k--c rv">Parlons de votre expérience</p>
+            <p className="k rv">Parlons de votre expérience</p>
             <h2 className="d h2 rv" style={{ "--rd": "80ms" } as React.CSSProperties}>
-              Et si on racontait votre expérience <em>avant même qu&apos;elle soit vécue ?</em>
+              Vous avez une expérience à faire vivre ? <em>Voyons comment la raconter.</em>
             </h2>
             <a className="btn btn--fill rv" style={{ "--rd": "160ms" } as React.CSSProperties} href="/#contact">
               {CTA}
             </a>
-            <footer className="foot" style={{ width: "100%" }}>
-              <p>
-                <a className="mark" href="/">
-                  <b>June</b>
-                  <small>Studio de contenu pour les lieux qui se vivent · Montpellier • Alpe d&apos;Huez</small>
-                </a>
-              </p>
-              <nav aria-label="Liens">
-                {INSTAGRAM_URL && (
-                  <a className="link" href={INSTAGRAM_URL} rel="noopener noreferrer" target="_blank">
-                    Instagram
-                  </a>
-                )}
-                <a className="link" href="/">
-                  Accueil
-                </a>
-                <a className="link" href={`mailto:${CONTACT_EMAIL}`}>
-                  Email
-                </a>
-              </nav>
-            </footer>
           </div>
         </section>
       </main>
+      <SiteFooter home={false} />
     </>
   );
 }

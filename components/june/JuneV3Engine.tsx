@@ -15,10 +15,11 @@ export default function JuneV3Engine() {
     const hover = matchMedia("(hover: hover)").matches;
     const doc = document.documentElement;
     const body = document.body;
-    body.classList.add("v3");
+    body.classList.add("v3", "v4");
     const nav = document.getElementById("nav");
     const plates = Array.from(document.querySelectorAll<HTMLElement>(".plate[data-dev]"));
     const darks = Array.from(document.querySelectorAll<HTMLElement>("[data-dark]"));
+    const pxs = Array.from(document.querySelectorAll<HTMLElement>("[data-px]"));
 
     const STOPS: Array<[number, [number, number, number]]> = [
       [0, [244, 240, 232]],
@@ -77,7 +78,17 @@ export default function JuneV3Engine() {
           return r.top <= 44 && r.bottom >= 44;
         })
       );
-      if (!reduce) develop();
+      if (!reduce) {
+        develop();
+        /* parallaxe très discrète : quelques pixels sur les grandes images */
+        for (const el of pxs) {
+          const r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) continue;
+          const c = (r.top + r.height / 2 - vh / 2) / vh;
+          const k = parseFloat(el.dataset.px || "24");
+          el.style.setProperty("--px", `${(c * k).toFixed(1)}px`);
+        }
+      }
     };
     const onScroll = () => {
       if (queued) return;
@@ -154,7 +165,7 @@ export default function JuneV3Engine() {
       });
       doc.style.removeProperty("--day");
       doc.style.removeProperty("--sc-canvas");
-      body.classList.remove("v3", "on-dark");
+      body.classList.remove("v3", "v4", "on-dark");
     };
   }, []);
 

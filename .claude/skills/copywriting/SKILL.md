@@ -51,3 +51,6 @@ ne l'a pas confirmée.
 ## À éviter
 Jargon marketing, superlatifs, « contenu premium », « stratégie », « visibilité 360 »,
 « booster », « n'hésitez pas », community management, promesse de résultats.
+
+
+> Mise à jour 2026-09-21 : le brief « version claire » (docs/brief-site-clair.md) fait foi pour la palette, le menu, l'ordre des sections et les textes de l'accueil. En cas de contradiction avec ce qui précède, suivre ce brief.

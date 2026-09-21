@@ -65,3 +65,6 @@ doit presque vivre une Content Experience en parcourant le site. DA conservée (
 - Ne jamais promettre de résultats chiffrés. Contenus prévus pour un usage organique ; droits
   publicitaires en supplément.
 - Pas d'agence, pas d'équipe. Vocabulaire : expérience, ressentir, vivre, raconter.
+
+
+> Mise à jour 2026-09-21 : le brief « version claire » (docs/brief-site-clair.md) fait foi pour la palette, le menu, l'ordre des sections et les textes de l'accueil. En cas de contradiction avec ce qui précède, suivre ce brief.
