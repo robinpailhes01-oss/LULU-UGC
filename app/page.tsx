@@ -1,16 +1,16 @@
 import type React from "react";
 import JuneV3Engine from "@/components/june/JuneV3Engine";
 import JuneContact from "@/components/june/JuneContact";
+import MethodSteps, { type Step } from "@/components/june/MethodSteps";
 import SiteNav from "@/components/june/SiteNav";
 import SiteFooter from "@/components/june/SiteFooter";
 import { VIDEO } from "@/lib/site";
 import { works } from "@/lib/work";
 
 /*
-   Accueil June Content Studio, version claire (brief du 2026-09-21).
-   Ivoire dominant, quelques grandes images immersives, brun très foncé
-   réservé à l'offre, à l'Alpe d'Huez, au menu mobile et au pied de page.
-   Les textes sont ceux du brief, sans ajout.
+   Accueil June Content Studio, refonte du 2026-09-21 : sept grands blocs,
+   une idée par écran, les réalisations tôt, un seul chemin vers le contact.
+   Hero sombre, puis ivoire ; brun très foncé pour l'offre et le pied de page.
 */
 
 const rv = (ms: number) => ({ "--rd": `${ms}ms` }) as React.CSSProperties;
@@ -29,51 +29,68 @@ function Media({ video, poster, alt, pos, w, h, eager, auto = "view", px }: { vi
   );
 }
 
-const MOMENTS = ["Une arrivée", "Un réveil", "Une attention", "Un dîner", "Un moment de déconnexion", "Une activité", "Un détail", "Une journée entière"];
-const FORMATS = ["Reels", "UGC", "Vidéos immersives", "Photos & lifestyle", "Stories"];
-
-const STEPS: Array<[string, string, string, string, string]> = [
-  ["01", "Comprendre", "Votre lieu, vos clients, votre univers, vos objectifs et ce que vous souhaitez faire ressentir.", "/realisations/shooting-hotel-jardins-vue.jpg", "50% 40%"],
-  ["02", "Révéler", "Les moments, détails, sensations et histoires qui rendent votre expérience particulière.", "/realisations/shooting-hotel-balcon-fleuri.jpg", "50% 45%"],
-  ["03", "Vivre", "Je viens sur place et découvre l'expérience comme pourrait le faire votre futur client.", "/wall/ugc-hotel.jpg", "50% 50%"],
-  ["04", "Raconter", "Je transforme cette matière en contenus pensés pour permettre à votre futur client de comprendre, ressentir et se projeter.", "/wall/yacht-reel.jpg", "50% 40%"],
+const STEPS: Step[] = [
+  {
+    n: "01",
+    title: "Comprendre",
+    text: ["Votre expérience, vos clients, vos objectifs et ce que vous souhaitez leur faire ressentir.", "L'objectif est aussi d'identifier ce qui fonctionne déjà, ce qui manque et ce que votre communication ne raconte pas encore suffisamment."],
+    image: "/realisations/shooting-hotel-jardins-vue.jpg",
+    pos: "50% 40%",
+    alt: "Vue sur les jardins d'un hôtel",
+  },
+  {
+    n: "02",
+    title: "Révéler & raconter",
+    text: ["Identifier les moments, détails, émotions, histoires et angles qui permettront à votre futur client de comprendre ce qui rend votre expérience particulière.", "À cette étape, June apporte ses recommandations et construit la direction créative."],
+    image: "/realisations/shooting-hotel-balcon-fleuri.jpg",
+    pos: "50% 45%",
+    alt: "Un balcon fleuri au petit matin",
+  },
+  {
+    n: "03",
+    title: "Vivre & créer",
+    text: ["Lorsque la création de contenu est pertinente, je viens vivre l'expérience sur place comme pourrait le faire votre client.", "Je capture et/ou incarne les moments nécessaires pour donner vie aux histoires identifiées ensemble."],
+    image: "/wall/ugc-hotel.jpg",
+    pos: "50% 50%",
+    alt: "Ludivine vit l'expérience d'une chambre d'hôtel",
+  },
+  {
+    n: "04",
+    title: "Vous donner la matière",
+    text: ["Vous repartez avec les contenus, formats et recommandations nécessaires pour raconter votre expérience sous différents angles.", "Reels, UGC, vidéos, photos ou autres formats sont choisis en fonction de ce qu'il y a réellement à raconter."],
+    image: "/wall/yacht-reel.jpg",
+    pos: "50% 40%",
+    alt: "Une vidéo publiée pour Harmonie Yacht",
+  },
 ];
 
-const UNIVERS: Array<[string, string, string, string]> = [
-  ["Hospitality", "Hôtels • Chalets • Hébergements • Insolite", "/realisations/shooting-hotel-chambre.jpg", "50% 45%"],
-  ["Wellness", "Spas • Instituts • Expériences bien-être", "/realisations/beltra-therapy.jpg", "50% 30%"],
-  ["Tourism", "Activités • Loisirs • Expériences touristiques", "/realisations/harmonie-yacht-shooting.jpg", "50% 35%"],
-  ["Food & Lifestyle", "Restaurants • Bars • Lieux expérientiels", "/wall/unamas.jpg", "50% 40%"],
-  ["Retreats", "Yoga • Wellness • Séjours thématiques", "/realisations/shooting-hotel-jardins.jpg", "50% 50%"],
-  ["Intimate Experiences", "Pop-up • Événements intimistes • Expériences de marque", "/realisations/shooting-hotel-couple-terrasse.jpg", "50% 40%"],
-];
+const SELECTED = ["Harmonie Yacht", "Hôtel & spa", "Gîte de l'Abric", "Beltra Physical Therapy"];
+const CATEGORY: Record<string, string> = { Tourisme: "Tourism", Hébergement: "Hospitality", "Bien-être": "Wellness", "Restaurant & bar": "Food & Lifestyle" };
 
-const OFFRE: Array<[string, string]> = [
-  ["Échange & analyse du besoin", "Comprendre où vous en êtes et ce que vous souhaitez réellement travailler."],
-  ["Regard sur l'expérience client", "Identifier ce qui mérite d'être révélé."],
-  ["Direction créative & storytelling", "Trouver les histoires, angles et intentions."],
-  ["Immersion sur place", "Vivre et créer au cœur de l'expérience."],
-  ["Création & post-production", "Selon les formats définis ensemble."],
-  ["Content board", "Organiser les contenus créés et faciliter leur utilisation."],
+const INCLUS: Array<[string, string]> = [
+  ["Regard extérieur", "Analyse de votre expérience et de votre communication."],
+  ["Recommandations", "Ce qui manque, ce qui mérite d'être raconté et les opportunités de contenu."],
+  ["Direction créative", "Histoires, angles, moments et formats à privilégier."],
+  ["Création", "Immersion et production de la matière nécessaire lorsque le projet le demande."],
 ];
 
 const FAQ: Array<[string, string[]]> = [
-  ["Qu'est-ce qu'une Content Experience ?", ["Une immersion dans votre univers pour comprendre ce que vous faites réellement vivre à vos clients, et le transformer en contenu dans lequel vos futurs clients peuvent se projeter.", "Avant de créer, nous travaillons sur votre expérience, les histoires à raconter et les contenus dont vous avez réellement besoin."]],
-  ["Quels types de contenus pouvez-vous créer ?", ["Selon votre projet : Reels, vidéos immersives, vidéos où je vis l'expérience à la place de vos clients, photos & lifestyle, stories.", "Les formats sont définis ensemble selon votre expérience, vos objectifs et les histoires que nous souhaitons raconter."]],
-  ["Est-ce uniquement destiné aux hôtels ?", ["Non.", "June travaille avec les lieux et expériences qui ont quelque chose à faire vivre et à raconter : hôtels, hébergements, wellness, restaurants, activités touristiques, retraites, séjours expérientiels ou encore événements intimistes."]],
-  ["Combien coûte une Content Experience ?", ["Les projets débutent à partir de 490 € TTC.", "Le tarif dépend ensuite de l'expérience, de la durée de l'immersion, des contenus à créer, des éventuels déplacements et des besoins spécifiques du projet.", "Un devis personnalisé est réalisé avant chaque collaboration."]],
-  ["Où vous déplacez-vous ?", ["June est basée entre Montpellier et l'Alpe d'Huez pour la saison hiver 2026/27, mais je peux me déplacer ailleurs en France selon les projets.", "Les éventuels frais de déplacement sont simplement définis en amont, dans le devis."]],
+  ["Qu'est-ce qu'une Content Experience ?", ["Un accompagnement qui commence par votre expérience : ce que vos clients vivent réellement chez vous et ce que votre communication ne montre pas encore.", "J'apporte d'abord un regard extérieur et des recommandations, puis je construis la manière de la raconter et je crée la matière nécessaire."]],
+  ["Est-ce que je dois déjà savoir quels contenus je veux ?", ["Non. C'est justement le point de départ de mon travail.", "On commence par votre expérience et votre communication actuelle. Les formats viennent ensuite, en fonction de ce qu'il y a réellement à raconter."]],
+  ["Quels types d'établissements accompagnez-vous ?", ["Les lieux et expériences qui ont quelque chose à faire vivre : hôtels, chalets, hébergements, spas, restaurants, activités touristiques, retraites, séjours ou événements intimistes."]],
+  ["Combien coûte une Content Experience ?", ["Les projets débutent à partir de 490 € TTC.", "Le tarif dépend ensuite de l'expérience, de l'immersion, des contenus à créer et des éventuels déplacements. Un devis est réalisé avant chaque collaboration."]],
+  ["Où vous déplacez-vous ?", ["June est basée entre Montpellier et l'Alpe d'Huez pour la saison hiver 2026/27, et je me déplace ailleurs en France selon les projets.", "Les éventuels frais de déplacement sont définis en amont, dans le devis."]],
 ];
 
 export default function Home() {
-  const selected = works.filter((w) => w.home && !w.feature);
+  const selected = SELECTED.map((n) => works.find((w) => w.nom === n)).filter(Boolean) as typeof works;
   return (
     <>
       <JuneV3Engine />
       <SiteNav />
 
       <main id="top">
-        {/* 4. Hero */}
+        {/* 1. Hero */}
         <section className="hero" data-dark aria-label="June, Content Experience Studio">
           <Media video={VIDEO.hero} poster="/realisations/shooting-hotel-terrasse.jpg" alt="Terrasse d'un hôtel & spa au soleil couchant" pos="70% 45%" w={1080} h={1616} eager px={30} />
           <div className="hero__inner">
@@ -84,120 +101,105 @@ export default function Home() {
               Des lieux qui font vivre une expérience. <em>Des contenus qui donnent envie de la vivre.</em>
             </h1>
             <p className="hero__lede rise" style={{ "--d": "360ms" } as React.CSSProperties}>
-              J&apos;accompagne les établissements et expériences à révéler ce que leurs clients vivent réellement chez eux, pour le transformer en contenu dans lequel leurs futurs clients peuvent se projeter.
+              J&apos;accompagne les établissements à révéler leur expérience pour que leurs futurs clients puissent la comprendre, la ressentir et s&apos;y projeter avant même de venir.
             </p>
-            <p className="hero__fmt rise" style={{ "--d": "460ms" } as React.CSSProperties}>
-              Hospitality • Tourism • Experiences
-            </p>
-            <a className="btn btn--light rise" style={{ "--d": "560ms" } as React.CSSProperties} href="#approche">
-              Découvrir ma Content Experience
+            <a className="btn btn--light rise" style={{ "--d": "480ms" } as React.CSSProperties} href="#approche">
+              Découvrir la Content Experience
             </a>
           </div>
-          <p className="hero__place rise" style={{ "--d": "700ms" } as React.CSSProperties}>
-            Montpellier • France • Alpe d&apos;Huez — Hiver 26/27
-          </p>
-        </section>
-
-        {/* 5. Manifeste */}
-        <section className="manif light" aria-label="Manifeste">
-          <div className="manif__media">
-            <Media poster="/realisations/shooting-hotel-moment-a-deux.jpg" alt="Un moment à deux sur un balcon d'hôtel" pos="50% 40%" w={1080} h={1616} px={22} />
-          </div>
-          <div className="manif__copy">
-            <p className="num rv">01</p>
-            <h2 className="d h2 rv" style={rv(80)}>
-              Je ne crée pas du contenu
-              <br />
-              pour remplir vos réseaux.
-            </h2>
-            <p className="lede rv" style={rv(160)}>
-              Je transforme l&apos;expérience que vos clients vont vivre chez vous en contenu pour qu&apos;ils puissent déjà se projeter, l&apos;imaginer et avoir envie de la vivre.
-            </p>
+          <div className="hero__foot rise" style={{ "--d": "700ms" } as React.CSSProperties}>
+            <span>Hospitality • Tourism • Experiences</span>
+            <span>Montpellier • France • Alpe d&apos;Huez — Hiver 26/27</span>
           </div>
         </section>
 
-        {/* 6. Expertise / approche */}
-        <section className="approche light" id="approche" aria-label="Content Experience, l'approche">
-          <div className="wrap approche__grid">
-            <div className="approche__copy">
-              <p className="k rv">02 — Content Experience</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Avant de savoir quoi filmer,
-                <br />
-                je cherche à comprendre ce que vous faites vivre.
+        {/* 2. Le problème */}
+        <section className="probleme light" aria-label="Le point de départ">
+          <div className="wrap probleme__grid">
+            <div className="probleme__copy">
+              <p className="k rv">01 — Le point de départ</p>
+              <h2 className="d h2 h2--xl rv" style={rv(80)}>
+                Votre expérience est peut-être plus forte dans la vraie vie <em>que dans votre communication.</em>
               </h2>
               <div className="ed rv" style={rv(160)}>
-                <p>Un client ne réserve pas seulement une chambre, un soin, une table ou une activité.</p>
-                <p>Il réserve aussi un moment, une ambiance, une sensation, une façon de vivre l&apos;expérience.</p>
-                <p>Quand je découvre votre établissement, je me mets à la place de votre futur client : qu&apos;est-ce qu&apos;il va vivre ? Qu&apos;est-ce qui va le marquer ? Qu&apos;est-ce qu&apos;il doit voir ou ressentir pour réussir à se projeter ?</p>
-                <p>Ensuite seulement, je réfléchis aux histoires, aux angles et aux contenus qui permettront de le raconter.</p>
+                <p className="lines">
+                  Votre lieu peut être magnifique.
+                  <br />
+                  Votre accueil peut être incroyable.
+                  <br />
+                  Vos clients peuvent repartir enchantés.
+                </p>
+                <p>Mais si tout cela ne se ressent pas dans votre contenu, votre futur client ne peut pas encore comprendre ce qui rend réellement votre expérience différente.</p>
               </div>
-              <p className="pull d rv" style={rv(240)}>
-                L&apos;expérience existe déjà.
-                <br />
-                <em>Mon travail est de révéler ce qu&apos;il y a à raconter.</em>
+              <p className="d strong rv" style={rv(240)}>
+                C&apos;est là que June intervient.
               </p>
             </div>
-            <figure className="approche__media plate plate--photo rv" data-dev style={rv(120)}>
-              <Media video={VIDEO.approche} poster="/wall/ugc-hotel.jpg" alt="Ludivine en immersion dans une chambre d'hôtel" pos="50% 50%" w={393} h={622} px={16} />
+            <figure className="probleme__media rv" style={rv(120)}>
+              <Media poster="/realisations/shooting-hotel-moment-a-deux.jpg" alt="Un moment à deux sur un balcon d'hôtel" pos="50% 40%" w={1080} h={1616} px={20} />
             </figure>
           </div>
         </section>
 
-        {/* 7. Avant la Content Experience */}
-        <section className="avant sand" aria-label="Avant la Content Experience">
-          <div className="wrap avant__grid">
-            <div>
-              <p className="k rv">Avant la Content Experience</p>
+        {/* 3. L'expertise June */}
+        <section className="approche light" id="approche" aria-label="L'approche June">
+          <div className="wrap approche__grid">
+            <figure className="approche__media rv" data-px="16">
+              <Media video={VIDEO.approche} poster="/wall/ugc-hotel.jpg" alt="Ludivine en immersion dans une chambre d'hôtel" pos="50% 50%" w={393} h={622} />
+            </figure>
+            <div className="approche__copy">
+              <p className="k rv">02 — L&apos;approche June</p>
               <h2 className="d h2 rv" style={rv(80)}>
-                On commence simplement
+                Je ne viens pas simplement
                 <br />
-                par parler de votre projet.
+                filmer votre établissement.
               </h2>
-            </div>
-            <div className="avant__copy">
-              <div className="ed rv">
-                <p>Vous me racontez votre établissement, votre expérience, ce que vous faites aujourd&apos;hui et surtout ce que vous aimeriez réussir à mieux montrer ou faire ressentir.</p>
-                <p>De mon côté, je prends un premier regard extérieur sur votre communication et votre expérience.</p>
-                <p>On échange sur vos objectifs, vos besoins et ce qui pourrait être intéressant à raconter, mais aussi sur ce qui est réellement pertinent pour vous.</p>
+              <div className="ed rv" style={rv(160)}>
+                <p>Je découvre votre expérience comme pourrait le faire votre futur client : ce qu&apos;il voit, ce qu&apos;il ressent, les moments qu&apos;il vit et les détails dont il se souviendra.</p>
+                <p>Je cherche ce qui va lui permettre de se projeter, de s&apos;imaginer ici et d&apos;avoir envie de vivre l&apos;expérience à son tour.</p>
+                <p>Puis je transforme tout cela en histoires et en contenus.</p>
               </div>
-              <p className="pull d rv" style={rv(120)}>
-                Mon objectif n&apos;est pas de vous vendre du contenu à tout prix.
-                <br />
-                <em>C&apos;est de voir si mon approche peut réellement répondre à votre besoin.</em>
-              </p>
-              <a className="btn rv" style={rv(200)} href="#contact">
-                Parler de mon projet
-              </a>
+            </div>
+          </div>
+          <div className="wrap">
+            <p className="d signature rv">
+              Vous faites vivre l&apos;expérience.
+              <br />
+              <em>June trouve comment la raconter.</em>
+            </p>
+            <div className="regard rv" style={rv(120)}>
+              <p className="k">Mon regard extérieur</p>
+              <div className="regard__body">
+                <p className="regard__lead">Avant de créer quoi que ce soit, je regarde ce qui existe déjà.</p>
+                <p className="lines">
+                  Ce que votre communication raconte.
+                  <br />
+                  Ce qu&apos;elle ne raconte pas encore.
+                  <br />
+                  Ce que vos clients vivent réellement.
+                  <br />
+                  Et ce qui pourrait permettre à quelqu&apos;un qui ne vous connaît pas encore de comprendre pourquoi venir chez vous.
+                </p>
+                <p>Je vous conseille ensuite sur ce qui mérite d&apos;être montré, raconté ou créé.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* 8. Méthode */}
-        <section className="methode light" id="methode" aria-label="La méthode Content Experience">
+        {/* 4. La méthode */}
+        <section className="methode sand" id="methode" aria-label="La Content Experience, la méthode">
           <div className="wrap">
             <div className="sec__head">
-              <p className="k rv">03 — The Content Experience</p>
+              <p className="k rv">03 — La Content Experience</p>
               <h2 className="d h2 rv" style={rv(80)}>
-                Une méthode pensée
+                Votre expérience est le point de départ.
                 <br />
-                autour de votre expérience.
+                <em>Le contenu vient ensuite.</em>
               </h2>
             </div>
-            <ol className="steps">
-              {STEPS.map(([n, t, p, img, pos], i) => (
-                <li className="step rv" style={rv(i * 120)} key={n}>
-                  <figure className="plate plate--photo" data-dev>
-                    <img src={img} alt={`${t} : ${p}`} width={1080} height={1350} loading="lazy" style={posOf(pos)} />
-                  </figure>
-                  <p className="step__n">{n}</p>
-                  <h3>{t}</h3>
-                  <p>{p}</p>
-                </li>
-              ))}
-            </ol>
+            <MethodSteps steps={STEPS} />
             <p className="flow rv" aria-label="Comprendre, révéler, vivre, raconter">
-              {STEPS.map(([, t], i) => (
+              {["Comprendre", "Révéler", "Vivre", "Raconter"].map((t, i) => (
                 <span key={t}>
                   {i > 0 && <i aria-hidden="true">→</i>}
                   {t}
@@ -205,163 +207,111 @@ export default function Home() {
               ))}
             </p>
           </div>
+          <div className="wrap respire rv">
+            <p className="respire__no">Une Content Experience ne commence pas par « Combien de Reels voulez-vous ? »</p>
+            <p className="d respire__yes">
+              Elle commence par : « Qu&apos;est-ce que votre client vit réellement chez vous <em>et qu&apos;est-ce que votre communication n&apos;arrive pas encore à montrer ?</em> »
+            </p>
+          </div>
         </section>
 
-        {/* 9. Une expérience, plusieurs histoires */}
-        <section className="histoires sand" aria-label="Une expérience, plusieurs histoires">
+        {/* 5. La preuve */}
+        <section className="work light" id="experiences" aria-label="Selected experiences">
           <div className="wrap">
-            <div className="sec__head">
-              <p className="k rv">One experience. Different stories.</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Une expérience ne se raconte
-                <br />
-                jamais d&apos;une seule façon.
-              </h2>
-            </div>
-            <div className="histoires__grid">
-              <ul className="moments rv" style={rv(120)}>
-                {MOMENTS.map((m) => (
-                  <li className="d" key={m}>
-                    {m}
-                  </li>
-                ))}
-              </ul>
-              <div className="histoires__side">
-                <div className="histoires__pics rv" style={rv(160)}>
-                  <figure className="plate" data-dev>
-                    <img src="/realisations/shooting-hotel-balcon.jpg" alt="Un réveil sur un balcon d'hôtel" width={1080} height={1616} loading="lazy" style={posOf("50% 40%")} />
-                  </figure>
-                  <figure className="plate" data-dev>
-                    <img src="/wall/unamas.jpg" alt="Un dîner entre amis" width={392} height={629} loading="lazy" style={posOf("50% 40%")} />
-                  </figure>
-                  <figure className="plate" data-dev>
-                    <img src="/wall/ugc-bateau.jpg" alt="Une activité en mer" width={386} height={615} loading="lazy" style={posOf("50% 40%")} />
-                  </figure>
-                </div>
-                <p className="lede rv" style={rv(200)}>C&apos;est à partir de ces moments que je construis vos contenus.</p>
-                <ul className="formats rv" style={rv(240)} aria-label="Formats">
-                  {FORMATS.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-                <p className="pull d rv" style={rv(280)}>
-                  Je ne pars pas d&apos;un nombre de Reels à produire.
+            <div className="sec__head sec__head--row">
+              <div>
+                <p className="k rv">04 — Selected experiences</p>
+                <h2 className="d h2 rv" style={rv(80)}>
+                  Des expériences
                   <br />
-                  <em>Je pars de ce qu&apos;il y a à raconter.</em>
-                </p>
+                  racontées par June.
+                </h2>
               </div>
+              <p className="work__sub rv" style={rv(160)}>Parce que le meilleur moyen de comprendre mon travail reste encore de le voir.</p>
             </div>
-          </div>
-        </section>
-
-        {/* 10. Pour qui */}
-        <section className="pourqui light" id="pour-qui" aria-label="Pour qui">
-          <div className="wrap">
-            <div className="sec__head">
-              <p className="k rv">Hospitality • Tourism • Experiences</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Pour les lieux que l&apos;on choisit
-                <br />
-                autant pour ce qu&apos;ils proposent
-                <br />
-                que pour ce qu&apos;on va y vivre.
-              </h2>
-            </div>
-            <ul className="tiles">
-              {UNIVERS.map(([t, sub, img, pos], i) => (
-                <li className="tile rv" style={rv((i % 3) * 90)} key={t}>
-                  <figure className="plate plate--photo" data-dev>
-                    <img src={img} alt={`${t} : ${sub}`} width={1080} height={1350} loading="lazy" style={posOf(pos)} />
-                  </figure>
-                  <h3>{t}</h3>
-                  <p>{sub}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* 11. Selected work */}
-        <section className="work light" id="experiences" aria-label="Selected work">
-          <div className="wrap sec__head sec__head--row">
-            <div>
-              <p className="k rv">Selected work</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Des expériences
-                <br />
-                racontées par June.
-              </h2>
-            </div>
-            <a className="btn rv" style={rv(160)} href="/portfolio">
-              Voir toutes les réalisations
-            </a>
-          </div>
-          <div className="rail" aria-label="Sélection de réalisations">
-            {selected.map((wk, i) => {
-              const inner = (
-                <>
-                  <figure className="plate" data-dev>
-                    <img src={wk.image} alt={`${wk.nom} : ${wk.univers}, ${wk.type}`} width={wk.w} height={wk.h} loading="lazy" style={posOf(wk.pos)} />
-                    {wk.video && (
-                      <video data-auto="hover" muted loop playsInline preload="none" poster={wk.image} aria-hidden="true" style={posOf(wk.pos)}>
-                        <source src={wk.video} type="video/mp4" />
-                      </video>
-                    )}
-                    {wk.video && <span className="plate__play" aria-hidden="true" />}
-                  </figure>
-                  <span className="rail__cap">
-                    <b>{wk.nom}</b>
-                    <span>
-                      {wk.univers} • {wk.type}
+            <div className="proof">
+              {selected.map((wk, i) => {
+                const cat = `${CATEGORY[wk.univers] ?? wk.univers} • Experience`;
+                const inner = (
+                  <>
+                    <figure className="plate proof__plate" data-dev>
+                      <img src={wk.image} alt={`${wk.nom} : ${cat}`} width={wk.w} height={wk.h} loading="lazy" style={posOf(wk.pos)} />
+                      {wk.video && (
+                        <video data-auto="hover" muted loop playsInline preload="none" poster={wk.image} aria-hidden="true" style={posOf(wk.pos)}>
+                          <source src={wk.video} type="video/mp4" />
+                        </video>
+                      )}
+                      {wk.video && <span className="plate__play" aria-hidden="true" />}
+                    </figure>
+                    <span className="proof__cap">
+                      <b>{wk.nom}</b>
+                      <span>{cat}</span>
                     </span>
-                  </span>
-                </>
-              );
-              return wk.href ? (
-                <a className="rail__it rv" style={rv((i % 4) * 80)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
-                  {inner}
-                </a>
-              ) : (
-                <div className="rail__it rv" style={rv((i % 4) * 80)} key={wk.nom} data-hover-host>
-                  {inner}
-                </div>
-              );
-            })}
+                  </>
+                );
+                return wk.href ? (
+                  <a className="proof__it rv" style={rv((i % 2) * 120)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
+                    {inner}
+                  </a>
+                ) : (
+                  <div className="proof__it rv" style={rv((i % 2) * 120)} key={wk.nom} data-hover-host>
+                    {inner}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="work__more rv">
+              <a className="btn" href="/portfolio">
+                Voir toutes les expériences
+              </a>
+            </div>
           </div>
         </section>
 
-        {/* 12. Offre */}
-        <section className="offre night" id="offre" data-dark aria-label="Work with June">
+        {/* 6. L'accompagnement */}
+        <section className="offre night" id="content-experience" data-dark aria-label="Work with June">
           <div className="wrap offre__grid">
             <div className="offre__side">
-              <p className="k rv">Work with June</p>
+              <p className="k rv">05 — Work with June</p>
               <h2 className="d offre__title rv" style={rv(80)}>
                 Content{" "}
                 <span className="nowrap">
                   Experience <span className="star">✦</span>
                 </span>
               </h2>
-              <p className="lede rv" style={rv(160)}>Une Content Experience est construite autour de votre expérience, de vos objectifs et de ce que nous souhaitons raconter.</p>
-              <p className="offre__price rv" style={rv(240)}>
+              <div className="ed offre__text rv" style={rv(160)}>
+                <p>Vous n&apos;avez pas besoin de savoir exactement combien de Reels, de vidéos ou de photos il vous faut avant de me contacter.</p>
+                <p>On commence par votre expérience, votre communication actuelle et ce que vous souhaitez améliorer.</p>
+                <p>J&apos;apporte ensuite mon regard extérieur pour identifier ce qui mérite d&apos;être révélé, les histoires que l&apos;on peut raconter et la matière dont vous avez réellement besoin.</p>
+                <p>Puis, si nous sommes la bonne personne l&apos;une pour l&apos;autre, je construis votre Content Experience.</p>
+              </div>
+            </div>
+            <div className="offre__right">
+              <ul className="offre__list rv" style={rv(120)}>
+                {INCLUS.map(([t, p]) => (
+                  <li key={t}>
+                    <b>{t}</b>
+                    <p>{p}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="offre__price rv" style={rv(200)}>
                 À partir de 490 <span className="eur">€ TTC</span>
               </p>
-              <p className="muted rv" style={rv(300)}>Chaque projet étant différent, la Content Experience est adaptée à vos besoins après notre premier échange.</p>
-              <a className="btn btn--fill rv" style={rv(360)} href="#contact">
-                Discuter de mon projet
-              </a>
+              <p className="muted rv" style={rv(240)}>Chaque Content Experience est construite selon votre établissement, vos objectifs et vos besoins.</p>
+              <div className="offre__ctas rv" style={rv(300)}>
+                <a className="btn btn--fill" href="#contact">
+                  Parler de mon expérience
+                </a>
+                <a className="link-arrow" href="/content-experience">
+                  Découvrir l&apos;offre
+                </a>
+              </div>
             </div>
-            <ul className="offre__list rv" style={rv(160)}>
-              {OFFRE.map(([t, p]) => (
-                <li key={t}>
-                  <b>{t}</b>
-                  <p>{p}</p>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
 
-        {/* 13. About */}
+        {/* 7. Ludivine */}
         <section className="about light" id="apropos" aria-label="Behind June">
           <div className="wrap about__grid">
             <figure className="about__media plate plate--photo rv" data-dev>
@@ -373,32 +323,44 @@ export default function Home() {
                 Moi, c&apos;est Ludivine.
               </h2>
               <div className="ed rv" style={rv(160)}>
-                <p className="big">Créatrice de contenu, entrepreneuse et saisonnière.</p>
-                <p>J&apos;ai toujours eu ce réflexe lorsque je découvre un endroit : observer ce que l&apos;on y vit.</p>
-                <p>L&apos;ambiance. Les petits détails. Les moments auxquels on ne pense pas forcément. Ce qui fait qu&apos;une expérience nous reste en tête.</p>
-                <p>C&apos;est ce regard que j&apos;ai transformé avec June.</p>
-                <p>Aujourd&apos;hui, j&apos;accompagne les établissements à prendre du recul sur leur propre expérience, à comprendre ce qui mérite d&apos;être montré et raconté, puis à le transformer en contenu.</p>
-                <p>Je peux être derrière la caméra, devant lorsqu&apos;il faut incarner l&apos;expérience, mais mon rôle commence toujours avant :</p>
-                <p className="turn">comprendre ce que l&apos;on veut réellement faire vivre à travers le contenu.</p>
+                <p>Créatrice de contenu, entrepreneuse et saisonnière, j&apos;ai créé June autour d&apos;un regard que j&apos;ai naturellement lorsque je découvre un lieu : observer ce que l&apos;on y vit vraiment.</p>
+                <p className="lines d about__lines">
+                  L&apos;ambiance.
+                  <br />
+                  Les détails.
+                  <br />
+                  Les moments auxquels on ne pense pas forcément.
+                  <br />
+                  Ce qui fait qu&apos;une expérience reste en tête.
+                </p>
+                <p>Aujourd&apos;hui, j&apos;utilise ce regard pour aider les établissements à prendre du recul sur leur propre expérience et leur communication.</p>
+                <p>Je peux conseiller, imaginer la manière de la raconter, être derrière la caméra ou devant lorsqu&apos;il faut l&apos;incarner.</p>
+                <p>Mais mon rôle commence toujours au même endroit :</p>
+                <p className="turn">comprendre ce que votre client doit ressentir avant même d&apos;être venu.</p>
               </div>
+              <p className="about__place rv" style={rv(240)}>
+                Montpellier • France
+                <br />
+                Alpe d&apos;Huez • Hiver 26/27
+              </p>
             </div>
           </div>
         </section>
 
-        {/* 14. Alpe d'Huez */}
+        {/* Bandeau saisonnier */}
         <section className="alpe" id="alpe" data-dark aria-label="Alpe d'Huez, hiver 26/27">
-          <Media video={VIDEO.alpe} poster="/realisations/shooting-hotel-jardins-vue.jpg" alt="En attendant les images de l'Alpe d'Huez" pos="50% 35%" w={1080} h={1616} px={26} />
+          <Media video={VIDEO.alpe} poster="/realisations/shooting-hotel-jardins-vue.jpg" alt="En attendant les images de l'Alpe d'Huez" pos="50% 35%" w={1080} h={1616} px={24} />
           <div className="wrap alpe__inner">
-            <p className="k rv">Winter 26/27</p>
-            <h2 className="d h2 rv" style={rv(80)}>
-              Cet hiver,
-              <br />
-              June prend de l&apos;altitude.
-            </h2>
-            <div className="ed rv" style={rv(160)}>
-              <p>Je pose mes valises à l&apos;Alpe d&apos;Huez pour la saison hiver 2026/27.</p>
-              <p>Étant moi-même saisonnière, je connais cet univers, son rythme et ses temps forts.</p>
-              <p>Pendant toute la saison, je serai disponible directement sur place pour accompagner hôtels, chalets, restaurants, spas, activités et expériences qui souhaitent révéler autrement ce qu&apos;ils font vivre à leurs clients.</p>
+            <div className="alpe__copy">
+              <p className="k rv">Winter 26/27</p>
+              <h2 className="d h2 rv" style={rv(80)}>
+                June sera à l&apos;Alpe d&apos;Huez
+                <br />
+                tout l&apos;hiver.
+              </h2>
+              <p className="alpe__list rv" style={rv(160)}>
+                Disponible sur place pour : <span>hôtels • chalets • restaurants • spas • activités • expériences</span>
+              </p>
             </div>
             <a className="btn btn--light rv" style={rv(240)} href="#contact" data-offre="Alpe d'Huez">
               Créer ensemble à l&apos;Alpe d&apos;Huez
@@ -406,7 +368,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 15. FAQ */}
+        {/* FAQ */}
         <section className="faq light" id="faq" aria-label="Questions fréquentes">
           <div className="wrap faq__grid">
             <div className="faq__head">
@@ -433,36 +395,25 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 16. CTA final */}
-        <section className="fin" data-dark aria-label="Parlons de votre expérience">
+        {/* CTA final + formulaire */}
+        <section className="fin" id="contact" data-dark aria-label="Parlons de votre expérience">
           <Media poster="/realisations/shooting-hotel-piscine-ext.jpg" alt="Piscine extérieure d'un hôtel & spa" pos="50% 55%" w={1080} h={1616} px={30} />
-          <div className="wrap fin__inner">
-            <h2 className="d h2 rv">
-              Vous avez une expérience à faire vivre ?
-              <br />
-              <em>Voyons comment la raconter.</em>
-            </h2>
-            <div className="ed rv" style={rv(120)}>
-              <p>Racontez-moi votre établissement, votre projet, ce que vous faites vivre aujourd&apos;hui et ce que vous aimeriez réussir à mieux montrer.</p>
-              <p>Je prendrai le temps de regarder votre univers avant notre échange pour voir comment — et si — June peut vous accompagner.</p>
-            </div>
-            <a className="btn btn--light rv" style={rv(200)} href="#contact">
-              Me parler de mon projet
-            </a>
-          </div>
-        </section>
-
-        {/* Contact */}
-        <section className="contact sand" id="contact" aria-label="Contact">
-          <div className="wrap contact__grid">
-            <div className="contact__head">
-              <p className="k rv">Contact</p>
-              <h2 className="d h2 rv" style={rv(80)}>
-                Racontez-moi votre projet.
+          <div className="wrap fin__grid">
+            <div className="fin__copy">
+              <h2 className="d h2 rv">
+                Votre expérience mérite
+                <br />
+                <em>peut-être d&apos;être mieux racontée.</em>
               </h2>
-              <p className="muted rv" style={rv(160)}>Je vous réponds personnellement, en général sous 48 h.</p>
+              <div className="ed rv" style={rv(120)}>
+                <p>Parlez-moi de votre établissement, de ce que vos clients vivent chez vous et de ce que vous aimeriez réussir à mieux faire ressentir.</p>
+                <p>Avant de parler de contenus, je regarderai d&apos;abord votre univers et votre besoin pour voir comment — et si — June peut vous accompagner.</p>
+              </div>
+              <a className="btn btn--light fin__btn rv" style={rv(200)} href="#formulaire">
+                Parler de mon projet
+              </a>
             </div>
-            <div className="contact__form rv" style={rv(120)}>
+            <div className="fin__form rv" id="formulaire" style={rv(160)}>
               <JuneContact />
             </div>
           </div>

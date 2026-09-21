@@ -17,11 +17,12 @@ export default function SiteFooter({ home = true }: { home?: boolean }) {
         </a>
         <nav className="foot__nav" aria-label="Plan du site">
           {NAV_MOBILE.map(([label, h]) => (
-            <a key={h} href={h === "#top" ? (home ? "#top" : "/") : `${p}${h}`}>
+            <a key={h} href={`${p}${h}`}>
               {label}
             </a>
           ))}
-          <a href="/portfolio">Réalisations</a>
+          <a href="/portfolio">Toutes les expériences</a>
+          <a href="/content-experience">L&apos;offre en détail</a>
         </nav>
         <nav className="foot__social" aria-label="Réseaux">
           {socials.map(([label, url]) => (

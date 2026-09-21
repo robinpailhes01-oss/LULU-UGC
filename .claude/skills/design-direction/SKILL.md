@@ -95,3 +95,5 @@ La retenue est ce qui fait « premium ». Trop d'animation = effet IA génériqu
 
 
 > Mise à jour 2026-09-21 : le brief « version claire » (docs/brief-site-clair.md) fait foi pour la palette, le menu, l'ordre des sections et les textes de l'accueil. En cas de contradiction avec ce qui précède, suivre ce brief.
+
+> Mise à jour 2026-09-21 (bis) : docs/brief-homepage-refonte.md précise la structure en sept blocs, le menu (Approche · Expériences · Content Experience · À propos) et le positionnement « révéler l'expérience ». Il prime sur le brief « version claire » en cas de contradiction.

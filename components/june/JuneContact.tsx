@@ -6,11 +6,11 @@ type FormStatus = "idle" | "sending" | "success" | "error";
 
 const CONTACT_EMAIL = "harmonieyacht@gmail.com";
 
-/** Formulaire de la plaque du soir. Même API que l'ancien Contact.tsx. */
+/** Formulaire court de la page d'accueil. Les boutons [data-offre] renseignent le champ caché. */
 export default function JuneContact() {
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const offreRef = useRef<HTMLSelectElement>(null);
+  const offreRef = useRef<HTMLInputElement>(null);
 
   // Les boutons d'offre (data-offre) présélectionnent le sujet du formulaire.
   useEffect(() => {
@@ -33,6 +33,8 @@ export default function JuneContact() {
       email: String(formData.get("email") ?? "").trim(),
       message: String(formData.get("message") ?? "").trim(),
     };
+    const site = String(formData.get("site") ?? "").trim();
+    if (site) payload.message = `${payload.message}\n\nInstagram / site : ${site}`.trim();
     const offre = String(formData.get("offre") ?? "").trim();
     if (offre) payload.message = `[${offre}] ${payload.message}`.trim();
 
@@ -79,59 +81,30 @@ export default function JuneContact() {
 
   return (
     <form className="j-form" onSubmit={handleSubmit} noValidate>
+      <input type="hidden" name="offre" ref={offreRef} defaultValue="" />
       <div className="j-form__row">
         <div className="j-field">
-          <label htmlFor="nom">Votre nom</label>
-          <input
-            id="nom"
-            name="nom"
-            type="text"
-            autoComplete="name"
-            required
-            placeholder="Camille Durand"
-          />
+          <label htmlFor="nom">Nom</label>
+          <input id="nom" name="nom" type="text" autoComplete="name" required placeholder="Camille Durand" />
         </div>
         <div className="j-field">
-          <label htmlFor="lieu">Votre établissement ou votre expérience</label>
-          <input
-            id="lieu"
-            name="lieu"
-            type="text"
-            autoComplete="organization"
-            placeholder="Le Chalet des Cimes"
-          />
+          <label htmlFor="lieu">Établissement</label>
+          <input id="lieu" name="lieu" type="text" autoComplete="organization" placeholder="Le Chalet des Cimes" />
         </div>
       </div>
-
-      <div className="j-field">
-        <label htmlFor="offre">Votre projet</label>
-        <select id="offre" name="offre" ref={offreRef} defaultValue="">
-          <option value="Content Experience">Une Content Experience</option>
-          <option value="Alpe d'Huez">Un projet à l'Alpe d'Huez, hiver 26/27</option>
-          <option value="Autre">Autre chose, on en parle</option>
-        </select>
+      <div className="j-form__row">
+        <div className="j-field">
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" autoComplete="email" required placeholder="vous@votrelieu.fr" />
+        </div>
+        <div className="j-field">
+          <label htmlFor="site">Instagram / site</label>
+          <input id="site" name="site" type="text" autoComplete="url" placeholder="@votrelieu ou votrelieu.fr" />
+        </div>
       </div>
-
       <div className="j-field">
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          placeholder="vous@votrelieu.fr"
-        />
-      </div>
-
-      <div className="j-field">
-        <label htmlFor="message">Votre message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          placeholder="Parlez-moi de votre établissement, de ce que vous faites vivre à vos clients et de ce que vous aimeriez réussir à mieux montrer."
-        />
+        <label htmlFor="message">Parlez-moi de votre expérience / votre besoin</label>
+        <textarea id="message" name="message" rows={4} placeholder="Ce que vos clients vivent chez vous, et ce que vous aimeriez réussir à mieux faire ressentir." />
       </div>
 
       {status === "error" && errorMessage && (
@@ -150,7 +123,7 @@ export default function JuneContact() {
           ? "Envoi en cours…"
           : status === "success"
             ? "Demande envoyée"
-            : "Parler de mon projet →"}
+            : "Envoyer mon projet →"}
       </button>
     </form>
   );
