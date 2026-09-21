@@ -1,7 +1,7 @@
 import type React from "react";
 import JuneV3Engine from "@/components/june/JuneV3Engine";
 import JuneContact from "@/components/june/JuneContact";
-import MethodSteps, { type Step } from "@/components/june/MethodSteps";
+type Step = { n: string; title: string; text: string[]; image: string; pos?: string; alt: string };
 import SiteNav from "@/components/june/SiteNav";
 import SiteFooter from "@/components/june/SiteFooter";
 import { VIDEO } from "@/lib/site";
@@ -91,7 +91,7 @@ export default function Home() {
       <main id="top">
         {/* 1. Hero */}
         <section className="hero" data-dark aria-label="June, Content Experience Studio">
-          <Media video={VIDEO.hero} poster="/realisations/shooting-hotel-terrasse.jpg" alt="Terrasse d'un hôtel & spa au soleil couchant" pos="70% 45%" w={1080} h={1616} eager px={30} />
+          <Media video={VIDEO.hero} poster="/hero.jpg" alt="Ludivine photographie un petit-déjeuner dans une chambre avec vue sur les montagnes" pos="72% 50%" w={1672} h={941} eager px={30} />
           <div className="hero__inner">
             <p className="k hero__k rise" style={{ "--d": "100ms" } as React.CSSProperties}>
               Content Experience Studio
@@ -140,53 +140,61 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. Mon approche : le regard, puis la méthode */}
+        {/* 3. Mon approche : le regard, puis comment ça se passe */}
         <section className="approche light" id="approche" aria-label="Mon approche">
-          <div className="wrap approche__grid">
-            <figure className="approche__media rv" data-px="16">
-              <Media video={VIDEO.approche} poster="/wall/ugc-hotel.jpg" alt="Ludivine en immersion dans une chambre d'hôtel" pos="50% 50%" w={393} h={622} />
-            </figure>
-            <div className="approche__copy">
+          <div className="wrap approche__head">
+            <div>
               <p className="k rv">02 — Mon approche</p>
               <h2 className="d h2 rv" style={rv(80)}>
                 Je ne viens pas simplement
                 <br />
                 filmer votre établissement.
               </h2>
-              <div className="ed rv" style={rv(160)}>
-                <p>Je découvre votre expérience comme pourrait le faire votre futur client : ce qu&apos;il voit, ce qu&apos;il ressent, les moments qu&apos;il vit et les détails dont il se souviendra.</p>
-                <p>Je cherche ce qui va lui permettre de se projeter, de s&apos;imaginer ici et d&apos;avoir envie de vivre l&apos;expérience à son tour.</p>
-                <p>Puis je transforme tout cela en histoires et en contenus.</p>
-              </div>
-              <div className="regard rv" style={rv(240)}>
-                <p className="k">Mon regard extérieur</p>
-                <div className="regard__body">
-                  <p className="regard__lead">Avant de créer quoi que ce soit, je regarde ce qui existe déjà.</p>
-                  <p className="lines">
-                    Ce que votre communication raconte.
-                    <br />
-                    Ce qu&apos;elle ne raconte pas encore.
-                    <br />
-                    Ce que vos clients vivent réellement.
-                    <br />
-                    Et ce qui pourrait permettre à quelqu&apos;un qui ne vous connaît pas encore de comprendre pourquoi venir chez vous.
-                  </p>
-                  <p>Je vous conseille ensuite sur ce qui mérite d&apos;être montré, raconté ou créé.</p>
-                </div>
-              </div>
+            </div>
+            <div className="ed rv" style={rv(160)}>
+              <p>Je découvre votre expérience comme pourrait le faire votre futur client : ce qu&apos;il voit, ce qu&apos;il ressent, les moments qu&apos;il vit et les détails dont il se souviendra.</p>
+              <p>Je cherche ce qui va lui permettre de se projeter, de s&apos;imaginer ici et d&apos;avoir envie de vivre l&apos;expérience à son tour.</p>
+              <p>Puis je transforme tout cela en histoires et en contenus.</p>
+            </div>
+          </div>
+
+          <div className="wrap regard">
+            <figure className="regard__media rv" data-px="16">
+              <Media video={VIDEO.approche} poster="/wall/ugc-hotel.jpg" alt="Ludivine en immersion dans une chambre d'hôtel" pos="50% 50%" w={393} h={622} />
+            </figure>
+            <div className="regard__copy">
+              <p className="k rv">Mon regard extérieur</p>
+              <p className="regard__lead d rv" style={rv(80)}>
+                Avant de créer quoi que ce soit, <em>je regarde ce qui existe déjà.</em>
+              </p>
+              <ul className="regard__list rv" style={rv(160)}>
+                <li>Ce que votre communication raconte.</li>
+                <li>Ce qu&apos;elle ne raconte pas encore.</li>
+                <li>Ce que vos clients vivent réellement.</li>
+                <li>Ce qui pourrait permettre à quelqu&apos;un qui ne vous connaît pas encore de comprendre pourquoi venir chez vous.</li>
+              </ul>
+              <p className="regard__after rv" style={rv(240)}>Je vous conseille ensuite sur ce qui mérite d&apos;être montré, raconté ou créé.</p>
             </div>
           </div>
 
           <div className="wrap methode" id="methode">
-            <div className="sec__head">
+            <div className="methode__head">
               <p className="k rv">Comment ça se passe</p>
               <h3 className="d h2 rv" style={rv(80)}>
-                Votre expérience est le point de départ.
-                <br />
-                <em>Le contenu vient ensuite.</em>
+                Votre expérience est le point de départ. <em>Le contenu vient ensuite.</em>
               </h3>
             </div>
-            <MethodSteps steps={STEPS} />
+            <ol className="steps">
+              {STEPS.map((st, i) => (
+                <li className="step rv" style={rv(i * 100)} key={st.n}>
+                  <p className="step__n">{st.n}</p>
+                  <h4 className="d">{st.title}</h4>
+                  {st.text.map((t) => (
+                    <p key={t}>{t}</p>
+                  ))}
+                </li>
+              ))}
+            </ol>
             <p className="flow rv" aria-label="Comprendre, révéler, vivre, raconter">
               {["Comprendre", "Révéler", "Vivre", "Raconter"].map((t, i) => (
                 <span key={t}>
