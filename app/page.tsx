@@ -233,7 +233,7 @@ export default function Home() {
               </div>
               <p className="work__sub rv" style={rv(160)}>Parce que le meilleur moyen de comprendre mon travail reste encore de le voir.</p>
             </div>
-            <div className="grid">
+            <div className="wgrid">
               {selected.map((wk, i) => {
                 const cat = `${CATEGORY[wk.univers] ?? wk.univers} • ${wk.type}`;
                 const inner = (
@@ -256,18 +256,18 @@ export default function Home() {
                       )}
                       {wk.video && <span className="plate__play" aria-hidden="true" />}
                     </figure>
-                    <span className="grid__cap">
+                    <span className="wgrid__cap">
                       <b>{wk.nom}</b>
                       <span>{cat}</span>
                     </span>
                   </>
                 );
                 return wk.href ? (
-                  <a className="grid__it rv" style={rv((i % 5) * 70)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
+                  <a className="wgrid__it rv" style={rv((i % 5) * 70)} href={wk.href} target="_blank" rel="noopener noreferrer" key={wk.nom} data-hover-host>
                     {inner}
                   </a>
                 ) : (
-                  <div className="grid__it rv" style={rv((i % 5) * 70)} key={wk.nom} data-hover-host>
+                  <div className="wgrid__it rv" style={rv((i % 5) * 70)} key={wk.nom} data-hover-host>
                     {inner}
                   </div>
                 );

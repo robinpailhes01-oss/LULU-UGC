@@ -15,6 +15,11 @@ const config: Config = {
         chestnut: "#8B5E34",
         honey: "#C98A3C",
         muted: "#6B5E50",
+        ivory: "#F4F0E8",
+        sand: "#E9E1D6",
+        ink: "#211C18",
+        taupe: "#75675C",
+        brown: "#7C604B",
       },
       borderColor: {
         line: "rgba(36,29,23,.12)",
@@ -22,6 +27,7 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-fraunces)", "Georgia", "serif"],
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        script: ["var(--font-script)", "cursive"],
       },
       boxShadow: {
         card: "0 22px 50px rgba(36,29,23,.18)",

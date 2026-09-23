@@ -4,3 +4,5 @@ Déposer ici les vidéos (mp4, H.264, sans son ou son coupé) :
 - alpe.mp4 : montagne, Alpe d Huez
 - work/<slug>.mp4 : une vidéo par réalisation (noms dans lib/work.ts)
 Tant qu un fichier manque, l image d attente reste affichée.
+
+vsl.mp4 : vidéo de présentation (VSL) affichée sur la version test /v2, sous le hero. Affiche : public/hero.jpg.
