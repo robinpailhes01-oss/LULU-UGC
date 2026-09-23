@@ -33,8 +33,8 @@ export default function SiteNav({ home = true }: { home?: boolean }) {
         </a>
         <nav className="nav__links" aria-label="Navigation">
           {NAV.map(([label, h]) => (
-            <a key={h} href={href(h)}>
-              {label}
+            <a key={h} href={href(h)} className="lnk">
+              <span data-text={label}>{label}</span>
             </a>
           ))}
         </nav>

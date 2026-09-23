@@ -4,6 +4,8 @@ import JuneContact from "@/components/june/JuneContact";
 type Step = { n: string; title: string; text: string[]; image: string; pos?: string; alt: string };
 import SiteNav from "@/components/june/SiteNav";
 import SiteFooter from "@/components/june/SiteFooter";
+import Split from "@/components/june/Split";
+import Faq from "@/components/june/Faq";
 import { VIDEO } from "@/lib/site";
 import { works } from "@/lib/work";
 
@@ -96,9 +98,12 @@ export default function Home() {
             <p className="k hero__k rise" style={{ "--d": "100ms" } as React.CSSProperties}>
               Content Experience Studio
             </p>
-            <h1 className="d hero__title rise" style={{ "--d": "220ms" } as React.CSSProperties}>
-              Des lieux qui font vivre une expérience. <em>Des contenus qui donnent envie de la vivre.</em>
-            </h1>
+            <Split as="h1" className="d hero__title" delay={250}>
+              Des lieux qui font vivre une expérience.
+            </Split>
+            <Split as="p" className="d hero__sub" delay={520}>
+              <em>Des contenus qui donnent envie de la vivre.</em>
+            </Split>
             <p className="hero__lede rise" style={{ "--d": "360ms" } as React.CSSProperties}>
               J&apos;accompagne les établissements à révéler leur expérience pour que leurs futurs clients puissent la comprendre, la ressentir et s&apos;y projeter avant même de venir.
             </p>
@@ -117,9 +122,9 @@ export default function Home() {
           <div className="wrap probleme__grid">
             <div className="probleme__copy">
               <p className="k rv">01 — Le point de départ</p>
-              <h2 className="d h2 h2--xl rv" style={rv(80)}>
+              <Split as="h2" className="d h2 h2--xl" delay={80}>
                 Votre expérience est peut-être plus forte dans la vraie vie <em>que dans votre communication.</em>
-              </h2>
+              </Split>
               <div className="ed rv" style={rv(160)}>
                 <p className="lines">
                   Votre lieu peut être magnifique.
@@ -130,11 +135,11 @@ export default function Home() {
                 </p>
                 <p>Mais si tout cela ne se ressent pas dans votre contenu, votre futur client ne peut pas encore comprendre ce qui rend réellement votre expérience différente.</p>
               </div>
-              <p className="d strong rv" style={rv(240)}>
+              <Split as="p" className="d strong" delay={240}>
                 C&apos;est là que June intervient.
-              </p>
+              </Split>
             </div>
-            <figure className="probleme__media rv" style={rv(120)}>
+            <figure className="probleme__media rv rv--mask" style={rv(120)}>
               <Media poster="/realisations/shooting-hotel-moment-a-deux.jpg" alt="Un moment à deux sur un balcon d'hôtel" pos="50% 40%" w={1080} h={1616} px={20} />
             </figure>
           </div>
@@ -145,11 +150,11 @@ export default function Home() {
           <div className="wrap approche__head">
             <div>
               <p className="k rv">02 — Mon approche</p>
-              <h2 className="d h2 rv" style={rv(80)}>
+              <Split as="h2" className="d h2" delay={80}>
                 Je ne viens pas simplement
                 <br />
                 filmer votre établissement.
-              </h2>
+              </Split>
             </div>
             <div className="ed rv" style={rv(160)}>
               <p>Je découvre votre expérience comme pourrait le faire votre futur client : ce qu&apos;il voit, ce qu&apos;il ressent, les moments qu&apos;il vit et les détails dont il se souviendra.</p>
@@ -159,14 +164,14 @@ export default function Home() {
           </div>
 
           <div className="wrap regard">
-            <figure className="regard__media rv" data-px="16">
+            <figure className="regard__media rv rv--mask">
               <Media video={VIDEO.approche} poster="/regard.jpg" alt="Ludivine prend des notes, carnet et téléphone en main, la caméra posée à côté" pos="50% 40%" w={1122} h={1402} />
             </figure>
             <div className="regard__copy">
               <p className="k rv">Mon regard extérieur</p>
-              <p className="regard__lead d rv" style={rv(80)}>
+              <Split as="p" className="regard__lead d" delay={80}>
                 Avant de créer quoi que ce soit, <em>je regarde ce qui existe déjà.</em>
-              </p>
+              </Split>
               <ul className="regard__list rv" style={rv(160)}>
                 <li>Ce que votre communication raconte.</li>
                 <li>Ce qu&apos;elle ne raconte pas encore.</li>
@@ -180,9 +185,9 @@ export default function Home() {
           <div className="wrap methode" id="methode">
             <div className="methode__head">
               <p className="k rv">Comment ça se passe</p>
-              <h3 className="d h2 rv" style={rv(80)}>
+              <Split as="h3" className="d h2" delay={80}>
                 Votre expérience est le point de départ. <em>Le contenu vient ensuite.</em>
-              </h3>
+              </Split>
             </div>
             <ol className="steps">
               {STEPS.map((st, i) => (
@@ -206,11 +211,11 @@ export default function Home() {
           </div>
 
           <div className="wrap">
-            <p className="d signature rv">
+            <Split as="p" className="d signature">
               Vous faites vivre l&apos;expérience.
               <br />
               <em>June trouve comment la raconter.</em>
-            </p>
+            </Split>
           </div>
         </section>
 
@@ -220,11 +225,11 @@ export default function Home() {
             <div className="sec__head sec__head--row">
               <div>
                 <p className="k rv">03 — Mon travail</p>
-                <h2 className="d h2 rv" style={rv(80)}>
+                <Split as="h2" className="d h2" delay={80}>
                   Des expériences
                   <br />
                   racontées par June.
-                </h2>
+                </Split>
               </div>
               <p className="work__sub rv" style={rv(160)}>Parce que le meilleur moyen de comprendre mon travail reste encore de le voir.</p>
             </div>
@@ -322,14 +327,14 @@ export default function Home() {
         {/* 6. Ludivine */}
         <section className="about light" id="apropos" aria-label="Behind June">
           <div className="wrap about__grid">
-            <figure className="about__media plate plate--photo rv" data-dev>
+            <figure className="about__media plate plate--photo rv rv--mask" data-dev>
               <img src="/ludivine.jpg" alt="Ludivine, fondatrice de June, caméra en main" width={1111} height={1415} loading="lazy" style={posOf("50% 35%")} />
             </figure>
             <div className="about__copy">
               <p className="k rv">Behind June</p>
-              <h2 className="d h2 rv" style={rv(80)}>
+              <Split as="h2" className="d h2" delay={80}>
                 Moi, c&apos;est Ludivine.
-              </h2>
+              </Split>
               <div className="ed rv" style={rv(160)}>
                 <p>Créatrice de contenu, entrepreneuse et saisonnière, j&apos;ai créé June autour d&apos;un regard que j&apos;ai naturellement lorsque je découvre un lieu : observer ce que l&apos;on y vit vraiment.</p>
                 <p className="lines d about__lines">
@@ -361,11 +366,11 @@ export default function Home() {
           <div className="wrap alpe__inner">
             <div className="alpe__copy">
               <p className="k rv">Winter 26/27</p>
-              <h2 className="d h2 rv" style={rv(80)}>
+              <Split as="h2" className="d h2" delay={80}>
                 June sera à l&apos;Alpe d&apos;Huez
                 <br />
                 tout l&apos;hiver.
-              </h2>
+              </Split>
               <p className="alpe__list rv" style={rv(160)}>
                 Disponible sur place pour : <span>hôtels • chalets • restaurants • spas • activités • expériences</span>
               </p>
@@ -381,24 +386,12 @@ export default function Home() {
           <div className="wrap faq__grid">
             <div className="faq__head">
               <p className="k rv">FAQ</p>
-              <h2 className="d h2 rv" style={rv(80)}>
+              <Split as="h2" className="d h2" delay={80}>
                 Les questions que l&apos;on me pose.
-              </h2>
+              </Split>
             </div>
             <div className="rv" style={rv(120)}>
-              {FAQ.map(([q, a]) => (
-                <details key={q}>
-                  <summary>
-                    {q}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
-                  </summary>
-                  {a.map((t) => (
-                    <p key={t}>{t}</p>
-                  ))}
-                </details>
-              ))}
+              <Faq items={FAQ} />
             </div>
           </div>
         </section>
@@ -408,11 +401,11 @@ export default function Home() {
           <Media poster="/realisations/shooting-hotel-piscine-ext.jpg" alt="Piscine extérieure d'un hôtel & spa" pos="50% 55%" w={1080} h={1616} px={30} />
           <div className="wrap fin__grid">
             <div className="fin__copy">
-              <h2 className="d h2 rv">
+              <Split as="h2" className="d h2" delay={0}>
                 Votre expérience mérite
                 <br />
                 <em>peut-être d&apos;être mieux racontée.</em>
-              </h2>
+              </Split>
               <div className="ed rv" style={rv(120)}>
                 <p>Parlez-moi de votre établissement, de ce que vos clients vivent chez vous et de ce que vous aimeriez réussir à mieux faire ressentir.</p>
                 <p>Avant de parler de contenus, je regarderai d&apos;abord votre univers et votre besoin pour voir comment — et si — June peut vous accompagner.</p>

@@ -83,28 +83,28 @@ export default function JuneContact() {
     <form className="j-form" onSubmit={handleSubmit} noValidate>
       <input type="hidden" name="offre" ref={offreRef} defaultValue="" />
       <div className="j-form__row">
-        <div className="j-field">
+        <div className="j-field j-field--float">
+          <input id="nom" name="nom" type="text" autoComplete="name" required placeholder=" " />
           <label htmlFor="nom">Nom</label>
-          <input id="nom" name="nom" type="text" autoComplete="name" required placeholder="Camille Durand" />
         </div>
-        <div className="j-field">
+        <div className="j-field j-field--float">
+          <input id="lieu" name="lieu" type="text" autoComplete="organization" placeholder=" " />
           <label htmlFor="lieu">Établissement</label>
-          <input id="lieu" name="lieu" type="text" autoComplete="organization" placeholder="Le Chalet des Cimes" />
         </div>
       </div>
       <div className="j-form__row">
-        <div className="j-field">
+        <div className="j-field j-field--float">
+          <input id="email" name="email" type="email" autoComplete="email" required placeholder=" " />
           <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" autoComplete="email" required placeholder="vous@votrelieu.fr" />
         </div>
-        <div className="j-field">
+        <div className="j-field j-field--float">
+          <input id="site" name="site" type="text" autoComplete="url" placeholder=" " />
           <label htmlFor="site">Instagram / site</label>
-          <input id="site" name="site" type="text" autoComplete="url" placeholder="@votrelieu ou votrelieu.fr" />
         </div>
       </div>
-      <div className="j-field">
+      <div className="j-field j-field--float">
+        <textarea id="message" name="message" rows={4} placeholder=" " />
         <label htmlFor="message">Parlez-moi de votre expérience / votre besoin</label>
-        <textarea id="message" name="message" rows={4} placeholder="Ce que vos clients vivent chez vous, et ce que vous aimeriez réussir à mieux faire ressentir." />
       </div>
 
       {status === "error" && errorMessage && (
@@ -118,12 +118,12 @@ export default function JuneContact() {
         </p>
       )}
 
-      <button type="submit" disabled={status === "sending"}>
+      <button type="submit" className="btn btn--fill" disabled={status === "sending"}>
         {status === "sending"
           ? "Envoi en cours…"
           : status === "success"
             ? "Demande envoyée"
-            : "Envoyer mon projet →"}
+            : "Envoyer mon projet"}
       </button>
     </form>
   );

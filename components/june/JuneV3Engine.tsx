@@ -153,7 +153,30 @@ export default function JuneV3Engine() {
       Array.from(v.querySelectorAll("source")).at(-1)?.addEventListener("error", () => v.classList.add("is-missing"), { once: true });
     });
 
+    /* boutons magnétiques : le bouton suit légèrement le curseur (ordinateur) */
+    const mags: Array<[HTMLElement, (e: PointerEvent) => void, () => void]> = [];
+    if (hover && !reduce) {
+      document.querySelectorAll<HTMLElement>(".btn").forEach((b) => {
+        const mv = (e: PointerEvent) => {
+          const r = b.getBoundingClientRect();
+          b.style.setProperty("--mx", `${((e.clientX - (r.left + r.width / 2)) * 0.22).toFixed(1)}px`);
+          b.style.setProperty("--my", `${((e.clientY - (r.top + r.height / 2)) * 0.22).toFixed(1)}px`);
+        };
+        const lv = () => {
+          b.style.setProperty("--mx", "0px");
+          b.style.setProperty("--my", "0px");
+        };
+        b.addEventListener("pointermove", mv);
+        b.addEventListener("pointerleave", lv);
+        mags.push([b, mv, lv]);
+      });
+    }
+
     return () => {
+      mags.forEach(([b, mv, lv]) => {
+        b.removeEventListener("pointermove", mv);
+        b.removeEventListener("pointerleave", lv);
+      });
       removeEventListener("scroll", onScroll);
       removeEventListener("resize", onScroll);
       rafs.forEach((id) => cancelAnimationFrame(id));

@@ -17,8 +17,8 @@ export default function SiteFooter({ home = true }: { home?: boolean }) {
         </a>
         <nav className="foot__nav" aria-label="Plan du site">
           {NAV_MOBILE.map(([label, h]) => (
-            <a key={h} href={`${p}${h}`}>
-              {label}
+            <a key={h} href={`${p}${h}`} className="lnk">
+              <span data-text={label}>{label}</span>
             </a>
           ))}
           <a href="/portfolio">Toutes les expériences</a>
