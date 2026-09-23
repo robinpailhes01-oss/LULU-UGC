@@ -10,15 +10,15 @@ import { createElement, isValidElement, useEffect, useRef, type CSSProperties, t
    prefers-reduced-motion est actif.
 */
 
-type Tok = { t: "w"; text: string; em: boolean } | { t: "br" };
+type Tok = { t: "w"; text: string; em: boolean; cls?: string } | { t: "br" };
 
-function tokens(node: ReactNode, em = false): Tok[] {
-  if (typeof node === "string") return node.split(/\s+/).filter(Boolean).map((text) => ({ t: "w", text, em }));
-  if (Array.isArray(node)) return node.flatMap((n) => tokens(n, em));
+function tokens(node: ReactNode, em = false, cls?: string): Tok[] {
+  if (typeof node === "string") return node.split(/\s+/).filter(Boolean).map((text) => ({ t: "w", text, em, cls }));
+  if (Array.isArray(node)) return node.flatMap((n) => tokens(n, em, cls));
   if (isValidElement(node)) {
     if (node.type === "br") return [{ t: "br" }];
-    const props = node.props as { children?: ReactNode };
-    return tokens(props.children, em || node.type === "em");
+    const props = node.props as { children?: ReactNode; className?: string };
+    return tokens(props.children, em || node.type === "em", props.className === "star" ? "star" : cls);
   }
   return [];
 }
@@ -76,7 +76,7 @@ export default function Split({ as = "h2", className = "", children, delay = 0, 
     }
     out.push(
       <span className="sw" key={i}>
-        {t.em ? <em className="si">{t.text}</em> : <span className="si">{t.text}</span>}
+        {t.em ? <em className="si">{t.text}</em> : <span className={t.cls ? `si ${t.cls}` : "si"}>{t.text}</span>}
       </span>,
       " "
     );

@@ -4,6 +4,7 @@ import JuneV3Engine from "@/components/june/JuneV3Engine";
 import SiteNav from "@/components/june/SiteNav";
 import WorkGallery from "@/components/june/WorkGallery";
 import SiteFooter from "@/components/june/SiteFooter";
+import Split from "@/components/june/Split";
 import { CTA } from "@/lib/site";
 import { works } from "@/lib/work";
 
@@ -22,9 +23,9 @@ export default function PortfolioPage() {
         <section className="pf light" aria-label="Réalisations">
           <div className="wrap pf__inner">
             <p className="k rv">Réalisations</p>
-            <h1 className="d h1 rv" style={{ "--rd": "80ms" } as React.CSSProperties}>
+            <Split as="h1" className="d h1" delay={80}>
               Le travail de June, <em>tel qu&apos;il a été publié.</em>
-            </h1>
+            </Split>
             <p className="pf__lede rv" style={{ "--rd": "160ms" } as React.CSSProperties}>
               Les vidéos se lancent au survol ou au défilement. Cliquez pour voir le contenu sur Instagram.
             </p>
@@ -40,9 +41,9 @@ export default function PortfolioPage() {
         <section className="sand" aria-label="Contact">
           <div className="wrap pf__end">
             <p className="k rv">Parlons de votre expérience</p>
-            <h2 className="d h2 rv" style={{ "--rd": "80ms" } as React.CSSProperties}>
+            <Split as="h2" className="d h2" delay={80}>
               Vous avez une expérience à faire vivre ? <em>Voyons comment la raconter.</em>
-            </h2>
+            </Split>
             <a className="btn btn--fill rv" style={{ "--rd": "160ms" } as React.CSSProperties} href="/#contact">
               {CTA}
             </a>

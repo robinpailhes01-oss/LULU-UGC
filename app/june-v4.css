@@ -283,7 +283,7 @@ body.v4.menu-open { overflow: hidden; }
 .fin .h2 em { color: var(--night-ink); }
 .fin .ed p { color: rgba(244, 240, 232, 0.9); }
 .fin__btn { display: none; }
-.fin__form { background: var(--ivory); color: var(--ink); padding: clamp(1.6rem, 3vw, 2.6rem); box-shadow: var(--shadow); }
+.fin__form { background: rgba(244, 240, 232, 0.72); -webkit-backdrop-filter: blur(22px) saturate(1.1); backdrop-filter: blur(22px) saturate(1.1); border: 1px solid rgba(244, 240, 232, 0.55); color: var(--ink); padding: clamp(1.6rem, 3vw, 2.6rem); box-shadow: 0 30px 60px -30px rgba(33, 28, 24, 0.5); }
 .fin__form .j-form { gap: 1rem; }
 
 /* contact */
@@ -294,13 +294,15 @@ body.v4.menu-open { overflow: hidden; }
 .v4 .j-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 .v4 .j-field { display: flex; flex-direction: column; gap: 0.45rem; }
 .v4 .j-field label { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-.v4 .j-field input, .v4 .j-field textarea, .v4 .j-field select { width: 100%; border: 1px solid var(--line-strong); border-radius: 2px; background: rgba(244, 240, 232, 0.6); padding: 0.85rem 0.95rem; color: var(--ink); font: inherit; font-size: 0.96rem; transition: border-color 0.3s, background 0.3s; background-image: none; }
+.v4 .j-field input, .v4 .j-field textarea, .v4 .j-field select { width: 100%; border: 1px solid rgba(33, 28, 24, 0.22); border-radius: 2px; background: rgba(255, 255, 255, 0.28); padding: 0.85rem 0.95rem; color: var(--ink); font: inherit; font-size: 0.96rem; transition: border-color 0.3s, background 0.3s; background-image: none; }
 .v4 .j-field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2371675E' stroke-width='1.4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.95rem center; padding-right: 2.4rem; }
 .v4 .j-field select option { color: var(--ink); }
-.v4 .j-field input:focus, .v4 .j-field textarea:focus, .v4 .j-field select:focus { outline: none; border-color: var(--accent); background: var(--ivory); }
+.v4 .j-field input:focus, .v4 .j-field textarea:focus, .v4 .j-field select:focus { outline: none; border-color: var(--accent); background: rgba(255, 255, 255, 0.5); }
 .v4 .j-field input::placeholder, .v4 .j-field textarea::placeholder { color: rgba(113, 103, 94, 0.55); }
-.v4 .j-form button { align-self: flex-start; font: inherit; font-weight: 600; font-size: 0.7rem; }
-.v4 .j-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+.v4 .j-form button.btn { align-self: flex-start; margin-top: 0.4rem; padding: 0.95rem 1.5rem; border: 1px solid var(--ink); border-radius: 2px; background: var(--ink); color: var(--ivory); font: inherit; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; transition: color 0.45s var(--ease), border-color 0.45s var(--ease), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+.v4 .j-form button.btn:hover { transform: translate(var(--mx, 0px), var(--my, 0px)); border-color: var(--accent); }
+.v4 .j-form button.btn:active { transform: translate(var(--mx, 0px), var(--my, 0px)); }
+.v4 .j-form button.btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .v4 .j-form__status { font-size: 0.9rem; color: var(--accent); }
 .v4 .j-form__status--error { color: #9a4a2f; }
 
@@ -317,7 +319,8 @@ body.v4.menu-open { overflow: hidden; }
 /* page réalisations */
 .pf { padding: clamp(9rem, 18vw, 12rem) 0 clamp(3.5rem, 7vw, 5rem); }
 .pf__inner { display: flex; flex-direction: column; gap: 1.2rem; align-items: flex-start; }
-.pf .h1 { font-size: clamp(2.6rem, 1.4rem + 4.6vw, 5.2rem); max-width: 14ch; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; }
+.pf .h1 { font-size: clamp(2.6rem, 1.4rem + 4.6vw, 5.2rem); max-width: 14ch; }
+.pf .h1--caps { text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; }
 .pf__lede { font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem); color: var(--muted); max-width: 44ch; }
 .pf__end { padding-block: clamp(5rem, 11vw, 8rem); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
 .pf__end .h2 { max-width: 22ch; }
@@ -350,13 +353,6 @@ body.v4.menu-open { overflow: hidden; }
 .split .si { display: inline-block; transform: translateY(112%); transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1); transition-delay: calc(var(--sd, 0ms) + var(--li, 0) * 120ms); will-change: transform; }
 .split.in .si { transform: none; }
 .hero .split .si { transition-duration: 1.2s; }
-
-/* images qui se dévoilent */
-.rv--mask { overflow: hidden; opacity: 1; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 1.3s cubic-bezier(0.19, 1, 0.22, 1); transition-delay: var(--rd, 0ms); }
-.rv--mask.in { clip-path: inset(0); }
-.rv--mask .media, .rv--mask > img { transform: scale(1.12); transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1); transition-delay: var(--rd, 0ms); }
-.rv--mask.in .media, .rv--mask.in > img { transform: none; }
-.rv--mask.plate > img { opacity: 1; }
 
 /* accordéon */
 .acc { display: flex; flex-direction: column; }
@@ -391,6 +387,14 @@ body.v4.menu-open { overflow: hidden; }
 /* révélations */
 .rv { opacity: 0; transform: translateY(18px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); transition-delay: var(--rd, 0ms); }
 .rv.in { opacity: 1; transform: none; }
+
+/* images qui se dévoilent */
+.rv.rv--mask { overflow: hidden; opacity: 1; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 1.3s cubic-bezier(0.19, 1, 0.22, 1); transition-delay: var(--rd, 0ms); }
+.rv.rv--mask.in { clip-path: inset(0); }
+.rv--mask .media, .rv--mask > img { transform: scale(1.12); transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1); transition-delay: var(--rd, 0ms); }
+.rv--mask.in .media, .rv--mask.in > img { transform: none; }
+.rv--mask.plate > img { opacity: 1; }
+
 
 /* page content experience */
 .detail { padding-block: clamp(4rem, 9vw, 7rem); }

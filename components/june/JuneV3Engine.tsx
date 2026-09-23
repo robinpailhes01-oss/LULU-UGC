@@ -20,6 +20,7 @@ export default function JuneV3Engine() {
     const plates = Array.from(document.querySelectorAll<HTMLElement>(".plate[data-dev]"));
     const darks = Array.from(document.querySelectorAll<HTMLElement>("[data-dark]"));
     const pxs = Array.from(document.querySelectorAll<HTMLElement>("[data-px]"));
+    let pending = Array.from(document.querySelectorAll<HTMLElement>(".rv"));
 
     const STOPS: Array<[number, [number, number, number]]> = [
       [0, [244, 240, 232]],
@@ -78,6 +79,17 @@ export default function JuneV3Engine() {
           return r.top <= 44 && r.bottom >= 44;
         })
       );
+      /* repli pour les révélations : tout élément déjà passé sous 92 % de la
+         fenêtre apparaît, même si l'observateur ne l'a pas vu (masques). */
+      if (pending.length) {
+        pending = pending.filter((el) => {
+          if (el.getBoundingClientRect().top < vh * 0.92) {
+            el.classList.add("in");
+            return false;
+          }
+          return true;
+        });
+      }
       if (!reduce) {
         develop();
         /* parallaxe très discrète : quelques pixels sur les grandes images */

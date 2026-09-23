@@ -3,6 +3,7 @@ import type React from "react";
 import JuneV3Engine from "@/components/june/JuneV3Engine";
 import SiteNav from "@/components/june/SiteNav";
 import SiteFooter from "@/components/june/SiteFooter";
+import Split from "@/components/june/Split";
 
 export const metadata: Metadata = {
   title: "Content Experience · June",
@@ -29,12 +30,12 @@ export default function ContentExperiencePage() {
         <section className="pf light" aria-label="Content Experience">
           <div className="wrap pf__inner">
             <p className="k rv">Work with June</p>
-            <h1 className="d h1 rv" style={rv(80)}>
+            <Split as="h1" className="d h1 h1--caps" delay={80}>
               Content{" "}
               <span className="nowrap">
                 Experience <span className="star">✦</span>
               </span>
-            </h1>
+            </Split>
             <p className="pf__lede rv" style={rv(160)}>Une Content Experience est construite autour de votre expérience, de vos objectifs et de ce que nous souhaitons raconter. Voici ce qu&apos;elle comprend.</p>
           </div>
         </section>
@@ -66,9 +67,9 @@ export default function ContentExperiencePage() {
         <section className="light" aria-label="Et avant ?">
           <div className="wrap pf__end">
             <p className="k rv">Avant tout engagement</p>
-            <h2 className="d h2 rv" style={rv(80)}>
+            <Split as="h2" className="d h2" delay={80}>
               On commence simplement <em>par parler de votre projet.</em>
-            </h2>
+            </Split>
             <p className="pf__lede rv" style={rv(160)}>Vous me racontez votre établissement et ce que vous aimeriez mieux faire ressentir. Je prends un premier regard extérieur, et on voit ensemble si mon approche répond à votre besoin.</p>
             <a className="btn rv" style={rv(240)} href="/#contact">
               Parler de mon projet
