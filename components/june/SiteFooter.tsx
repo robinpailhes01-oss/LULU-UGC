@@ -1,8 +1,7 @@
-import { CONTACT_EMAIL, INSTAGRAM_URL, LINKEDIN_URL, NAV_MOBILE, TIKTOK_URL } from "@/lib/site";
+import { CONTACT_EMAIL, INSTAGRAM_URL, LIEUX, LINKEDIN_URL, NAV_MOBILE, SIGNATURE, TIKTOK_URL } from "@/lib/site";
 
-/** Pied de page commun, brun très foncé. */
-export default function SiteFooter({ home = true }: { home?: boolean }) {
-  const p = home ? "" : "/";
+/** Pied de page commun, espresso. Contact direct visible. */
+export default function SiteFooter() {
   const socials = [
     ["Instagram", INSTAGRAM_URL],
     ["TikTok", TIKTOK_URL],
@@ -11,28 +10,32 @@ export default function SiteFooter({ home = true }: { home?: boolean }) {
   return (
     <footer className="foot night" data-dark>
       <div className="wrap foot__grid">
-        <a className="mark" href={home ? "#top" : "/"} aria-label="June Content Studio">
-          <b>June</b>
-          <small>Content Studio</small>
-        </a>
+        <div className="foot__brand">
+          <a className="mark" href="/" aria-label="June Content Studio">
+            <b>June</b>
+            <small>Content Studio</small>
+          </a>
+          <p className="foot__sig">{SIGNATURE}</p>
+        </div>
         <nav className="foot__nav" aria-label="Plan du site">
           {NAV_MOBILE.map(([label, h]) => (
-            <a key={h} href={`${p}${h}`} className="lnk">
+            <a key={h} href={h} className="lnk">
               <span data-text={label}>{label}</span>
             </a>
           ))}
-          <a href="/portfolio">Toutes les expériences</a>
-          <a href="/content-experience">L&apos;offre en détail</a>
         </nav>
-        <nav className="foot__social" aria-label="Réseaux">
+        <nav className="foot__social" aria-label="Contact direct">
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           {socials.map(([label, url]) => (
             <a key={label} href={url} target="_blank" rel="noopener noreferrer">
               {label}
             </a>
           ))}
-          <a href={`mailto:${CONTACT_EMAIL}`}>Email</a>
         </nav>
-        <p className="foot__place">Montpellier • France • Alpe d&apos;Huez 26/27</p>
+        <p className="foot__place">
+          <span>{LIEUX}</span>
+          <a href="/confidentialite">Politique de confidentialité</a>
+        </p>
       </div>
     </footer>
   );

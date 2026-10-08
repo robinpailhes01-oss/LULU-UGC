@@ -56,3 +56,5 @@ Jargon marketing, superlatifs, « contenu premium », « stratégie », « visib
 > Mise à jour 2026-09-21 : le brief « version claire » (docs/brief-site-clair.md) fait foi pour la palette, le menu, l'ordre des sections et les textes de l'accueil. En cas de contradiction avec ce qui précède, suivre ce brief.
 
 > Mise à jour 2026-09-21 (bis) : docs/brief-homepage-refonte.md précise la structure en sept blocs, le menu (Approche · Expériences · Content Experience · À propos) et le positionnement « révéler l'expérience ». Il prime sur le brief « version claire » en cas de contradiction.
+
+> Mise à jour 2026-10-08 (V2 finale) : trois offres (Experience Content Day, The Experience Stay, Experience Coverage) dans lib/offres.ts ; affichage des prix piloté par lib/pricing.ts (PRICE_DISPLAY_MODE, « hidden » par défaut, jamais sur l'accueil) ; palette Ivory #F5F0E9 / Sand #D9C9B6 / Taupe #AD9682 / Brown #705344 / Espresso #302A27 ; menu Réalisations · Services · L'approche · À propos + « Parler de votre projet ↗ » ; pages /, /realisations, /services, /contact. Ce brief prime sur les précédents.

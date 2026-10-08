@@ -5,6 +5,7 @@ import "./scrollcraft.css";
 import "./june.css";
 import "./june-v1.css";
 import "./june-v4.css";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -27,16 +28,25 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "June · Content Experience Studio",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "June Content Studio · créatrice de contenu hôtel, hébergement et expériences",
+    template: `%s · ${SITE_NAME}`,
+  },
   description:
-    "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre. J'accompagne les établissements et expériences à révéler ce que leurs clients vivent réellement chez eux, pour le transformer en contenu dans lequel leurs futurs clients peuvent se projeter. Montpellier • France • Alpe d'Huez, hiver 26/27.",
+    "Création de contenu photo et vidéo centrée sur l'expérience client, pour hôtels, hébergements touristiques, spas, restaurants et expériences. Vidéos immersives et photographies par June, créatrice de contenu hôtelier basée à Montpellier, à l'Alpe d'Huez l'hiver 2026/27.",
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: "June Content Studio",
-    description:
-      "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre. Content Experience : comprendre, révéler, vivre, raconter.",
+    description: "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre. Création de contenu hôtel, hébergement touristique et expériences.",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "fr_FR",
     type: "website",
+    images: [{ url: "/hero.jpg", width: 1672, height: 941, alt: "Ludivine, June Content Studio, photographie une chambre d'hôtel avec vue" }],
   },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
