@@ -10,7 +10,7 @@ import { CONTACT_EMAIL } from "@/lib/site";
    délai minimal contre les robots, consentement RGPD, confirmation réelle.
    Envoi via /api/contact (Supabase si configuré, sinon repli e-mail).
 */
-type Errors = Partial<Record<"nom" | "email" | "etablissement" | "prestation" | "message" | "rgpd", string>>;
+type Errors = Partial<Record<"nom" | "email" | "etablissement" | "localisation" | "prestation" | "message" | "rgpd", string>>;
 
 function Field({ id, label, error, optional, children }: { id: string; label: string; error?: string; optional?: boolean; children: React.ReactNode }) {
   return (
@@ -31,7 +31,7 @@ function Field({ id, label, error, optional, children }: { id: string; label: st
 
 export default function ContactForm() {
   const params = useSearchParams();
-  const preset = params.get("prestation") ?? "";
+  const preset = params.get("projet") ?? params.get("prestation") ?? "";
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errors, setErrors] = useState<Errors>({});
   const [serverError, setServerError] = useState<string | null>(null);
@@ -46,7 +46,8 @@ export default function ContactForm() {
     const email = String(fd.get("email") ?? "").trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Indiquez un email valide pour que je puisse vous répondre.";
     if (!String(fd.get("etablissement") ?? "").trim()) e.etablissement = "Indiquez le nom de votre établissement.";
-    if (!String(fd.get("prestation") ?? "")) e.prestation = "Choisissez une prestation, ou « Je souhaite être conseillée ».";
+    if (!String(fd.get("localisation") ?? "").trim()) e.localisation = "Indiquez où se situe votre établissement ou votre activité.";
+    if (!String(fd.get("prestation") ?? "")) e.prestation = "Choisissez un type de projet.";
     if (String(fd.get("message") ?? "").trim().length < 20) e.message = "Décrivez votre projet en quelques phrases (20 caractères minimum).";
     if (!fd.get("rgpd")) e.rgpd = "Merci d'accepter que vos informations soient utilisées pour vous répondre.";
     return e;
@@ -70,7 +71,7 @@ export default function ContactForm() {
       etablissement: String(fd.get("etablissement")).trim(),
       site: String(fd.get("site") ?? "").trim(),
       prestation: String(fd.get("prestation")),
-      periode: String(fd.get("periode") ?? "").trim(),
+      localisation: String(fd.get("localisation")).trim(),
       message: String(fd.get("message")).trim(),
       website: String(fd.get("website") ?? ""),
       elapsed: Date.now() - started.current,
@@ -82,7 +83,7 @@ export default function ContactForm() {
       if (!r.ok) throw new Error(data.error ?? "Erreur");
       if (data.fallback === "mailto") {
         const subject = encodeURIComponent(`${payload.prestation} — ${payload.etablissement}`);
-        const body = encodeURIComponent(`Nom : ${payload.nom}\nEmail : ${payload.email}\nÉtablissement : ${payload.etablissement}\nSite / Instagram : ${payload.site}\nPrestation : ${payload.prestation}\nPériode : ${payload.periode}\n\n${payload.message}`);
+        const body = encodeURIComponent(`Nom : ${payload.nom}\nEmail : ${payload.email}\nÉtablissement : ${payload.etablissement}\nSite / Instagram : ${payload.site}\nLocalisation : ${payload.localisation}\nType de projet : ${payload.prestation}\n\n${payload.message}`);
         window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
       }
       setStatus("sent");
@@ -114,7 +115,7 @@ export default function ContactForm() {
         </Field>
       </div>
       <div className="cf__row">
-        <Field id="etablissement" label="Nom de l'établissement" error={errors.etablissement}>
+        <Field id="etablissement" label="Nom de l'établissement ou de l'activité" error={errors.etablissement}>
           <input id="etablissement" name="etablissement" type="text" autoComplete="organization" required aria-invalid={!!errors.etablissement} aria-describedby={errors.etablissement ? "etablissement-err" : undefined} />
         </Field>
         <Field id="site" label="Site ou Instagram" optional>
@@ -122,7 +123,10 @@ export default function ContactForm() {
         </Field>
       </div>
       <div className="cf__row">
-        <Field id="prestation" label="Prestation souhaitée" error={errors.prestation}>
+        <Field id="localisation" label="Localisation" error={errors.localisation}>
+          <input id="localisation" name="localisation" type="text" autoComplete="address-level2" required placeholder="Ville, région" aria-invalid={!!errors.localisation} aria-describedby={errors.localisation ? "localisation-err" : undefined} />
+        </Field>
+        <Field id="prestation" label="Type de projet" error={errors.prestation}>
           <select id="prestation" name="prestation" defaultValue={PRESTATIONS.includes(preset as (typeof PRESTATIONS)[number]) ? preset : ""} required aria-invalid={!!errors.prestation} aria-describedby={errors.prestation ? "prestation-err" : undefined}>
             <option value="" disabled>
               Choisir…
@@ -134,12 +138,9 @@ export default function ContactForm() {
             ))}
           </select>
         </Field>
-        <Field id="periode" label="Période du projet" optional>
-          <input id="periode" name="periode" type="text" placeholder="Ex. : hiver 26/27, mai 2027…" />
-        </Field>
       </div>
-      <Field id="message" label="Description du projet" error={errors.message}>
-        <textarea id="message" name="message" rows={5} required placeholder="Votre lieu, ce que vos clients viennent y vivre, et ce que vous aimeriez mettre en lumière." aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-err" : undefined} />
+      <Field id="message" label="Message" error={errors.message}>
+        <textarea id="message" name="message" rows={5} required placeholder="Votre lieu ou votre activité, ce que vos clients viennent y vivre, et ce que vous aimeriez montrer." aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-err" : undefined} />
       </Field>
       <div className={errors.rgpd ? "cf__check is-invalid" : "cf__check"}>
         <input id="rgpd" name="rgpd" type="checkbox" required aria-invalid={!!errors.rgpd} aria-describedby={errors.rgpd ? "rgpd-err" : undefined} />

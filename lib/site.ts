@@ -10,32 +10,35 @@ export const INSTAGRAM_URL = "";
 export const TIKTOK_URL = "";
 export const LINKEDIN_URL = "";
 
-export const CTA = "Parler de votre projet";
+export const CTA = "Parlons de votre projet";
 export const CTA_HREF = "/contact";
 
-export const SIGNATURE = "Vous faites vivre l'expérience. June trouve comment la raconter.";
+export const SIGNATURE = "Vous faites vivre l'expérience. June la fait ressentir.";
+export const PROMESSE = "Des contenus qui donnent envie de vivre votre expérience. Sans avoir à les créer vous-même.";
 export const POSITIONNEMENT = "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre.";
-export const LIEUX = "Montpellier · Alpe d'Huez — Hiver 26/27";
+export const LIEUX = "Montpellier · Alpe d'Huez — hiver 2026/27";
 export const SAISON = "Présente à l'Alpe d'Huez et dans l'Oisans durant l'hiver 2026/2027.";
 
+/** Vidéos facultatives. Laisser vide tant que le fichier n'est pas déposé dans public/video/ (sinon requête 404 à chaque visite). */
 export const VIDEO = {
-  hero: "/video/hero.mp4",
+  hero: "",
   approche: "/video/approche.mp4",
   alpe: "/video/alpe.mp4",
 };
 
 /** Menu : libellé, lien. Les ancres pointent vers l'accueil. */
 export const NAV = [
+  ["Accueil", "/"],
+  ["L'offre", "/offre"],
   ["Réalisations", "/realisations"],
-  ["Services", "/services"],
-  ["L'approche", "/#approche"],
   ["À propos", "/#apropos"],
+  ["Contact", "/contact"],
 ] as const;
-export const NAV_MOBILE = [...NAV, ["Contact", "/contact"]] as const;
+export const NAV_MOBILE = NAV;
 
 export const METHODE: Array<[string, string, string]> = [
-  ["01", "Comprendre", "Votre lieu, vos clients et ce que vous souhaitez transmettre."],
-  ["02", "Révéler", "Identifier les moments qui rendent votre expérience particulière."],
-  ["03", "Vivre", "Découvrir ou capturer l'expérience au plus près de la réalité."],
-  ["04", "Raconter", "Créer les contenus qui permettront à vos futurs clients de se projeter."],
+  ["01", "Comprendre", "Votre activité, votre clientèle et vos besoins."],
+  ["02", "Révéler", "Ce qui rend votre lieu ou votre expérience particulière."],
+  ["03", "Créer", "Des photos et vidéos adaptées à votre univers."],
+  ["04", "Partager", "Des contenus préparés et organisés pour faciliter votre communication."],
 ];

@@ -47,7 +47,6 @@ export const PROJETS: Projet[] = [
     categorie: "Experiences",
     sousCategorie: "Sortie en mer · Tourisme",
     description: "Une journée en mer racontée comme la vivent les invités : l'embarquement, la table dressée à bord, le large.",
-    home: true,
     cover: { image: "/wall/yacht-reel.jpg", w: 389, h: 614, alt: "Petit-déjeuner servi à bord d'un yacht face à la mer", video: "/video/work/harmonie-yacht.mp4", href: "https://www.instagram.com/reel/DZ5ER2RsFEt/?igsh=MWNwMWtybWVrNTJ5eQ==", vues: "20,3 K", type: "Vidéo" },
     medias: [
       { image: "/realisations/harmonie-yacht-shooting.jpg", w: 1179, h: 1456, alt: "Groupe d'amis à bord au coucher du soleil", href: "https://www.instagram.com/p/DasUCeeiM1E/?igsh=NXppc2lyZ3NmcHB0", pos: "50% 35%", type: "Photo" },
@@ -81,6 +80,7 @@ export const PROJETS: Projet[] = [
     categorie: "Wellness",
     sousCategorie: "Thérapie · Bien-être",
     description: "Le geste, l'attention, le soin : un cabinet de thérapie raconté à hauteur de patient.",
+    home: true,
     cover: { image: "/wall/beltra.jpg", w: 1179, h: 1143, alt: "Séance de thérapie physique chez Beltra", video: "/video/work/beltra.mp4", href: "https://www.instagram.com/p/DSKXshciI5F/?img_index=1&igsh=NnV2cnc3ejduaGZp", type: "Vidéo" },
     medias: [],
   },

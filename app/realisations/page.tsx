@@ -9,8 +9,8 @@ import { PROJETS } from "@/lib/projets";
 import { CTA, CTA_HREF, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Réalisations · vidéos immersives et photos pour hôtels et expériences",
-  description: "Les projets de June Content Studio, créatrice de contenu hôtelier : vidéos immersives et photographies pour hôtels, gîtes, spas, restaurants et expériences touristiques, regroupés par établissement.",
+  title: "Réalisations · Reels et photos pour hébergements, bien-être et expériences",
+  description: "Les projets de June Content Studio : Reels, vidéos et photographies créés pour des hôtels, gîtes, cabinets bien-être, restaurants et expériences, regroupés par établissement. Montpellier, Occitanie, Alpe d'Huez.",
   alternates: { canonical: `${SITE_URL}/realisations` },
 };
 
@@ -24,9 +24,9 @@ export default function RealisationsPage() {
       <main id="top">
         <section className="pf light" aria-label="Réalisations">
           <div className="wrap pf__inner">
-            <p className="k rv">Selected work</p>
+            <p className="k rv">Réalisations</p>
             <Split as="h1" className="d h1" delay={80}>
-              Des expériences <em>racontées par June.</em>
+              Des lieux, des rencontres, <em>des expériences à raconter.</em>
             </Split>
             <p className="pf__lede rv" style={rv(160)}>Chaque projet regroupe les vidéos et photographies créées pour un établissement ou une expérience. Les vidéos se lancent au survol ou au défilement ; cliquez pour voir le contenu publié.</p>
           </div>
@@ -35,7 +35,7 @@ export default function RealisationsPage() {
         <section className="sand" aria-label="Contact">
           <div className="wrap pf__end">
             <Split as="h2" className="d h2" delay={0}>
-              Let&apos;s tell <em>your story.</em>
+              Vous avez une expérience <em>à faire découvrir ?</em>
             </Split>
             <a className="btn btn--fill btn--up rv" style={rv(120)} href={CTA_HREF}>
               {CTA}

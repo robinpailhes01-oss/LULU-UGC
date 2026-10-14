@@ -22,7 +22,7 @@ export default function ConfidentialitePage() {
             <p className="k">Politique de confidentialité</p>
             <h1 className="d h2">Vos informations, et ce que j&apos;en fais.</h1>
             <h2>Données collectées</h2>
-            <p>Le formulaire « Start a project » recueille votre nom et prénom, votre email, le nom de votre établissement, votre site ou compte Instagram (facultatif), la prestation souhaitée, la période envisagée (facultatif) et la description de votre projet.</p>
+            <p>Le formulaire « Start a project » recueille votre nom et prénom, votre email, le nom de votre établissement ou de votre activité, votre site ou compte Instagram (facultatif), votre localisation, le type de projet et votre message.</p>
             <h2>Finalité</h2>
             <p>Ces informations servent uniquement à répondre à votre demande et à préparer notre échange. Elles ne sont ni vendues, ni transmises à des tiers à des fins commerciales, ni utilisées pour vous envoyer des communications non sollicitées.</p>
             <h2>Conservation</h2>

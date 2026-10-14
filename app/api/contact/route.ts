@@ -8,7 +8,7 @@ type ContactPayload = {
   lieu?: string;
   site?: string;
   prestation?: string;
-  periode?: string;
+  localisation?: string;
   message?: string;
   website?: string;
   elapsed?: number;
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   }
 
   const lieu = clean(payload.etablissement) || clean(payload.lieu);
-  const details = [payload.prestation && `Prestation : ${clean(payload.prestation)}`, payload.site && `Site / Instagram : ${clean(payload.site)}`, payload.periode && `Période : ${clean(payload.periode)}`].filter(Boolean).join("\n");
+  const details = [payload.prestation && `Prestation : ${clean(payload.prestation)}`, payload.site && `Site / Instagram : ${clean(payload.site)}`, payload.localisation && `Localisation : ${clean(payload.localisation)}`].filter(Boolean).join("\n");
 
   const supabase = createClient(supabaseUrl, supabaseKey);
   const { error } = await supabase.from("contact_requests").insert({

@@ -30,15 +30,15 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "June Content Studio · créatrice de contenu hôtel, hébergement et expériences",
+    default: "June Content Studio · Reels, photos et contenus pour hébergements indépendants et bien-être",
     template: `%s · ${SITE_NAME}`,
   },
   description:
-    "Création de contenu photo et vidéo centrée sur l'expérience client, pour hôtels, hébergements touristiques, spas, restaurants et expériences. Vidéos immersives et photographies par June, créatrice de contenu hôtelier basée à Montpellier, à l'Alpe d'Huez l'hiver 2026/27.",
+    "Studio indépendant de création de contenu photo et vidéo pour les gîtes, maisons d'hôtes, chalets, boutique-hôtels, spas et expériences bien-être. Reels, photos et publications prêts à partager, sans avoir à les créer vous-même. Montpellier, Occitanie et Alpe d'Huez l'hiver 2026/27.",
   alternates: { canonical: SITE_URL },
   openGraph: {
     title: "June Content Studio",
-    description: "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre. Création de contenu hôtel, hébergement touristique et expériences.",
+    description: "Des contenus qui donnent envie de vivre votre expérience. Sans avoir à les créer vous-même. Hébergements indépendants et expériences bien-être.",
     url: SITE_URL,
     siteName: SITE_NAME,
     locale: "fr_FR",
