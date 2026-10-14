@@ -18,8 +18,8 @@ const fmt = (n: number) => `${n.toLocaleString("fr-FR")} €${TAX_LABEL ? ` ${TA
 export function priceLabel(slug: string): string | null {
   const p = PRICES[slug];
   if (!p || PRICE_DISPLAY_MODE === "hidden") return null;
-  return `À partir de ${fmt(p.from)} — sur devis selon votre projet`;
+  return `À partir de ${fmt(p.from)} — devis personnalisé`;
 }
 
 export const PRICE_HIDDEN_TEXT = "Prestation adaptée à votre projet — sur devis";
-export const PRICE_SCOPE_NOTE = "Le volume final de contenus, la durée de captation et le devis sont confirmés ensemble avant la réservation. Le tarif indicatif correspond à une session de base ; il évolue selon le périmètre.";
+export const PRICE_SCOPE_NOTE = "Le tarif indicatif correspond à une session de base. Le volume de contenus, la durée de captation et le devis sont confirmés ensemble avant la réservation.";

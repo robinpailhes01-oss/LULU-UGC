@@ -10,13 +10,14 @@ export const INSTAGRAM_URL = "";
 export const TIKTOK_URL = "";
 export const LINKEDIN_URL = "";
 
-export const CTA = "Parlons de votre projet";
+export const CTA = "Parler de mon projet";
 export const CTA_HREF = "/contact";
 
 export const SIGNATURE = "Vous faites vivre l'expérience. June la fait ressentir.";
 export const PROMESSE = "Des contenus qui donnent envie de vivre votre expérience. Sans avoir à les créer vous-même.";
 export const POSITIONNEMENT = "Des lieux qui font vivre une expérience. Des contenus qui donnent envie de la vivre.";
 export const LIEUX = "Montpellier · Alpe d'Huez — hiver 2026/27";
+export const SURTITRE = ["Independent content studio", "Hospitality · Wellness"] as const;
 export const SAISON = "Présente à l'Alpe d'Huez et dans l'Oisans durant l'hiver 2026/2027.";
 
 /** Vidéos facultatives. Laisser vide tant que le fichier n'est pas déposé dans public/video/ (sinon requête 404 à chaque visite). */
@@ -30,7 +31,7 @@ export const VIDEO = {
 export const NAV = [
   ["Accueil", "/"],
   ["L'offre", "/offre"],
-  ["Réalisations", "/realisations"],
+  ["Portfolio", "/realisations"],
   ["À propos", "/#apropos"],
   ["Contact", "/contact"],
 ] as const;

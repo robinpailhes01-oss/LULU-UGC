@@ -413,6 +413,22 @@ body.v4.menu-open { overflow: hidden; }
 .detail__side .muted { font-size: 0.92rem; max-width: 36ch; }
 
 
+/* 02 — mosaïque éditoriale */
+.hero__k2 { display: block; margin-top: 0.3rem; opacity: 0.75; }
+.hero__k2::before { display: none; }
+.mosaic-ed { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: minmax(0, auto); gap: clamp(0.9rem, 1.8vw, 1.6rem); align-items: start; }
+.mosaic-ed__it { display: flex; flex-direction: column; }
+.mosaic-ed__it .pc__cap { padding-bottom: 0; }
+.mosaic-ed__cat { font-size: 0.78rem; color: var(--muted); padding-top: 0.15rem; }
+.mosaic-ed__it--1 { grid-column: 1 / span 5; }
+.mosaic-ed__it--2 { grid-column: 6 / span 3; margin-top: clamp(2rem, 6vw, 6rem); }
+.mosaic-ed__it--3 { grid-column: 9 / span 4; margin-top: clamp(1rem, 3vw, 3rem); }
+.mosaic-ed__it--4 { grid-column: 1 / span 7; }
+.mosaic-ed__it--5 { grid-column: 8 / span 2; margin-top: clamp(2rem, 5vw, 5rem); }
+.mosaic-ed__it--6 { grid-column: 10 / span 3; }
+.mosaic-ed__it--7 { grid-column: 4 / span 4; margin-top: calc(clamp(2rem, 5vw, 5rem) * -1); }
+.pc__plate { aspect-ratio: var(--ratio, 4 / 5); }
+
 /* 02 — selected work */
 .sel { padding-block: clamp(5rem, 12vw, 10rem); }
 .sel__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.2rem, 2.6vw, 2.4rem); align-items: start; }
@@ -597,6 +613,11 @@ body.v4.menu-open { overflow: hidden; }
   .offre-sig__media, .event__media, .offre-hero__media { max-width: 22rem; justify-self: start; }
   .proc__head { position: static; }
   .sel__it:nth-child(2) { margin-top: 0; }
+  .mosaic-ed { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .mosaic-ed__it { grid-column: auto !important; margin-top: 0 !important; }
+  .mosaic-ed__it--4 { grid-column: 1 / -1 !important; }
+  .mosaic-ed__it .pc__plate { aspect-ratio: 4 / 5; }
+  .mosaic-ed__it--4 .pc__plate { aspect-ratio: 16 / 10; }
   .offer__media { position: static; max-width: 22rem; }
   .offer__grid--flip .offer__media { order: 0; }
   .contact__head { position: static; }

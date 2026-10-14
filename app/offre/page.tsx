@@ -5,12 +5,12 @@ import SiteNav from "@/components/june/SiteNav";
 import SiteFooter from "@/components/june/SiteFooter";
 import Split from "@/components/june/Split";
 import Faq from "@/components/june/Faq";
-import { EVENT, EXTRAS, OFFRE } from "@/lib/offres";
+import { EVENT, EXTRAS, EXTRAS_TITRE, OFFRE } from "@/lib/offres";
 import { PRICE_HIDDEN_TEXT, PRICE_SCOPE_NOTE, priceLabel } from "@/lib/pricing";
 import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Experience Content Day · Reels, photos et publications prêts à partager",
+  title: "Experience Content Day · Reels, photos et contenus prêts à partager",
   description: "Une session de création photo et vidéo, des semaines de contenus prêts à publier : Reels, photos retouchées, carrousels et Content Board. Pour les hébergements indépendants et les professionnels du bien-être, à Montpellier, en Occitanie et à l'Alpe d'Huez.",
   alternates: { canonical: `${SITE_URL}/offre` },
 };
@@ -35,7 +35,7 @@ export default function OffrePage() {
               </Split>
               <p className="pf__lede rv" style={rv(160)}>{OFFRE.sousTitre}</p>
               <a className="btn btn--fill btn--up rv" style={rv(240)} href={contact(OFFRE.nom)}>
-                Discutons de votre projet
+                Parler de mon projet
               </a>
             </div>
             <figure className="offre-hero__media plate plate--photo rv rv--mask" data-dev>
@@ -48,7 +48,7 @@ export default function OffrePage() {
         <section className="sand liv" aria-label="Ce que vous recevez">
           <div className="wrap">
             <div className="sec__head">
-              <p className="k rv">Ce que vous recevez</p>
+              <p className="k rv">Inclus</p>
               <Split as="h2" className="d h2" delay={80}>
                 {OFFRE.accroche}
               </Split>
@@ -81,7 +81,7 @@ export default function OffrePage() {
         <section className="light proc" aria-label="Comment ça se passe">
           <div className="wrap proc__grid">
             <div className="proc__head">
-              <p className="k rv">Comment ça se passe</p>
+              <p className="k rv">Méthode</p>
               <Split as="h2" className="d h2" delay={80}>
                 Cinq étapes, <em>sans rien à gérer de votre côté.</em>
               </Split>
@@ -101,7 +101,7 @@ export default function OffrePage() {
         <section className="night prix" data-dark aria-label="Tarification">
           <div className="wrap prix__grid">
             <div>
-              <p className="k rv">Tarification</p>
+              <p className="k rv">Tarif</p>
               <Split as="h2" className="d h2" delay={80}>
                 {price ?? PRICE_HIDDEN_TEXT}
               </Split>
@@ -109,7 +109,7 @@ export default function OffrePage() {
             <div className="prix__copy">
               <p className="rv" style={rv(160)}>{PRICE_SCOPE_NOTE}</p>
               <a className="btn btn--fill btn--up rv" style={rv(240)} href={contact(OFFRE.nom)}>
-                Discutons de votre projet
+                Parler de mon projet
               </a>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function OffrePage() {
             <div className="sec__head">
               <p className="k rv">Les extras à la carte</p>
               <Split as="h2" className="d h2" delay={80}>
-                En complément, <em>ou indépendamment.</em>
+                {EXTRAS_TITRE}
               </Split>
             </div>
             <ul className="extras__list">
@@ -130,7 +130,7 @@ export default function OffrePage() {
                   <h3 className="d">{e.nom}</h3>
                   <p>{e.texte}</p>
                   <a className="link-arrow" href={contact("Création à la carte")}>
-                    Demander un devis
+                    Parler de mon projet
                   </a>
                 </li>
               ))}
@@ -181,10 +181,10 @@ export default function OffrePage() {
         <section className="sand" aria-label="Contact">
           <div className="wrap pf__end">
             <Split as="h2" className="d h2" delay={0}>
-              Vous avez une expérience <em>à faire découvrir ?</em>
+              Parlons de <em>votre expérience.</em>
             </Split>
             <a className="btn btn--fill btn--up rv" style={rv(120)} href={contact(OFFRE.nom)}>
-              Discutons de votre projet
+              Parler de mon projet
             </a>
           </div>
         </section>
