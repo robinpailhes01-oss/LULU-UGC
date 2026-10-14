@@ -6,7 +6,7 @@ import Reveal from "@/components/ui/Reveal";
 
 type FormStatus = "idle" | "sending" | "success" | "error";
 
-const CONTACT_EMAIL = "harmonieyacht@gmail.com";
+const CONTACT_EMAIL = "junecontentstudio@gmail.com";
 
 export default function Contact() {
   const [status, setStatus] = useState<FormStatus>("idle");

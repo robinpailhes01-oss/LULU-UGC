@@ -5,7 +5,7 @@
  */
 export const SITE_URL = "https://www.junecontentstudio.fr";
 export const SITE_NAME = "June Content Studio";
-export const CONTACT_EMAIL = "harmonieyacht@gmail.com";
+export const CONTACT_EMAIL = "junecontentstudio@gmail.com";
 export const INSTAGRAM_URL = "";
 export const TIKTOK_URL = "";
 export const LINKEDIN_URL = "";
