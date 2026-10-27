@@ -12,6 +12,7 @@ import {
   FolderPlus,
   Images,
   LayoutDashboard,
+  Library,
   MessageSquareText,
   Plus,
   Settings,
@@ -43,6 +44,7 @@ const NAV = [
   { href: "/menage", label: "Ménage", icon: Sparkles },
   { href: "/montage", label: "Montage", icon: Clapperboard },
   { href: "/programmation", label: "Programmation", icon: CalendarDays },
+  { href: "/skills", label: "Skills", icon: Library },
   { href: "/agent", label: "Agent", icon: MessageSquareText },
   { href: "/corbeille", label: "Corbeille", icon: Trash2 },
 ];

@@ -1,0 +1,22 @@
+{
+  "format": "9:16",
+  "fps": 30,
+  "targetDurationS": { "min": 7, "max": 12 },
+  "photoDurationS": 0.9,
+  "videoClipS": { "min": 0.6, "max": 1.2 },
+  "transition": { "type": "cut", "durationS": 0 },
+  "pacing": "rapide",
+  "look": "June doré",
+  "fonts": { "display": "Fraunces", "text": "Manrope" },
+  "colors": { "text": "#FBF7F0", "accent": "#C98A3C", "plate": "#241D17", "background": "#F4F0E8" },
+  "textAnimation": "words",
+  "textPlacement": "top",
+  "captions": true,
+  "music": { "mood": "rythmé, chaleureux, percussions légères", "volume": 0.75, "fadeOutS": 0.6 },
+  "endCard": null,
+  "structure": [
+    { "role": "hook", "durationS": 1, "shot": "le plan le plus fort du projet", "text": "3 à 6 mots" },
+    { "role": "enchaînement", "durationS": 7, "shot": "5 à 8 plans courts sur le rythme" },
+    { "role": "chute", "durationS": 1.5, "shot": "le plan qui répond au hook" }
+  ]
+}

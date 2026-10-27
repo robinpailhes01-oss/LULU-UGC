@@ -1,0 +1,24 @@
+{
+  "format": "9:16",
+  "fps": 30,
+  "targetDurationS": { "min": 20, "max": 40 },
+  "photoDurationS": 2,
+  "videoClipS": { "min": 1.5, "max": 5 },
+  "transition": { "type": "cut", "durationS": 0 },
+  "pacing": "moyen",
+  "look": "Lumière naturelle",
+  "fonts": { "display": "Fraunces", "text": "Manrope" },
+  "colors": { "text": "#FBF7F0", "accent": "#C98A3C", "plate": "#241D17", "background": "#F4F0E8" },
+  "textAnimation": "fade",
+  "textPlacement": "bottom",
+  "captions": true,
+  "music": { "mood": "doux, discret, sous la voix", "volume": 0.25, "fadeOutS": 1.2 },
+  "endCard": null,
+  "structure": [
+    { "role": "accroche", "durationS": 2, "shot": "Ludivine ou son point de vue qui pose la situation", "text": "phrase qui pose la situation" },
+    { "role": "arrivée", "durationS": 5, "shot": "pas, mains, découverte en point de vue" },
+    { "role": "moments vécus", "durationS": 20, "shot": "trois moments, deux ou trois plans chacun" },
+    { "role": "ressenti", "durationS": 4, "shot": "plan calme, ce qu'elle retient", "text": "une phrase" },
+    { "role": "invitation", "durationS": 2, "shot": "plan large final", "text": "invitation douce, facultative" }
+  ]
+}

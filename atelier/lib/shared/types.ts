@@ -275,8 +275,42 @@ export interface MontageSpec {
   musicAssetId: string | null;
   musicVolume: number; // 0 … 1
   endCard: { title: string; subtitle: string | null; durationS: number } | null;
-  /** Style typographique de la composition. */
-  theme: "june" | "minimal" | "bold";
+  /**
+   * Style de montage (slug d'un skill de type « montage »). Fournit les valeurs par défaut
+   * (rythme, typographies, couleurs, animations du texte, structure type) ; les champs
+   * explicites de la spec priment sur le style.
+   */
+  style: string | null;
+}
+
+/**
+ * Paramètres structurés d'un style de montage (data.json d'un skill « montage »).
+ * Tous les champs sont facultatifs : un style peut ne préciser que ce qui le distingue.
+ */
+export interface MontageStyleData {
+  format?: MontageFormat;
+  fps?: 24 | 25 | 30 | 60;
+  /** Durée visée du montage complet. */
+  targetDurationS?: { min: number; max: number };
+  /** Durée d'affichage d'une photo. */
+  photoDurationS?: number;
+  /** Longueur d'un plan vidéo. */
+  videoClipS?: { min: number; max: number };
+  transition?: { type: MontageTransition; durationS: number };
+  pacing?: "lent" | "moyen" | "rapide";
+  /** Nom ou identifiant d'un look de retouche appliqué à tous les plans. */
+  look?: string | null;
+  /** Familles Google Fonts. */
+  fonts?: { display: string; text: string };
+  colors?: { text: string; accent: string; plate: string; background: string };
+  textAnimation?: "rise" | "fade" | "words" | "typewriter" | "none";
+  textPlacement?: "top" | "center" | "bottom";
+  /** Sous-titres / textes à l'écran. */
+  captions?: boolean;
+  music?: { mood: string; volume: number; fadeOutS: number } | null;
+  endCard?: { title: string; subtitle: string | null; durationS: number } | null;
+  /** Déroulé type, plan par plan : rôle (accroche, détail, moment fort…), durée, plan à chercher, texte. */
+  structure?: { role: string; durationS?: number; shot: string; text?: string }[];
 }
 
 export interface RenderState {
@@ -302,6 +336,54 @@ export interface Montage {
   durationS: number | null;
   createdAt: string;
   updatedAt: string;
+  createdBy: string | null;
+}
+
+// ---------------------------------------------------------------------------------------------
+// Skills (savoir-faire de l'atelier : styles de montage, voix, méthodes, références)
+
+export type SkillKind = "montage" | "voice" | "brand" | "workflow" | "references" | "retouch" | "other";
+
+export interface Skill {
+  /** Identifiant stable (nom du dossier dans atelier/skills/). */
+  slug: string;
+  kind: SkillKind;
+  name: string;
+  /** Quand utiliser ce skill (lu par l'agent pour choisir). */
+  description: string;
+  /** Consignes en Markdown. */
+  body: string;
+  /** Paramètres structurés (pour un style de montage : MontageStyleData). */
+  data: Record<string, unknown> | null;
+  /** Fichiers texte annexes (ex. template.html, references.md). */
+  files: Record<string, string>;
+  /** Médias de la médiathèque servant de références (vidéos et photos modèles). */
+  referenceAssetIds: string[];
+  /** « repo » : écrit dans le dépôt ; « app » : créé dans l'Atelier. */
+  source: "repo" | "app";
+  version: number;
+  /** Modifié dans l'Atelier depuis la dernière version du dépôt. */
+  appEdited: boolean;
+  /** Une version plus récente existe dans le dépôt (non appliquée car modifiée dans l'Atelier). */
+  repoUpdateAvailable: boolean;
+  enabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+  updatedBy: string | null;
+}
+
+export interface SkillVersion {
+  id: string;
+  slug: string;
+  version: number;
+  name: string;
+  description: string;
+  body: string;
+  data: Record<string, unknown> | null;
+  files: Record<string, string>;
+  referenceAssetIds: string[];
+  note: string | null;
+  createdAt: string;
   createdBy: string | null;
 }
 
@@ -386,6 +468,7 @@ export interface AgentScreenContext {
   selectedAssetIds?: string[];
   montageId?: string | null;
   postId?: string | null;
+  skillSlug?: string | null;
 }
 
 /** Événements envoyés au navigateur (une ligne JSON par événement). */
@@ -400,7 +483,7 @@ export type AgentStreamEvent =
   | { type: "error"; message: string };
 
 /** Zones de l'interface à recharger après une action (de l'agent ou d'un autre écran). */
-export type RefreshScope = "assets" | "folders" | "looks" | "montages" | "posts" | "cleanup" | "stats";
+export type RefreshScope = "assets" | "folders" | "looks" | "montages" | "posts" | "cleanup" | "stats" | "skills";
 
 /** Message affichable (reconstruit depuis les blocs Claude stockés). */
 export interface AgentDisplayMessage {

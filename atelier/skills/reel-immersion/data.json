@@ -1,0 +1,25 @@
+{
+  "format": "9:16",
+  "fps": 30,
+  "targetDurationS": { "min": 15, "max": 20 },
+  "photoDurationS": 2.2,
+  "videoClipS": { "min": 1.2, "max": 3.5 },
+  "transition": { "type": "fade", "durationS": 0.35 },
+  "pacing": "lent",
+  "look": "June doré",
+  "fonts": { "display": "Fraunces", "text": "Manrope" },
+  "colors": { "text": "#FBF7F0", "accent": "#C98A3C", "plate": "#241D17", "background": "#F4F0E8" },
+  "textAnimation": "rise",
+  "textPlacement": "center",
+  "captions": false,
+  "music": { "mood": "acoustique, chaleureux, lent, sans paroles", "volume": 0.6, "fadeOutS": 1.5 },
+  "endCard": null,
+  "structure": [
+    { "role": "accroche", "durationS": 2, "shot": "plan d'ouverture qui pose le lieu et la lumière", "text": "hook court qui fait ressentir" },
+    { "role": "arrivée", "durationS": 3, "shot": "mouvement d'entrée : porte, chemin, escalier" },
+    { "role": "détails", "durationS": 4, "shot": "3 à 4 gros plans de matières et de gestes" },
+    { "role": "moment fort", "durationS": 4, "shot": "le moment signature de l'expérience" },
+    { "role": "respiration", "durationS": 3, "shot": "plan large et lent, la vue, quelqu'un qui profite" },
+    { "role": "fin", "durationS": 2, "shot": "plan qui donne envie de rester", "text": "phrase finale facultative" }
+  ]
+}

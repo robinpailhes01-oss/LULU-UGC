@@ -1,0 +1,20 @@
+{
+  "format": "9:16",
+  "fps": 30,
+  "targetDurationS": { "min": 6, "max": 8 },
+  "photoDurationS": 3.5,
+  "videoClipS": { "min": 3, "max": 8 },
+  "transition": { "type": "fade", "durationS": 0.6 },
+  "pacing": "lent",
+  "look": "June doré",
+  "fonts": { "display": "Fraunces", "text": "Manrope" },
+  "colors": { "text": "#FBF7F0", "accent": "#C98A3C", "plate": "#241D17", "background": "#F4F0E8" },
+  "textAnimation": "fade",
+  "textPlacement": "center",
+  "captions": false,
+  "music": { "mood": "ambiance en boucle, très douce", "volume": 0.5, "fadeOutS": 0 },
+  "endCard": null,
+  "structure": [
+    { "role": "moment", "durationS": 7, "shot": "un plan à mouvement continu qui peut boucler", "text": "un mot, facultatif" }
+  ]
+}

@@ -70,3 +70,19 @@ lib/server             env, db, stockage, auth, http, repos, services, intégrat
 | Programmation | `/programmation` | services/posts (+ client Zernio, webhook) |
 | Agent | panneau + `/agent` | lib/server/agent/*, services/ai-tagging |
 | Pilotage | `/` (tableau de bord), `/reglages` | /api/stats, /api/health |
+| Skills | `/skills`, `/skills/[slug]` | services/skills (fondation), /api/skills |
+
+## Skills : configurer ici, améliorer dans l'Atelier
+
+Les skills (`atelier/skills/<slug>/SKILL.md` + `data.json`) portent le savoir-faire : styles de
+montage, voix, direction artistique, méthodes, références. Ils sont regroupés au build
+(`scripts/bundle-skills.mjs` → `lib/server/skills/bundled.generated.ts`) et importés en base au
+démarrage (`lib/server/services/skills.ts`, tables `atelier.skills` / `atelier.skill_versions`).
+
+- Une modification dans l'Atelier crée une version (retour arrière possible) et marque le skill
+  « modifié dans l'Atelier » ; une nouvelle version du dépôt ne l'écrase pas, elle est signalée.
+- Un skill non modifié dans l'Atelier suit automatiquement le dépôt.
+- L'agent reçoit l'index des skills dans son prompt et lit/modifie leur contenu avec des outils.
+- Les montages référencent un style (`MontageSpec.style` = slug d'un skill « montage ») dont les
+  paramètres (`MontageStyleData`) servent de valeurs par défaut.
+- `npm run skills:pull` rapatrie dans le dépôt les versions d'un Atelier en ligne.
