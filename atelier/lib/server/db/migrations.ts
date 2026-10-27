@@ -174,4 +174,47 @@ alter table atelier.activity enable row level security;
 alter table atelier.settings enable row level security;
 `,
   },
+  {
+    version: "002_skills",
+    sql: `
+create table if not exists atelier.skills (
+  slug text primary key,
+  kind text not null,
+  name text not null,
+  description text not null default '',
+  body text not null default '',
+  data jsonb,
+  files jsonb not null default '{}',
+  reference_asset_ids uuid[] not null default '{}',
+  source text not null default 'app' check (source in ('repo', 'app')),
+  version integer not null default 1,
+  repo_hash text,
+  repo_pending_hash text,
+  app_edited boolean not null default false,
+  enabled boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  updated_by text
+);
+
+create table if not exists atelier.skill_versions (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null references atelier.skills(slug) on delete cascade on update cascade,
+  version integer not null,
+  name text not null,
+  description text not null default '',
+  body text not null default '',
+  data jsonb,
+  files jsonb not null default '{}',
+  reference_asset_ids uuid[] not null default '{}',
+  note text,
+  created_at timestamptz not null default now(),
+  created_by text,
+  unique (slug, version)
+);
+
+alter table atelier.skills enable row level security;
+alter table atelier.skill_versions enable row level security;
+`,
+  },
 ];

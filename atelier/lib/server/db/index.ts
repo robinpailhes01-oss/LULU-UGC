@@ -77,10 +77,19 @@ async function createPostgres(): Promise<Executor> {
     idle_timeout: 20,
     connect_timeout: 15,
     types: {
-      // bigint renvoyé en nombre JS (tailles de fichiers, compteurs).
-      bigint: postgres.BigInt,
+      // bigint (count, tailles) renvoyé en nombre JS, comme PGlite (BigInt casserait JSON.stringify).
+      bigint: { to: 20, from: [20], serialize: (x: unknown) => String(x), parse: (x: string) => Number(x) },
+      // Nos requêtes passent les jsonb déjà sérialisés (JSON.stringify + ::jsonb) : sans cette
+      // surcharge, postgres.js les ré-encoderait et stockerait une chaîne JSON au lieu d'un objet.
+      json: {
+        to: 114,
+        from: [114, 3802],
+        serialize: (x: unknown) => (typeof x === "string" ? x : JSON.stringify(x)),
+        parse: (x: string) => JSON.parse(x),
+      },
     },
     transform: { undefined: null },
+    onnotice: () => undefined,
   });
   type Sql = typeof sql;
   const execFor = (target: Pick<Sql, "unsafe">): Executor => ({

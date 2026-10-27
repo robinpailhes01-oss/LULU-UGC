@@ -4,11 +4,15 @@
   "private": true,
   "description": "Atelier — médiathèque, retouche, ménage, montage HyperFrames, programmation Zernio et agent Claude pour June Content Studio",
   "scripts": {
+    "predev": "node scripts/bundle-skills.mjs",
     "dev": "next dev -p 3100",
+    "prebuild": "node scripts/bundle-skills.mjs --strict",
     "build": "next build",
     "start": "next start -p 3100",
     "typecheck": "tsc --noEmit",
-    "db:migrate": "node --experimental-strip-types scripts/migrate.ts"
+    "skills:bundle": "node scripts/bundle-skills.mjs",
+    "skills:pull": "node scripts/pull-skills.mjs",
+    "db:sql": "node scripts/print-sql.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "0.133.0",

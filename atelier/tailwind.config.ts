@@ -16,13 +16,13 @@ const config: Config = {
         ink: "#241D17", // texte principal, boutons primaires
         night: "#17110D", // fonds sombres (aperçu vidéo, lightbox)
         muted: "#6B5E50", // texte secondaire
-        faint: "#9A8B7A", // texte tertiaire, icônes inactives
-        chestnut: "#8B5E34", // accent : sélection, focus, liens
+        faint: "#776858", // texte tertiaire, icônes inactives (AA ≥ 4,5:1 sur canvas/surface)
+        chestnut: "#7F5530", // accent : sélection, focus, liens (assombri pour l'AA sur bg-select)
         honey: "#C98A3C", // lumière : progression, mises en avant
         "honey-soft": "#F1DFC2",
-        olive: "#5F6F45", // succès (publié, prêt)
+        olive: "#4F5D38", // succès (publié, prêt)
         "olive-soft": "#E3E6D3",
-        terracotta: "#A8482A", // erreur, suppression
+        terracotta: "#933E23", // erreur, suppression
         "terracotta-soft": "#F3DCD2",
         plum: "#6E4B5E", // programmé
         "plum-soft": "#EADDE3",
