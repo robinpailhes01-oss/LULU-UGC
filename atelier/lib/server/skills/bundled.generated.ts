@@ -48,10 +48,41 @@ export const BUNDLED_SKILLS: BundledSkill[] = [
     "kind": "workflow",
     "name": "Programmer les publications",
     "description": "Règles pour programmer les publications sur les comptes de June via Zernio : rythme, horaires, formats, légendes et premier commentaire. À suivre avant toute programmation.",
-    "body": "# Programmer\n\n## Comptes\nOn programme uniquement sur les comptes connectés à l'Atelier (comptes de June). Jamais sur le\ncompte d'un client sans demande explicite et écrite.\n\n## Rythme et horaires (point de départ, à ajuster avec les statistiques)\n- 2 à 3 publications par semaine, plus des stories au fil de l'eau.\n- Horaires conseillés : en semaine 12 h 15 ou 18 h 30 ; le week-end 10 h 00 (heure de Paris).\n- Ne pas programmer deux Reels le même jour.\n\n## Formats\n- Une vidéo seule → Reel (9:16, 3 s à 90 s ; idéal 8 à 25 s), avec une couverture choisie.\n- Plusieurs photos → carrousel (4:5).\n- Story : un seul média, pas de légende.\n\n## Avant de programmer\n1. Relire la légende avec le skill « Voix et légendes June ».\n2. Vérifier le format et la qualité des médias (retouchés, bon ratio).\n3. Hashtags : 3 à 6, dans la légende (ou en premier commentaire si demandé).\n4. Toujours demander confirmation avant de programmer (action visible du public).",
-    "data": null,
+    "body": "# Programmer\n\n## Comptes\nOn programme uniquement sur les comptes connectés à l'Atelier (comptes de June). Jamais sur le\ncompte d'un client sans demande explicite et écrite.\n\n## Rythme et horaires (point de départ, à ajuster avec les statistiques)\n- 2 à 3 publications par semaine, plus des stories au fil de l'eau.\n- Horaires conseillés : en semaine 12 h 15 ou 18 h 30 ; le week-end 10 h 00 (heure de Paris).\n- Ne pas programmer deux Reels le même jour.\n\n## Formats\n- Une vidéo seule → Reel (9:16, 3 s à 90 s ; idéal 8 à 25 s), avec une couverture choisie.\n- Plusieurs photos → carrousel (4:5).\n- Story : un seul média, pas de légende.\n\n## Avant de programmer\n1. Relire la légende avec le skill « Voix et légendes June ».\n2. Vérifier le format et la qualité des médias (retouchés, bon ratio).\n3. Hashtags : 3 à 6, dans la légende (ou en premier commentaire si demandé).\n4. Toujours demander confirmation avant de programmer (action visible du public).\n\n## Réglages lus par l'écran Programmation (data.json)\n- `slots` : horaires proposés dans le compositeur (semaine / week-end) ; `defaultTime` : heure\n  pré-remplie quand on clique sur un jour du calendrier.\n- `minLeadMinutes` : délai minimal avant publication (une date plus proche est repoussée).\n- `maxReelsPerDay`, `hashtags`, `captionWarnAt` : alertes affichées avant de programmer (elles\n  n'empêchent pas de programmer).\n- `postsPerWeek` : rythme visé, rappelé dans le calendrier.",
+    "data": {
+      "timezone": "Europe/Paris",
+      "slots": {
+        "weekday": [
+          "12:15",
+          "18:30"
+        ],
+        "weekend": [
+          "10:00"
+        ]
+      },
+      "defaultTime": {
+        "weekday": "18:30",
+        "weekend": "10:00"
+      },
+      "minLeadMinutes": 2,
+      "postsPerWeek": {
+        "min": 2,
+        "max": 3
+      },
+      "maxReelsPerDay": 1,
+      "hashtags": {
+        "min": 3,
+        "max": 6
+      },
+      "captionWarnAt": 2000,
+      "reelIdealDurationS": {
+        "min": 8,
+        "max": 25
+      },
+      "firstCommentHint": "Idéal pour les hashtags, ou pour « Lien en bio »."
+    },
     "files": {},
-    "hash": "c04c57c2c72f9502"
+    "hash": "e037bcf54d4d2a29"
   },
   {
     "slug": "reel-accroche",

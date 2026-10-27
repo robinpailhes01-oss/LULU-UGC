@@ -27,3 +27,11 @@ compte d'un client sans demande explicite et écrite.
 2. Vérifier le format et la qualité des médias (retouchés, bon ratio).
 3. Hashtags : 3 à 6, dans la légende (ou en premier commentaire si demandé).
 4. Toujours demander confirmation avant de programmer (action visible du public).
+
+## Réglages lus par l'écran Programmation (data.json)
+- `slots` : horaires proposés dans le compositeur (semaine / week-end) ; `defaultTime` : heure
+  pré-remplie quand on clique sur un jour du calendrier.
+- `minLeadMinutes` : délai minimal avant publication (une date plus proche est repoussée).
+- `maxReelsPerDay`, `hashtags`, `captionWarnAt` : alertes affichées avant de programmer (elles
+  n'empêchent pas de programmer).
+- `postsPerWeek` : rythme visé, rappelé dans le calendrier.

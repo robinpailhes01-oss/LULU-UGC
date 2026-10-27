@@ -217,4 +217,22 @@ alter table atelier.skills enable row level security;
 alter table atelier.skill_versions enable row level security;
 `,
   },
+  {
+    // Programmation : événements webhook Zernio reçus (dédoublonnage, livraison « au moins une fois »).
+    version: "003_posts_events",
+    sql: `
+create table if not exists atelier.zernio_events (
+  id text primary key,
+  event text not null,
+  zernio_post_id text,
+  post_id uuid references atelier.posts(id) on delete set null,
+  payload jsonb not null,
+  received_at timestamptz not null default now()
+);
+create index if not exists zernio_events_received_idx on atelier.zernio_events (received_at desc);
+create index if not exists zernio_events_post_idx on atelier.zernio_events (zernio_post_id);
+
+alter table atelier.zernio_events enable row level security;
+`,
+  },
 ];

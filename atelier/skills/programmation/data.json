@@ -1,0 +1,18 @@
+{
+  "timezone": "Europe/Paris",
+  "slots": {
+    "weekday": ["12:15", "18:30"],
+    "weekend": ["10:00"]
+  },
+  "defaultTime": {
+    "weekday": "18:30",
+    "weekend": "10:00"
+  },
+  "minLeadMinutes": 2,
+  "postsPerWeek": { "min": 2, "max": 3 },
+  "maxReelsPerDay": 1,
+  "hashtags": { "min": 3, "max": 6 },
+  "captionWarnAt": 2000,
+  "reelIdealDurationS": { "min": 8, "max": 25 },
+  "firstCommentHint": "Idéal pour les hashtags, ou pour « Lien en bio »."
+}
