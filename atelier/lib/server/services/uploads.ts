@@ -54,8 +54,10 @@ export async function initUpload(req: UploadInitRequest, actor: string | null): 
 
   const id = randomUUID();
   const storageKey = keys.original(id, extFromName(req.name));
-  const thumbKey = req.withThumb ? keys.thumb(id) : null;
-  const posterKey = req.withPoster ? keys.poster(id) : null;
+  const thumbMime = req.thumbMime === "image/jpeg" ? "image/jpeg" : "image/webp";
+  const posterMime = req.posterMime === "image/jpeg" ? "image/jpeg" : "image/webp";
+  const thumbKey = req.withThumb ? keys.thumb(id, thumbMime) : null;
+  const posterKey = req.withPoster ? keys.poster(id, posterMime) : null;
   await insertAsset(
     { id, folderId: req.folderId, kind, name: req.name, mime, sizeBytes: req.size, storageKey, thumbKey, posterKey, status: "uploading", source: "upload", sha256: req.sha256 ?? null },
     actor,
@@ -72,8 +74,8 @@ export async function initUpload(req: UploadInitRequest, actor: string | null): 
     const put = await store.presignPut(storageKey, mime);
     original = { mode: "single", url: put.url, headers: put.headers };
   }
-  const thumb = thumbKey ? await store.presignPut(thumbKey, "image/webp") : null;
-  const poster = posterKey ? await store.presignPut(posterKey, "image/webp") : null;
+  const thumb = thumbKey ? await store.presignPut(thumbKey, thumbMime) : null;
+  const poster = posterKey ? await store.presignPut(posterKey, posterMime) : null;
 
   return {
     assetId: id,
