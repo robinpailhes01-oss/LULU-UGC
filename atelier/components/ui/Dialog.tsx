@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { cx } from "@/components/ui/cx";
+import { popLayer, pushLayer } from "@/components/ui/layer";
 
 export interface DialogProps {
   open: boolean;
@@ -25,8 +26,13 @@ export function Dialog({ open, onClose, title, description, children, footer, si
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (open && !el.open) el.showModal();
+    if (open && !el.open) {
+      el.showModal();
+      pushLayer(el);
+    }
     if (!open && el.open) el.close();
+    if (!open) popLayer(el);
+    return () => popLayer(el);
   }, [open]);
   return (
     <dialog

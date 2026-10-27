@@ -13,6 +13,8 @@ const Init = z.object({
   sha256: z.string().regex(/^[a-f0-9]{64}$/).nullable().optional(),
   withThumb: z.boolean().optional(),
   withPoster: z.boolean().optional(),
+  thumbMime: z.enum(["image/webp", "image/jpeg"]).optional(),
+  posterMime: z.enum(["image/webp", "image/jpeg"]).optional(),
 });
 
 /** Démarre un envoi : crée le média et renvoie les URLs d'envoi direct vers le stockage. */

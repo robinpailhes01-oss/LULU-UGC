@@ -124,6 +124,9 @@ export interface UploadInitRequest {
   /** Si présent, on crée aussi les URLs d'envoi de la vignette (et de l'affiche pour une vidéo). */
   withThumb?: boolean;
   withPoster?: boolean;
+  /** Format des dérivés produits par le navigateur (Safari ne sait pas encoder le WebP : JPEG). */
+  thumbMime?: "image/webp" | "image/jpeg";
+  posterMime?: "image/webp" | "image/jpeg";
 }
 
 export interface UploadInitResponse {

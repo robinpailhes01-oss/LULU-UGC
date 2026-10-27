@@ -43,8 +43,8 @@ export interface BlobStore {
 /** Clés de stockage normalisées. */
 export const keys = {
   original: (assetId: string, ext: string) => `assets/${assetId}/original${ext ? `.${ext.replace(/^\./, "").toLowerCase()}` : ""}`,
-  thumb: (assetId: string) => `assets/${assetId}/thumb.webp`,
-  poster: (assetId: string) => `assets/${assetId}/poster.webp`,
+  thumb: (assetId: string, mime: string = "image/webp") => `assets/${assetId}/thumb.${mime === "image/jpeg" ? "jpg" : "webp"}`,
+  poster: (assetId: string, mime: string = "image/webp") => `assets/${assetId}/poster.${mime === "image/jpeg" ? "jpg" : "webp"}`,
 };
 
 export function extFromName(name: string): string {
