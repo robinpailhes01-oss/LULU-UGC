@@ -8,7 +8,7 @@ const nextConfig = {
   // Permet de lancer plusieurs serveurs de dev en parallèle (un dossier de build chacun).
   distDir: process.env.NEXT_DIST_DIR || ".next",
   // Paquets natifs ou WASM chargés tels quels côté serveur (pas de bundling).
-  serverExternalPackages: ["@electric-sql/pglite", "sharp", "postgres"],
+  serverExternalPackages: ["@electric-sql/pglite", "sharp", "postgres", "@hyperframes/lint"],
   experimental: {
     serverActions: { bodySizeLimit: "4mb" },
   },
