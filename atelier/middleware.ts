@@ -38,5 +38,7 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // /api/blob est exclu du middleware : Next ne garde que les 10 premiers Mo du corps des requêtes
+  // qui le traversent, ce qui tronquerait les envois de fichiers en mode local (signature HMAC à la place).
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|api/blob/).*)"],
 };

@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { cx } from "@/components/ui/cx";
+import { topLayer } from "@/components/ui/layer";
 
 export interface MenuItem {
   label: string;
@@ -136,6 +137,6 @@ function MenuSurface({ menu, onClose }: { menu: OpenMenu; onClose: () => void })
         ),
       )}
     </div>,
-    document.body,
+    topLayer(),
   );
 }

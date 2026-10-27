@@ -1,8 +1,10 @@
 "use client";
 
 import { createContext, useCallback, useContext, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { CheckCircle2, AlertTriangle, Info, X } from "lucide-react";
 import { cx } from "@/components/ui/cx";
+import { useTopLayer } from "@/components/ui/layer";
 
 type Tone = "success" | "error" | "info";
 
@@ -27,9 +29,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     },
     [dismiss],
   );
-  return (
-    <Ctx.Provider value={push}>
-      {children}
+  const layer = useTopLayer();
+  const stackEl = (
       <div aria-live="polite" className="pointer-events-none fixed bottom-4 left-1/2 z-toast flex w-[min(440px,calc(100vw-24px))] -translate-x-1/2 flex-col gap-2">
         {items.map((t) => (
           <div key={t.id} className="pointer-events-auto flex animate-rise-in items-center gap-3 rounded-xl bg-ink px-4 py-3 text-[13.5px] text-surface shadow-pop">
@@ -46,6 +47,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           </div>
         ))}
       </div>
+  );
+  return (
+    <Ctx.Provider value={push}>
+      {children}
+      {layer ? createPortal(stackEl, layer) : null}
     </Ctx.Provider>
   );
 }

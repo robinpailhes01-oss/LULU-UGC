@@ -143,12 +143,13 @@ async function syncFromRepo(): Promise<void> {
   }
 }
 
-async function applyBundled(t: Db, b: BundledSkill, version: number): Promise<Skill> {
+/** `actor` : qui a récupéré la version du dépôt (null pour une mise à jour automatique au démarrage). */
+async function applyBundled(t: Db, b: BundledSkill, version: number, actor: string | null = null): Promise<Skill> {
   const r = await t.one(
     `update atelier.skills set kind = $2, name = $3, description = $4, body = $5, data = $6::jsonb, files = $7::jsonb,
-       version = $8, repo_hash = $9, repo_pending_hash = null, app_edited = false, updated_at = now()
+       version = $8, repo_hash = $9, repo_pending_hash = null, app_edited = false, updated_at = now(), updated_by = $10
      where slug = $1 returning *`,
-    [b.slug, b.kind, b.name, b.description, b.body, b.data ? JSON.stringify(b.data) : null, JSON.stringify(b.files), version, b.hash],
+    [b.slug, b.kind, b.name, b.description, b.body, b.data ? JSON.stringify(b.data) : null, JSON.stringify(b.files), version, b.hash, actor],
   );
   return toSkill(r!);
 }
@@ -360,7 +361,7 @@ export async function resetSkillToRepo(slug: string, actor: string | null): Prom
   const skill = await db.tx(async (t) => {
     const cur = await t.one(`select version from atelier.skills where slug = $1 for update`, [slug]);
     if (!cur) throw notFound("Skill");
-    const s = await applyBundled(t, b, num(cur.version) + 1);
+    const s = await applyBundled(t, b, num(cur.version) + 1, actor);
     await insertVersion(t, s, "Version du dépôt récupérée", actor);
     return s;
   });
