@@ -4,7 +4,7 @@ import { requireAssets } from "@/lib/server/agent/tools/common";
 import { defineTool, plural, Uuid } from "@/lib/server/agent/tool-kit";
 import { serviceErrorMessage } from "@/lib/server/agent/errors";
 import { createLook, findLookByName, getLook, listLooks } from "@/lib/server/services/looks";
-import { exportRetouch } from "@/lib/server/services/retouch";
+import { applyLookToAssets, exportRetouch } from "@/lib/server/services/retouch";
 import type { Look, RetouchParams } from "@/lib/shared/types";
 
 /** Outils de retouche : looks June, retouche d'une photo, look en lot, nouveau look. */
@@ -102,15 +102,19 @@ export const applyLook = defineTool({
   }),
   run: async (i, ctx) => {
     const look = await resolveLook(i.look);
-    const photos = (await requireAssets(i.asset_ids)).filter((a) => a.kind === "photo" && !a.trashedAt);
+    const all = await requireAssets(i.asset_ids);
+    const photos = all.filter((a) => a.kind === "photo" && !a.trashedAt);
+    const ignored = all.filter((a) => !photos.includes(a)).map((a) => a.name);
     if (photos.length === 0) throw new Error("Aucune photo dans cette liste.");
     const done: { id: string; name: string; from: string }[] = [];
     const errors: { id: string; name: string; message: string }[] = [];
     for (const [n, a] of photos.entries()) {
       ctx.progress(`Look « ${look.name} » : ${n + 1}/${photos.length}`);
       try {
-        const out = await exportRetouch(a.id, look.params, { folderId: i.folder_id }, ctx.actor);
-        done.push({ id: out.id, name: out.name, from: a.name });
+        // Une photo déjà retouchée repart de son original (recadrage gardé) : pas de look empilé.
+        const r = await applyLookToAssets({ assetIds: [a.id], lookId: look.id, options: i.folder_id !== undefined ? { folderId: i.folder_id } : undefined }, ctx.actor);
+        if (r.errors.length || !r.created[0]) throw new Error(r.errors[0]?.message ?? "Export impossible.");
+        done.push({ id: r.created[0].id, name: r.created[0].name, from: a.name });
       } catch (err) {
         errors.push({ id: a.id, name: a.name, message: serviceErrorMessage(err) });
         // Module indisponible : inutile d'insister sur les suivantes.
@@ -119,8 +123,8 @@ export const applyLook = defineTool({
     }
     if (done.length === 0) throw new Error(errors[0]?.message ?? "Aucune photo retouchée.");
     return {
-      summary: `Look « ${look.name} » appliqué à ${plural(done.length, "photo")}${errors.length ? ` (${plural(errors.length, "erreur")})` : ""}`,
-      data: { look: look.name, exports: done, errors },
+      summary: `Look « ${look.name} » appliqué à ${plural(done.length, "photo")}${errors.length ? ` (${plural(errors.length, "erreur")})` : ""}${ignored.length ? `, ${plural(ignored.length, "média ignoré", "médias ignorés")}` : ""}`,
+      data: { look: look.name, exports: done, errors, ignored: ignored.length ? { names: ignored, reason: "pas une photo, ou à la corbeille" } : undefined },
       refresh: ["assets", "folders"],
       assetIds: done.slice(0, 12).map((d) => d.id),
     };

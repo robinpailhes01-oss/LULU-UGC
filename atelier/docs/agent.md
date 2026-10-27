@@ -63,7 +63,7 @@ la liste des zones à recharger et les médias à montrer en miniatures.
 | | `analyze_assets` | Analyse IA (voir plus bas) | |
 | | `trash_assets` | Mise à la corbeille | **oui** |
 | | `restore_assets` | Restauration | |
-| Retouche | `list_looks`, `retouch_photo`, `apply_look`, `create_look` | Looks, export d'une nouvelle version, look en lot (progression affichée), nouveau look | |
+| Retouche | `list_looks`, `retouch_photo`, `apply_look`, `create_look` | Looks, export d'une nouvelle version (`exportRetouch`), look en lot photo par photo (`applyLookToAssets` : une retouche repart de son original, progression affichée), nouveau look | |
 | Ménage | `cleanup_report` | Groupes de doublons, flous, ratés, avec le média à garder | |
 | Montage | `list_montages`, `get_montage`, `create_montage`, `update_montage`, `render_montage`, `montage_status` | Montages dans un style (skill « montage », `reel-immersion` par défaut) | |
 | Programmation | `list_social_accounts`, `list_posts`, `create_draft_post` | Comptes, calendrier, brouillon (rien n'est envoyé) | |
