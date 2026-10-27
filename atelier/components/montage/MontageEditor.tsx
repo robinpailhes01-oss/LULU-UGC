@@ -305,6 +305,9 @@ export function MontageEditor({ montageId }: { montageId: string }) {
                 onSelect={(s) => {
                   setSelection(s);
                   setPanel("reglages");
+                  // Un plan choisi hors de la tête de lecture : l'aperçu montre ce plan.
+                  const c = s?.kind === "clip" ? timing.clips.find((x) => x.id === s.id) : undefined;
+                  if (c && (time < c.startS || time >= c.endS)) seek(c.startS + Math.min(0.1, c.durationS / 4));
                 }}
                 onSeek={seek}
                 onTogglePlay={() => player.current?.toggle()}

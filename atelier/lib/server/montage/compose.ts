@@ -174,6 +174,7 @@ export function buildComposition(spec: MontageSpec, assets: Map<string, Asset>, 
   const findings: MontageFinding[] = [];
   const tl = new TimelineWriter();
   const look = lookMarkup(spec.look);
+  if (look.error) findings.push(atelierFinding("warning", "atelier_look_invalid", `Le look n'a pas pu être appliqué (${look.error}) : les plans gardent leurs couleurs d'origine.`));
 
   // --- Plans -----------------------------------------------------------------------------------
   const shots: string[] = [];

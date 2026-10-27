@@ -57,7 +57,7 @@ export function styleFindings(ctx: StyleContext, slug: string | null): MontageFi
   return out;
 }
 
-/** Look de retouche par nom ou par identifiant (le service des looks peut ne pas être prêt). */
+/** Look de retouche par nom ou par identifiant ; null s'il n'existe pas (ou plus). */
 export async function resolveLook(ref: { name?: string | null; id?: string | null }): Promise<Look | null> {
   try {
     if (ref.id) {
@@ -65,8 +65,9 @@ export async function resolveLook(ref: { name?: string | null; id?: string | nul
       if (l) return l;
     }
     if (ref.name) return await findLookByName(ref.name);
-  } catch {
-    // Service des looks indisponible : le montage reste sans look.
+  } catch (err) {
+    // Base indisponible ou identifiant invalide : le montage reste sans look, sans bloquer.
+    console.error("[atelier] look du montage", err);
   }
   return null;
 }

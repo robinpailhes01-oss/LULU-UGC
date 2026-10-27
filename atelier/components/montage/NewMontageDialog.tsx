@@ -77,11 +77,11 @@ export function NewMontageDialog({ open, onClose, initialAssetIds, initialStyle 
         assetIds: assets.map((a) => a.id),
       });
       emitRefresh("montages");
-      onClose();
+      // Pas de onClose() ici : il nettoie l'URL (?nouveau=1) par router.replace, qui annulerait
+      // la navigation vers l'éditeur. Le dialogue disparaît avec la page.
       router.push(`/montage/${m.id}`);
     } catch (err) {
       toast(errorMessage(err), { tone: "error" });
-    } finally {
       setBusy(false);
     }
   }

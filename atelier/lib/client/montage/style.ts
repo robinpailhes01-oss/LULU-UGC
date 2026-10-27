@@ -273,14 +273,16 @@ export function defaultClip(asset: { id: string; kind: string; durationS: number
   return { id: shortId("c"), assetId: asset.id, inS: 0, outS: round(style.photoDurationS), motion };
 }
 
-/** Adapte la longueur d'un plan existant au rythme d'un style (garde le point d'entrée). */
+/**
+ * Applique le rythme d'un style à un plan existant : longueur par défaut du style (comme à la
+ * création), en gardant le point d'entrée des vidéos, leur son et le mouvement des photos.
+ */
 export function refitClip(clip: MontageClip, asset: { kind: string; durationS: number | null } | undefined, style: ResolvedStyle): MontageClip {
   if (!asset) return clip;
   if (asset.kind === "video") {
     const available = asset.durationS && asset.durationS > 0 ? Math.max(0.2, asset.durationS - clip.inS) : style.videoClipS.max;
-    const cur = clip.outS - clip.inS;
-    const len = Math.min(available, Math.max(Math.min(cur, style.videoClipS.max), Math.min(style.videoClipS.min, available)));
-    return { ...clip, outS: round(clip.inS + len) };
+    const len = Math.min(available, style.videoClipS.max);
+    return { ...clip, outS: round(clip.inS + Math.max(0.2, len)) };
   }
   return { ...clip, inS: 0, outS: round(style.photoDurationS) };
 }
