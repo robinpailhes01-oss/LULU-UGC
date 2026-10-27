@@ -67,8 +67,14 @@ const SORTS: Record<NonNullable<AssetQuery["sort"]>, string> = {
   size: "size_bytes desc, id",
 };
 
+/** Filtres supplémentaires de la liste (extension compatible de AssetQuery). */
+export interface AssetListQuery extends AssetQuery {
+  /** Versions dérivées d'un média (retouches, rendus) : parent_asset_id = … */
+  parentAssetId?: string;
+}
+
 /** Recherche et filtres de la médiathèque. Exclut les envois inachevés. */
-export async function listAssets(query: AssetQuery = {}): Promise<AssetPage> {
+export async function listAssets(query: AssetListQuery = {}): Promise<AssetPage> {
   const db = await getDb();
   const where: string[] = [`status <> 'uploading'`];
   const params: unknown[] = [];
@@ -86,6 +92,7 @@ export async function listAssets(query: AssetQuery = {}): Promise<AssetPage> {
   if (query.untagged) where.push("cardinality(tags) = 0 and ai is null");
   if (query.tags?.length) where.push(`tags @> ${p(query.tags.map((t) => t.toLowerCase()))}::text[]`);
   if (query.ids) where.push(`id = any(${p(query.ids)}::uuid[])`);
+  if (query.parentAssetId) where.push(`parent_asset_id = ${p(query.parentAssetId)}::uuid`);
   if (query.q?.trim()) {
     const words = query.q.trim().toLowerCase().split(/\s+/).slice(0, 6);
     for (const w of words) {
