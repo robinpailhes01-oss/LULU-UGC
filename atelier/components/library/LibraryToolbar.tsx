@@ -56,7 +56,7 @@ export function LibraryToolbar({ filters, onFilters, sort, onSort, view, onView,
   const showSortLabel = width === 0 || width >= 820;
   return (
     <div ref={root} className="flex items-center gap-2">
-      <div className="-mx-1 flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto px-1 py-1 [scrollbar-width:none]">
+      <div className="-mx-1 flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto px-1 py-1 [scrollbar-width:none] max-sm:pr-6 max-sm:[mask-image:linear-gradient(to_right,#000_calc(100%-28px),transparent)]">
         <div role="radiogroup" aria-label="Type de média" className="flex shrink-0 gap-1">
           {KINDS.map((k) => (
             <button

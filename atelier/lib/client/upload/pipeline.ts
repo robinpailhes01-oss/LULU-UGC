@@ -45,9 +45,9 @@ const URL_BATCH = 40;
 /** Les URLs d'envoi simple expirent après 1 h : au-delà de 50 min on redemande un envoi. */
 const SINGLE_URL_MAX_AGE = 50 * 60_000;
 /**
- * Stockage local : les fichiers passent par l'application Next, dont le middleware ne transmet
- * que les 10 premiers Mo d'une requête (middlewareClientMaxBodySize). On envoie donc des parties
- * de 8 Mo au plus (le stockage local accepte n'importe quelle taille de partie).
+ * Stockage local : les parties transitent par l'application (route /api/blob, lue en mémoire).
+ * Des parties de 8 Mo au plus limitent la mémoire du serveur de dev et rendent la progression
+ * plus régulière (le stockage local accepte n'importe quelle taille de partie).
  */
 const LOCAL_MAX_PART = 8 * 1024 * 1024;
 
@@ -84,6 +84,8 @@ export async function runPipeline(job: UploadJob, hooks: PipelineHooks): Promise
         sha256: analysis.facts.sha256,
         withThumb: Boolean(analysis.thumb),
         withPoster: Boolean(analysis.poster),
+        thumbMime: derivedMime(analysis.thumb),
+        posterMime: derivedMime(analysis.poster),
       },
       signal,
     );
@@ -278,6 +280,12 @@ export async function abortRemote(assetId: string, uploadId: string | null): Pro
   } catch {
     /* sans gravité : purgé automatiquement après 24 h */
   }
+}
+
+/** Format du dérivé produit (WebP, ou JPEG sur Safari qui n'encode pas le WebP). */
+function derivedMime(blob: Blob | null): "image/webp" | "image/jpeg" | undefined {
+  if (!blob) return undefined;
+  return blob.type === "image/jpeg" ? "image/jpeg" : "image/webp";
 }
 
 /** Nom limité à 255 caractères, extension conservée. */

@@ -71,13 +71,17 @@ export const AssetCard = memo(function AssetCard({ asset, index, selected, selec
         <AssetThumb asset={asset} />
         {asset.kind === "video" ? (
           <>
-            <span className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden>
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-night/45 text-surface backdrop-blur-[2px] transition-transform duration-base group-hover:scale-110">
-                <Play className="ml-0.5 h-4 w-4 fill-current" />
+            {asset.urls.poster || asset.urls.thumb ? (
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-night/45 text-surface backdrop-blur-[2px] transition-transform duration-base group-hover:scale-110">
+                  <Play className="ml-0.5 h-4 w-4 fill-current" />
+                </span>
               </span>
-            </span>
+            ) : null}
             {asset.durationS ? (
-              <span className="pointer-events-none absolute bottom-1.5 right-1.5 rounded-md bg-night/70 px-1.5 py-0.5 text-2xs font-semibold tabular-nums text-surface">{formatDuration(asset.durationS)}</span>
+              <span className="pointer-events-none absolute bottom-1.5 right-1.5 rounded-md bg-night/70 px-1.5 py-0.5 text-2xs font-semibold tabular-nums text-surface">
+                {formatDuration(asset.durationS)}
+              </span>
             ) : null}
           </>
         ) : null}
@@ -120,7 +124,9 @@ export const AssetCard = memo(function AssetCard({ asset, index, selected, selec
           onDoubleClick={(e) => e.stopPropagation()}
           className={cx(
             "absolute right-1.5 top-1.5 flex h-7 w-7 items-center justify-center rounded-full transition-opacity duration-fast",
-            asset.starred ? "text-honey opacity-100 drop-shadow-[0_1px_2px_rgba(23,17,13,.45)]" : "bg-night/25 text-surface opacity-0 hover:bg-night/40 group-hover:opacity-100 [@media(hover:none)]:hidden",
+            asset.starred
+              ? "text-honey opacity-100 drop-shadow-[0_1px_2px_rgba(23,17,13,.45)]"
+              : "bg-night/25 text-surface opacity-0 hover:bg-night/40 group-hover:opacity-100 [@media(hover:none)]:hidden",
           )}
         >
           <Star className={cx("h-4 w-4", asset.starred && "fill-current")} />
