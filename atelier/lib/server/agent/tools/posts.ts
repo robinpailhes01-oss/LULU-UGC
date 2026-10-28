@@ -57,7 +57,7 @@ function compactPost(p: ScheduledPost) {
 export const listSocialAccountsTool = defineTool({
   name: "list_social_accounts",
   label: "Lecture des comptes",
-  description: "Liste les comptes de réseaux sociaux connectés à l'Atelier via Zernio (id, réseau, nom d'utilisateur). À appeler avant de programmer.",
+  description: "Liste les comptes de réseaux sociaux du client de la conversation connectés via Zernio (id, réseau, nom d'utilisateur ; sans client : tous les comptes). À appeler avant de programmer. Aucun compte : ils se connectent depuis la fiche du client.",
   input: z.object({}),
   run: async () => {
     const accounts = await listSocialAccounts();
@@ -92,7 +92,7 @@ export const createDraftPost = defineTool({
   description:
     "Crée un brouillon de publication dans l'Atelier (rien n'est envoyé aux réseaux, aucune confirmation nécessaire). scheduled_for est une date prévue, gardée sur le brouillon pour plus tard. Lis voix-june avant d'écrire la légende.",
   input: z.object({
-    caption: z.string().min(1).max(2200).describe("Légende complète, dans la voix June."),
+    caption: z.string().min(1).max(2200).describe("Légende complète, dans la voix du client (skill voix du client, sinon celle de l'agence)."),
     asset_ids: z.array(Uuid).min(1).max(20).describe("Médias dans l'ordre (carrousel)."),
     account_ids: z.array(z.string().min(1).max(80)).max(10).optional().describe("Comptes visés (list_social_accounts), facultatif pour un brouillon."),
     scheduled_for: IsoDate.optional().describe("Date prévue (ISO 8601), gardée sur le brouillon."),
@@ -112,9 +112,9 @@ export const schedulePost = defineTool({
   label: "Programmation",
   description:
     "Programme une publication sur des comptes connectés via Zernio, à une date précise ou au prochain créneau (\"next-slot\"). NE S'EXÉCUTE PAS DIRECTEMENT : l'Atelier affiche une carte de confirmation. " +
-    "Avant : lis les skills programmation et voix-june, vérifie le calendrier (list_posts) et prépare la légende finale. Appelle l'outil une seule fois puis dis à l'utilisateur de confirmer sur la carte.",
+    "Avant : lis le skill programmation et la voix du client (son skill, sinon celui de l'agence), vérifie le calendrier (list_posts) et prépare la légende finale. Appelle l'outil une seule fois puis dis à l'utilisateur de confirmer sur la carte.",
   input: z.object({
-    caption: z.string().min(1).max(2200).describe("Légende finale, dans la voix June."),
+    caption: z.string().min(1).max(2200).describe("Légende finale, dans la voix du client (skill voix du client, sinon celle de l'agence)."),
     asset_ids: z.array(Uuid).min(1).max(20).describe("Médias dans l'ordre (carrousel ou vidéo)."),
     account_ids: z.array(z.string().min(1).max(80)).min(1).max(10).describe("Comptes (list_social_accounts)."),
     scheduled_for: z.union([z.literal("next-slot"), IsoDate]).describe('Date ISO 8601 avec décalage (heure de Paris), ou "next-slot" pour le prochain créneau de la file.'),

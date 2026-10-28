@@ -2,7 +2,8 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { getDb } from "@/lib/server/db";
 import { badRequest, notFound } from "@/lib/server/http";
-import { insertAsset, kindFromMime, markAssetReady, toAsset } from "@/lib/server/repo/assets";
+import { inferAssetClient, insertAsset, kindFromMime, markAssetReady, toAsset } from "@/lib/server/repo/assets";
+import { resolveRootFolder } from "@/lib/server/repo/folders";
 import { logActivity } from "@/lib/server/repo/activity";
 import { extFromName, getStore, keys } from "@/lib/server/storage";
 import type { Asset, UploadCompleteRequest, UploadInitRequest, UploadInitResponse } from "@/lib/shared/types";
@@ -46,10 +47,17 @@ export async function initUpload(req: UploadInitRequest, actor: string | null): 
   if (req.size > MAX_UPLOAD_BYTES) throw badRequest("Fichier trop volumineux (20 Go maximum).");
 
   const db = await getDb();
-  if (req.folderId && !(await db.one(`select 1 from atelier.folders where id = $1`, [req.folderId]))) throw notFound("Dossier");
+  // À la racine avec un client courant : dans le dossier racine du client.
+  const folderId = await resolveRootFolder(req.folderId);
+  if (folderId && !(await db.one(`select 1 from atelier.folders where id = $1`, [folderId]))) throw notFound("Dossier");
+  const clientId = await inferAssetClient({ folderId });
 
+  // Doublon exact chez le même client (deux clients peuvent avoir le même fichier).
   const duplicate = req.sha256
-    ? await db.one<{ id: string }>(`select id from atelier.assets where sha256 = $1 and trashed_at is null and status = 'ready' limit 1`, [req.sha256])
+    ? await db.one<{ id: string }>(
+        `select id from atelier.assets where sha256 = $1 and trashed_at is null and status = 'ready' and client_id is not distinct from $2::uuid limit 1`,
+        [req.sha256, clientId],
+      )
     : null;
 
   const id = randomUUID();
@@ -59,7 +67,7 @@ export async function initUpload(req: UploadInitRequest, actor: string | null): 
   const thumbKey = req.withThumb ? keys.thumb(id, thumbMime) : null;
   const posterKey = req.withPoster ? keys.poster(id, posterMime) : null;
   await insertAsset(
-    { id, folderId: req.folderId, kind, name: req.name, mime, sizeBytes: req.size, storageKey, thumbKey, posterKey, status: "uploading", source: "upload", sha256: req.sha256 ?? null },
+    { id, clientId, folderId, kind, name: req.name, mime, sizeBytes: req.size, storageKey, thumbKey, posterKey, status: "uploading", source: "upload", sha256: req.sha256 ?? null },
     actor,
     db,
   );
@@ -115,7 +123,7 @@ export async function completeUpload(req: UploadCompleteRequest, actor: string |
   if (facts.hasThumb && r.thumb_key && !(await store.head(r.thumb_key as string))) facts.hasThumb = false;
   if (facts.hasPoster && r.poster_key && !(await store.head(r.poster_key as string))) facts.hasPoster = false;
   const asset = await markAssetReady(req.assetId, facts, head.size, db);
-  await logActivity({ actor, verb: "a importé", objectType: "asset", objectId: asset.id, summary: asset.name }, db);
+  await logActivity({ actor, verb: "a importé", objectType: "asset", objectId: asset.id, summary: asset.name, clientId: asset.clientId }, db);
   return asset;
 }
 
@@ -137,6 +145,8 @@ export async function addServerAsset(
     mime: string;
     data: Buffer;
     folderId: string | null;
+    /** Client du média ; absent = celui du média d'origine, du dossier, ou le client courant. */
+    clientId?: string | null;
     source: Asset["source"];
     parentAssetId?: string | null;
     edit?: Asset["edit"];
@@ -160,6 +170,7 @@ export async function addServerAsset(
   return insertAsset(
     {
       id,
+      clientId: input.clientId,
       folderId: input.folderId,
       kind,
       name: input.name,

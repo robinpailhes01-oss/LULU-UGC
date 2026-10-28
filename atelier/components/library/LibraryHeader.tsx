@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import Link from "next/link";
 import { ChevronDown, ChevronRight, Folder as FolderIcon, FolderPlus, Trash2, Upload } from "lucide-react";
 import type { LibraryMode } from "@/components/library/LibraryView";
@@ -47,27 +48,30 @@ export function LibraryHeader({ mode, query, folder, path, total, hideImport, on
       {mode === "folder" ? <Breadcrumb path={path} onMoveIds={onMoveIds} /> : null}
       <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-3">
         <div className="min-w-0">
-          {mode === "folder" ? (
-            <div className="flex min-w-0 items-center gap-2">
-              <FolderIcon className="h-6 w-6 shrink-0" style={{ color: folder?.color ?? "#8B5E34" }} fill={folder?.color ?? "#8B5E34"} fillOpacity={0.18} aria-hidden />
-              {folder ? (
-                <button
-                  type="button"
-                  onClick={(e) => onFolderMenu(e.currentTarget)}
-                  className="group flex min-w-0 items-center gap-1 rounded-lg px-1 -mx-1 text-left hover:bg-hover"
-                  aria-label={`Actions du dossier ${folder.name}`}
-                  aria-haspopup="menu"
-                >
-                  <h1 className="page-title truncate">{folder.name}</h1>
-                  <ChevronDown className="h-5 w-5 shrink-0 text-muted group-hover:text-ink" aria-hidden />
-                </button>
-              ) : (
-                <div className="skeleton h-8 w-56" />
-              )}
-            </div>
-          ) : (
-            <h1 className="page-title">{mode === "search" ? `Résultats pour « ${query ?? ""} »` : TITLES[mode]}</h1>
-          )}
+          <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1.5">
+            {mode === "folder" ? (
+              <div className="flex min-w-0 items-center gap-2">
+                <FolderIcon className="h-6 w-6 shrink-0" style={{ color: folder?.color ?? "#8B5E34" }} fill={folder?.color ?? "#8B5E34"} fillOpacity={0.18} aria-hidden />
+                {folder ? (
+                  <button
+                    type="button"
+                    onClick={(e) => onFolderMenu(e.currentTarget)}
+                    className="group flex min-w-0 items-center gap-1 rounded-lg px-1 -mx-1 text-left hover:bg-hover"
+                    aria-label={`Actions du dossier ${folder.name}`}
+                    aria-haspopup="menu"
+                  >
+                    <h1 className="page-title truncate">{folder.name}</h1>
+                    <ChevronDown className="h-5 w-5 shrink-0 text-muted group-hover:text-ink" aria-hidden />
+                  </button>
+                ) : (
+                  <div className="skeleton h-8 w-56" />
+                )}
+              </div>
+            ) : (
+              <h1 className="page-title">{mode === "search" ? `Résultats pour « ${query ?? ""} »` : TITLES[mode]}</h1>
+            )}
+            <ClientScopeChip />
+          </div>
           <p className="mt-1 text-[13px] text-muted">
             {SUBTITLES[mode] ?? null}
             {mode !== "recent" ? (

@@ -43,6 +43,24 @@ export function PlatformGlyph({ platform, className, title }: { platform: string
       </svg>
     );
   }
+  if (platform === "linkedin") {
+    return (
+      <svg {...common}>
+        <rect x="3" y="3" width="18" height="18" rx="3" />
+        <path d="M8 10.5V16" />
+        <circle cx="8" cy="7.6" r="0.6" fill="currentColor" />
+        <path d="M12 16v-5.5M12 13a2.5 2.5 0 0 1 5 0v3" />
+      </svg>
+    );
+  }
+  if (platform === "youtube") {
+    return (
+      <svg {...common}>
+        <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+        <path d="m10.5 9.5 4 2.5-4 2.5z" fill="currentColor" />
+      </svg>
+    );
+  }
   return (
     <span className={cx("inline-flex h-4 min-w-4 items-center justify-center rounded bg-sunken px-0.5 text-[9px] font-bold uppercase", className)} aria-label={title === false ? undefined : label}>
       {label.slice(0, 2)}

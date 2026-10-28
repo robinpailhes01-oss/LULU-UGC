@@ -223,7 +223,7 @@ export async function analyzeAssets(assetIds: string[], actor: string | null, op
   const ready = todo.map((a, i) => ({ asset: a, preview: previews[i] })).filter((x): x is { asset: Asset; preview: Preview } => x.preview !== null);
   if (ready.length === 0) return out;
 
-  const folderNames = new Map((await listFolders()).map((f) => [f.id, f.name]));
+  const folderNames = new Map((await listFolders(null)).map((f) => [f.id, f.name]));
   const system = await analysisSystem();
   const model = aiModel();
   const batches: (typeof ready)[] = [];
@@ -291,6 +291,7 @@ export async function analyzeAssets(assetIds: string[], actor: string | null, op
         objectId: done.length === 1 ? done[0].id : null,
         summary: done.length === 1 ? done[0].name : `${done.length} médias`,
         meta: { ids: done.map((a) => a.id), model: msg.model },
+        ...(new Set(done.map((a) => a.clientId)).size === 1 ? { clientId: done[0].clientId } : {}),
       });
     }
   };

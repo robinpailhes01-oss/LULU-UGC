@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -241,7 +242,10 @@ function ScheduleScreen() {
     <div className="mx-auto max-w-[1440px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
       <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
         <div className="min-w-0">
-          <h1 className="page-title">Programmation</h1>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <h1 className="page-title">Programmation</h1>
+            <ClientScopeChip />
+          </div>
           <p className="mt-1 text-[13.5px] text-muted">
             {view === "list" ? "À venir puis passées, jour par jour" : `${monthCount} publication${monthCount > 1 ? "s" : ""} sur la période`}
             {rules?.postsPerWeek ? ` · rythme visé : ${rules.postsPerWeek.min} à ${rules.postsPerWeek.max} par semaine` : ""}

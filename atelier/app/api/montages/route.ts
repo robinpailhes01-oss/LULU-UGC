@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getActor } from "@/lib/server/auth";
+import { requestClientFilter } from "@/lib/server/client-scope";
 import { body, route } from "@/lib/server/http";
 import { createMontage, listMontageCards } from "@/lib/server/services/montages";
 import type { MontageSpec } from "@/lib/shared/types";
@@ -7,8 +8,8 @@ import type { MontageSpec } from "@/lib/shared/types";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** Liste des montages (avec affiche et nom du style). */
-export const GET = route(async () => ({ montages: await listMontageCards() }));
+/** Montages du client courant (avec affiche et nom du style) ; ?client=all|<id>. */
+export const GET = route(async (req) => ({ montages: await listMontageCards(await requestClientFilter(req)) }));
 
 const Create = z.object({
   title: z.string().max(200).default(""),

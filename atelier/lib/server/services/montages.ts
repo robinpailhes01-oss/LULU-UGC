@@ -2,6 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { env } from "@/lib/server/env";
 import { badRequest, HttpError, notConfigured, notFound } from "@/lib/server/http";
+import type { ClientFilter } from "@/lib/server/client-scope";
 import { logActivity } from "@/lib/server/repo/activity";
 import { getAssets } from "@/lib/server/repo/assets";
 import { getStore } from "@/lib/server/storage";
@@ -66,13 +67,14 @@ async function toDetail(m: Montage, preloaded?: { style?: StyleContext; assets?:
   return { ...m, html, durationS, assets: Object.fromEntries(assets), timing: computeTiming(m.spec), styleGuide: styleGuide(style, m.spec) };
 }
 
-export async function listMontages(): Promise<Montage[]> {
-  return selectMontages();
+/** Montages du client courant (`client` : null = tous, id = ce client). */
+export async function listMontages(client?: ClientFilter): Promise<Montage[]> {
+  return selectMontages(client);
 }
 
 /** Liste pour l'écran Montage : affiche (premier plan ou vidéo rendue) et nom du style. */
-export async function listMontageCards(): Promise<MontageCard[]> {
-  const montages = await selectMontages();
+export async function listMontageCards(client?: ClientFilter): Promise<MontageCard[]> {
+  const montages = await selectMontages(client);
   const names = new Map<string, string>();
   try {
     for (const s of await listSkills({ kind: "montage", includeDisabled: true })) names.set(s.slug, s.name);
@@ -173,7 +175,7 @@ export async function createMontage(input: CreateMontageInput, actor: string | n
 
   const built = await buildStored({ title, spec }, { style: styleCtx });
   const row = await insertMontage({ title, spec, html: built.html, customHtml: false, durationS: built.durationS }, actor);
-  await logActivity({ actor, verb: "a créé le montage", objectType: "montage", objectId: row.id, summary: title, meta: { style: slug, clips: spec.clips.length } });
+  await logActivity({ actor, verb: "a créé le montage", objectType: "montage", objectId: row.id, summary: title, meta: { style: slug, clips: spec.clips.length }, clientId: row.clientId });
   return toDetail(row, { style: styleCtx, assets: built.assets });
 }
 
@@ -216,9 +218,9 @@ export async function updateMontage(id: string, patch: { title?: string; spec?: 
   const htmlChanged = patch.html !== undefined && (html !== cur.html || customHtml !== cur.customHtml);
   const status = (specChanged || htmlChanged) && (cur.status === "rendered" || cur.status === "failed") ? "draft" : undefined;
   const row = await patchMontageRow(id, { title, spec, html, customHtml, durationS, ...(status ? { status } : {}) });
-  if (patch.title !== undefined && title !== cur.title) await logActivity({ actor, verb: "a renommé le montage", objectType: "montage", objectId: id, summary: `${cur.title} → ${title}` });
+  if (patch.title !== undefined && title !== cur.title) await logActivity({ actor, verb: "a renommé le montage", objectType: "montage", objectId: id, summary: `${cur.title} → ${title}`, clientId: cur.clientId });
   if (patch.html !== undefined && customHtml !== cur.customHtml)
-    await logActivity({ actor, verb: customHtml ? "a personnalisé le code du montage" : "a rétabli la composition générée de", objectType: "montage", objectId: id, summary: title });
+    await logActivity({ actor, verb: customHtml ? "a personnalisé le code du montage" : "a rétabli la composition générée de", objectType: "montage", objectId: id, summary: title, clientId: cur.clientId });
   return toDetail(row, { style: styleCtx, assets });
 }
 
@@ -250,7 +252,7 @@ export async function applyMontageStyle(id: string, slug: string | null, actor: 
     style: realSlug,
   };
   const detail = await updateMontage(id, { spec }, actor);
-  await logActivity({ actor, verb: "a appliqué un style au montage", objectType: "montage", objectId: id, summary: `${cur.title} — ${ctx.skill?.name ?? "sans style"}` });
+  await logActivity({ actor, verb: "a appliqué un style au montage", objectType: "montage", objectId: id, summary: `${cur.title} — ${ctx.skill?.name ?? "sans style"}`, clientId: cur.clientId });
   return detail;
 }
 
@@ -258,8 +260,8 @@ export async function applyMontageStyle(id: string, slug: string | null, actor: 
 export async function duplicateMontage(id: string, actor: string | null): Promise<MontageDetail> {
   const cur = await requireMontageRow(id);
   const title = `${cur.title} (copie)`;
-  const row = await insertMontage({ title, spec: cur.spec, html: cur.html, customHtml: cur.customHtml, durationS: cur.durationS }, actor);
-  await logActivity({ actor, verb: "a dupliqué le montage", objectType: "montage", objectId: row.id, summary: cur.title });
+  const row = await insertMontage({ title, spec: cur.spec, html: cur.html, customHtml: cur.customHtml, durationS: cur.durationS, clientId: cur.clientId }, actor);
+  await logActivity({ actor, verb: "a dupliqué le montage", objectType: "montage", objectId: row.id, summary: cur.title, clientId: cur.clientId });
   return toDetail(row);
 }
 
@@ -268,7 +270,7 @@ export async function deleteMontage(id: string, actor: string | null): Promise<v
   if (!cur) throw notFound("Montage");
   if (cur.status === "rendering") await cancelProvider(cur).catch(() => undefined);
   await deleteMontageRow(id);
-  await logActivity({ actor, verb: "a supprimé le montage", objectType: "montage", objectId: id, summary: cur.title });
+  await logActivity({ actor, verb: "a supprimé le montage", objectType: "montage", objectId: id, summary: cur.title, clientId: cur.clientId });
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -358,7 +360,7 @@ export async function startRender(id: string, actor: string | null): Promise<Ren
     state = { provider, jobId, progress: 0.02, message: provider === "sandbox" ? "Démarrage de la sandbox de rendu…" : "Envoyé à HeyGen…", error: null, startedAt, finishedAt: null };
     await patchMontageRow(id, { status: "rendering", render: state });
   }
-  await logActivity({ actor, verb: "a lancé le rendu de", objectType: "montage", objectId: id, summary: m.title, meta: { provider } });
+  await logActivity({ actor, verb: "a lancé le rendu de", objectType: "montage", objectId: id, summary: m.title, meta: { provider }, clientId: m.clientId });
   return state;
 }
 
@@ -392,7 +394,7 @@ export async function cancelRender(id: string, actor: string | null): Promise<Mo
   if (m.status !== "rendering" || !m.render) return m;
   await cancelProvider(m).catch((err) => console.error("[atelier] annulation du rendu", err));
   const next = await patchRenderIfCurrent(m.id, m.render.jobId ?? "", { ...m.render, message: "Rendu annulé", error: "Rendu annulé.", finishedAt: nowIso() }, { status: "draft" });
-  await logActivity({ actor, verb: "a annulé le rendu de", objectType: "montage", objectId: id, summary: m.title });
+  await logActivity({ actor, verb: "a annulé le rendu de", objectType: "montage", objectId: id, summary: m.title, clientId: m.clientId });
   return next ?? (await requireMontageRow(id));
 }
 

@@ -1,4 +1,5 @@
 import { getActor } from "@/lib/server/auth";
+import { requestClientFilter } from "@/lib/server/client-scope";
 import { badRequest, body, route, searchParams } from "@/lib/server/http";
 import { createPost, listPosts, postAssets } from "@/lib/server/services/posts";
 import { CreatePostSchema } from "@/lib/server/zernio/schemas";
@@ -19,12 +20,13 @@ function isoParam(v: string | null, name: string): string | undefined {
 
 /**
  * GET /api/posts?from=ISO&to=ISO&drafts=1&status=scheduled,failed
- * → { posts, assets } : publications datées dans l'intervalle (+ brouillons sans date si drafts=1).
+ * → { posts, assets } : publications datées dans l'intervalle (+ brouillons sans date si drafts=1),
+ * du client courant (?client=all|<id> pour passer outre).
  */
 export const GET = route(async (req) => {
   const sp = searchParams(req);
   const status = sp.get("status")?.split(",").filter((s): s is PostStatus => STATUSES.includes(s as PostStatus));
-  const posts = await listPosts({ from: isoParam(sp.get("from"), "from"), to: isoParam(sp.get("to"), "to"), includeDrafts: sp.get("drafts") === "1", status });
+  const posts = await listPosts({ from: isoParam(sp.get("from"), "from"), to: isoParam(sp.get("to"), "to"), includeDrafts: sp.get("drafts") === "1", status, client: await requestClientFilter(req) });
   return { posts, assets: await postAssets(posts) };
 });
 

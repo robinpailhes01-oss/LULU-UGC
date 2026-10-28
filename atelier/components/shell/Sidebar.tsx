@@ -20,7 +20,10 @@ import {
   Star,
   Trash2,
   Upload,
+  Users,
 } from "lucide-react";
+import { ClientSwitcher } from "@/components/clients/ClientSwitcher";
+import { BrandName } from "@/components/shell/BrandName";
 import { cx } from "@/components/ui/cx";
 import { useMenu } from "@/components/ui/Menu";
 import { useToast } from "@/components/ui/Toast";
@@ -38,6 +41,7 @@ export const DRAG_ASSETS_MIME = "application/x-atelier-assets";
 
 const NAV = [
   { href: "/", label: "Tableau de bord", icon: LayoutDashboard, exact: true },
+  { href: "/clients", label: "Clients", icon: Users },
   { href: "/mediatheque", label: "Médiathèque", icon: Images, exact: true },
   { href: "/mediatheque/recents", label: "Récents", icon: Clock },
   { href: "/mediatheque/favoris", label: "Favoris", icon: Star },
@@ -52,7 +56,7 @@ const NAV = [
 export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { folders, sidebarOpen, setSidebarOpen } = useShell();
+  const { folders, sidebarOpen, setSidebarOpen, appName, client, setNewClientOpen } = useShell();
   const { pickFiles } = useUploads();
   const menu = useMenu();
   const [newFolder, setNewFolder] = useState<{ parentId: string | null } | null>(null);
@@ -71,9 +75,13 @@ export function Sidebar() {
         aria-label="Navigation"
       >
         <div className="flex h-14 items-center gap-2 px-5">
-          <Link href="/" className="font-display text-[1.35rem] font-[400] tracking-[-0.02em] text-ink" style={{ fontVariationSettings: "'opsz' 96, 'SOFT' 30" }}>
-            June <span className="italic text-chestnut">atelier</span>
+          <Link href="/" className="truncate font-display text-[1.35rem] font-[400] tracking-[-0.02em] text-ink" style={{ fontVariationSettings: "'opsz' 96, 'SOFT' 30" }}>
+            <BrandName name={appName} />
           </Link>
+        </div>
+
+        <div className="px-3 pb-3">
+          <ClientSwitcher />
         </div>
 
         <div className="px-3 pb-2">
@@ -86,6 +94,8 @@ export function Sidebar() {
                 "separator",
                 { label: "Nouveau montage", icon: <Clapperboard />, onSelect: () => router.push("/montage?nouveau=1") },
                 { label: "Nouvelle publication", icon: <CalendarDays />, onSelect: () => router.push("/programmation?nouveau=1") },
+                "separator",
+                { label: "Nouveau client", icon: <Users />, onSelect: () => setNewClientOpen(true) },
               ])
             }
             className="flex h-11 items-center gap-2.5 rounded-2xl bg-surface pl-4 pr-5 text-[14px] font-semibold text-ink shadow-card transition-shadow hover:shadow-pop"
@@ -109,7 +119,7 @@ export function Sidebar() {
                   <item.icon className="h-[18px] w-[18px] shrink-0" aria-hidden />
                   {item.label}
                 </Link>
-                {item.href === "/mediatheque" ? <FolderTree folders={folders} currentId={currentFolderId} onNew={(parentId) => setNewFolder({ parentId })} /> : null}
+                {item.href === "/mediatheque" ? <FolderTree folders={folders} currentId={currentFolderId} onNew={(parentId) => setNewFolder({ parentId: parentId ?? client?.rootFolderId ?? null })} /> : null}
               </li>
             ))}
           </ul>
@@ -169,7 +179,9 @@ function FolderTree({ folders, currentId, onNew }: { folders: Folder[]; currentI
 
 function FolderNode({ folder, depth, childrenMap, currentId, ancestors }: { folder: Folder; depth: number; childrenMap: Map<string | null, Folder[]>; currentId: string | null; ancestors: Set<string> }) {
   const kids = childrenMap.get(folder.id) ?? [];
-  const [open, setOpen] = useState(ancestors.has(folder.id));
+  const { client } = useShell();
+  // Avec un client courant, son dossier racine est déplié d'office.
+  const [open, setOpen] = useState(ancestors.has(folder.id) || (depth === 0 && client?.rootFolderId === folder.id));
   const [over, setOver] = useState(false);
   const toast = useToast();
   const { setSidebarOpen } = useShell();

@@ -1,7 +1,9 @@
 import "server-only";
+import { getCurrentClientId, resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { arr, getDb, iso, isoOrNull, jsonOrNull, num, numOrNull, type Db, type Row } from "@/lib/server/db";
 import { badRequest, notFound } from "@/lib/server/http";
 import { logActivity } from "@/lib/server/repo/activity";
+import { resolveRootFolder } from "@/lib/server/repo/folders";
 import { getStore } from "@/lib/server/storage";
 import type { AiAnalysis, Asset, AssetKind, AssetPage, AssetQuery, AssetSource, ClientMediaFacts, RetouchParams } from "@/lib/shared/types";
 
@@ -20,6 +22,7 @@ export function toAsset(r: Row): Asset {
   const updatedAt = iso(r.updated_at);
   return {
     id,
+    clientId: (r.client_id as string | null) ?? null,
     folderId: (r.folder_id as string | null) ?? null,
     kind: r.kind as AssetKind,
     name: r.name as string,
@@ -71,6 +74,11 @@ const SORTS: Record<NonNullable<AssetQuery["sort"]>, string> = {
 export interface AssetListQuery extends AssetQuery {
   /** Versions dérivées d'un média (retouches, rendus) : parent_asset_id = … */
   parentAssetId?: string;
+  /**
+   * Client : undefined = client courant, null = tous les clients, id = ce client. Ignoré quand on
+   * liste un dossier précis ou des identifiants précis (leur contenu appartient déjà à un client).
+   */
+  client?: ClientFilter;
 }
 
 /** Recherche et filtres de la médiathèque. Exclut les envois inachevés. */
@@ -84,6 +92,10 @@ export async function listAssets(query: AssetListQuery = {}): Promise<AssetPage>
   };
 
   where.push(query.trashed ? "trashed_at is not null" : "trashed_at is null");
+  if (typeof query.folderId !== "string" && !query.ids) {
+    const client = await resolveClientFilter(query.client);
+    if (client) where.push(`client_id = ${p(client)}::uuid`);
+  }
   if (query.folderId === null) where.push("folder_id is null");
   else if (typeof query.folderId === "string") where.push(`folder_id = ${p(query.folderId)}`);
   if (query.kind) where.push(`kind = ${p(query.kind)}`);
@@ -151,6 +163,8 @@ export async function getStorageKeys(id: string): Promise<{ original: string; th
 
 export interface NewAssetRecord {
   id?: string;
+  /** Client du média ; absent = déduit (média d'origine, puis dossier, puis client courant). */
+  clientId?: string | null;
   folderId: string | null;
   kind: AssetKind;
   name: string;
@@ -169,14 +183,30 @@ export interface NewAssetRecord {
   ai?: AiAnalysis | null;
 }
 
+/** Client d'un nouveau média : celui du média d'origine (retouche, rendu), sinon du dossier, sinon le client courant. */
+export async function inferAssetClient(rec: { clientId?: string | null; parentAssetId?: string | null; folderId: string | null }, db?: Db): Promise<string | null> {
+  if (rec.clientId !== undefined) return rec.clientId;
+  const d = db ?? (await getDb());
+  if (rec.parentAssetId) {
+    const r = await d.one<{ client_id: string | null }>(`select client_id from atelier.assets where id = $1`, [rec.parentAssetId]);
+    if (r?.client_id) return r.client_id;
+  }
+  if (rec.folderId) {
+    const r = await d.one<{ client_id: string | null }>(`select client_id from atelier.folders where id = $1`, [rec.folderId]);
+    if (r?.client_id) return r.client_id;
+  }
+  return getCurrentClientId();
+}
+
 export async function insertAsset(rec: NewAssetRecord, actor: string | null, db?: Db): Promise<Asset> {
   const d = db ?? (await getDb());
   const f = rec.facts ?? {};
+  const clientId = await inferAssetClient(rec, d);
   const r = await d.one(
     `insert into atelier.assets (id, folder_id, kind, name, mime, size_bytes, storage_key, thumb_key, poster_key, status, source,
-        parent_asset_id, edit, sha256, tags, width, height, duration_s, taken_at, camera, gps, dhash, blur_score, luma_mean, clip_high, clip_low, ai, created_by)
+        parent_asset_id, edit, sha256, tags, width, height, duration_s, taken_at, camera, gps, dhash, blur_score, luma_mean, clip_high, clip_low, ai, created_by, client_id)
      values (coalesce($1::uuid, gen_random_uuid()), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13::jsonb, $14, $15::text[], $16, $17, $18, $19, $20, $21::jsonb,
-        $22, $23, $24, $25, $26, $27::jsonb, $28)
+        $22, $23, $24, $25, $26, $27::jsonb, $28, $29::uuid)
      returning *`,
     [
       rec.id ?? null,
@@ -207,6 +237,7 @@ export async function insertAsset(rec: NewAssetRecord, actor: string | null, db?
       f.clipLow ?? null,
       rec.ai ? JSON.stringify(rec.ai) : null,
       actor,
+      clientId,
     ],
   );
   return toAsset(r!);
@@ -261,10 +292,20 @@ export async function updateAsset(id: string, patch: AssetPatch, actor: string |
   const cur = await requireAsset(id, db);
   const name = patch.name?.trim();
   if (patch.name !== undefined && !name) throw badRequest("Le média doit avoir un nom.");
+  // « À la racine » avec un client courant : dans son dossier racine.
+  if (patch.folderId === null) patch = { ...patch, folderId: await resolveRootFolder(null) };
+  // Rangé dans le dossier d'un client : le média passe à ce client.
+  let moveClient: string | null = null;
+  if (patch.folderId) {
+    const folder = await db.one<{ client_id: string | null }>(`select client_id from atelier.folders where id = $1`, [patch.folderId]);
+    if (!folder) throw notFound("Dossier");
+    moveClient = folder.client_id;
+  }
   const r = await db.one(
     `update atelier.assets set
        name = coalesce($2, name),
        folder_id = case when $3::boolean then $4::uuid else folder_id end,
+       client_id = coalesce($9::uuid, client_id),
        tags = coalesce($5::text[], tags),
        starred = coalesce($6, starred),
        ai = case when $7::boolean then $8::jsonb else ai end,
@@ -279,9 +320,10 @@ export async function updateAsset(id: string, patch: AssetPatch, actor: string |
       patch.starred ?? null,
       patch.ai !== undefined,
       patch.ai ? JSON.stringify(patch.ai) : null,
+      moveClient,
     ],
   );
-  if (name && name !== cur.name) await logActivity({ actor, verb: "a renommé", objectType: "asset", objectId: id, summary: `${cur.name} → ${name}` }, db);
+  if (name && name !== cur.name) await logActivity({ actor, verb: "a renommé", objectType: "asset", objectId: id, summary: `${cur.name} → ${name}`, clientId: cur.clientId }, db);
   return toAsset(r!);
 }
 
@@ -304,10 +346,18 @@ export async function bulkAssets(ids: string[], op: BulkAction, actor: string | 
   const db = await getDb();
   let rows: Row[] = [];
   switch (op.action) {
-    case "move":
-      if (op.folderId && !(await db.one(`select 1 from atelier.folders where id = $1`, [op.folderId]))) throw notFound("Dossier");
-      rows = await db.query(`update atelier.assets set folder_id = $2, updated_at = now() where id = any($1::uuid[]) returning id`, [ids, op.folderId]);
+    case "move": {
+      // « À la racine » avec un client courant : dans son dossier racine.
+      op = { ...op, folderId: await resolveRootFolder(op.folderId) };
+      // Rangés dans le dossier d'un client : les médias passent à ce client (à la racine : client inchangé).
+      const folder = op.folderId ? await db.one<{ client_id: string | null }>(`select client_id from atelier.folders where id = $1`, [op.folderId]) : null;
+      if (op.folderId && !folder) throw notFound("Dossier");
+      rows = await db.query(
+        `update atelier.assets set folder_id = $2, client_id = coalesce($3::uuid, client_id), updated_at = now() where id = any($1::uuid[]) returning id, client_id`,
+        [ids, op.folderId, folder?.client_id ?? null],
+      );
       break;
+    }
     case "tag":
       rows = await db.query(
         `update atelier.assets set tags = (select array(select distinct unnest(tags || $2::text[]))), updated_at = now() where id = any($1::uuid[]) returning id`,
@@ -339,7 +389,20 @@ export async function bulkAssets(ids: string[], op: BulkAction, actor: string | 
   }
   const verbs: Record<string, string> = { move: "a déplacé", tag: "a ajouté des mots-clés à", untag: "a retiré des mots-clés de", star: "a mis en favori", trash: "a mis à la corbeille", restore: "a restauré" };
   if (rows.length > 0 && op.action !== "star") {
-    await logActivity({ actor, verb: verbs[op.action], objectType: "asset", objectId: rows.length === 1 ? (rows[0].id as string) : null, summary: `${rows.length} média${rows.length > 1 ? "s" : ""}`, meta: { ids: rows.map((r) => r.id) } }, db);
+    const owners = await db.query<{ client_id: string | null }>(`select distinct client_id from atelier.assets where id = any($1::uuid[])`, [rows.map((r) => r.id)]);
+    await logActivity(
+      {
+        actor,
+        verb: verbs[op.action],
+        objectType: "asset",
+        objectId: rows.length === 1 ? (rows[0].id as string) : null,
+        summary: `${rows.length} média${rows.length > 1 ? "s" : ""}`,
+        meta: { ids: rows.map((r) => r.id) },
+        // Le journal suit le client des médias (s'ils sont tous au même client).
+        ...(owners.length === 1 ? { clientId: owners[0].client_id } : {}),
+      },
+      db,
+    );
   }
   return { count: rows.length };
 }
@@ -355,25 +418,32 @@ export async function deleteAssetsPermanently(ids: string[], actor: string | nul
   return { count: rows.length };
 }
 
-/** Vide la corbeille (tout, ou seulement ce qui y est depuis plus de N jours). */
-export async function emptyTrash(actor: string | null, olderThanDays?: number): Promise<{ count: number }> {
+/** Vide la corbeille du client (tout, ou seulement ce qui y est depuis plus de N jours). */
+export async function emptyTrash(actor: string | null, olderThanDays?: number, client?: ClientFilter): Promise<{ count: number }> {
   const db = await getDb();
+  const filter = await resolveClientFilter(client);
   const rows = await db.query<{ id: string }>(
-    olderThanDays ? `select id from atelier.assets where trashed_at < now() - ($1 || ' days')::interval` : `select id from atelier.assets where trashed_at is not null`,
-    olderThanDays ? [String(olderThanDays)] : [],
+    `select id from atelier.assets where ${olderThanDays ? `trashed_at < now() - ($1 || ' days')::interval` : "trashed_at is not null and $1::text is null"}
+       and ($2::uuid is null or client_id = $2::uuid)`,
+    [olderThanDays ? String(olderThanDays) : null, filter],
   );
   return deleteAssetsPermanently(rows.map((r) => r.id), actor);
 }
 
 /** Tous les mots-clés utilisés, avec leur fréquence (pour l'autocomplétion et les filtres). */
-export async function listTags(): Promise<{ tag: string; count: number }[]> {
+export async function listTags(client?: ClientFilter): Promise<{ tag: string; count: number }[]> {
   const db = await getDb();
-  const rows = await db.query(`select t as tag, count(*) as n from atelier.assets, unnest(tags) t where trashed_at is null group by t order by count(*) desc, t limit 300`);
+  const filter = await resolveClientFilter(client);
+  const rows = await db.query(
+    `select t as tag, count(*) as n from atelier.assets, unnest(tags) t where trashed_at is null and ($1::uuid is null or client_id = $1::uuid) group by t order by count(*) desc, t limit 300`,
+    [filter],
+  );
   return rows.map((r) => ({ tag: r.tag as string, count: num(r.n) }));
 }
 
-export async function storageTotals(): Promise<{ photos: number; videos: number; audio: number; bytes: number; untagged: number; trashed: number }> {
+export async function storageTotals(client?: ClientFilter): Promise<{ photos: number; videos: number; audio: number; bytes: number; untagged: number; trashed: number }> {
   const db = await getDb();
+  const filter = await resolveClientFilter(client);
   const r = await db.one(
     `select
        count(*) filter (where kind = 'photo' and trashed_at is null) as photos,
@@ -382,7 +452,8 @@ export async function storageTotals(): Promise<{ photos: number; videos: number;
        coalesce(sum(size_bytes), 0) as bytes,
        count(*) filter (where trashed_at is null and cardinality(tags) = 0 and ai is null) as untagged,
        count(*) filter (where trashed_at is not null) as trashed
-     from atelier.assets where status = 'ready'`,
+     from atelier.assets where status = 'ready' and ($1::uuid is null or client_id = $1::uuid)`,
+    [filter],
   );
   return {
     photos: num(r?.photos),

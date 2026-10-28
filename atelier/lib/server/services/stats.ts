@@ -1,4 +1,5 @@
 import "server-only";
+import { resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { listActivity } from "@/lib/server/repo/activity";
 import { listAssets, storageTotals } from "@/lib/server/repo/assets";
 import { getCleanupReport, suggestionCount } from "@/lib/server/services/cleanup";
@@ -17,10 +18,10 @@ export interface DashboardPayload extends DashboardStats {
 
 const DAY = 86_400_000;
 
-async function upcomingPosts(): Promise<ScheduledPost[] | null> {
+async function upcomingPosts(client: ClientFilter): Promise<ScheduledPost[] | null> {
   try {
     const now = Date.now();
-    const posts = await listPosts({ from: new Date(now - 3_600_000).toISOString(), to: new Date(now + 7 * DAY).toISOString() });
+    const posts = await listPosts({ from: new Date(now - 3_600_000).toISOString(), to: new Date(now + 7 * DAY).toISOString(), client });
     return posts
       .filter((p) => p.scheduledFor && p.status !== "cancelled")
       .sort((a, b) => (a.scheduledFor ?? "").localeCompare(b.scheduledFor ?? ""))
@@ -30,9 +31,9 @@ async function upcomingPosts(): Promise<ScheduledPost[] | null> {
   }
 }
 
-async function activeMontages(): Promise<Montage[] | null> {
+async function activeMontages(client: ClientFilter): Promise<Montage[] | null> {
   try {
-    const all = await listMontages();
+    const all = await listMontages(client);
     return all
       .filter((m) => m.status !== "failed" || Date.now() - new Date(m.updatedAt).getTime() < 7 * DAY)
       .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
@@ -43,15 +44,19 @@ async function activeMontages(): Promise<Montage[] | null> {
   }
 }
 
-/** Tout ce qu'affiche la page d'accueil, en un appel. Le rapport de ménage est mis en cache 60 s. */
-export async function getDashboardStats(): Promise<DashboardPayload> {
+/**
+ * Tout ce qu'affiche la page d'accueil, en un appel, pour un client (undefined = client courant,
+ * null = toute l'agence). Le rapport de ménage est mis en cache 60 s.
+ */
+export async function getDashboardStats(clientFilter?: ClientFilter): Promise<DashboardPayload> {
+  const client = await resolveClientFilter(clientFilter);
   const [totals, recent, activity, posts, montages, cleanup] = await Promise.all([
-    storageTotals(),
-    listAssets({ sort: "recent", limit: 12 }),
-    listActivity(60),
-    upcomingPosts(),
-    activeMontages(),
-    getCleanupReport().catch((err) => {
+    storageTotals(client),
+    listAssets({ sort: "recent", limit: 12, client }),
+    listActivity(60, client),
+    upcomingPosts(client),
+    activeMontages(client),
+    getCleanupReport({ client }).catch((err) => {
       console.error("[atelier] ménage (tableau de bord)", err);
       return null;
     }),

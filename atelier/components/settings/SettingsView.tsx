@@ -271,6 +271,7 @@ function buildConnections(h: Health): Connection[] {
         { name: "ATELIER_SECRET", hint: "Secret de signature des sessions (long, aléatoire)" },
         { name: "ATELIER_TEAM", hint: "Prénoms proposés", example: "Ludivine,Robin" },
         { name: "ATELIER_APP_URL", hint: "Adresse publique de l'Atelier", example: "https://atelier.example.com" },
+        { name: "ATELIER_NAME", hint: "Nom affiché du produit (logo, titres)", example: "Atelier" },
       ],
     },
   ];

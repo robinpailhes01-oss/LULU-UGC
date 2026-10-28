@@ -161,6 +161,7 @@ function onEvent(e: AgentStreamEvent) {
       break;
     case "refresh":
       emitRefresh(...e.scopes);
+      if (e.scopes.includes("threads") || e.scopes.includes("clients")) void loadThreads();
       break;
     case "error": {
       const snapshot = committed;

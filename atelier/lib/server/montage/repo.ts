@@ -1,4 +1,5 @@
 import "server-only";
+import { getCurrentClientId, resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { getDb, iso, jsonOrNull, numOrNull, type Db, type Row } from "@/lib/server/db";
 import { notFound } from "@/lib/server/http";
 import type { Montage, MontageSpec, MontageStatus, RenderState } from "@/lib/shared/types";
@@ -8,6 +9,7 @@ import type { Montage, MontageSpec, MontageStatus, RenderState } from "@/lib/sha
 export function toMontage(r: Row): Montage {
   return {
     id: r.id as string,
+    clientId: (r.client_id as string | null) ?? null,
     title: r.title as string,
     spec: jsonOrNull<MontageSpec>(r.spec) as MontageSpec,
     html: (r.html as string | null) ?? null,
@@ -22,9 +24,11 @@ export function toMontage(r: Row): Montage {
   };
 }
 
-export async function selectMontages(): Promise<Montage[]> {
+/** Montages d'un client (undefined = client courant, null = tous). */
+export async function selectMontages(client?: ClientFilter): Promise<Montage[]> {
   const db = await getDb();
-  const rows = await db.query(`select * from atelier.montages order by updated_at desc limit 500`);
+  const filter = await resolveClientFilter(client);
+  const rows = await db.query(`select * from atelier.montages where ($1::uuid is null or client_id = $1::uuid) order by updated_at desc limit 500`, [filter]);
   return rows.map(toMontage);
 }
 
@@ -41,11 +45,16 @@ export async function requireMontageRow(id: string, db?: Db): Promise<Montage> {
   return m;
 }
 
-export async function insertMontage(input: { title: string; spec: MontageSpec; html: string | null; customHtml: boolean; durationS: number | null }, actor: string | null): Promise<Montage> {
+/** Nouveau montage, rattaché au client donné (absent = client courant). */
+export async function insertMontage(
+  input: { title: string; spec: MontageSpec; html: string | null; customHtml: boolean; durationS: number | null; clientId?: string | null },
+  actor: string | null,
+): Promise<Montage> {
   const db = await getDb();
+  const clientId = input.clientId !== undefined ? input.clientId : await getCurrentClientId();
   const r = await db.one(
-    `insert into atelier.montages (title, spec, html, custom_html, duration_s, created_by) values ($1, $2::jsonb, $3, $4, $5, $6) returning *`,
-    [input.title, JSON.stringify(input.spec), input.html, input.customHtml, input.durationS, actor],
+    `insert into atelier.montages (title, spec, html, custom_html, duration_s, created_by, client_id) values ($1, $2::jsonb, $3, $4, $5, $6, $7::uuid) returning *`,
+    [input.title, JSON.stringify(input.spec), input.html, input.customHtml, input.durationS, actor, clientId],
   );
   return toMontage(r!);
 }

@@ -1,12 +1,29 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { loadThreads, newThread } from "@/components/agent/store";
+import { api } from "@/lib/client/api";
+import { emitRefresh } from "@/lib/client/refresh";
 import { useResource } from "@/lib/client/use-resource";
-import type { AgentScreenContext, Folder } from "@/lib/shared/types";
+import { ALL_REFRESH_SCOPES, type AgentScreenContext, type Client, type ClientSummary, type Folder } from "@/lib/shared/types";
 
 interface ShellState {
   actor: string | null;
   team: string[];
+  /** Nom du produit (ATELIER_NAME). */
+  appName: string;
+  /** Client courant (null = « Tous les clients »). */
+  client: Client | null;
+  /** Clients actifs (sélecteur, liste). */
+  clients: ClientSummary[];
+  clientsLoaded: boolean;
+  reloadClients: () => Promise<void>;
+  /** Change de client courant : cookie, puis toutes les vues se rechargent. */
+  switchClient: (clientId: string | null) => Promise<void>;
+  /** Dialogue « Nouveau client » (monté une fois par la coque). */
+  newClientOpen: boolean;
+  setNewClientOpen: (open: boolean) => void;
   /** Panneau de l'agent ouvert à droite. */
   agentOpen: boolean;
   setAgentOpen: (open: boolean) => void;
@@ -27,7 +44,55 @@ interface ShellState {
 
 const Ctx = createContext<ShellState | null>(null);
 
-export function ShellProvider({ actor, team, children }: { actor: string | null; team: string[]; children: React.ReactNode }) {
+export function ShellProvider({
+  actor,
+  team,
+  appName,
+  initialClient,
+  children,
+}: {
+  actor: string | null;
+  team: string[];
+  appName: string;
+  initialClient: Client | null;
+  children: React.ReactNode;
+}) {
+  const router = useRouter();
+  const [client, setClient] = useState<Client | null>(initialClient);
+  const clientsRes = useResource<{ clients: ClientSummary[] }>("/api/clients", ["clients"]);
+  const clientRef = useRef(client);
+  clientRef.current = client;
+
+  // La fiche du client courant suit les modifications (nom, couleur, archivage).
+  const clientsData = clientsRes.data;
+  useEffect(() => {
+    const cur = clientRef.current;
+    if (!cur || !clientsData) return;
+    const fresh = clientsData.clients.find((c) => c.id === cur.id);
+    if (fresh && (fresh.updatedAt !== cur.updatedAt || fresh.name !== cur.name)) {
+      const { stats: _stats, ...rest } = fresh;
+      void _stats;
+      setClient(rest);
+    }
+  }, [clientsData]);
+
+  const switchClient = useCallback(
+    async (clientId: string | null) => {
+      const out = await api.post<{ client: Client | null }>("/api/clients/current", { clientId });
+      const changed = (clientRef.current?.id ?? null) !== (out.client?.id ?? null);
+      setClient(out.client);
+      clientRef.current = out.client;
+      if (changed) {
+        newThread(); // la conversation ouverte appartient à l'ancien client
+        void loadThreads();
+      }
+      emitRefresh(...ALL_REFRESH_SCOPES);
+      router.refresh();
+    },
+    [router],
+  );
+
+  const [newClientOpen, setNewClientOpen] = useState(false);
   const [agentOpen, setAgentOpenState] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [screen, setScreen] = useState<AgentScreenContext>({ page: "tableau-de-bord" });
@@ -85,6 +150,14 @@ export function ShellProvider({ actor, team, children }: { actor: string | null;
     () => ({
       actor,
       team,
+      appName,
+      client,
+      clients: clientsRes.data?.clients ?? [],
+      clientsLoaded: Boolean(clientsRes.data),
+      reloadClients: clientsRes.reload,
+      switchClient,
+      newClientOpen,
+      setNewClientOpen,
       agentOpen,
       setAgentOpen,
       toggleAgent,
@@ -98,7 +171,7 @@ export function ShellProvider({ actor, team, children }: { actor: string | null;
       sidebarOpen,
       setSidebarOpen,
     }),
-    [actor, team, agentOpen, setAgentOpen, toggleAgent, askAgent, pendingPrompt, consumePrompt, screen, folders.data, folders.reload, sidebarOpen],
+    [actor, team, appName, client, clientsRes.data, clientsRes.reload, switchClient, newClientOpen, agentOpen, setAgentOpen, toggleAgent, askAgent, pendingPrompt, consumePrompt, screen, folders.data, folders.reload, sidebarOpen],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

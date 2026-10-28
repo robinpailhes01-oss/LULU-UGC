@@ -11,8 +11,9 @@ export interface FolderIndex {
   path: (id: string | null | undefined) => string | null;
 }
 
+/** Index de tous les dossiers (pour nommer le dossier de n'importe quel média). */
 export async function folderIndex(): Promise<FolderIndex> {
-  const all = await listFolders();
+  const all = await listFolders(null);
   const byId = new Map(all.map((f) => [f.id, f]));
   const path = (id: string | null | undefined): string | null => {
     if (!id) return null;

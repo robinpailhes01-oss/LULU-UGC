@@ -13,6 +13,15 @@ export function KindBadge({ kind }: { kind: SkillKind }) {
   );
 }
 
+/** Skill propre à un client (sinon : skill de l'agence, pour tous les clients). */
+export function ClientSkillBadge({ clientName }: { clientName: string | null }) {
+  return clientName ? (
+    <Badge tone="chestnut" className="max-w-[180px]">
+      <span className="truncate">Client : {clientName}</span>
+    </Badge>
+  ) : null;
+}
+
 export function SourceBadge({ source }: { source: Skill["source"] }) {
   return source === "repo" ? (
     <Badge tone="neutral" className="border border-line bg-transparent">

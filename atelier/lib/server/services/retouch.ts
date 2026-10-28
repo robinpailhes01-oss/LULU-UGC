@@ -370,7 +370,7 @@ async function exportInternal(asset: Asset, params: Partial<RetouchParams>, opts
   );
   // L'analyse IA (titre, description, mots-clés) reste valable pour la version retouchée.
   const final = asset.ai ? await updateAsset(created.id, { ai: asset.ai }, actor) : created;
-  if (log) await logActivity({ actor, verb: "a retouché", objectType: "asset", objectId: final.id, summary: `${asset.name} → ${final.name}`, meta: { parentAssetId: asset.id } });
+  if (log) await logActivity({ actor, verb: "a retouché", objectType: "asset", objectId: final.id, summary: `${asset.name} → ${final.name}`, meta: { parentAssetId: asset.id }, clientId: final.clientId });
   return final;
 }
 
@@ -556,6 +556,7 @@ export async function applyLookToAssets(input: BatchLookInput, actor: string | n
       objectId: created.length === 1 ? created[0].id : null,
       summary: `${created.length} photo${created.length > 1 ? "s" : ""}`,
       meta: { ids: created.map((a) => a.id), parents: created.map((a) => a.parentAssetId) },
+      ...(new Set(created.map((a) => a.clientId)).size === 1 ? { clientId: created[0].clientId } : {}),
     });
   }
   return { created, errors, lookName };

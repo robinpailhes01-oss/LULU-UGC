@@ -1,6 +1,7 @@
 import "server-only";
 import type { BetaTool, BetaToolResultBlockParam } from "@anthropic-ai/sdk/resources/beta/messages/messages";
 import { z } from "zod";
+import type { ClientScopeStore } from "@/lib/server/client-scope";
 import type { PendingAction, RefreshScope } from "@/lib/shared/types";
 
 /**
@@ -11,6 +12,8 @@ import type { PendingAction, RefreshScope } from "@/lib/shared/types";
 export interface ToolContext {
   actor: string | null;
   threadId: string | null;
+  /** Client de la conversation (modifiable : set_conversation_client). */
+  scope: ClientScopeStore;
   toolUseId: string;
   /** Met à jour le libellé de la puce d'activité pendant un outil long (« Look appliqué : 3/12 »). */
   progress: (label: string) => void;

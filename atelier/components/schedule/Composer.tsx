@@ -833,10 +833,16 @@ function AccountsPicker({ accounts, selected, setSelected, orphan, readOnly }: {
   }
   if (accounts.error) return <p className="rounded-xl bg-terracotta-soft px-3.5 py-2.5 text-[13px] text-[#7f341d]">Comptes Zernio indisponibles : {accounts.error}</p>;
   if (accounts.accounts.length === 0 && orphan.length === 0) {
+    // Avec un client courant, seuls ses comptes sont proposés : ils se connectent depuis sa fiche.
     return (
       <div className="rounded-xl border border-dashed border-line-strong px-3.5 py-3 text-[13px] text-muted">
-        <p className="font-semibold text-ink">Aucun compte connecté dans Zernio.</p>
-        <p className="mt-0.5">Connecter Instagram, Facebook ou TikTok dans Zernio, puis actualiser.</p>
+        <p className="font-semibold text-ink">{accounts.client ? `Aucun compte connecté pour « ${accounts.client.name} ».` : "Aucun compte connecté dans Zernio."}</p>
+        <p className="mt-0.5">{accounts.client ? "Connectez Instagram, Facebook ou TikTok depuis la fiche du client, puis actualisez." : "Connecter Instagram, Facebook ou TikTok dans Zernio, puis actualiser."}</p>
+        {accounts.client ? (
+          <Link href={`/clients/${accounts.client.id}`} className="mt-1.5 inline-block font-semibold text-chestnut underline-offset-2 hover:underline">
+            Ouvrir la fiche du client
+          </Link>
+        ) : null}
       </div>
     );
   }

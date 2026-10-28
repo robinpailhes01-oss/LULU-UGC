@@ -235,4 +235,47 @@ create index if not exists zernio_events_post_idx on atelier.zernio_events (zern
 alter table atelier.zernio_events enable row level security;
 `,
   },
+  {
+    // Clients de l'agence (fiche client) et rattachement de tout le contenu à un client.
+    // client_id null = contenu de l'agence (vue « Tous les clients », skills par défaut).
+    version: "004_clients",
+    sql: `
+create table if not exists atelier.clients (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  slug text not null unique,
+  sector text not null default '',
+  description text not null default '',
+  website text,
+  socials jsonb not null default '[]',
+  zernio_profile_id text,
+  color text,
+  status text not null default 'active' check (status in ('active', 'archived')),
+  brand jsonb,
+  root_folder_id uuid references atelier.folders(id) on delete set null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  created_by text
+);
+create index if not exists clients_status_idx on atelier.clients (status, lower(name));
+
+alter table atelier.folders add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+alter table atelier.assets add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+alter table atelier.montages add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+alter table atelier.posts add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+alter table atelier.threads add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+alter table atelier.activity add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+alter table atelier.skills add column if not exists client_id uuid references atelier.clients(id) on delete set null;
+
+create index if not exists folders_client_idx on atelier.folders (client_id);
+create index if not exists assets_client_idx on atelier.assets (client_id, created_at desc);
+create index if not exists montages_client_idx on atelier.montages (client_id);
+create index if not exists posts_client_idx on atelier.posts (client_id, scheduled_for);
+create index if not exists threads_client_idx on atelier.threads (client_id);
+create index if not exists activity_client_idx on atelier.activity (client_id, created_at desc);
+create index if not exists skills_client_idx on atelier.skills (client_id);
+
+alter table atelier.clients enable row level security;
+`,
+  },
 ];

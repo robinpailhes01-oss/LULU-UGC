@@ -1,5 +1,6 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
+import { getCurrentClientId, resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { arr, getDb, iso, isoOrNull, jsonOrNull, num, type Db, type Row } from "@/lib/server/db";
 import { env } from "@/lib/server/env";
 import { badRequest, HttpError, notConfigured, notFound } from "@/lib/server/http";
@@ -74,6 +75,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 function toPost(r: Row): ScheduledPost {
   return {
     id: r.id as string,
+    clientId: (r.client_id as string | null) ?? null,
     zernioPostId: (r.zernio_post_id as string | null) ?? null,
     status: r.status as PostStatus,
     caption: (r.caption as string) ?? "",
@@ -197,10 +199,35 @@ export async function zernioConfigured(): Promise<boolean> {
   return Boolean(env.zernio.apiKey);
 }
 
-export async function listSocialAccounts(opts: { force?: boolean } = {}): Promise<SocialAccountInfo[]> {
+/** Profil Zernio d'un client (null : pas de profil créé). */
+async function clientProfileId(clientId: string): Promise<string | null> {
+  const db = await getDb();
+  const r = await db.one<{ zernio_profile_id: string | null }>(`select zernio_profile_id from atelier.clients where id = $1`, [clientId]);
+  return r?.zernio_profile_id ?? null;
+}
+
+/**
+ * Comptes Zernio où l'on peut publier. Avec un client (courant par défaut) : seulement les
+ * comptes de son profil Zernio (aucun s'il n'a pas encore de profil). `client: null` = tous.
+ * `profileId` force un profil précis.
+ */
+export async function listSocialAccounts(opts: { force?: boolean; client?: ClientFilter; profileId?: string | null } = {}): Promise<SocialAccountInfo[]> {
   if (!(await zernioConfigured())) return [];
+  let profileId = opts.profileId ?? null;
+  if (!profileId) {
+    const client = await resolveClientFilter(opts.client);
+    if (client) {
+      profileId = await clientProfileId(client);
+      if (!profileId) return [];
+    }
+  }
   const accounts = await zernioAccounts(opts.force);
-  return accounts.filter((a) => a.isActive !== false && a.enabled !== false).map(toSocialAccount);
+  return accounts.filter((a) => a.isActive !== false && a.enabled !== false && (!profileId || profileIdOf(a) === profileId)).map(toSocialAccount);
+}
+
+/** Oublie le cache des comptes (après une connexion depuis la fiche client). */
+export function forgetAccountsCache() {
+  accountsCache = null;
 }
 
 /** Infos TikTok du compte (niveaux de confidentialité, réglages autorisés, plafond de durée). */
@@ -225,9 +252,13 @@ export async function nextQueueSlot(accountId?: string | null): Promise<{ nextSl
 // ---------------------------------------------------------------------------------------------
 // Lecture
 
-/** Publications dont la date tombe dans [from, to] (ISO), plus les brouillons sans date si includeDrafts. */
-export async function listPosts(range: { from?: string; to?: string; includeDrafts?: boolean; status?: ScheduledPost["status"][] }): Promise<ScheduledPost[]> {
+/**
+ * Publications dont la date tombe dans [from, to] (ISO), plus les brouillons sans date si includeDrafts.
+ * `client` : undefined = client courant, null = tous les clients.
+ */
+export async function listPosts(range: { from?: string; to?: string; includeDrafts?: boolean; status?: ScheduledPost["status"][]; client?: ClientFilter }): Promise<ScheduledPost[]> {
   const db = await getDb();
+  const client = await resolveClientFilter(range.client);
   const params: unknown[] = [];
   const p = (v: unknown) => {
     params.push(v);
@@ -239,6 +270,7 @@ export async function listPosts(range: { from?: string; to?: string; includeDraf
   let where = `(${dated.join(" and ")})`;
   if (range.includeDrafts) where = `(${where} or scheduled_for is null)`;
   if (range.status?.length) where += ` and status = any(${p(range.status)}::text[])`;
+  if (client) where += ` and client_id = ${p(client)}::uuid`;
   const rows = await db.query(`select * from atelier.posts where ${where} order by scheduled_for asc nulls first, created_at desc limit 1000`, params);
   return rows.map(toPost);
 }
@@ -298,7 +330,7 @@ function parisDay(isoDate: string, tz: string): string {
 }
 
 /** Vérifie une publication (règles des plateformes, du skill, comptes Zernio, date). */
-async function checkInput(input: CreatePostInput, opts: { scheduling: boolean; excludePostId?: string }): Promise<PostCheck & { assets: Asset[]; rules: ScheduleRules }> {
+async function checkInput(input: CreatePostInput, opts: { scheduling: boolean; excludePostId?: string; clientId?: string | null }): Promise<PostCheck & { assets: Asset[]; rules: ScheduleRules }> {
   const rules = await scheduleRules();
   const assets = await loadAssets(input.assetIds);
   const options = input.options ?? {};
@@ -325,9 +357,14 @@ async function checkInput(input: CreatePostInput, opts: { scheduling: boolean; e
   if (await zernioConfigured()) {
     try {
       const accounts = await zernioAccounts();
+      // Une publication d'un client ne part que sur les comptes de son profil Zernio.
+      const profile = opts.clientId ? await clientProfileId(opts.clientId) : null;
       for (const t of input.targets) {
         const a = accounts.find((x) => x._id === t.accountId);
         if (!a) check.errors.push({ field: "targets", platform: t.platform, message: `Compte ${platformLabel(t.platform)} introuvable dans Zernio : actualisez la liste des comptes.` });
+        else if (opts.clientId && profileIdOf(a) !== profile) {
+          check.errors.push({ field: "targets", platform: t.platform, message: `Le compte ${platformLabel(t.platform)} @${a.username ?? ""} n'appartient pas à ce client : choisissez un compte connecté depuis sa fiche.` });
+        }
         else if (a.needsReconnection) check.errors.push({ field: "targets", platform: t.platform, message: `Le compte ${platformLabel(t.platform)} @${a.username ?? ""} est à reconnecter dans Zernio.` });
         else if (a.rateLimitedUntil && Date.parse(a.rateLimitedUntil) > Date.now()) {
           check.warnings.push({ field: "targets", platform: t.platform, message: `Zernio a mis en pause le compte @${a.username ?? ""} jusqu'à ${whenLabel(a.rateLimitedUntil, rules.timezone)}.` });
@@ -353,8 +390,8 @@ async function checkInput(input: CreatePostInput, opts: { scheduling: boolean; e
         where status in ('scheduled', 'publishing', 'published') and scheduled_for is not null
           and to_char(scheduled_for at time zone $1, 'YYYY-MM-DD') = $2
           and options->>'instagramType' = 'reel' and targets @> '[{"platform":"instagram"}]'::jsonb
-          and ($3::uuid is null or id <> $3::uuid)`,
-      [rules.timezone, day, opts.excludePostId ?? null],
+          and ($3::uuid is null or id <> $3::uuid) and client_id is not distinct from $4::uuid`,
+      [rules.timezone, day, opts.excludePostId ?? null, opts.clientId ?? null],
     );
     if (num(r?.n) >= rules.maxReelsPerDay) check.warnings.push({ field: "date", platform: "instagram", message: "Un Reel est déjà programmé ce jour-là : le skill conseille un seul Reel par jour." });
   }
@@ -371,7 +408,9 @@ function throwIfInvalid(errors: PostIssue[]) {
 export async function validatePost(raw: CreatePostInput, opts: { postId?: string } = {}): Promise<PostValidation> {
   const input = cleanInput(raw);
   const scheduling = input.scheduledFor !== null;
-  const check = await checkInput(input, { scheduling, excludePostId: opts.postId });
+  const existing = opts.postId ? await getPost(opts.postId) : null;
+  const clientId = existing ? existing.clientId : await postClientFor(input.assetIds);
+  const check = await checkInput(input, { scheduling, excludePostId: opts.postId, clientId });
   if (scheduling && !(await zernioConfigured())) check.errors.push({ field: "options", message: NOT_CONFIGURED_MESSAGE });
   if (scheduling && check.errors.length === 0 && (await zernioConfigured()) && input.targets.length) {
     try {
@@ -407,6 +446,7 @@ function draftShape(input: CreatePostInput): Omit<ScheduledPost, "id"> {
     scheduledFor: input.scheduledFor && input.scheduledFor !== "next-slot" ? input.scheduledFor : null,
     timezone: env.zernio.timezone,
     options: input.options ?? {},
+    clientId: null,
     error: null,
     result: null,
     createdAt: now,
@@ -622,23 +662,36 @@ async function pushToZernio(post: ScheduledPost, assets: Asset[], when: When): P
 // ---------------------------------------------------------------------------------------------
 // Écriture
 
+/**
+ * Client d'une nouvelle publication : le client courant ; dans la vue « Tous les clients », le
+ * client des médias s'ils appartiennent tous au même client.
+ */
+async function postClientFor(assetIds: string[]): Promise<string | null> {
+  const current = await getCurrentClientId();
+  if (current || assetIds.length === 0) return current;
+  const db = await getDb();
+  const rows = await db.query<{ client_id: string | null }>(`select distinct client_id from atelier.assets where id = any($1::uuid[])`, [assetIds]);
+  return rows.length === 1 ? rows[0].client_id : null;
+}
+
 /** Crée la publication : brouillon local, ou envoi à Zernio (médias recopiés chez Zernio) si une date est donnée. */
 export async function createPost(raw: CreatePostInput, actor: string | null): Promise<ScheduledPost> {
   const input = cleanInput(raw);
   const scheduling = input.scheduledFor !== null;
   if (scheduling && !(await zernioConfigured())) throw notConfigured(NOT_CONFIGURED_MESSAGE);
-  const check = await checkInput(input, { scheduling });
+  const clientId = await postClientFor(input.assetIds);
+  const check = await checkInput(input, { scheduling, clientId });
   throwIfInvalid(check.errors);
   const options = normalizeOptions(input.options ?? {}, check.assets, input.targets);
   const db = await getDb();
   const r = await db.one(
-    `insert into atelier.posts (status, caption, first_comment, asset_ids, targets, scheduled_for, timezone, options, created_by)
-     values ('draft', $1, $2, $3::uuid[], $4::jsonb, null, $5, $6::jsonb, $7) returning *`,
-    [input.caption, input.firstComment ?? null, input.assetIds, JSON.stringify(input.targets), env.zernio.timezone, JSON.stringify(options), actor],
+    `insert into atelier.posts (status, caption, first_comment, asset_ids, targets, scheduled_for, timezone, options, created_by, client_id)
+     values ('draft', $1, $2, $3::uuid[], $4::jsonb, null, $5, $6::jsonb, $7, $8::uuid) returning *`,
+    [input.caption, input.firstComment ?? null, input.assetIds, JSON.stringify(input.targets), env.zernio.timezone, JSON.stringify(options), actor, clientId],
   );
   const draft = toPost(r!);
   if (!scheduling) {
-    await logActivity({ actor, verb: "a créé un brouillon", objectType: "post", objectId: draft.id, summary: captionExcerpt(draft.caption) });
+    await logActivity({ actor, verb: "a créé un brouillon", objectType: "post", objectId: draft.id, summary: captionExcerpt(draft.caption), clientId });
     return draft;
   }
   try {
@@ -648,6 +701,7 @@ export async function createPost(raw: CreatePostInput, actor: string | null): Pr
       verb: "a programmé",
       objectType: "post",
       objectId: out.id,
+      clientId,
       summary: `${targetsLabel(out.targets)} · ${whenLabel(out.scheduledFor, check.rules.timezone)} · ${captionExcerpt(out.caption)}`,
     });
     return out;
@@ -676,7 +730,7 @@ export async function updatePost(id: string, rawPatch: Partial<CreatePostInput>,
   const scheduling = merged.scheduledFor !== null;
 
   if (!scheduling) {
-    const check = await checkInput(merged, { scheduling: false });
+    const check = await checkInput(merged, { scheduling: false, clientId: cur.clientId });
     throwIfInvalid(check.errors);
     const wasOnZernio = Boolean(cur.zernioPostId);
     if (cur.zernioPostId) {
@@ -696,12 +750,12 @@ export async function updatePost(id: string, rawPatch: Partial<CreatePostInput>,
       error: null,
       result: wasOnZernio ? { urls: prev.urls } : cur.result,
     });
-    await logActivity({ actor, verb: wasOnZernio ? "a annulé la programmation de" : "a modifié le brouillon", objectType: "post", objectId: id, summary: captionExcerpt(out.caption) });
+    await logActivity({ actor, verb: wasOnZernio ? "a annulé la programmation de" : "a modifié le brouillon", objectType: "post", objectId: id, summary: captionExcerpt(out.caption), clientId: cur.clientId });
     return out;
   }
 
   if (!(await zernioConfigured())) throw notConfigured(NOT_CONFIGURED_MESSAGE);
-  const check = await checkInput(merged, { scheduling: true, excludePostId: id });
+  const check = await checkInput(merged, { scheduling: true, excludePostId: id, clientId: cur.clientId });
   throwIfInvalid(check.errors);
   const next: ScheduledPost = {
     ...cur,
@@ -721,6 +775,7 @@ export async function updatePost(id: string, rawPatch: Partial<CreatePostInput>,
       verb: wasScheduled ? "a modifié la publication" : "a programmé",
       objectType: "post",
       objectId: id,
+      clientId: cur.clientId,
       summary: `${targetsLabel(out.targets)} · ${whenLabel(pushed.scheduledFor, check.rules.timezone)} · ${captionExcerpt(out.caption)}`,
     });
     return out;
@@ -744,7 +799,7 @@ export async function cancelPost(id: string, actor: string | null): Promise<Sche
   const prev = (cur.result ?? {}) as PostResult;
   // La date reste affichée (brouillon daté) ; les médias recopiés chez Zernio sont oubliés.
   const out = await saveRow(id, { status: "draft", zernioPostId: null, error: null, result: { urls: prev.urls } });
-  await logActivity({ actor, verb: "a annulé la programmation de", objectType: "post", objectId: id, summary: captionExcerpt(out.caption) });
+  await logActivity({ actor, verb: "a annulé la programmation de", objectType: "post", objectId: id, summary: captionExcerpt(out.caption), clientId: cur.clientId });
   return out;
 }
 
@@ -756,7 +811,7 @@ export async function deletePost(id: string, actor: string | null): Promise<void
   }
   const db = await getDb();
   await db.query(`delete from atelier.posts where id = $1`, [id]);
-  await logActivity({ actor, verb: "a supprimé la publication", objectType: "post", objectId: id, summary: captionExcerpt(cur.caption) });
+  await logActivity({ actor, verb: "a supprimé la publication", objectType: "post", objectId: id, summary: captionExcerpt(cur.caption), clientId: cur.clientId });
 }
 
 /** Relance chez Zernio les comptes en échec d'une publication (POST /v1/posts/{id}/retry). */
@@ -765,15 +820,15 @@ export async function retryPost(id: string, actor: string | null): Promise<Sched
   if (!cur.zernioPostId || cur.status !== "failed") throw badRequest("Seule une publication en échec peut être relancée.");
   const res = await getZernio().retryPost(cur.zernioPostId);
   const out = await saveRow(id, mergeZernioState(cur, res.body.post, res.body.platformResults, res.body.warnings));
-  await logActivity({ actor, verb: "a relancé la publication", objectType: "post", objectId: id, summary: captionExcerpt(out.caption) });
+  await logActivity({ actor, verb: "a relancé la publication", objectType: "post", objectId: id, summary: captionExcerpt(out.caption), clientId: cur.clientId });
   return out;
 }
 
 async function noteStatusChange(before: ScheduledPost, after: ScheduledPost) {
   if (before.status === after.status) return;
   const summary = `${targetsLabel(after.targets)} · ${captionExcerpt(after.caption)}`;
-  if (after.status === "published") await logActivity({ actor: null, verb: after.error ? "a publié en partie" : "a publié", objectType: "post", objectId: after.id, summary });
-  else if (after.status === "failed") await logActivity({ actor: null, verb: "n'a pas pu publier", objectType: "post", objectId: after.id, summary: `${summary} — ${after.error ?? ""}`.slice(0, 300) });
+  if (after.status === "published") await logActivity({ actor: null, verb: after.error ? "a publié en partie" : "a publié", objectType: "post", objectId: after.id, summary, clientId: after.clientId });
+  else if (after.status === "failed") await logActivity({ actor: null, verb: "n'a pas pu publier", objectType: "post", objectId: after.id, summary: `${summary} — ${after.error ?? ""}`.slice(0, 300), clientId: after.clientId });
 }
 
 /** Resynchronise les statuts avec Zernio (publiées, échecs, liens). */

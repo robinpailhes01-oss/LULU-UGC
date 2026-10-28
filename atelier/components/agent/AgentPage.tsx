@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { MessageSquare, Plus, SquarePen, Trash2 } from "lucide-react";
@@ -138,6 +139,7 @@ function AgentPageInner() {
       <aside className="hidden w-72 shrink-0 flex-col border-r border-line md:flex" aria-label="Conversations">
         <div className="flex items-center justify-between gap-2 px-4 pb-3 pt-5">
           <h1 className="page-title">Agent</h1>
+          <ClientScopeChip className="ml-auto mr-1 max-w-[120px]" />
           <Button size="sm" variant="secondary" icon={<Plus className="h-3.5 w-3.5" />} onClick={() => newThread()} disabled={!st.threadId && st.messages.length === 0}>
             Nouvelle
           </Button>
@@ -150,6 +152,7 @@ function AgentPageInner() {
       <section className="flex min-w-0 flex-1 flex-col bg-surface/40">
         <header className="flex h-12 shrink-0 items-center gap-2 border-b border-line px-4 sm:px-8">
           <h1 className="page-title text-[1.25rem] md:hidden">Agent</h1>
+          <ClientScopeChip className="md:hidden" />
           <button ref={mobileBtn} type="button" onClick={openMobileList} className="ml-auto inline-flex h-8 items-center gap-1.5 rounded-full border border-line-strong bg-surface px-3 text-[13px] font-semibold text-ink md:hidden">
             <MessageSquare className="h-3.5 w-3.5" aria-hidden />
             Conversations

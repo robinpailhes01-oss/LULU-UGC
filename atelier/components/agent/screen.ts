@@ -28,7 +28,8 @@ export function effectiveScreen(screen: AgentScreenContext, pathname: string): A
 }
 
 export function useAgentScreen(): AgentScreen {
-  const { screen } = useShell();
+  const { screen, client } = useShell();
   const pathname = usePathname();
-  return useMemo(() => effectiveScreen(screen, pathname), [screen, pathname]);
+  const clientId = client?.id ?? null;
+  return useMemo(() => ({ ...effectiveScreen(screen, pathname), clientId }), [screen, pathname, clientId]);
 }

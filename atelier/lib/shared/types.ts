@@ -4,6 +4,62 @@
  */
 
 // ---------------------------------------------------------------------------------------------
+// Clients (agence de community management : un Atelier, plusieurs clients)
+
+export type SocialPlatform = "instagram" | "tiktok" | "facebook" | "linkedin" | "youtube";
+
+export interface ClientSocial {
+  platform: SocialPlatform;
+  /** Adresse complète du profil (normalisée). */
+  url: string | null;
+  /** Identifiant sans « @ » (normalisé, minuscules). */
+  handle: string | null;
+}
+
+export type ClientStatus = "active" | "archived";
+
+/**
+ * Fiche marque du client, écrite par l'étape « Analyse de la marque » (à venir) : l'agent lira
+ * le site et les réseaux. Tant qu'elle est absente, brand = null. Champs libres au-delà de summary.
+ */
+export interface ClientBrand {
+  /** Résumé en quelques phrases (injecté dans le prompt de l'agent). */
+  summary?: string;
+  voice?: string;
+  values?: string[];
+  audience?: string;
+  analyzedAt?: string;
+  [key: string]: unknown;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  /** Identifiant lisible et stable (préfixe des skills propres au client). */
+  slug: string;
+  sector: string;
+  description: string;
+  website: string | null;
+  socials: ClientSocial[];
+  /** Profil Zernio du client (ses comptes sociaux y sont connectés). */
+  zernioProfileId: string | null;
+  /** Couleur de l'avatar (#RRGGBB). */
+  color: string | null;
+  status: ClientStatus;
+  brand: ClientBrand | null;
+  /** Dossier racine du client dans la médiathèque. */
+  rootFolderId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string | null;
+}
+
+/** Carte de la liste des clients : la fiche + quelques chiffres. */
+export interface ClientSummary extends Client {
+  stats: { media: number; scheduledPosts: number; lastActivityAt: string | null };
+}
+
+// ---------------------------------------------------------------------------------------------
 // Médiathèque
 
 export type AssetKind = "photo" | "video" | "audio";
@@ -34,6 +90,8 @@ export interface AiAnalysis {
 
 export interface Asset {
   id: string;
+  /** Client propriétaire (null = agence). */
+  clientId: string | null;
   folderId: string | null;
   kind: AssetKind;
   name: string;
@@ -80,6 +138,7 @@ export interface AssetUrls {
 
 export interface Folder {
   id: string;
+  clientId: string | null;
   parentId: string | null;
   name: string;
   color: string | null;
@@ -328,6 +387,7 @@ export interface RenderState {
 
 export interface Montage {
   id: string;
+  clientId: string | null;
   title: string;
   spec: MontageSpec;
   /** Composition HyperFrames générée depuis spec (ou éditée à la main si customHtml). */
@@ -348,8 +408,10 @@ export interface Montage {
 export type SkillKind = "montage" | "voice" | "brand" | "workflow" | "references" | "retouch" | "other";
 
 export interface Skill {
-  /** Identifiant stable (nom du dossier dans atelier/skills/). */
+  /** Identifiant stable (nom du dossier dans atelier/skills/ ; « <slug-client>-<base> » pour un skill propre à un client). */
   slug: string;
+  /** null = skill par défaut de l'agence ; sinon skill propre à ce client. */
+  clientId: string | null;
   kind: SkillKind;
   name: string;
   /** Quand utiliser ce skill (lu par l'agent pour choisir). */
@@ -423,6 +485,7 @@ export interface PostOptions {
 
 export interface ScheduledPost {
   id: string;
+  clientId: string | null;
   zernioPostId: string | null;
   status: PostStatus;
   caption: string;
@@ -446,6 +509,8 @@ export interface ScheduledPost {
 
 export interface AgentThread {
   id: string;
+  /** Client de la conversation (outils limités à ce client) ; null = tous les clients. */
+  clientId: string | null;
   title: string;
   createdAt: string;
   updatedAt: string;
@@ -467,6 +532,8 @@ export interface PendingAction {
 /** Contexte de l'écran envoyé avec chaque message, pour que l'agent sache de quoi on parle. */
 export interface AgentScreenContext {
   page: string;
+  /** Client courant de l'interface (null = « Tous les clients »). */
+  clientId?: string | null;
   folderId?: string | null;
   selectedAssetIds?: string[];
   montageId?: string | null;
@@ -486,7 +553,10 @@ export type AgentStreamEvent =
   | { type: "error"; message: string };
 
 /** Zones de l'interface à recharger après une action (de l'agent ou d'un autre écran). */
-export type RefreshScope = "assets" | "folders" | "looks" | "montages" | "posts" | "cleanup" | "stats" | "skills";
+export type RefreshScope = "assets" | "folders" | "looks" | "montages" | "posts" | "cleanup" | "stats" | "skills" | "clients" | "activity" | "threads";
+
+/** Toutes les zones (changement de client courant : tout se recharge). */
+export const ALL_REFRESH_SCOPES: RefreshScope[] = ["assets", "folders", "looks", "montages", "posts", "cleanup", "stats", "skills", "clients", "activity", "threads"];
 
 /** Message affichable (reconstruit depuis les blocs Claude stockés). */
 export interface AgentDisplayMessage {
@@ -503,6 +573,7 @@ export interface AgentDisplayMessage {
 
 export interface ActivityItem {
   id: number;
+  clientId: string | null;
   actor: string | null;
   verb: string;
   objectType: string;

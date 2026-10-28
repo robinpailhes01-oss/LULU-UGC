@@ -1,3 +1,4 @@
+import { requestClientFilter } from "@/lib/server/client-scope";
 import { route, searchParams } from "@/lib/server/http";
 import { listAssets, type AssetListQuery } from "@/lib/server/repo/assets";
 import type { AssetKind, AssetSort, AssetSource } from "@/lib/shared/types";
@@ -12,6 +13,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
  * ?folder=<uuid>|root  ?q=  ?kind=photo|video|audio  ?tags=a,b  ?starred=1  ?trashed=1  ?untagged=1
  * ?source=upload|retouch|montage  ?ids=a,b  ?sort=recent|oldest|name|taken|size  ?limit=  ?offset=
  * ?parent=<uuid> (versions dérivées d'un média : retouches, rendus)
+ * ?client=all|<uuid> (par défaut : le client courant ; ignoré pour un dossier ou des ids précis)
  */
 export const GET = route(async (req) => {
   const sp = searchParams(req);
@@ -31,6 +33,7 @@ export const GET = route(async (req) => {
     limit: sp.get("limit") ? Number(sp.get("limit")) : undefined,
     offset: sp.get("offset") ? Number(sp.get("offset")) : undefined,
     parentAssetId: parent && UUID.test(parent) ? parent : undefined,
+    client: await requestClientFilter(req),
   };
   return listAssets(query);
 });

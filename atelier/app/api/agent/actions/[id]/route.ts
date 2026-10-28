@@ -3,8 +3,9 @@ import { getActor } from "@/lib/server/auth";
 import { body, HttpError, notFound, route } from "@/lib/server/http";
 import { logActivity } from "@/lib/server/repo/activity";
 import { serviceErrorMessage } from "@/lib/server/agent/errors";
-import { claimPendingAction, getPendingAction, isExpired, presentAction, resolvePendingAction } from "@/lib/server/agent/store";
-import { executeConfirmed } from "@/lib/server/agent/tools";
+import { claimPendingAction, getPendingAction, getThread, isExpired, presentAction, resolvePendingAction } from "@/lib/server/agent/store";
+import { getCurrentClientId, runWithClient } from "@/lib/server/client-scope";
+import { ACTION_CLIENT_KEY, executeConfirmed } from "@/lib/server/agent/tools";
 import type { RefreshScope } from "@/lib/shared/types";
 
 export const runtime = "nodejs";
@@ -42,22 +43,27 @@ export const POST = route<Ctx>(async (req, { params }) => {
   }
   const claimed = await claimPendingAction(id, actor);
   if (!claimed) throw new HttpError(409, "already_resolved", "Cette action a déjà été traitée.");
+  // L'action s'exécute dans le client de la conversation au moment de la proposition (pas celui de l'écran).
+  const stored = claimed.input[ACTION_CLIENT_KEY];
+  const thread = action.threadId ? await getThread(action.threadId) : null;
+  const clientId = typeof stored === "string" || stored === null ? (stored as string | null) : thread ? thread.clientId : await getCurrentClientId();
+  return runWithClient({ clientId }, async () => {
+    if (decision === "cancel") {
+      const updated = await resolvePendingAction(id, "cancelled", { cancelledBy: actor });
+      await logActivity({ actor, verb: "a annulé une action proposée par l'agent", objectType: "thread", objectId: action.threadId, summary: action.summary });
+      return { action: updated, refresh: [] as RefreshScope[] };
+    }
 
-  if (decision === "cancel") {
-    const updated = await resolvePendingAction(id, "cancelled", { cancelledBy: actor });
-    await logActivity({ actor, verb: "a annulé une action proposée par l'agent", objectType: "thread", objectId: action.threadId, summary: action.summary });
-    return { action: updated, refresh: [] as RefreshScope[] };
-  }
-
-  try {
-    const outcome = await executeConfirmed(claimed, actor);
-    const updated = await resolvePendingAction(id, "executed", { summary: outcome.summary, data: outcome.data ?? null, assetIds: outcome.assetIds ?? [] });
-    await logActivity({ actor, verb: "a confirmé une action de l'agent", objectType: "thread", objectId: action.threadId, summary: `${action.summary} — ${outcome.summary}` });
-    return { action: updated, refresh: outcome.refresh ?? [] };
-  } catch (err) {
-    const message = serviceErrorMessage(err);
-    const updated = await resolvePendingAction(id, "failed", { error: message });
-    await logActivity({ actor, verb: "a confirmé une action de l'agent (échec)", objectType: "thread", objectId: action.threadId, summary: `${action.summary} — ${message}` });
-    return { action: updated, refresh: [] as RefreshScope[] };
-  }
+    try {
+      const outcome = await executeConfirmed(claimed, actor);
+      const updated = await resolvePendingAction(id, "executed", { summary: outcome.summary, data: outcome.data ?? null, assetIds: outcome.assetIds ?? [] });
+      await logActivity({ actor, verb: "a confirmé une action de l'agent", objectType: "thread", objectId: action.threadId, summary: `${action.summary} — ${outcome.summary}` });
+      return { action: updated, refresh: outcome.refresh ?? [] };
+    } catch (err) {
+      const message = serviceErrorMessage(err);
+      const updated = await resolvePendingAction(id, "failed", { error: message });
+      await logActivity({ actor, verb: "a confirmé une action de l'agent (échec)", objectType: "thread", objectId: action.threadId, summary: `${action.summary} — ${message}` });
+      return { action: updated, refresh: [] as RefreshScope[] };
+    }
+  });
 });

@@ -1,5 +1,6 @@
 import "server-only";
 import { createHash } from "node:crypto";
+import { getCurrentClientId, resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { arr, getDb, iso, jsonOrNull, num, type Db, type Row } from "@/lib/server/db";
 import { badRequest, HttpError, notFound } from "@/lib/server/http";
 import { logActivity } from "@/lib/server/repo/activity";
@@ -16,6 +17,10 @@ import type { MontageStyleData, Skill, SkillKind, SkillVersion } from "@/lib/sha
  *   le skill a été modifié dans l'Atelier : on signale alors qu'une mise à jour est disponible.
  * - « app » : créés dans l'Atelier (par l'équipe ou l'agent).
  * Chaque modification crée une version (historique, retour arrière possible).
+ *
+ * Clients : client_id null = skill par défaut de l'agence (tous ceux du dépôt) ; un skill créé
+ * alors qu'un client est courant lui est propre (slug « <slug-client>-<base> », client_id posé).
+ * Avec un client courant, on voit les skills de l'agence + ceux de ce client.
  */
 
 export const SKILL_KINDS: SkillKind[] = ["montage", "voice", "brand", "workflow", "references", "retouch", "other"];
@@ -33,6 +38,7 @@ export const SKILL_KIND_LABEL: Record<SkillKind, string> = {
 function toSkill(r: Row): Skill {
   return {
     slug: r.slug as string,
+    clientId: (r.client_id as string | null) ?? null,
     kind: r.kind as SkillKind,
     name: r.name as string,
     description: (r.description as string) ?? "",
@@ -157,17 +163,27 @@ async function applyBundled(t: Db, b: BundledSkill, version: number, actor: stri
 // ---------------------------------------------------------------------------------------------
 // Lecture
 
-export async function listSkills(opts: { kind?: SkillKind; includeDisabled?: boolean } = {}): Promise<Skill[]> {
+/**
+ * Skills visibles : ceux de l'agence + ceux du client (`client` undefined = client courant ;
+ * null = tous les skills, de tous les clients ; `agencyOnly` = seulement ceux de l'agence).
+ */
+export async function listSkills(opts: { kind?: SkillKind; includeDisabled?: boolean; client?: ClientFilter; agencyOnly?: boolean } = {}): Promise<Skill[]> {
   await ensureSkillsSynced();
   const db = await getDb();
   const where: string[] = [];
   const params: unknown[] = [];
+  const client = opts.agencyOnly ? null : await resolveClientFilter(opts.client);
+  if (opts.agencyOnly) where.push("client_id is null");
+  else if (client) {
+    params.push(client);
+    where.push(`(client_id is null or client_id = $${params.length}::uuid)`);
+  }
   if (opts.kind) {
     params.push(opts.kind);
     where.push(`kind = $${params.length}`);
   }
   if (!opts.includeDisabled) where.push("enabled = true");
-  const rows = await db.query(`select * from atelier.skills ${where.length ? `where ${where.join(" and ")}` : ""} order by kind, lower(name)`, params);
+  const rows = await db.query(`select * from atelier.skills ${where.length ? `where ${where.join(" and ")}` : ""} order by kind, (client_id is not null) desc, lower(name)`, params);
   return rows.map(toSkill);
 }
 
@@ -220,7 +236,13 @@ export function getRepoVersion(slug: string): BundledSkill | null {
 export async function skillsIndex(): Promise<string> {
   const skills = await listSkills();
   if (skills.length === 0) return "Aucun skill pour le moment.";
-  return skills.map((s) => `- ${s.slug} (${SKILL_KIND_LABEL[s.kind]}) — ${s.name} : ${s.description}`).join("\n");
+  const db = await getDb();
+  const clientIds = [...new Set(skills.map((s) => s.clientId).filter((x): x is string => Boolean(x)))];
+  const names = new Map(
+    clientIds.length ? (await db.query<{ id: string; name: string }>(`select id, name from atelier.clients where id = any($1::uuid[])`, [clientIds])).map((r) => [r.id, r.name]) : [],
+  );
+  // Un skill propre au client prime sur celui de l'agence du même type : il est marqué.
+  return skills.map((s) => `- ${s.slug} (${SKILL_KIND_LABEL[s.kind]}${s.clientId ? `, propre au client « ${names.get(s.clientId) ?? "?"} »` : ""}) — ${s.name} : ${s.description}`).join("\n");
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -238,6 +260,8 @@ export function slugify(input: string): string {
 
 export interface SkillInput {
   slug?: string;
+  /** Client du skill ; absent = client courant (null = skill de l'agence). */
+  clientId?: string | null;
   kind: SkillKind;
   name: string;
   description: string;
@@ -255,20 +279,27 @@ export async function createSkill(input: SkillInput, actor: string | null): Prom
   let slug = slugify(input.slug || name);
   if (slug.length < 2) throw badRequest("Nom de skill trop court.");
   const db = await getDb();
+  const clientId = input.clientId !== undefined ? input.clientId : await getCurrentClientId();
+  if (clientId) {
+    // Skill propre au client : préfixé par le slug du client (« hotel-du-port-voix »).
+    const c = await db.one<{ slug: string }>(`select slug from atelier.clients where id = $1`, [clientId]);
+    if (!c) throw notFound("Client");
+    if (!slug.startsWith(`${c.slug}-`)) slug = slugify(`${c.slug}-${slug}`);
+  }
   const skill = await db.tx(async (t) => {
     let i = 2;
     const base = slug;
     while (await t.one(`select 1 as x from atelier.skills where slug = $1`, [slug])) slug = `${base}-${i++}`;
     const r = await t.one(
-      `insert into atelier.skills (slug, kind, name, description, body, data, files, reference_asset_ids, source, version, app_edited, updated_by)
-       values ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::uuid[], 'app', 1, true, $9) returning *`,
-      [slug, input.kind, name, input.description.trim(), input.body ?? "", input.data ? JSON.stringify(input.data) : null, JSON.stringify(input.files ?? {}), input.referenceAssetIds ?? [], actor],
+      `insert into atelier.skills (slug, kind, name, description, body, data, files, reference_asset_ids, source, version, app_edited, updated_by, client_id)
+       values ($1, $2, $3, $4, $5, $6::jsonb, $7::jsonb, $8::uuid[], 'app', 1, true, $9, $10::uuid) returning *`,
+      [slug, input.kind, name, input.description.trim(), input.body ?? "", input.data ? JSON.stringify(input.data) : null, JSON.stringify(input.files ?? {}), input.referenceAssetIds ?? [], actor, clientId],
     );
     const s = toSkill(r!);
     await insertVersion(t, s, "Création", actor);
     return s;
   });
-  await logActivity({ actor, verb: "a créé le skill", objectType: "system", objectId: skill.slug, summary: skill.name });
+  await logActivity({ actor, verb: "a créé le skill", objectType: "system", objectId: skill.slug, summary: skill.name, clientId: skill.clientId });
   return skill;
 }
 
@@ -404,7 +435,8 @@ export function skillToFiles(s: Pick<Skill, "kind" | "name" | "description" | "b
   return out;
 }
 
+/** Skills de l'agence au format du dépôt. Les skills propres à un client restent dans l'Atelier. */
 export async function exportSkills(): Promise<{ slug: string; source: Skill["source"]; version: number; enabled: boolean; files: Record<string, string> }[]> {
-  const skills = await listSkills({ includeDisabled: true });
+  const skills = await listSkills({ includeDisabled: true, agencyOnly: true });
   return skills.map((s) => ({ slug: s.slug, source: s.source, version: s.version, enabled: s.enabled, files: skillToFiles(s) }));
 }

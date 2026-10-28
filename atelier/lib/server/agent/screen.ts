@@ -4,6 +4,7 @@ import { getAssets } from "@/lib/server/repo/assets";
 import { getFolderPath } from "@/lib/server/repo/folders";
 import { getMontage } from "@/lib/server/services/montages";
 import { getPost } from "@/lib/server/services/posts";
+import { getClient } from "@/lib/server/services/clients";
 import { getSkill } from "@/lib/server/services/skills";
 import type { AgentScreenContext } from "@/lib/shared/types";
 
@@ -28,6 +29,8 @@ const PAGE_LABEL: Record<string, string> = {
   skills: "skills",
   reglages: "réglages",
   agent: "agent (plein écran)",
+  clients: "clients",
+  client: "fiche client",
 };
 
 async function attempt<T>(fn: () => Promise<T>): Promise<T | null> {
@@ -48,8 +51,14 @@ export function nowInParis(date = new Date()): string {
   return `${day}, ${time} (${tz}, UTC${offset})`;
 }
 
-export async function buildScreenBlock(ctx: (AgentScreenContext & { path?: string }) | null | undefined, actor: string | null): Promise<string> {
+export async function buildScreenBlock(ctx: (AgentScreenContext & { path?: string }) | null | undefined, actor: string | null, conversationClientId: string | null = null): Promise<string> {
   const lines: string[] = [`Date : ${nowInParis()}`, `Personne : ${actor ?? "inconnue (accès local sans connexion)"}`];
+  if (ctx && ctx.clientId !== undefined) {
+    const shown = ctx.clientId ? await attempt(() => getClient(ctx.clientId!)) : null;
+    const label = ctx.clientId ? (shown ? `« ${shown.name} » (id ${shown.id})` : `id ${ctx.clientId}`) : "Tous les clients";
+    const differs = (ctx.clientId ?? null) !== conversationClientId;
+    lines.push(`Client affiché par l'interface : ${label}${differs ? " — différent du client de la conversation" : ""}`);
+  }
   if (!ctx) {
     lines.push("Contexte de l'écran : non partagé par la personne.");
     return `<ecran>\n${lines.join("\n")}\n</ecran>`;

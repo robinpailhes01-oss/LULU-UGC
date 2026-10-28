@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -83,8 +84,11 @@ function MontageListInner() {
     <div className="mx-auto w-full max-w-[1400px] px-4 py-6 sm:px-6">
       <header className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="min-w-0 flex-1">
-          <h1 className="page-title">Montage</h1>
-          <p className="mt-1 text-[13.5px] text-muted">Vos Reels montés avec HyperFrames, chacun dans un style de June.</p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <h1 className="page-title">Montage</h1>
+            <ClientScopeChip />
+          </div>
+          <p className="mt-1 text-[13.5px] text-muted">Vos Reels montés avec HyperFrames, chacun dans un style.</p>
         </div>
         <Button variant="primary" className="self-start sm:self-auto" icon={<Plus className="h-4 w-4" />} onClick={() => setDialog({ assets: [], style: null })}>
           Nouveau montage

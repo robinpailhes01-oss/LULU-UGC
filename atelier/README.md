@@ -1,7 +1,11 @@
 # Atelier — l'outil interne de June Content Studio
 
-Atelier réunit au même endroit tout le travail sur les photos et vidéos de June :
+Atelier réunit au même endroit tout le travail sur les photos et vidéos de June, client par client :
 
+- **Clients** : une fiche par client (secteur, site, réseaux, description, couleur), son dossier dans la
+  médiathèque, ses comptes sociaux connectés via Zernio ; un sélecteur en haut de la barre latérale choisit le
+  client courant, et tous les écrans (médiathèque, montage, programmation, ménage, tableau de bord, skills,
+  agent) se limitent à lui — ou montrent tout avec « Tous les clients » ;
 - **Médiathèque** façon Google Drive : dossiers, recherche, favoris, mots-clés, corbeille, import par glisser-déposer ;
 - **Retouche** « à l'image de June » : looks maison, recadrage, export, application par lot ;
 - **Ménage** : doublons, quasi-doublons, photos floues, trop sombres ou trop claires, petites résolutions, vidéos ratées ;
@@ -89,8 +93,25 @@ comptes. Pour changer de compte, on change les variables, rien d'autre.
 1. Zernio → **Settings → API keys** → créez une clé → `ZERNIO_API_KEY`.
 2. Zernio → **Webhooks** : adresse `https://<votre-atelier>/api/webhooks/zernio`, avec un secret de votre
    choix (le même dans `ZERNIO_WEBHOOK_SECRET`). Les statuts (publié, échec) remontent alors tout seuls.
-3. Connectez les comptes Instagram / TikTok de June dans Zernio ; ils apparaissent dans la programmation.
+3. Chaque client reçoit son profil Zernio à sa création : connectez ses comptes Instagram / TikTok / Facebook
+   depuis sa fiche (« Connecter »). `ATELIER_APP_URL` doit être l'adresse publique (Zernio y renvoie après la
+   connexion). La programmation ne propose que les comptes du client courant.
 4. `ATELIER_TIMEZONE` (défaut `Europe/Paris`) fixe le fuseau des horaires.
+
+## Clients
+
+L'Atelier est pensé pour une agence qui gère plusieurs clients (une installation par agence ; le nom affiché se
+règle avec `ATELIER_NAME`, par défaut « Atelier »).
+
+1. **Nouveau client** (barre latérale ou `/clients`) : nom, secteur, site, réseaux (adresse ou @identifiant,
+   normalisés), description, couleur. Le client devient le client courant et sa fiche s'ouvre ; son dossier est
+   créé dans la médiathèque.
+2. **Fiche** (`/clients/<id>`) : identité modifiable, réseaux et état de connexion Zernio (« Connecter » ouvre
+   la connexion du compte chez Zernio puis revient sur la fiche), chiffres, médias récents, prochaines
+   publications, activité ; onglets « Marque » et « Concurrents » (prochaines étapes) ; raccourcis Médias,
+   Montages, Planning ; archiver / réactiver.
+3. **Client courant** : tout ce qui est importé, créé ou programmé lui est rattaché ; la programmation ne propose
+   que ses comptes. « Tous les clients » est la vue de l'agence. Détails : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#clients--une-agence-plusieurs-clients).
 
 ## Skills : configurés dans le dépôt, améliorés dans l'Atelier
 
@@ -102,7 +123,8 @@ des versions. Pour rapatrier dans le dépôt les améliorations faites en ligne 
 ATELIER_URL=https://atelier.example.com ATELIER_PASSWORD=… npm run skills:pull
 ```
 
-Relisez le diff, puis committez.
+Relisez le diff, puis committez. Les skills propres à un client (créés alors qu'un client est choisi, slug
+préfixé par celui du client) restent dans l'Atelier et ne sont pas rapatriés.
 
 ## Sécurité
 

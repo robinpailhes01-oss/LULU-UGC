@@ -3,6 +3,7 @@ import type { BetaTool, BetaToolResultBlockParam } from "@anthropic-ai/sdk/resou
 import { serviceErrorMessage } from "@/lib/server/agent/errors";
 import { createPendingAction, type ToolChipMeta } from "@/lib/server/agent/store";
 import { describeZodError, type AgentTool, type ToolContext, type ToolOutcome } from "@/lib/server/agent/tool-kit";
+import { CLIENT_TOOLS } from "@/lib/server/agent/tools/clients";
 import { LIBRARY_TOOLS } from "@/lib/server/agent/tools/library";
 import { MONTAGE_TOOLS } from "@/lib/server/agent/tools/montage";
 import { OVERVIEW_TOOLS } from "@/lib/server/agent/tools/overview";
@@ -15,7 +16,7 @@ import type { PendingAction } from "@/lib/shared/types";
  * Registre des outils de l'agent. L'ordre est trié par nom et les définitions ne dépendent de
  * rien de variable (ni personne, ni date) : le préfixe outils + système reste en cache.
  */
-export const AGENT_TOOLS: AgentTool[] = [...LIBRARY_TOOLS, ...RETOUCH_TOOLS, ...OVERVIEW_TOOLS, ...MONTAGE_TOOLS, ...POST_TOOLS, ...SKILL_TOOLS].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+export const AGENT_TOOLS: AgentTool[] = [...LIBRARY_TOOLS, ...RETOUCH_TOOLS, ...OVERVIEW_TOOLS, ...MONTAGE_TOOLS, ...POST_TOOLS, ...SKILL_TOOLS, ...CLIENT_TOOLS].sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
 const BY_NAME = new Map(AGENT_TOOLS.map((t) => [t.name, t]));
 if (BY_NAME.size !== AGENT_TOOLS.length) throw new Error("Deux outils de l'agent portent le même nom.");
@@ -27,6 +28,9 @@ export function getTool(name: string): AgentTool | undefined {
 export function toolLabel(name: string): string {
   return BY_NAME.get(name)?.label ?? name;
 }
+
+/** Clé de l'entrée stockée d'une action à confirmer qui porte le client de la conversation. */
+export const ACTION_CLIENT_KEY = "__clientId";
 
 /** Outils qui demandent une confirmation dans l'interface avant de s'exécuter. */
 export const CONFIRM_TOOLS = AGENT_TOOLS.filter((t) => t.confirm).map((t) => t.name);
@@ -72,7 +76,8 @@ export async function executeTool(use: { id: string; name: string; input: unknow
     let pendingAction: PendingAction | null = null;
     if (tool.confirm) {
       const plan = await tool.confirm.prepare(parsed.data, fullCtx);
-      pendingAction = await createPendingAction({ threadId: ctx.threadId, tool: tool.name, input: plan.input, summary: plan.summary });
+      // Le client de la conversation au moment de la proposition : l'action s'exécutera dans ce client.
+      pendingAction = await createPendingAction({ threadId: ctx.threadId, tool: tool.name, input: { ...plan.input, [ACTION_CLIENT_KEY]: ctx.scope.clientId }, summary: plan.summary });
       outcome = {
         summary: `À confirmer : ${plan.summary}`,
         data: {

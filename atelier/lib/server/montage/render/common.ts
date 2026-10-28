@@ -117,6 +117,8 @@ export async function completeRender(
         mime: "video/mp4",
         data,
         folderId: await targetFolder(m),
+        // La vidéo rendue appartient au client du montage.
+        clientId: m.clientId,
         source: "montage",
         tags: ["montage"],
         facts: { width: size.width, height: size.height, durationS: durationS ?? null, sha256: createHash("sha256").update(data).digest("hex"), hasThumb: Boolean(poster), hasPoster: Boolean(poster) },
@@ -126,7 +128,7 @@ export async function completeRender(
       opts.actor,
     );
     const done = await patchRenderIfCurrent(montageId, state.jobId ?? "", { ...state, progress: 1, message: "Vidéo prête", error: null, finishedAt: nowIso() }, { status: "rendered", outputAssetId: asset.id });
-    await logActivity({ actor: null, verb: "a terminé le rendu de", objectType: "montage", objectId: montageId, summary: m.title, meta: { assetId: asset.id, provider: state.provider } });
+    await logActivity({ actor: null, verb: "a terminé le rendu de", objectType: "montage", objectId: montageId, summary: m.title, meta: { assetId: asset.id, provider: state.provider }, clientId: m.clientId });
     return done;
   } finally {
     if (tmpDir) await rm(tmpDir, { recursive: true, force: true }).catch(() => undefined);

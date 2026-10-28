@@ -2,19 +2,21 @@
 
 import { Suspense } from "react";
 import { AgentPanel } from "@/components/agent/AgentPanel";
+import { NewClientDialog } from "@/components/clients/NewClientDialog";
 import { UploadProvider } from "@/components/library/UploadProvider";
 import { MenuProvider } from "@/components/ui/Menu";
 import { ToastProvider } from "@/components/ui/Toast";
 import { ShellProvider, useShell } from "@/components/shell/ShellContext";
 import { Sidebar } from "@/components/shell/Sidebar";
 import { Topbar } from "@/components/shell/Topbar";
+import type { Client } from "@/lib/shared/types";
 
 /** Coque de l'application : navigation à gauche, contenu au centre, agent à droite. */
-export function AppShell({ actor, team, children }: { actor: string | null; team: string[]; children: React.ReactNode }) {
+export function AppShell({ actor, team, appName, initialClient, children }: { actor: string | null; team: string[]; appName: string; initialClient: Client | null; children: React.ReactNode }) {
   return (
     <ToastProvider>
       <MenuProvider>
-        <ShellProvider actor={actor} team={team}>
+        <ShellProvider actor={actor} team={team} appName={appName} initialClient={initialClient}>
           <UploadProvider>
             <ShellLayout>{children}</ShellLayout>
           </UploadProvider>
@@ -38,6 +40,7 @@ function ShellLayout({ children }: { children: React.ReactNode }) {
         </main>
       </div>
       <AgentPanel open={agentOpen} />
+      <NewClientDialog />
     </div>
   );
 }

@@ -147,8 +147,20 @@ export class ZernioClient {
   }
 
   // Profils et comptes -------------------------------------------------------------------------
-  listProfiles() {
-    return this.request<{ profiles: ZProfile[] }>("GET", "/v1/profiles").then((r) => r.data.profiles ?? []);
+  listProfiles(q: { externalId?: string; name?: string } = {}) {
+    return this.request<{ profiles: ZProfile[] }>("GET", "/v1/profiles", { query: q }).then((r) => r.data.profiles ?? []);
+  }
+  /** POST /v1/profiles — un profil par client (externalId = identifiant du client dans l'Atelier). */
+  createProfile(input: { name: string; description?: string; color?: string; timezone?: string; externalId?: string }, idempotencyKey?: string) {
+    return this.request<{ message?: string; profile: ZProfile }>("POST", "/v1/profiles", { body: input, headers: idempotencyKey ? { "Idempotency-Key": idempotencyKey } : undefined }).then((r) => r.data.profile);
+  }
+  /**
+   * GET /v1/connect/{platform}?profileId&redirect_url → { authUrl, state }. Zernio renvoie ensuite
+   * le navigateur sur redirect_url avec connected=<plateforme>&profileId&accountId&username, ou
+   * error=<code>&platform (et error_message facultatif).
+   */
+  connectUrl(platform: string, q: { profileId: string; redirectUrl: string }) {
+    return this.request<{ authUrl: string; state?: string }>("GET", `/v1/connect/${encodeURIComponent(platform)}`, { query: { profileId: q.profileId, redirect_url: q.redirectUrl } }).then((r) => r.data);
   }
   listAccounts(q: { profileId?: string; platform?: string } = {}) {
     return this.request<ZAccountsResponse>("GET", "/v1/accounts", { query: q }).then((r) => r.data.accounts ?? []);

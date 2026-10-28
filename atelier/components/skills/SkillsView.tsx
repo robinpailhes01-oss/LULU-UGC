@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { FolderGit2, Gauge, Library, Palette, Plus, RefreshCw, Search, Shuffle, Timer, X } from "lucide-react";
@@ -10,7 +11,8 @@ import { useScreenContext } from "@/components/shell/ShellContext";
 import { Segmented, Switch } from "@/components/skills/controls";
 import { KindIcon } from "@/components/skills/KindIcon";
 import { NewSkillDialog } from "@/components/skills/NewSkillDialog";
-import { KindBadge, SourceBadge, StateBadges } from "@/components/skills/SkillBadges";
+import { ClientSkillBadge, KindBadge, SourceBadge, StateBadges } from "@/components/skills/SkillBadges";
+import { useShell } from "@/components/shell/ShellContext";
 import { StructureTimeline } from "@/components/skills/StructureTimeline";
 import { useResource } from "@/lib/client/use-resource";
 import { lastChangeLabel, matchesFilter, SKILL_FILTERS, type SkillFilter } from "@/lib/client/skills/kinds";
@@ -58,9 +60,12 @@ export function SkillsView() {
     <div className="mx-auto max-w-[1240px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
       <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
         <div className="min-w-0 max-w-2xl">
-          <h1 className="page-title">Skills</h1>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <h1 className="page-title">Skills</h1>
+            <ClientScopeChip />
+          </div>
           <p className="mt-1.5 text-[13.5px] leading-relaxed text-muted">
-            Le savoir-faire de June que l'agent applique : styles de montage, voix, méthodes, références. Modifiez-le ici, chaque changement est conservé.
+            Le savoir-faire que l'agent applique : styles de montage, voix, méthodes, références. Ceux de l'agence servent à tous les clients ; un skill créé avec un client choisi lui est propre. Chaque changement est conservé.
           </p>
         </div>
         <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
@@ -167,6 +172,7 @@ export function SkillsView() {
 }
 
 function SkillCard({ skill }: { skill: Skill }) {
+  const { clients } = useShell();
   const d = (skill.data ?? {}) as MontageStyleData;
   const summary = skill.kind === "montage" ? montageSummary(skill.data) : [];
   const icons = { pacing: Gauge, duration: Timer, transition: Shuffle, look: Palette };
@@ -227,6 +233,7 @@ function SkillCard({ skill }: { skill: Skill }) {
 
       <div className="mt-3 flex flex-wrap items-center gap-1.5">
         <KindBadge kind={skill.kind} />
+        <ClientSkillBadge clientName={skill.clientId ? clients.find((c) => c.id === skill.clientId)?.name ?? "autre client" : null} />
         <SourceBadge source={skill.source} />
         <StateBadges skill={skill} />
       </div>

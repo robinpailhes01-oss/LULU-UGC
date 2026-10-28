@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getActor } from "@/lib/server/auth";
+import { requestClientFilter } from "@/lib/server/client-scope";
 import { body, route, searchParams } from "@/lib/server/http";
 import { createSkill, listSkills, SKILL_KINDS } from "@/lib/server/services/skills";
 import type { SkillKind } from "@/lib/shared/types";
@@ -7,10 +8,10 @@ import type { SkillKind } from "@/lib/shared/types";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-/** ?kind=montage  ?all=1 (y compris désactivés) */
+/** ?kind=montage  ?all=1 (y compris désactivés)  ?client=all|<id> (par défaut : agence + client courant) */
 export const GET = route(async (req) => {
   const sp = searchParams(req);
-  return { skills: await listSkills({ kind: (sp.get("kind") as SkillKind | null) ?? undefined, includeDisabled: sp.get("all") === "1" }) };
+  return { skills: await listSkills({ kind: (sp.get("kind") as SkillKind | null) ?? undefined, includeDisabled: sp.get("all") === "1", client: await requestClientFilter(req) }) };
 });
 
 const Create = z.object({

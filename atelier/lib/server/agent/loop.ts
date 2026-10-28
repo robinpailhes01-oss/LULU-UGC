@@ -11,7 +11,7 @@ import type {
 } from "@anthropic-ai/sdk/resources/beta/messages/messages";
 import { AGENT_BETAS, AGENT_EFFORT, AGENT_MAX_ITERATIONS, AGENT_MAX_TOKENS } from "@/lib/server/agent/config";
 import { describeAiError } from "@/lib/server/agent/errors";
-import { freezeSystem, skillsBlockText, systemBlocks } from "@/lib/server/agent/prompt";
+import { clientBlockText, freezeSystem, skillsBlockText, systemBlocks } from "@/lib/server/agent/prompt";
 import { buildScreenBlock } from "@/lib/server/agent/screen";
 import {
   appendMessage,
@@ -29,6 +29,7 @@ import {
 import { generateTitle, needsGeneratedTitle, provisionalTitle } from "@/lib/server/agent/title";
 import { API_TOOLS, executeTool, toolLabel } from "@/lib/server/agent/tools";
 import { aiModel, getAnthropic } from "@/lib/server/ai/client";
+import { getCurrentClientId, runWithClient, type ClientScopeStore } from "@/lib/server/client-scope";
 import { badRequest, HttpError } from "@/lib/server/http";
 import { logActivity } from "@/lib/server/repo/activity";
 import { skillsIndex } from "@/lib/server/services/skills";
@@ -78,12 +79,21 @@ export async function prepareTurn(request: TurnRequest): Promise<PreparedTurn> {
   if (request.threadId) thread = await requireThread(request.threadId);
   else {
     if (request.retry) throw badRequest("Aucune conversation à reprendre.");
-    thread = await createThread(provisionalTitle(message), request.actor);
+    // Nouvelle conversation : rattachée au client courant de l'interface.
+    thread = await createThread(provisionalTitle(message), request.actor, await getCurrentClientId());
     created = true;
   }
   if (running.has(thread.id)) throw new HttpError(409, "busy", "L'agent répond déjà dans cette conversation. Attendez la fin ou arrêtez-le.");
   running.add(thread.id);
   return { client, thread, created, request: { ...request, message }, release: () => running.delete(thread.id) };
+}
+
+function lastKnownClient(rows: StoredMessage[], frozen: FrozenSystem): string | undefined {
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const c = rows[i].meta.clientBlock;
+    if (c) return c;
+  }
+  return frozen.client;
 }
 
 function lastKnownSkills(rows: StoredMessage[], frozen: FrozenSystem): string {
@@ -118,8 +128,17 @@ function textOf(blocks: BetaContentBlock[]): string {
     .join("");
 }
 
-/** Déroule un tour complet en émettant les événements (texte, outils, confirmations, rafraîchissements). */
-export async function runAgentTurn(prep: PreparedTurn, emit: Emit, signal: AbortSignal): Promise<void> {
+/**
+ * Déroule un tour complet en émettant les événements (texte, outils, confirmations, rafraîchissements).
+ * Tout le tour s'exécute dans la portée du client de la conversation : les outils ne voient que
+ * ce client (set_conversation_client peut en changer en cours de tour).
+ */
+export function runAgentTurn(prep: PreparedTurn, emit: Emit, signal: AbortSignal): Promise<void> {
+  const scope: ClientScopeStore = { clientId: prep.thread.clientId };
+  return runWithClient(scope, () => runScopedTurn(prep, emit, signal, scope));
+}
+
+async function runScopedTurn(prep: PreparedTurn, emit: Emit, signal: AbortSignal, scope: ClientScopeStore): Promise<void> {
   const { client, thread, request } = prep;
   const actor = request.actor;
   const message = request.message ?? "";
@@ -128,7 +147,7 @@ export async function runAgentTurn(prep: PreparedTurn, emit: Emit, signal: Abort
     const titlePromise = prep.created && needsGeneratedTitle(message) ? generateTitle(client, message, signal) : Promise.resolve(null);
 
     const rows = await loadMessages(thread.id);
-    const frozen = rows.find((r) => r.meta.system)?.meta.system ?? (await freezeSystem());
+    const frozen = rows.find((r) => r.meta.system)?.meta.system ?? (await freezeSystem(scope.clientId));
     const firstWithSystem = !rows.some((r) => r.meta.system);
 
     // Réparation : un tour d'outils interrompu (coupure serveur) reçoit ses résultats avant toute suite.
@@ -142,7 +161,7 @@ export async function runAgentTurn(prep: PreparedTurn, emit: Emit, signal: Abort
     }
 
     if (!request.retry) {
-      const header: string[] = [await buildScreenBlock(request.screen, actor)];
+      const header: string[] = [await buildScreenBlock(request.screen, actor, scope.clientId)];
       const meta: MessageMeta = { kind: "user", text: message };
       if (firstWithSystem) meta.system = frozen;
       else {
@@ -150,6 +169,11 @@ export async function runAgentTurn(prep: PreparedTurn, emit: Emit, signal: Abort
         if (current !== lastKnownSkills(rows, frozen)) {
           header.push(`<skills_a_jour>\nL'index des skills a changé depuis le début de la conversation. Index actuel :\n${current}\n</skills_a_jour>`);
           meta.skillsIndex = current;
+        }
+        const clientNow = await clientBlockText(scope.clientId);
+        if (clientNow !== lastKnownClient(rows, frozen)) {
+          header.push(`<client_a_jour>\nLe client de la conversation (ou sa fiche) a changé. Il remplace le bloc <client> :\n${clientNow}\n</client_a_jour>`);
+          meta.clientBlock = clientNow;
         }
       }
       if (request.actionId) {
@@ -277,7 +301,7 @@ export async function runAgentTurn(prep: PreparedTurn, emit: Emit, signal: Abort
         uses.map((u) =>
           executeTool(
             { id: u.id, name: u.name, input: u.input },
-            { actor, threadId: thread.id, progress: (label) => emit({ type: "tool_start", id: u.id, name: u.name, label }) },
+            { actor, threadId: thread.id, scope, progress: (label) => emit({ type: "tool_start", id: u.id, name: u.name, label }) },
           ),
         ),
       );

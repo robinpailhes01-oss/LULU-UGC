@@ -22,6 +22,9 @@ export interface AccountsResponse {
   accounts: AccountInfo[];
   rules: ScheduleRules;
   error: string | null;
+  /** Client courant : seuls ses comptes (profil Zernio) sont proposés. */
+  client?: { id: string; name: string; zernioProfileId: string | null } | null;
+  profileMissing?: boolean;
 }
 
 /** Type MIME du glisser-déposer d'une publication (calendrier, brouillons). */

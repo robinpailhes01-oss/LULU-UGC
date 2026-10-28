@@ -88,7 +88,12 @@ function LibraryScreen({ mode, folderId, query }: { mode: LibraryMode; folderId?
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { folders, askAgent } = useShell();
+  const { folders, askAgent, client, clients, switchClient } = useShell();
+  // Avec un client courant, la racine de la médiathèque est son dossier.
+  const clientRoot = client?.rootFolderId ?? null;
+  useEffect(() => {
+    if (mode === "root" && clientRoot) router.replace(`/mediatheque/dossier/${clientRoot}`);
+  }, [mode, clientRoot, router]);
   const { pickFiles } = useUploads();
   const menu = useMenu();
   const toast = useToast();
@@ -145,6 +150,8 @@ function LibraryScreen({ mode, folderId, query }: { mode: LibraryMode; folderId?
     return out;
   }, [mode, folderInfo.data, folders, folderId]);
   const folderMissing = mode === "folder" && Boolean(folderInfo.error) && !currentFolder;
+  // Dossier d'un autre client que le client courant : on le montre, et on propose de changer.
+  const foreignClient = currentFolder?.clientId && client && currentFolder.clientId !== client.id ? clients.find((c) => c.id === currentFolder.clientId) ?? null : null;
 
   const subFolders = useMemo(() => {
     let list: Folder[] = [];
@@ -637,6 +644,17 @@ function LibraryScreen({ mode, folderId, query }: { mode: LibraryMode; folderId?
           onEmptyTrash={() => setConfirmEmpty(true)}
           onMoveIds={moveIds}
         />
+
+        {foreignClient ? (
+          <div role="status" className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-card border border-honey/40 bg-honey-soft/60 px-4 py-2.5 text-[13px] text-[#6d4a1c]">
+            <span>
+              Ce dossier appartient au client « {foreignClient.name} », pas à « {client?.name} ».
+            </span>
+            <Button size="sm" variant="secondary" onClick={() => void switchClient(foreignClient.id)}>
+              Passer à « {foreignClient.name} »
+            </Button>
+          </div>
+        ) : null}
 
         {!emptySearch ? (
           <div className="sticky top-0 z-20 -mx-4 mb-4 bg-canvas/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">

@@ -1,5 +1,6 @@
 import "server-only";
 import type { BetaContentBlockParam, BetaMessageParam } from "@anthropic-ai/sdk/resources/beta/messages/messages";
+import { resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { getDb, iso, isoOrNull, jsonOrNull, num, type Row } from "@/lib/server/db";
 import { notFound } from "@/lib/server/http";
 import type { AgentThread, PendingAction } from "@/lib/shared/types";
@@ -47,12 +48,16 @@ export interface MessageMeta {
   actionId?: string;
   /** Index des skills envoyé dans ce message (<skills_a_jour>), s'il a changé depuis le début du fil. */
   skillsIndex?: string;
+  /** Bloc client envoyé dans ce message (<client_a_jour>), s'il a changé depuis le début du fil. */
+  clientBlock?: string;
 }
 
 export interface FrozenSystem {
   version: string;
   stable: string;
   skills: string;
+  /** Bloc <client> figé à la création du fil (absent pour les fils d'avant les clients). */
+  client?: string;
 }
 
 export interface StoredMessage {
@@ -68,6 +73,7 @@ export interface StoredMessage {
 function toThread(r: Row): AgentThread {
   return {
     id: r.id as string,
+    clientId: (r.client_id as string | null) ?? null,
     title: r.title as string,
     createdAt: iso(r.created_at),
     updatedAt: iso(r.updated_at),
@@ -112,10 +118,16 @@ export function toPendingAction(r: Row): PendingAction {
 // ---------------------------------------------------------------------------------------------
 // Fils
 
-export async function createThread(title: string, actor: string | null): Promise<AgentThread> {
+export async function createThread(title: string, actor: string | null, clientId: string | null = null): Promise<AgentThread> {
   const db = await getDb();
-  const r = await db.one(`insert into atelier.threads (title, created_by) values ($1, $2) returning *`, [title.slice(0, 120) || "Nouvelle conversation", actor]);
+  const r = await db.one(`insert into atelier.threads (title, created_by, client_id) values ($1, $2, $3::uuid) returning *`, [title.slice(0, 120) || "Nouvelle conversation", actor, clientId]);
   return toThread(r!);
+}
+
+/** Change le client d'une conversation (les outils suivent ce client). */
+export async function setThreadClient(id: string, clientId: string | null): Promise<void> {
+  const db = await getDb();
+  await db.query(`update atelier.threads set client_id = $2::uuid where id = $1`, [id, clientId]);
 }
 
 export async function getThread(id: string): Promise<AgentThread | null> {
@@ -130,14 +142,16 @@ export async function requireThread(id: string): Promise<AgentThread> {
   return t;
 }
 
-/** Conversations récentes : les miennes d'abord, puis par date de dernière activité. */
-export async function listThreads(actor: string | null, limit = 60): Promise<AgentThread[]> {
+/** Conversations récentes du client (undefined = client courant, null = toutes) : les miennes d'abord, puis par date. */
+export async function listThreads(actor: string | null, limit = 60, client?: ClientFilter): Promise<AgentThread[]> {
   const db = await getDb();
+  const filter = await resolveClientFilter(client);
   const rows = await db.query(
     `select * from atelier.threads
+     where ($3::uuid is null or client_id = $3::uuid)
      order by (case when $1::text is not null and created_by = $1 then 0 else 1 end), updated_at desc
      limit $2`,
-    [actor, limit],
+    [actor, limit, filter],
   );
   return rows.map(toThread);
 }

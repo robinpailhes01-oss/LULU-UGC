@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Check, Columns2, EyeOff, RefreshCw, Sparkles, Star, Trash2, X } from "lucide-react";
@@ -200,7 +201,10 @@ export function CleanupView() {
     <div className="mx-auto max-w-[1240px] px-4 pb-16 pt-6 sm:px-6 lg:px-8">
       <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
         <div className="min-w-0 max-w-2xl">
-          <h1 className="page-title">Ménage</h1>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            <h1 className="page-title">Ménage</h1>
+            <ClientScopeChip />
+          </div>
           <p className="mt-1.5 text-[13.5px] leading-relaxed text-muted" aria-live="polite">
             {data ? (
               total > 0 ? (

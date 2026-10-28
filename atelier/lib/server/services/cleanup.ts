@@ -1,4 +1,5 @@
 import "server-only";
+import { resolveClientFilter, type ClientFilter } from "@/lib/server/client-scope";
 import { getDb, iso, isoOrNull, json, num, numOrNull, type Row } from "@/lib/server/db";
 import { logActivity } from "@/lib/server/repo/activity";
 import { toAsset } from "@/lib/server/repo/assets";
@@ -233,10 +234,12 @@ const pct = (x: number) => `${Math.round(x * 100)}${NB}%`;
 // ---------------------------------------------------------------------------------------------
 // Rapport
 
-export async function buildCleanupReport(): Promise<CleanupReport> {
+/** Rapport de ménage d'un client (undefined = client courant, null = toute la médiathèque). */
+export async function buildCleanupReport(client?: ClientFilter): Promise<CleanupReport> {
   const db = await getDb();
+  const filter = await resolveClientFilter(client);
   const [rows, ignoredList] = await Promise.all([
-    db.query(`select * from atelier.assets where status = 'ready' and trashed_at is null order by created_at asc, id`),
+    db.query(`select * from atelier.assets where status = 'ready' and trashed_at is null and ($1::uuid is null or client_id = $1::uuid) order by created_at asc, id`, [filter]),
     getIgnoredIds(),
   ]);
   const ignored = new Set(ignoredList);
@@ -429,13 +432,12 @@ export function suggestionCount(report: CleanupReport): number {
 // ---------------------------------------------------------------------------------------------
 // Cache (tableau de bord) : 60 s, invalidé dès que la médiathèque change.
 
-type CacheHolder = { report?: CleanupReport; at?: number; fingerprint?: string };
-const cache: CacheHolder = ((globalThis as unknown as { __atelierCleanup?: CacheHolder }).__atelierCleanup ??= {});
+type CacheEntry = { report?: CleanupReport; at?: number; fingerprint?: string };
+// Un rapport en cache par client (clé « all » pour toute la médiathèque).
+const caches: Map<string, CacheEntry> = ((globalThis as unknown as { __atelierCleanupByClient?: Map<string, CacheEntry> }).__atelierCleanupByClient ??= new Map());
 
 export function invalidateCleanupCache() {
-  cache.report = undefined;
-  cache.at = undefined;
-  cache.fingerprint = undefined;
+  caches.clear();
 }
 
 async function libraryFingerprint(): Promise<string> {
@@ -445,13 +447,13 @@ async function libraryFingerprint(): Promise<string> {
 }
 
 /** Rapport mis en cache 60 s (ou tant que la médiathèque n'a pas changé). `fresh` force le recalcul. */
-export async function getCleanupReport(opts: { fresh?: boolean; maxAgeMs?: number } = {}): Promise<CleanupReport> {
+export async function getCleanupReport(opts: { fresh?: boolean; maxAgeMs?: number; client?: ClientFilter } = {}): Promise<CleanupReport> {
+  const filter = await resolveClientFilter(opts.client);
+  const cache = caches.get(filter ?? "all") ?? {};
   const fingerprint = await libraryFingerprint();
   const maxAge = opts.maxAgeMs ?? 60_000;
   if (!opts.fresh && cache.report && cache.at && Date.now() - cache.at < maxAge && cache.fingerprint === fingerprint) return cache.report;
-  const report = await buildCleanupReport();
-  cache.report = report;
-  cache.at = Date.now();
-  cache.fingerprint = fingerprint;
+  const report = await buildCleanupReport(filter);
+  caches.set(filter ?? "all", { report, at: Date.now(), fingerprint });
   return report;
 }

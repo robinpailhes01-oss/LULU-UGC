@@ -1,5 +1,6 @@
 "use client";
 
+import { ClientScopeChip } from "@/components/clients/ClientScopeChip";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Brush, CalendarDays, Clapperboard, FolderOpen, HardDrive, Library, MessageSquareText, Sparkles, Tags, Upload, Wand2 } from "lucide-react";
@@ -46,7 +47,10 @@ export function Dashboard() {
               </>
             ) : null}
           </h1>
-          <p className="mt-2 text-[13.5px] text-muted">{d ? summaryLine(d) : <span className="skeleton inline-block h-4 w-64 align-middle" />}</p>
+          <div className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-2">
+            <ClientScopeChip />
+            <p className="text-[13.5px] text-muted">{d ? summaryLine(d) : <span className="skeleton inline-block h-4 w-64 align-middle" />}</p>
+          </div>
         </div>
         <nav aria-label="Raccourcis" className="flex w-full flex-wrap gap-2 sm:w-auto">
           <Button variant="primary" icon={<Upload className="h-4 w-4" />} onClick={() => pickFiles(null)}>

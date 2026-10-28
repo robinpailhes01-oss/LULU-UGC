@@ -32,6 +32,8 @@ function renderProvider(): RenderProvider {
 export const env = {
   isProd: process.env.NODE_ENV === "production",
   appUrl: (str("ATELIER_APP_URL") ?? "http://localhost:3100").replace(/\/$/, ""),
+  /** Nom du produit affiché (logo de la barre latérale, titres des pages). Une installation par agence. */
+  appName: str("ATELIER_NAME") ?? "Atelier",
   dataDir,
 
   db: {
@@ -100,6 +102,7 @@ export function configStatus() {
     timezone: env.zernio.timezone,
     render: env.hyperframes.render,
     appUrl: env.appUrl,
+    appName: env.appName,
   };
 }
 

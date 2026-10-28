@@ -5,7 +5,7 @@ import { loadPreview, mapLimit } from "@/lib/server/agent/media";
 import { compactAsset, detailedAsset, folderIndex, quoteNames, requireAssets } from "@/lib/server/agent/tools/common";
 import { countKinds, defineTool, Ids, plural, Uuid } from "@/lib/server/agent/tool-kit";
 import { bulkAssets, listAssets, normalizeTags, requireAsset, updateAsset } from "@/lib/server/repo/assets";
-import { createFolder, findFolderByName, getFolder, updateFolder } from "@/lib/server/repo/folders";
+import { createFolder, findFolderByName, getFolder, resolveRootFolder, updateFolder } from "@/lib/server/repo/folders";
 import { analyzeAssets } from "@/lib/server/services/ai-tagging";
 
 /** Outils de la médiathèque : chercher, regarder, ranger, taguer, analyser, corbeille. */
@@ -97,11 +97,13 @@ export const listFoldersTool = defineTool({
   name: "list_folders",
   label: "Lecture des dossiers",
   description:
-    "Renvoie l'arborescence des dossiers de la médiathèque (id, chemin complet, nombre de médias directement dedans). À appeler avant de ranger, de créer un dossier ou quand l'utilisateur cite un dossier par son nom.",
+    "Renvoie l'arborescence des dossiers de la médiathèque du client de la conversation (id, chemin complet, nombre de médias directement dedans). À appeler avant de ranger, de créer un dossier ou quand l'utilisateur cite un dossier par son nom.",
   input: z.object({}),
-  run: async () => {
+  run: async (_i, ctx) => {
     const folders = await folderIndex();
+    // Seulement les dossiers du client de la conversation (tous sans client).
     const items = [...folders.byId.values()]
+      .filter((f) => !ctx.scope.clientId || f.clientId === ctx.scope.clientId)
       .map((f) => ({ id: f.id, path: folders.path(f.id) ?? f.name, parent_id: f.parentId, count: f.assetCount }))
       .sort((a, b) => a.path.localeCompare(b.path, "fr"));
     return { summary: plural(items.length, "dossier"), data: { total: items.length, folders: items } };
@@ -115,10 +117,10 @@ export const createFolderTool = defineTool({
     "Crée un dossier (à la racine ou dans un dossier parent). Si un dossier du même nom existe déjà au même endroit, le renvoie sans en créer un second. Suis l'arborescence du skill tri-shooting pour un projet client.",
   input: z.object({
     name: z.string().min(1).max(120).describe("Nom du dossier, ex. « Gîte de l'Abric — octobre 2026 » ou « Sélection »."),
-    parent_id: Uuid.nullable().optional().describe("Dossier parent ; absent ou null = racine."),
+    parent_id: Uuid.nullable().optional().describe("Dossier parent ; absent ou null = racine (avec un client : son dossier racine)."),
   }),
   run: async (i, ctx) => {
-    const parentId = i.parent_id ?? null;
+    const parentId = await resolveRootFolder(i.parent_id ?? null);
     const existing = await findFolderByName(i.name, parentId);
     if (existing) return { summary: `Dossier « ${existing.name} » déjà présent`, data: { id: existing.id, name: existing.name, created: false, link: `/mediatheque/dossier/${existing.id}` } };
     const f = await createFolder({ name: i.name, parentId }, ctx.actor);

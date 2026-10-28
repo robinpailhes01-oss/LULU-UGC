@@ -11,6 +11,7 @@ export const maxDuration = 300;
 const Id = z.string().max(100);
 const Screen = z.object({
   page: z.string().max(80),
+  clientId: Id.nullable().optional(),
   folderId: Id.nullable().optional(),
   selectedAssetIds: z.array(Id).max(500).optional(),
   montageId: Id.nullable().optional(),

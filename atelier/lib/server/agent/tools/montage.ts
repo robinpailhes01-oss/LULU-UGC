@@ -137,7 +137,7 @@ export const createMontageTool = defineTool({
     style: z.string().max(80).optional().describe("Slug ou nom du style de montage (skill). Par défaut reel-immersion."),
     format: Format.optional(),
     clips: z.array(ClipIn).max(60).optional().describe("Facultatif : plans détaillés (remplacent asset_ids pour l'ordre et les durées)."),
-    hook: z.string().max(80).optional().describe("Accroche affichée dans la première seconde, dans la voix June."),
+    hook: z.string().max(80).optional().describe("Accroche affichée dans la première seconde, dans la voix du client (skill voix du client, sinon celle de l'agence)."),
     texts: z.array(TextIn).max(30).optional().describe("Autres textes à l'écran."),
     look: z.string().max(80).optional().describe("Look appliqué à tous les plans (nom ou id)."),
     music_asset_id: Uuid.optional().describe("Fichier audio de la médiathèque."),

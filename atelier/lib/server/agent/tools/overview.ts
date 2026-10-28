@@ -27,7 +27,7 @@ export const cleanupReport = defineTool({
     max_groups: z.number().int().min(1).max(40).optional().describe("Groupes détaillés au plus (15 par défaut)."),
   }),
   run: async (i) => {
-    const report = await buildCleanupReport();
+    const report = await buildCleanupReport(); // client de la conversation
     const wanted = new Set(i.kinds ?? KINDS);
     const groups = report.groups.filter((g) => wanted.has(g.kind));
     const name = (id: string) => report.assets[id]?.name ?? id;
